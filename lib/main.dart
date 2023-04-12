@@ -3,6 +3,7 @@ import 'package:translation/screens/bottom_nav_screen/bottom_nav.dart';
 import 'package:translation/screens/login/login_screen.dart';
 import 'package:translation/screens/Otp/verifyphoneno.dart';
 import 'package:translation/screens/splash_screen/splash_main.dart';
+import 'package:translation/screens/translator_screens/notranslator.dart';
 import 'package:translation/values/styles.dart';
 
 void main() async {
@@ -31,6 +32,7 @@ class _MyAppState extends State<MyApp> {
         'splash': (_) => SplashScreen(),
         'login': (_) => LoginScreen(),
         'VerifyPhone': (_) => VerifyPhone(),
+        'NoTranslator': (_) => NoTransFound_screen(),
       },
     );
   }
