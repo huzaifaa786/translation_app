@@ -22,7 +22,7 @@ class _NoTransFound_screenState extends State<NoTransFound_screen> {
             children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.pushReplacement(
+                  Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => Home(),

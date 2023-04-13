@@ -3,8 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:translation/values/colors.dart';
 
-class Button extends StatelessWidget {
-  const Button(
+
+class LargeButtons extends StatelessWidget {
+  const LargeButtons(
       {Key? key,
       @required this.title,
       @required this.onPressed,
@@ -13,7 +14,7 @@ class Button extends StatelessWidget {
       this.buttonWidth = 0.8,
       this.screenRatio = 0.9,
       this.rounded = false,
-      this.color = greenish})
+      this.color })
       : super(key: key);
 
   final title;
@@ -28,25 +29,27 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onPressed,
-      child: Container(
-
-
-
-        
+      child: SizedBox(
         width: MediaQuery.of(context).size.width * screenRatio,
         height: 60,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                color: textcolor,
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
+        child: Container(
+          decoration: BoxDecoration(
+              color: greenish,
+              borderRadius: BorderRadius.all(Radius.circular(12))),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  color: textcolor,
+                  fontFamily: 'Poppins',
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

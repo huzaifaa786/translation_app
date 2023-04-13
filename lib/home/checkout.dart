@@ -268,7 +268,7 @@ class _Checkout_screenState extends State<Checkout_screen> {
             setState(() {});
 
             // authController.signIn();
-            Navigator.pushReplacement(
+            Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => CardAdded_Screen(),

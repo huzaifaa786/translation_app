@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:translation/screens/home/setting.dart';
+import 'package:translation/screens/setting/setting.dart';
 import 'package:translation/static/large_button.dart';
 
 import '../../../../values/colors.dart';

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:translation/screens/favorites_screen/favorites.dart';
+import 'package:translation/screens/notification/notification.dart';
+import 'package:translation/screens/profile/profile.dart';
 import 'package:translation/static/topBar.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/screens/home/chats.dart';
 import 'package:translation/static/main_card.dart';
-import 'package:translation/screens/home/orderhistory.dart';
-import 'package:translation/screens/home/setting.dart';
+import 'package:translation/screens/orderhistory/orderhistory.dart';
+import 'package:translation/screens/setting/setting.dart';
 import 'package:translation/screens/translator_screens/translator_screen.dart';
 import 'package:translation/static/input_field.dart';
 import 'package:translation/static/dropdown.dart';
@@ -81,7 +84,7 @@ List<Widget> _buildScreens() {
     Home(),
     Chats_screen(),
     Text("Video"),
-    OrdrerHistory_screen(),
+    HistoryScreen(),
     Setting_screen(),
   ];
 }
@@ -112,7 +115,30 @@ class _HomeState extends State<Home> {
       body: SafeArea(
         child: Column(
           children: [
-            MainStackCard(),
+            MainStackCard(
+              onFavTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Favorites_screen(),
+                    ));
+              },
+              onNotiTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Notification_screen(),
+                    ));
+              },
+              onProfileTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Profile_screen(),
+                    ));
+              },
+              name: 'Williams',
+            ),
             Container(
               padding: EdgeInsets.only(left: 20, right: 20, top: 35),
               height: MediaQuery.of(context).size.height * 0.60,

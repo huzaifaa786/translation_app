@@ -4,7 +4,11 @@ import 'package:translation/static/topBar.dart';
 import 'package:translation/screens/home/freeitem.dart';
 
 class MainStackCard extends StatelessWidget {
-  const MainStackCard({super.key});
+  const MainStackCard({super.key,this.onNotiTap,this.onFavTap,this.onProfileTap,this.name});
+  final onNotiTap;
+  final onProfileTap;
+  final onFavTap;
+  final name;
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +32,9 @@ class MainStackCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TopBar(
-                onFavTap: () {},
-                onNotiTap: () {},
-                onProfileTap: () {},
+                onFavTap: onFavTap,
+                onNotiTap: onNotiTap,
+                onProfileTap: onProfileTap,
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.12,
@@ -39,7 +43,7 @@ class MainStackCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'Good Morning, Williams',
+                      'Good Morning, ' + name,
                       maxLines: 2,
                       style: TextStyle(
                           fontSize: 23,
@@ -57,7 +61,7 @@ class MainStackCard extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: GestureDetector(
               onTap: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => FreeItem_screen(),

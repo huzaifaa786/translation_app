@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:translation/screens/home/notification.dart';
+import 'package:translation/screens/notification/notification.dart';
 import 'package:translation/static/large_button.dart';
 
 import '../../../../values/colors.dart';
@@ -63,7 +63,7 @@ class _CardAdded_ScreenState extends State<CardAdded_Screen> {
               setState(() {});
 
               // authController.signIn();
-              Navigator.pushReplacement(
+              Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => Notification_screen(),
