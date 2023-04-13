@@ -4,6 +4,7 @@ import 'package:translation/screens/login/login_screen.dart';
 import 'package:translation/screens/Otp/verifyphoneno.dart';
 import 'package:translation/screens/profile/profile.dart';
 import 'package:translation/screens/splash_screen/splash_main.dart';
+import 'package:translation/screens/translator_screens/notranslator.dart';
 import 'package:translation/values/styles.dart';
 
 void main() async {
@@ -32,7 +33,11 @@ class _MyAppState extends State<MyApp> {
         'splash': (_) => SplashScreen(),
         'login': (_) => LoginScreen(),
         'VerifyPhone': (_) => VerifyPhone(),
+<<<<<<< HEAD
          'profile': (_) => Profile_screen(),
+=======
+        'NoTranslator': (_) => NoTransFound_screen(),
+>>>>>>> 4a7980bfec0fb0fe02dbdab72719b8bb06d58544
       },
     );
   }

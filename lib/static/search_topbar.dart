@@ -19,7 +19,6 @@ class SearchTopBar extends StatelessWidget {
               offset: Offset(5.0, 5.0))
         ],
       ),
-      margin: EdgeInsets.only(top: 0),
       padding: EdgeInsets.only(left: 20, right: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
