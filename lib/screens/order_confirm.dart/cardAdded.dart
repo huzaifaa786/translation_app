@@ -20,7 +20,7 @@ class _CardAdded_ScreenState extends State<CardAdded_Screen> {
     return Scaffold(
       body: Column(children: [
         SizedBox(
-          height: 90,
+          height: 130,
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -35,7 +35,7 @@ class _CardAdded_ScreenState extends State<CardAdded_Screen> {
         Container(
           width: 302,
           height: 70,
-          margin: EdgeInsets.only(left: 0, top: 60),
+          margin: EdgeInsets.only(left: 0, top: 80),
           alignment: Alignment.center,
           decoration: BoxDecoration(),
           child: Text(
@@ -54,7 +54,7 @@ class _CardAdded_ScreenState extends State<CardAdded_Screen> {
           height: 40,
         ),
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.only(top: 50),
           child: Center(
               child: LargeButton(
             title: 'Go back',

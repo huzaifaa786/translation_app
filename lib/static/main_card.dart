@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/static/topBar.dart';
-import 'package:translation/screens/home/freeitem.dart';
+import 'package:translation/screens/freeitem.dart/freeitem.dart';
 
 class MainStackCard extends StatelessWidget {
   const MainStackCard({super.key,this.onNotiTap,this.onFavTap,this.onProfileTap,this.name});

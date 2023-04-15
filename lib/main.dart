@@ -27,17 +27,13 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
       theme: Styles.lightTheme,
-      title: "Klicks",
+      title: "translation",
       initialRoute: 'login',
       routes: {
         'splash': (_) => SplashScreen(),
         'login': (_) => LoginScreen(),
         'VerifyPhone': (_) => VerifyPhone(),
-<<<<<<< HEAD
-         'profile': (_) => Profile_screen(),
-=======
         'NoTranslator': (_) => NoTransFound_screen(),
->>>>>>> 4a7980bfec0fb0fe02dbdab72719b8bb06d58544
       },
     );
   }

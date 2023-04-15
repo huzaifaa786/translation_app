@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:translation/screens/home/changepassword.dart';
+import 'package:translation/screens/profile/changepassword.dart';
 import 'package:translation/screens/main_screen/home.dart';
 import 'package:translation/static/button.dart';
 import 'package:translation/static/largebutton.dart';
@@ -103,6 +103,13 @@ class _Profile_screenState extends State<Profile_screen> {
               height: 10,
             ),
             ChangePassword(
+              onPressed: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ChangePassword_screen(),
+                  ));
+              },
               title: 'Change Password',
             ),
           

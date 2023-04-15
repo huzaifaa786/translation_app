@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:translation/screens/home/translator/radio_btn.dart';
+import 'package:translation/screens/home/translator/traling_radio.dart';
+import 'package:translation/static/add_remove.dart';
+import 'package:translation/static/checkout_button.dart';
+import 'package:translation/static/day_date_card.dart';
+import 'package:translation/static/freeitaminput.dart';
+import 'package:translation/static/icon_button.dart';
+import 'package:translation/static/lang_box.dart';
 import 'package:translation/static/large_button.dart';
+import 'package:translation/static/profile_detail.dart';
 import 'package:translation/values/colors.dart';
-import 'package:translation/screens/home/checkout.dart';
+import 'package:translation/screens/checkout/checkout.dart';
 import 'package:translation/screens/translator_screens/translator_screen.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:location/location.dart';
 
 class profile_translator extends StatefulWidget {
   const profile_translator({super.key});
@@ -12,856 +23,638 @@ class profile_translator extends StatefulWidget {
   State<profile_translator> createState() => _profile_translatorState();
 }
 
+enum meetingMethod { AudioVideo, InPerson }
+
+enum meetingTypeMethod { Urgent, NotUrgent }
+
 class _profile_translatorState extends State<profile_translator> {
+  meetingMethod _site = meetingMethod.AudioVideo;
+  void toggleplan(meetingMethod value) {
+    setState(() {
+      _site = value;
+    });
+  }
+
+  meetingTypeMethod _site1 = meetingTypeMethod.Urgent;
+  void toggleplan1(meetingTypeMethod value) {
+    setState(() {
+      _site1 = value;
+    });
+  }
+
+  bool schedule = false;
+  bool doc = false;
+
+  int i = 0;
+getlocation ()
+ async{
+Location location = new Location();
+
+bool _serviceEnabled;
+PermissionStatus _permissionGranted;
+LocationData _locationData;
+
+_serviceEnabled = await location.serviceEnabled();
+if (!_serviceEnabled) {
+  _serviceEnabled = await location.requestService();
+  if (!_serviceEnabled) {
+    return;
+  }
+}
+
+_permissionGranted = await location.hasPermission();
+if (_permissionGranted == PermissionStatus.denied) {
+  _permissionGranted = await location.requestPermission();
+  if (_permissionGranted != PermissionStatus.granted) {
+    return;
+  }
+}
+
+_locationData = await location.getLocation();
+print('latitude: ${_locationData.latitude}, longitude: ${_locationData.longitude}');
+
+
+
+
+
+
+}
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 40,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Row(
-                children: [
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Translator_()));
-                      },
-                      child: SvgPicture.asset("assets/icons/back.svg")),
-                  SizedBox(
-                    width: 120,
-                  ),
-                  Text(
-                    "Detail",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
-                  ),
-                  SizedBox(
-                    width: 120,
-                  ),
-                  SvgPicture.asset("assets/images/heart.svg"),
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.all(8),
-              width: 98,
-              height: 98,
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                border: Border.all(width: 2, color: Color(0xFF34607B)),
-                borderRadius: BorderRadius.circular(70),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(22),
-                child: SvgPicture.asset(
-                  "assets/images/splash_3.svg",
-                  width: 64,
-                  height: 64,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            Center(
-              child: const Text(
-                "Watson",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Center(
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 190,
-                  ),
-                  Icon(Icons.star, color: Colors.yellow, size: 11),
-                  SizedBox(width: 5),
-                  Text('5.0',
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 12),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 12),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Translator_()));
+                        },
+                        child: SvgPicture.asset("assets/icons/back.svg")),
+                    Text(
+                      "Detail",
                       style:
-                          TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Row(
-                children: [
-                  Text(
-                    "Language",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
-            Row(
-              children: [
-                Container(
-                  margin: EdgeInsets.fromLTRB(15, 15, 0, 15),
-                  width: 89,
-                  height: 36.6,
-                  padding: EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(
-                        color: Color.fromRGBO(0, 0, 0, 0.24), width: 1),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Arabic',
-                      textDirection: TextDirection.rtl,
-                      style: TextStyle(fontSize: 12),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
                     ),
-                  ),
+                    SvgPicture.asset("assets/images/heart.svg"),
+                  ],
                 ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(15, 15, 0, 15),
-                  width: 89,
-                  height: 36.6,
-                  padding: EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(
-                        color: Color.fromRGBO(0, 0, 0, 0.24), width: 1),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Arabic',
-                      textDirection: TextDirection.rtl,
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(15, 15, 0, 15),
-                  width: 89,
-                  height: 36.6,
-                  padding: EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(
-                        color: Color.fromRGBO(0, 0, 0, 0.24), width: 1),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Arabic',
-                      textDirection: TextDirection.rtl,
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Container(
-                  margin: EdgeInsets.fromLTRB(15, 0, 0, 15),
-                  width: 89,
-                  height: 36.6,
-                  padding: EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(
-                        color: Color.fromRGBO(0, 0, 0, 0.24), width: 1),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Arabic',
-                      textDirection: TextDirection.rtl,
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(15, 0, 0, 15),
-                  width: 89,
-                  height: 36.6,
-                  padding: EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(
-                        color: Color.fromRGBO(0, 0, 0, 0.24), width: 1),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Arabic',
-                      textDirection: TextDirection.rtl,
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Row(
-                children: [
-                  Text(
-                    "Certificates",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                ],
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Row(
-                children: [
-                  Image.asset("assets/icons/free.png"),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Text(
-                      "lorem ipsum dolor sit",
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Row(
-                children: [
-                  Text(
-                    "About",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Text(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae amet placerat dignissim nibh dictum sit. Pretium ornare viverra.,",
-                style: TextStyle(fontSize: 14),
-              ),
-            ),
-            Container(
-              width: 345,
-              height: 48,
-              margin: EdgeInsets.only(
-                left: 18,
-                top: 10,
-              ),
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 255, 255, 255),
-                borderRadius: BorderRadius.circular(8),
-                boxShadow: [
-                  BoxShadow(
-                    color: Color.fromARGB(255, 69, 59, 59).withOpacity(0.5),
-                    blurRadius: 4,
-                    offset: Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Row(
-                children: [
-                  SvgPicture.asset("assets/icons/audio.svg"),
-                  Text("Audio Now"),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text("/"),
-                  SvgPicture.asset("assets/icons/audio.svg"),
-                  Text("Video Now"),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
-              child: Row(
-                children: [
-                  Text(
-                    "How many hours do you need translator",
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.all(9),
-                    width: 125,
-                    height: 43,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                          color: Color.fromRGBO(0, 0, 0, 0.24), width: 1),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Center(
-                      child: Text(
-                        '00:30 mins',
-                        style: TextStyle(fontSize: 12),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(9),
-                    width: 125,
-                    height: 43,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                          color: Color.fromRGBO(0, 0, 0, 0.24), width: 1),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Center(
-                      child: Text(
-                        '00:30 mins',
-                        style: TextStyle(fontSize: 12),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(9),
-                    width: 125,
-                    height: 43,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                          color: Color.fromRGBO(0, 0, 0, 0.24), width: 1),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Center(
-                      child: Text(
-                        '00:30 mins',
-                        style: TextStyle(fontSize: 12),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Row(
-              children: [
-                Container(
-                  margin: EdgeInsets.all(15),
-                  width: 125,
-                  height: 43,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(
-                        color: Color.fromRGBO(0, 0, 0, 0.24), width: 1),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
+              Container(
+                height: MediaQuery.of(context).size.height * 0.834,
+                padding: EdgeInsets.only(right: 20, left: 20),
+                child: SingleChildScrollView(
+                  child: Column(
                     children: [
+                      ProfileDetail(
+                        name: 'Watson',
+                        rating: '5.0',
+                      ),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'Schedule',
-                          style: TextStyle(fontSize: 12),
+                        padding: const EdgeInsets.only(top: 8),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Language",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                          ],
                         ),
                       ),
-                      Radio(
-                        value: 2,
-                        groupValue: 0,
-                        onChanged: (value) {
-                          setState(() {
-                            // _site = value;
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            ListTile(
-              title: const Text('Audio/Video'),
-              leading: Radio(
-                value: 1,
-                groupValue: 0,
-                onChanged: (value) {
-                  setState(() {
-                    // _site = value;
-                  });
-                },
-              ),
-            ),
-            ListTile(
-              title: const Text('In Person'),
-              leading: Radio(
-                autofocus: true,
-                activeColor: Colors.blue,
-                focusColor: Colors.blue,
-                value: 2,
-                groupValue: 0,
-                onChanged: (value) {
-                  setState(() {
-                    // _site = value;
-                  });
-                },
-              ),
-            ),
-            Row(
-              children: [
-                Container(
-                  child: Column(children: [
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Text(
-                      "Tue",
-                      style: TextStyle(fontSize: 14),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text("08", style: TextStyle(fontSize: 16))
-                  ]),
-                  width: 54,
-                  height: 85,
-                  margin: EdgeInsets.only(
-                    left: 30,
-                    top: 13,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Color(0xFFF2F2F2),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                Container(
-                  child: Column(children: [
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Text(
-                      "Tue",
-                      style: TextStyle(fontSize: 14),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text("08", style: TextStyle(fontSize: 16))
-                  ]),
-                  width: 54,
-                  height: 85,
-                  margin: EdgeInsets.only(
-                    left: 10,
-                    top: 13,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Color(0xFFF2F2F2),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                Container(
-                  child: Column(children: [
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Text(
-                      "Tue",
-                      style: TextStyle(fontSize: 14),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text("08", style: TextStyle(fontSize: 16))
-                  ]),
-                  width: 54,
-                  height: 85,
-                  margin: EdgeInsets.only(
-                    left: 10,
-                    top: 13,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Color(0xFFF2F2F2),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                Container(
-                  child: Column(children: [
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Text(
-                      "Tue",
-                      style: TextStyle(fontSize: 14),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text("08", style: TextStyle(fontSize: 16))
-                  ]),
-                  width: 54,
-                  height: 85,
-                  margin: EdgeInsets.only(
-                    left: 10,
-                    top: 13,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Color(0xFFF2F2F2),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                Container(
-                  child: Column(children: [
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Text(
-                      "Tue",
-                      style: TextStyle(fontSize: 14),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text("08", style: TextStyle(fontSize: 16))
-                  ]),
-                  width: 54,
-                  height: 85,
-                  margin: EdgeInsets.only(
-                    left: 10,
-                    top: 13,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Color(0xFFF2F2F2),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                Container(
-                  child: Column(children: [
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Text(
-                      "Tue",
-                      style: TextStyle(fontSize: 14),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text("08", style: TextStyle(fontSize: 16))
-                  ]),
-                  width: 54,
-                  height: 85,
-                  margin: EdgeInsets.only(
-                    left: 10,
-                    top: 13,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Color(0xFFF2F2F2),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 10, 0, 10),
-                  child: Row(
-                    children: [
-                      Text(
-                        "Set Time",
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.all(9),
-                    width: 125,
-                    height: 43,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                          color: Color.fromRGBO(0, 0, 0, 0.24), width: 1),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Center(
-                      child: Text(
-                        '00:30 ',
-                        style: TextStyle(fontSize: 12),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text("To"),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(9),
-                    width: 125,
-                    height: 43,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                          color: Color.fromRGBO(0, 0, 0, 0.24), width: 1),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Center(
-                      child: Text(
-                        '00:30 ',
-                        style: TextStyle(fontSize: 12),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Row(
-              children: [
-                Container(
-                  margin: EdgeInsets.all(15),
-                  width: 187,
-                  height: 48,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(
-                        color: Color.fromRGBO(0, 0, 0, 0.24), width: 1),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    children: [
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'Document Type',
-                          style: TextStyle(fontSize: 16),
+                        padding: const EdgeInsets.only(top: 8),
+                        child: Wrap(
+                          direction: Axis.horizontal,
+                          runAlignment: WrapAlignment.start,
+                          children: [
+                            LanguageBox(lang: 'English'),
+                            LanguageBox(lang: 'Arabic'),
+                            LanguageBox(lang: 'Arabic'),
+                            LanguageBox(lang: 'English'),
+                            LanguageBox(lang: 'Arabic'),
+                          ],
                         ),
                       ),
-                      Radio(
-                        value: 2,
-                        groupValue: 0,
-                        onChanged: (value) {
-                          setState(() {
-                            // _site = value;
-                          });
-                        },
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Certificates",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
                       ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            ListTile(
-              title: const Text('Urgent Document'),
-              leading: Radio(
-                value: 1,
-                groupValue: 0,
-                onChanged: (value) {
-                  setState(() {
-                    // _site = value;
-                  });
-                },
-              ),
-            ),
-            ListTile(
-              title: const Text('Not Urgent Document'),
-              leading: Radio(
-                autofocus: true,
-                activeColor: Colors.blue,
-                focusColor: Colors.blue,
-                value: 2,
-                groupValue: 0,
-                onChanged: (value) {
-                  setState(() {
-                    // _site = value;
-                  });
-                },
-              ),
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Row(
-                    children: [
-                      Container(
-                          height: 50,
-                          width: 50,
-                          child: Image.asset("assets/icons/free.png")),
-                      Column(
+                      Padding(
+                        padding: const EdgeInsets.only(top: 15, bottom: 15),
+                        child: Row(
+                          children: [
+                            SvgPicture.asset("assets/images/certificate.svg"),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 12),
+                              child: Text(
+                                "lorem ipsum dolor sit",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Row(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Text(
-                              "Document",
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              "RS 50",
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.black,
-                              ),
-                            ),
+                          Text(
+                            "About",
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: 30,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Row(
-                    children: [
-                      Container(
-                          height: 50,
-                          width: 50,
-                          child: Image.asset("assets/icons/free.png")),
                       Padding(
-                        padding: const EdgeInsets.only(left: 20),
+                        padding: const EdgeInsets.only(top: 15.0, bottom: 15),
                         child: Text(
-                          "Attach File",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.black,
-                          ),
+                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae amet placerat dignissim nibh dictum sit. Pretium ornare viverra.,",
+                          style: TextStyle(fontSize: 14),
                         ),
                       ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 48,
+                        margin: EdgeInsets.only(top: 8),
+                        decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: greenish)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                SvgPicture.asset("assets/icons/audio.svg"),
+                                Text("Audio Now"),
+                              ],
+                            ),
+                            Text("/"),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                SvgPicture.asset("assets/icons/video.svg"),
+                                Text("Video Now"),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Row(
+                          children: [
+                            Text(
+                              "How many hours do you need translator",
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.all(9),
+                              width: 125,
+                              height: 43,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(
+                                    color: Color.fromRGBO(0, 0, 0, 0.24),
+                                    width: 1),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  '00:30 mins',
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.all(9),
+                              width: 125,
+                              height: 43,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(
+                                    color: Color.fromRGBO(0, 0, 0, 0.24),
+                                    width: 1),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  '00:30 mins',
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.all(9),
+                              width: 125,
+                              height: 43,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(
+                                    color: Color.fromRGBO(0, 0, 0, 0.24),
+                                    width: 1),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  '00:30 mins',
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      TralingRadioBtn(
+                        text: 'Schedule',
+                        schedule: schedule,
+                        ontap: () {
+                          setState(() {
+                            schedule = !schedule;
+                          });
+                        },
+                      ),
+                      schedule == true
+                          ? Column(
+                              children: [
+                                RadioBtn(
+                                  text: 'Audio/Video',
+                                  groupvalue: _site,
+                                  value: meetingMethod.AudioVideo,
+                                  onChanged: () {
+                                    toggleplan(meetingMethod.AudioVideo);
+                                  },
+                                ),
+                                RadioBtn(
+                                  text: 'In person',
+                                  groupvalue: _site,
+                                  value: meetingMethod.InPerson,
+                                  onChanged: () {
+                                    toggleplan(meetingMethod.InPerson);
+                                  },
+                                ),
+                                _site == meetingMethod.InPerson
+                                    ? IconsButton(
+                                        title: 'Choose location',
+                                        onPressed: () {
+                                          getlocation();
+                                        })
+                                    : Container(),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    DateDayCard(
+                                      date: 9,
+                                      day: 'Mon',
+                                    ),
+                                    DateDayCard(
+                                      date: 9,
+                                      day: 'Mon',
+                                    ),
+                                    DateDayCard(
+                                      date: 9,
+                                      day: 'Mon',
+                                    ),
+                                    DateDayCard(
+                                      date: 9,
+                                      day: 'Mon',
+                                    ),
+                                    DateDayCard(
+                                      date: 9,
+                                      day: 'Mon',
+                                    ),
+                                    DateDayCard(
+                                      date: 9,
+                                      day: 'Mon',
+                                    ),
+                                    DateDayCard(
+                                      date: 9,
+                                      day: 'Mon',
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 10, bottom: 10),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            "Set Time",
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.38,
+                                      height: 43,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(
+                                            color:
+                                                Color.fromRGBO(0, 0, 0, 0.24),
+                                            width: 1),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          '00:30 ',
+                                          style: TextStyle(fontSize: 12),
+                                        ),
+                                      ),
+                                    ),
+                                    Text("To"),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.38,
+                                      height: 43,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(
+                                            color:
+                                                Color.fromRGBO(0, 0, 0, 0.24),
+                                            width: 1),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          '00:30 ',
+                                          style: TextStyle(fontSize: 12),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            )
+                          : Container(),
+                      TralingRadioBtn(
+                        text: 'Document Type',
+                        schedule: doc,
+                        ontap: () {
+                          setState(() {
+                            doc = !doc;
+                          });
+                        },
+                      ),
+                      doc == true
+                          ? Column(
+                              children: [
+                                RadioBtn(
+                                  text: 'Urgent Document',
+                                  groupvalue: _site1,
+                                  value: meetingTypeMethod.Urgent,
+                                  onChanged: () {
+                                    toggleplan1(meetingTypeMethod.Urgent);
+                                  },
+                                ),
+                                RadioBtn(
+                                  text: 'Not Urgent Document',
+                                  groupvalue: _site1,
+                                  value: meetingTypeMethod.NotUrgent,
+                                  onChanged: () {
+                                    toggleplan1(meetingTypeMethod.NotUrgent);
+                                  },
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.42,
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                              padding: EdgeInsets.all(8),
+                                              decoration: BoxDecoration(
+                                                  color:
+                                                      greenish.withOpacity(0.3),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(25))),
+                                              child: SvgPicture.asset(
+                                                "assets/icons/doc.svg",
+                                                height: 22,
+                                              )),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 12),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "Document",
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  "RS 50",
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.42,
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                              padding: EdgeInsets.all(8),
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: greenish),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(25))),
+                                              child: SvgPicture.asset(
+                                                "assets/icons/attachFile.svg",
+                                                height: 22,
+                                              )),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 8),
+                                            child: Text(
+                                              "Attach File",
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "How many pages in a doc",
+                                        style: TextStyle(fontSize: 14),
+                                      ),
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.2,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            AddRemoveBtn(
+                                                ontap: () {
+                                                  setState(() {
+                                                    i--;
+                                                  });
+                                                },
+                                                icon: '-'),
+                                            Text(i.toString()),
+                                            AddRemoveBtn(
+                                              ontap: () {
+                                                setState(() {
+                                                  i++;
+                                                });
+                                              },
+                                              icon: '+',
+                                              color: greenish,
+                                              iconcolor: white,
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 12, bottom: 12),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "Will deliver in: 3 days",
+                                        style: TextStyle(fontSize: 14),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                FreeItemInput(
+                                  padding: false,
+                                ),
+                              ],
+                            )
+                          : Container(),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16, bottom: 30),
+                        child: CheckOutButton(
+                          title: 'Checkout',
+                          price: '50',
+                          sreenRatio: 0.9,
+                          onPressed: () {
+                            setState(() {});
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Checkout_screen()));
+                                    //  update(context);
+                          },
+                          color: greenish,
+                          textcolor: Colors.white,
+                          buttonWidth: 0.95,
+                        ),
+                      )
                     ],
                   ),
                 ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
-              child: Row(
-                children: [
-                  Text(
-                    "How many pages in a doc",
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  SizedBox(
-                    width: 80,
-                  ),
-                  Container(
-                    child: Center(
-                        child: Text(
-                      "-",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    )),
-                    width: 26,
-                    height: 26,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        width: 1,
-                        color: Color.fromRGBO(0, 0, 0, 0.2),
-                      ),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text("0"),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Container(
-                    child: Center(
-                        child: Text(
-                      "+",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.white),
-                    )),
-                    width: 26,
-                    height: 26,
-                    decoration: BoxDecoration(
-                      color: greenish,
-                      border: Border.all(
-                        width: 1,
-                        color: Color.fromRGBO(0, 0, 0, 0.2),
-                      ),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                ],
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Row(
-                children: [
-                  Text(
-                    "Will deliver in: 3 days",
-                    style: TextStyle(fontSize: 14),
-                  ),
-                ],
-              ),
-            ),
-            Row(
-              children: [
-                Container(
-                  width: 366,
-                  height: 115,
-                  margin: EdgeInsets.only(
-                    left: 20,
-                    top: 8,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 1,
-                      color: Color.fromRGBO(0, 0, 0, 0.17),
-                    ),
-                    borderRadius: BorderRadius.circular(9),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 45,
-            ),
-            LargeButton(
-              title: 'Checkout',
-              sreenRatio: 0.9,
-              onPressed: () {
-                setState(() {});
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Checkout_screen()));
-                // authController.signIn();
-                // Navigator.pushNamed(context, 'home');
-              },
-              color: greenish,
-              textcolor: Colors.white,
-              buttonWidth: 0.95,
-            )
-          ],
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  update(context) {
+    Alert(
+      style: AlertStyle(
+        titleStyle: TextStyle(fontSize: 25),
+      ),
+      context: context,
+      title: "Sorry! Interpreter not within your range. ",
+      image: SvgPicture.asset(
+        "assets/images/group.svg", // replace with your logo image path
+        width: 60,
+        height: 60,
+      ),
+      buttons: [
+        DialogButton(
+          radius: BorderRadius.all(
+            Radius.circular(12),
+          ),
+          height: 60,
+          child: Text(
+            "Ok",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          onPressed: () => Navigator.pop(context),
+          color: greenish,
+        ),
+      ],
+    ).show();
   }
 }
 

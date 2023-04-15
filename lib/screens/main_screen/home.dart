@@ -5,7 +5,7 @@ import 'package:translation/screens/notification/notification.dart';
 import 'package:translation/screens/profile/profile.dart';
 import 'package:translation/static/topBar.dart';
 import 'package:translation/values/colors.dart';
-import 'package:translation/screens/home/chats.dart';
+import 'package:translation/screens/chat/chats.dart';
 import 'package:translation/static/main_card.dart';
 import 'package:translation/screens/orderhistory/orderhistory.dart';
 import 'package:translation/screens/setting/setting.dart';

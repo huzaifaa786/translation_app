@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:translation/screens/home/enteramount.dart';
+import 'package:translation/screens/enter_amount/enteramount.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/static/bagee.dart';
 
