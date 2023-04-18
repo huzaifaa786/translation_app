@@ -7,24 +7,23 @@ class OnlineTranslatorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.35,
-      margin: EdgeInsets.only(left: 10),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => profile_translator()));
-        },
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(13),
-          ),
-          color: Color.fromARGB(255, 255, 255, 255),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => profile_translator()));
+      },
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(13),
+        ),
+        color: Color.fromARGB(255, 255, 255, 255),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
               Container(
                 margin: EdgeInsets.all(8),
-                width: MediaQuery.of(context).size.width * 0.2,
+                width: MediaQuery.of(context).size.width * 0.22,
                 height: MediaQuery.of(context).size.height * 0.1,
                 padding: EdgeInsets.all(8),
                 decoration: BoxDecoration(
@@ -60,18 +59,21 @@ class OnlineTranslatorCard extends StatelessWidget {
                   ),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Rate per 30 mins:  ",
-                    style: TextStyle(fontSize: 9, fontWeight: FontWeight.w700),
-                  ),
-                  Text(
-                    "100 AED",
-                    style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700),
-                  )
-                ],
+              Padding(
+                padding: const EdgeInsets.only(right: 4,left: 4),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Rate per 30 mins:  ",
+                      style: TextStyle(fontSize: 9, fontWeight: FontWeight.w700),
+                    ),
+                    Text(
+                      "100 AED",
+                      style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700),
+                    )
+                  ],
+                ),
               ),
             ],
           ),

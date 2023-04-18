@@ -21,7 +21,8 @@ class _Translator_State extends State<Translator_> {
           children: [
             SearchTopBar(),
             Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, top: 30,bottom: 12),
+              padding: const EdgeInsets.only(
+                  left: 20, right: 20, top: 30, bottom: 12),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -38,17 +39,18 @@ class _Translator_State extends State<Translator_> {
                 ],
               ),
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.2,
+            Container(
+              padding: EdgeInsets.only(left: 10),
+              height: MediaQuery.of(context).size.height * 0.21,
               child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                itemCount: 6,
-                itemBuilder: (context, index) => OnlineTranslatorCard()
-              ),
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  itemCount: 6,
+                  itemBuilder: (context, index) => OnlineTranslatorCard()),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 20, right: 20, top: 16, bottom: 10),
+              padding:
+                  EdgeInsets.only(left: 20, right: 20, top: 16, bottom: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

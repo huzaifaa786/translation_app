@@ -132,8 +132,9 @@ print('latitude: ${_locationData.latitude}, longitude: ${_locationData.longitude
                           ],
                         ),
                       ),
-                      Padding(
+                      Container(
                         padding: const EdgeInsets.only(top: 8),
+                        width: double.infinity,
                         child: Wrap(
                           direction: Axis.horizontal,
                           runAlignment: WrapAlignment.start,
@@ -141,8 +142,8 @@ print('latitude: ${_locationData.latitude}, longitude: ${_locationData.longitude
                             LanguageBox(lang: 'English'),
                             LanguageBox(lang: 'Arabic'),
                             LanguageBox(lang: 'Arabic'),
-                            LanguageBox(lang: 'English'),
-                            LanguageBox(lang: 'Arabic'),
+                            LanguageBox(lang: 'Persian'),
+                            LanguageBox(lang: 'Pilipino'),
                           ],
                         ),
                       ),
@@ -336,30 +337,34 @@ print('latitude: ${_locationData.latitude}, longitude: ${_locationData.longitude
                                     DateDayCard(
                                       date: 9,
                                       day: 'Mon',
+                                      color: white,
                                     ),
                                     DateDayCard(
-                                      date: 9,
-                                      day: 'Mon',
+                                      date: 10,
+                                      day: 'Tue',
+                                      color: Color.fromARGB(255, 224, 224, 224).withOpacity(0.6),
                                     ),
                                     DateDayCard(
-                                      date: 9,
-                                      day: 'Mon',
+                                      date: 11,
+                                      day: 'Wed',
                                     ),
                                     DateDayCard(
-                                      date: 9,
-                                      day: 'Mon',
+                                      date: 12,
+                                      day: 'Thu',
+                                      color: Color.fromARGB(255, 224, 224, 224).withOpacity(0.6),
                                     ),
                                     DateDayCard(
-                                      date: 9,
-                                      day: 'Mon',
+                                      date: 13,
+                                      day: 'Fri',
                                     ),
                                     DateDayCard(
-                                      date: 9,
-                                      day: 'Mon',
+                                      date: 14,
+                                      day: 'Sat',
+                                      color: Color.fromARGB(255, 224, 224, 224).withOpacity(0.6),
                                     ),
                                     DateDayCard(
-                                      date: 9,
-                                      day: 'Mon',
+                                      date: 15,
+                                      day: 'Sun',
                                     )
                                   ],
                                 ),
@@ -470,7 +475,7 @@ print('latitude: ${_locationData.latitude}, longitude: ${_locationData.longitude
                                               padding: EdgeInsets.all(8),
                                               decoration: BoxDecoration(
                                                   color:
-                                                      greenish.withOpacity(0.3),
+                                                      greenish.withOpacity(0.2),
                                                   borderRadius:
                                                       BorderRadius.all(
                                                           Radius.circular(25))),
@@ -492,13 +497,7 @@ print('latitude: ${_locationData.latitude}, longitude: ${_locationData.longitude
                                                     color: Colors.black,
                                                   ),
                                                 ),
-                                                Text(
-                                                  "RS 50",
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    color: Colors.black,
-                                                  ),
-                                                ),
+                                                
                                               ],
                                             ),
                                           ),

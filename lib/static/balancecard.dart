@@ -32,12 +32,13 @@ class BalanceCard extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width * 0.9,
             decoration: BoxDecoration(
-              color: greenish,
+              image:
+                  DecorationImage(image: AssetImage("assets/images/topUp.png"),fit: BoxFit.fill),
               border: Border.all(
                 width: 1,
                 color: Color.fromRGBO(0, 0, 0, 0.17),
               ),
-              borderRadius: BorderRadius.circular(19),
+              borderRadius: BorderRadius.circular(25),
             ),
             child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -61,7 +62,7 @@ class BalanceCard extends StatelessWidget {
                     Row(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 8,top: 5),
+                          padding: const EdgeInsets.only(left: 8, top: 5),
                           child: Text(
                             "AED ",
                             style: TextStyle(
@@ -94,10 +95,12 @@ class BalanceCard extends StatelessWidget {
                           padding: const EdgeInsets.only(left: 8),
                           child: Text(
                             name,
-                            style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.w500),
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500),
                           ),
                         ),
-                       
                         GestureDetector(
                           onTap: () {},
                           child: Container(
@@ -119,7 +122,9 @@ class BalanceCard extends StatelessWidget {
                                 },
                                 child: Text(
                                   'Top Up',
-                                  style: TextStyle(fontSize: 16,fontWeight:FontWeight.w500),
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500),
                                 ),
                                 style: ElevatedButton.styleFrom(
                                   minimumSize: Size(78, 26),

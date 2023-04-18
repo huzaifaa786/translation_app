@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:translation/values/colors.dart';
 
 class DateDayCard extends StatelessWidget {
-  const DateDayCard({super.key, this.day, this.date});
+  const DateDayCard({super.key, this.day, this.date,this.color = white});
   final day;
   final date;
+  final color;
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +23,8 @@ class DateDayCard extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.09,
       margin: EdgeInsets.only(top: 16, bottom: 16),
       decoration: BoxDecoration(
-        // color: Color(0xFFF2F2F2),
-        border: Border.all(color: gray),
+        color: color,
+        border: Border.all(color: hintText.withOpacity(0.4)),
         borderRadius: BorderRadius.circular(8),
       ),
     );

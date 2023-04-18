@@ -59,7 +59,7 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                   margin: EdgeInsets.only(right: 14),
                   numberOfFields: 4,
                   fieldWidth: 50,
-                  
+
                   borderColor: Color(0xFF512DA8),
                   showFieldAsBox: true,
                   onCodeChanged: (String code) {},
@@ -123,15 +123,10 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                 Center(
                     child: LargeButton(
                   title: 'Submit',
-                  sreenRatio: 0.9,
-                  onPressed: () {
-                    setState(() {});
-                    // authController.signIn();
-                    // Navigator.pushNamed(context, 'home');
-                  },
+                  sreenRatio: 0.85,
+                  onPressed: () {},
                   color: greenish,
                   textcolor: Colors.white,
-                  buttonWidth: 0.95,
                 )),
               ],
             ),

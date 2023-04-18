@@ -56,14 +56,6 @@ class _Topup_screenState extends State<Topup_screen> {
               ),
               Center(
                   child: Text(
-                "Enter an amount from AED-AED 250",
-                style: TextStyle(fontSize: 17),
-              )),
-              SizedBox(
-                height: 20,
-              ),
-              Center(
-                  child: Text(
                 "or quick select amount",
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
               )),

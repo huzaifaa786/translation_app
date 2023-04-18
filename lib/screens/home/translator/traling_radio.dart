@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:translation/values/colors.dart';
 
 class TralingRadioBtn extends StatelessWidget {
-  const TralingRadioBtn({super.key, this.text, this.schedule = false,this.ontap});
+  const TralingRadioBtn(
+      {super.key, this.text, this.schedule = false, this.ontap});
   final text;
   final schedule;
   final ontap;
@@ -15,11 +16,10 @@ class TralingRadioBtn extends StatelessWidget {
         children: [
           Container(
             margin: EdgeInsets.only(top: 15, bottom: 15),
-            // width: MediaQuery.of(context).size.width *0.42,
             height: 48,
             decoration: BoxDecoration(
               color: Colors.white,
-              border: Border.all(color: Color.fromRGBO(0, 0, 0, 0.24), width: 1),
+              border: Border.all(color: greenish, width: 1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -28,7 +28,7 @@ class TralingRadioBtn extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 8.0, right: 24),
                   child: Text(
                     text,
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(fontSize: 16, color: greenish),
                   ),
                 ),
                 Padding(

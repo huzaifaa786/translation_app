@@ -36,15 +36,18 @@ class _Setting_screenState extends State<Setting_screen> {
               balance: '134.34',
               name: 'willam jones',
             ),
-            SettingCard(
-              title: 'Profile',
-              onPressed: ()  {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Profile_screen()),
-                );
-              },
-              imgicon: "assets/icons/profile.svg",
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: SettingCard(
+                title: 'Profile',
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Profile_screen()),
+                  );
+                },
+                imgicon: "assets/icons/profile.svg",
+              ),
             ),
             LanguageCard(
               title: 'Language',
@@ -76,28 +79,35 @@ class _Setting_screenState extends State<Setting_screen> {
             SizedBox(
               height: 20,
             ),
-            InkWell(
-              onTap: () {
-                logout(context);
-              },
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 150,
-                  ),
-                  Text(
-                    "Log Out",
-                    style: TextStyle(color: Colors.red, fontSize: 17),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  SvgPicture.asset(
-                    "assets/icons/arrow.svg", // replace with your logo asset path
-                    height: 20,
-                    width: 27,
-                  ),
-                ],
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: InkWell(
+                onTap: () {
+                  logout(context);
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Log Out",
+                      style: TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 17),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: SvgPicture.asset(
+                        "assets/icons/arrow.svg", // replace with your logo asset path
+                        height: 12,
+                        width: 12,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             SizedBox(
@@ -122,15 +132,17 @@ class _Setting_screenState extends State<Setting_screen> {
   logout(context) {
     Alert(
       style: AlertStyle(
-        
-        titleStyle: TextStyle(fontSize: 25),
+        titleStyle: TextStyle(fontSize: 21, fontWeight: FontWeight.w400),
       ),
-      type: AlertType.warning,
       context: context,
-      title: "Are you sure to want logout",
+      image: Padding(
+        padding: const EdgeInsets.only(bottom: 8),
+        child: Image.asset('assets/images/wrning.png'),
+      ),
+      title: "Are you sure you want to logout?",
       buttons: [
         DialogButton(
-          height: 60,
+          height: 55,
           child: Text(
             "yes",
             style: TextStyle(color: Colors.white, fontSize: 20),
@@ -139,7 +151,7 @@ class _Setting_screenState extends State<Setting_screen> {
           color: greenish,
         ),
         DialogButton(
-          height: 60,
+          height: 55,
           border: Border.all(
             color: Colors.black,
           ),

@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
       navigatorKey: navigatorKey,
       theme: Styles.lightTheme,
       title: "translation",
-      initialRoute: 'login',
+      initialRoute: 'splash',
       routes: {
         'splash': (_) => SplashScreen(),
         'login': (_) => LoginScreen(),

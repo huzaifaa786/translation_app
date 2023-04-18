@@ -35,43 +35,38 @@ class SettingCard extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Padding(
-        padding: const EdgeInsets.only(top: 15,left: 20,right: 20),
+        padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
         child: Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-               
                 Row(
                   children: [
                     Container(
-                      width: 43,
-                      height: 43,
+                      padding: EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 199, 193, 193),
+                        color: greenish.withOpacity(0.2),
                         shape: BoxShape.circle,
                       ),
                       child: Center(
                         child: SvgPicture.asset(
                           imgicon,
-                          
-                          height: 30,
-                          width: 30,
+                          height: 22,
+                          width: 22,
                         ),
                       ),
                     ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 25),
-                        child: Text(
-                                      title,
-                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-                                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 25),
+                      child: Text(
+                        title,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 17),
                       ),
+                    ),
                   ],
                 ),
-              
-              
-               
                 Row(
                   children: [
                     SvgPicture.asset(
@@ -81,22 +76,18 @@ class SettingCard extends StatelessWidget {
                     ),
                   ],
                 ),
-               
               ],
             ),
-            SizedBox(height: 18,),
-              const Divider(
+            SizedBox(
+              height: 18,
+            ),
+            const Divider(
               thickness: 1,
               height: 1,
-              endIndent: 40,
-              indent: 40,
-              color: Color.fromARGB(255, 192, 180, 180),
             ),
           ],
         ),
       ),
-       
-        
     );
   }
 }

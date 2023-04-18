@@ -24,38 +24,37 @@ class BugReportModal extends StatelessWidget {
             width: 43,
             height: 43,
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 199, 193, 193),
+              color: greenish.withOpacity(0.2),
               shape: BoxShape.circle,
             ),
             child: Center(
-              child: SvgPicture.asset(
-                "assets/icons/warning.svg", // replace with your logo asset path
-                height: 20,
-                width: 20,
-              ),
-            ),
+                child: SvgPicture.asset(
+              "assets/icons/attachFile.svg",
+              height: 22,
+            )),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 16),
             child: Text(
-              'Sorry! Interpreter not within your range.',
+              'Please attach screenshot of the issue',
               style: TextStyle(fontSize: 11),
               textAlign: TextAlign.center,
             ),
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
                 width: 270,
                 height: 100,
                 margin: EdgeInsets.only(
-                  left: 20,
+                  
                   top: 8,
                 ),
                 decoration: BoxDecoration(
                   border: Border.all(
                     width: 1,
-                    color: Color.fromRGBO(0, 0, 0, 0.17),
+                    color: greenish,
                   ),
                   borderRadius: BorderRadius.circular(9),
                 ),
@@ -78,8 +77,11 @@ class BugReportModal extends StatelessWidget {
                 },
                 child: Text('Send'),
                 style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12))),
                   backgroundColor: MaterialStateProperty.all<Color>(greenish),
-                  fixedSize: MaterialStateProperty.all(Size(248, 64)),
+                  fixedSize: MaterialStateProperty.all(Size(238, 64)),
                 ),
               ),
             ),

@@ -32,7 +32,7 @@ class _ChatMessageCardState extends State<ChatMessageCard> {
         alignment: Alignment.centerRight,
         child: ConstrainedBox(
           constraints: BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width - 45,
+            maxWidth: MediaQuery.of(context).size.width - 65,
           ),
           child: GestureDetector(
             onLongPress: () {
@@ -41,58 +41,61 @@ class _ChatMessageCardState extends State<ChatMessageCard> {
                 pressIcon = true;
               });
             },
-            child: Card(
-              elevation: 1,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
-              color: pressAttention == true
-                  ? Color.fromARGB(255, 220, 44, 44)
-                  : greenish,
-              margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-              child: Stack(children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 10, right: 60, top: 5, bottom: 20),
-                  child: Text(
-                    widget.msg,
-                    style: TextStyle(fontSize: 16, color: Colors.white),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Card(
+                  elevation: 1,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(8),topLeft: Radius.circular(8),topRight: Radius.circular(8))),
+                  color: pressAttention == true
+                      ? Color.fromARGB(255, 220, 44, 44)
+                      : greenish,
+                  margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 10, right: 10, top: 10, bottom: 10),
+                    child: Text(
+                      widget.msg,
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400,color: Colors.white),
+                    ),
                   ),
                 ),
-                Positioned(
-                  bottom: 4,
-                  right: 10,
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 15),
                   child: Row(
-                    children: [
-                      Text(widget.name,
-                          style: TextStyle(
-                              fontSize: 13,
-                              color: Color.fromARGB(255, 75, 75, 75))),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      pressIcon == true
-                          ? GestureDetector(
-                              child: Icon(
-                                Icons.delete,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(widget.name,
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: hintText)),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        pressIcon == true
+                            ? GestureDetector(
+                                child: Icon(
+                                  Icons.delete,
+                                  size: 19,
+                                ),
+                                onTap: () {
+                                  // delmsgs();
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //       builder: (context) => groupchat(id: widget.user_id, name: widget.name)),
+                                  // );
+                                },
+                              )
+                            : Icon(
+                                Icons.done_all,
                                 size: 19,
                               ),
-                              onTap: () {
-                                // delmsgs();
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //       builder: (context) => groupchat(id: widget.user_id, name: widget.name)),
-                                // );
-                              },
-                            )
-                          : Icon(
-                              Icons.done_all,
-                              size: 19,
-                            ),
-                    ],
-                  ),
-                )
-              ]),
+                      ],
+                    ),
+                ),
+              ],
             ),
           ),
         ));

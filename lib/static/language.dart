@@ -44,17 +44,16 @@ class LanguageCard extends StatelessWidget {
                 Row(
                   children: [
                     Container(
-                      width: 43,
-                      height: 43,
+                      padding: EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 199, 193, 193),
+                        color: greenish.withOpacity(0.2),
                         shape: BoxShape.circle,
                       ),
                       child: Center(
                         child: SvgPicture.asset(
                           imgicon,
-                          height: 30,
-                          width: 30,
+                          height: 22,
+                          width: 22,
                         ),
                       ),
                     ),
@@ -85,9 +84,6 @@ class LanguageCard extends StatelessWidget {
             const Divider(
               thickness: 1,
               height: 1,
-              endIndent: 40,
-              indent: 40,
-              color: Color.fromARGB(255, 192, 180, 180),
             ),
           ],
         ),

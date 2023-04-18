@@ -44,9 +44,14 @@ class TopBar extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: onProfileTap,
-                  child: SvgPicture.asset(
-                    'assets/images/profile.svg',
-                    color: white,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(45),
+                    child: Image.asset(
+                      'assets/images/placeholder.png',
+                      height: 35,
+                      width: 35,
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
               ],

@@ -70,12 +70,12 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
                           return ChatMessageCard(
                             id: '1',
                             user_id: 2,
-                            msg: 'How are you',
+                            msg: 'Lorem ipsum dolor sit amet, consect adipiscing elit. Volutpat lacus pretium enim lacus sit amet at lectus amet.',
                             name: "3:03 PM",
                           );
                         } else {
                           return ReplyMessageCard(
-                            msg: 'Hi I am farhan',
+                            msg: 'Lorem ipsum dolor sit amet, consect adipiscing elit. Volutpat lacus pretium enim lacus sit amet at lectus amet.',
                           );
                         }
                       }
@@ -151,7 +151,7 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width * 0.9,
-                  height: 58,
+                  // height: 58,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: Colors.black),
@@ -159,11 +159,12 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
                   ),
                   child: TextField(
                     decoration: InputDecoration(
-                      suffixIcon: Icon(Icons.copy),
+                      suffixIcon: Icon(Icons.attach_file,color: Colors.black),
+                      
                       hintText: 'You message',
                       border: InputBorder.none,
                       contentPadding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                          EdgeInsets.only(left: 8,top: 18),
                     ),
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
