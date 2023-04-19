@@ -111,7 +111,7 @@ class _Checkout_screenState extends State<Checkout_screen> {
                     width: 5,
                   ),
                   Container(
-                    width: 316,
+                    width: MediaQuery.of(context).size.width*0.8,
                     child: TextField(
                       decoration: InputDecoration(
                         hintText: 'Promo Code',

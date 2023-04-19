@@ -48,6 +48,8 @@ dependencies:
   rflutter_alert: ^2.0.4
   location: ^4.4.0
 
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
