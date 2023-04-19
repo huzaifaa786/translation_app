@@ -47,8 +47,9 @@ class StackInputField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 19,left: 20,right: 20),
       child: TextField(
+        obscureText: obscure,
         decoration: InputDecoration(
-          
+          floatingLabelBehavior: FloatingLabelBehavior.always,
           fillColor: Colors.grey,
           border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
           hoverColor: Colors.grey,

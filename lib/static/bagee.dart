@@ -13,18 +13,18 @@ class Badgee extends StatelessWidget {
   final color;
   final rounded;
   final ontap;
-//  "assets/images/tick.svg", 
+//  "assets/images/tick.svg",
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 35,
-      width: MediaQuery.of(context).size.width * 0.24,
+      width: MediaQuery.of(context).size.width*0.22,
+      padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
       decoration:
-          BoxDecoration(color: color, borderRadius: BorderRadius.circular(30)),
+          BoxDecoration(color: color,borderRadius: BorderRadius.circular(25)),
       child: Center(
         child: Text(
           title,
-          style: const TextStyle(
+          style: TextStyle(
               color: Colors.white, fontSize: 12, fontWeight: FontWeight.w400),
         ),
       ),

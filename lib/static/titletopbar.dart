@@ -17,7 +17,7 @@ class TitleTopbar extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Padding(
-        padding: const EdgeInsets.only(top: 15, right: 20, left: 20 ,bottom: 10),
+        padding: const EdgeInsets.only(top: 15, right: 16, left: 16 ,bottom: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -33,7 +33,7 @@ class TitleTopbar extends StatelessWidget {
                     ),
                 ),
                 child: Icon(
-                   size: 35,
+                   size: 28,
                   Icons.keyboard_arrow_left_outlined,
                   
                 ),
@@ -43,8 +43,8 @@ class TitleTopbar extends StatelessWidget {
               text,
               style: TextStyle(
                 fontFamily: 'Mazzard',
-                fontSize: 22,
-                fontWeight: FontWeight.w600,
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
               ),
             ),
             Text('.............',style: TextStyle(color: white),)

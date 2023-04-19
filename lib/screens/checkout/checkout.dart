@@ -14,158 +14,141 @@ class Checkout_screen extends StatefulWidget {
   @override
   State<Checkout_screen> createState() => _Checkout_screenState();
 }
-enum payMethod { materCard, googlePay, applePay,walletpay }
+
+enum payMethod { materCard, googlePay, applePay, walletpay }
+
 class _Checkout_screenState extends State<Checkout_screen> {
-   payMethod _site = payMethod.materCard;
+  payMethod _site = payMethod.googlePay;
   void toggleplan(payMethod value) {
     setState(() {
       _site = value;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-          child: SingleChildScrollView(
-              child: Column(children: [
-             
-           TitleTopbar(text: 'Checkout'),
-              SizedBox(
-          height: 10,
-              ),
-              Text(
-          "Service detail",
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-          height: 10,
+      child: SingleChildScrollView(
+          child: Column(
+        children: [
+          TitleTopbar(text: 'Checkout'),
+          Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: Column(children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 12, bottom: 10),
+                child: Text(
+                  "Service detail",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                ),
               ),
               Container(
-          margin: EdgeInsets.all(8),
-          width: 98,
-          height: 98,
-          padding: EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            border: Border.all(width: 2, color: Color(0xFF34607B)),
-            borderRadius: BorderRadius.circular(70),
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(22),
-            child: SvgPicture.asset(
-              "assets/images/splash_3.svg",
-              width: 64,
-              height: 64,
-              fit: BoxFit.cover,
-            ),
-          ),
+                margin: EdgeInsets.all(8),
+                width: 98,
+                height: 98,
+                // padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  border: Border.all(width: 2, color: Color(0xFF34607B)),
+                  borderRadius: BorderRadius.circular(70),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(70),
+                  child: SvgPicture.asset(
+                    "assets/images/splash_3.svg",
+                    width: 98,
+                    height: 98,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
               Center(
-          child: const Text(
-            "Online Audio/video",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
+                child: const Text(
+                  "Online Audio/video",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text("Time:   01:30 mins  ",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400, color: hintText)),
+                    Text(" |",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400, color: hintText)),
+                    Text("   Date:    11/03/2024",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400, color: hintText)),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 16,bottom: 16),
+                child: Card(
+                  color: Color.fromRGBO(255, 255, 255, 1),
+                  shape: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: greenish,
+                      )),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(left: 12,top: 14),
+                      hintText: 'Promo Code',
+                      suffixIcon: Icon(Icons.copy),
+                      border: InputBorder.none,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.only(left: 4, right: 4),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("SubTotal ",style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w500,color: hintText)),
+                    Text(
+                      "\$47.60",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 4, right: 4,top: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Total ",
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w500,color: greenish)),
+                    Text(
+                      "\$47.60",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                    )
+                  ],
+                ),
               ),
               SizedBox(
-          height: 10,
+                height: 30,
               ),
-              Padding(
-          padding: const EdgeInsets.only(left: 25,right: 25),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Time:   01:30 mins  "),
-              Text(" |"),
-              Text("   Date:    11/03/2024"),
-            ],
-          ),
-              ),
-              Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            height: 80,
-            width: 900,
-            padding: EdgeInsets.only(left: 9),
-            child: Card(
-              color: Color.fromRGBO(255, 255, 255, 1),
-              margin: EdgeInsets.fromLTRB(15, 5, 15, 5),
-              shape: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(
-                    color: Color.fromARGB(255, 156, 146, 146),
-                  )),
-              child: Row(
+              Row(
                 children: [
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: greenish,
-                        width: 1,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width*0.8,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Promo Code',
-                        suffixIcon: Icon(Icons.copy),
-                        border: InputBorder.none,
-                      ),
-                    ),
+                  Text(
+                    "Payment Method",
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   )
                 ],
               ),
-            ),
-          ),
-              ),
-              Padding(
-          padding: const EdgeInsets.only(left: 30,right: 30),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("SubTotal "),
-             
-              Text("\$47.60",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),)
-            ],
-          ),
-              ),
-              SizedBox(
-          height: 30,
-              ),
-              Padding(
-          padding: const EdgeInsets.only(left: 30,right: 30),
-          child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Total ",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500)),
-             
-              Text("\$47.60",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),)
-            ],
-          ),
-              ),
-              SizedBox(
-          height: 30,
-              ),
-              Padding(
-          padding: const EdgeInsets.only(left: 30),
-          child: Row(
-            children: [
-              Text(
-                "Payment Method",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              )
-            ],
-          ),
-
-          
-              ),
-               PPaymentMethod(
+              PPaymentMethod(
                 title: 'Googlepay',
                 image: "assets/icons/googlepay.png",
                 groupvalue: _site,
@@ -174,7 +157,7 @@ class _Checkout_screenState extends State<Checkout_screen> {
                   toggleplan(payMethod.googlePay);
                 },
               ),
-                PPaymentMethod(
+              PPaymentMethod(
                 title: 'Applepay',
                 image: "assets/icons/applepay.png",
                 groupvalue: _site,
@@ -183,7 +166,7 @@ class _Checkout_screenState extends State<Checkout_screen> {
                   toggleplan(payMethod.applePay);
                 },
               ),
-                PPaymentMethod(
+              PPaymentMethod(
                 title: 'Form Wallet',
                 image: "assets/icons/walletpay.png",
                 groupvalue: _site,
@@ -192,7 +175,7 @@ class _Checkout_screenState extends State<Checkout_screen> {
                   toggleplan(payMethod.walletpay);
                 },
               ),
-                PPaymentMethod(
+              PPaymentMethod(
                 title: 'Credit/visa card',
                 image: "assets/icons/visapay.png",
                 groupvalue: _site,
@@ -202,31 +185,31 @@ class _Checkout_screenState extends State<Checkout_screen> {
                 },
               ),
               SizedBox(
-          height: 30,
+                height: 30,
               ),
-           
-              Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Center(
-              child: LargeButton(
-            title: 'Next',
-            sreenRatio: 0.9,
-            onPressed: () {
-              setState(() {});
-        
-              // authController.signIn();
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CardAdded_Screen(),
-                  ));
-            },
-            color: greenish,
-            textcolor: Colors.white,
-            buttonWidth: 0.95,
-          )),
-              ),
-            ])),
-        ));
+              Center(
+                  child: LargeButton(
+                title: 'Next',
+                sreenRatio: 0.9,
+                onPressed: () {
+                  setState(() {});
+
+                  // authController.signIn();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CardAdded_Screen(),
+                      ));
+                },
+                color: greenish,
+                textcolor: Colors.white,
+                buttonWidth: 0.95,
+              )),
+              SizedBox(height: 30)
+            ]),
+          ),
+        ],
+      )),
+    ));
   }
 }

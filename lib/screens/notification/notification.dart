@@ -21,78 +21,85 @@ class _Notification_screenState extends State<Notification_screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 8,right: 8),
-          child: Column(
-            children: [
-              TitleTopbar(
-                text: 'Notification',
-                ontap: () {
-                  Navigator.pop(context);
-                },
+        child: Column(
+          children: [
+            TitleTopbar(
+              text: 'Notification',
+              ontap: () {
+                Navigator.pop(context);
+              },
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: Column(
+                children: [
+                  Container(
+                      padding: const EdgeInsets.only(top: 8),
+                      child: NotificationTile(
+                        title: 'your order has been accepted',
+                        name: 'Fira Jonce',
+                        badgetitle: 'Accepted',
+                        badgecolor: greenish,
+                        ontap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(40),
+                              ),
+                            ),
+                            builder: (context) =>
+                                Wrap(children: [NotificationModal()]),
+                          );
+                        },
+                      )),
+                  Container(
+                      padding: const EdgeInsets.only(top: 8),
+                      child: NotificationTile(
+                        title: 'Your order has been rejected',
+                        name: 'Fira Jonce',
+                        badgetitle: 'Rejected',
+                        badgecolor: Colors.red,
+                        ontap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(40),
+                              ),
+                            ),
+                            builder: (context) =>
+                                Wrap(children: [NotificationModal()]),
+                          );
+                        },
+                      )),
+                  Container(
+                      padding: const EdgeInsets.only(top: 8),
+                      child: NotificationTile(
+                        title: 'your order has been accepted',
+                        name: 'Fira Jonce',
+                        badgetitle: 'Completed',
+                        badgecolor: completed,
+                        ontap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(40),
+                              ),
+                            ),
+                            builder: (context) =>
+                                Wrap(children: [NotificationModal()]),
+                          );
+                        },
+                      )),
+                ],
               ),
-              Container(
-                  padding: const EdgeInsets.only(left: 1, right: 1, top: 12),
-                  height: 100,
-                  child: NotificationTile(
-                    title: 'your order has been accepted',
-                    name: 'Fira Jonce',
-                    ontap: () {
-                      showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(40),
-                          ),
-                        ),
-                        builder: (context) =>
-                            Wrap(children: [NotificationModal()]),
-                      );
-                    },
-                  )),
-                    Container(
-                  padding: const EdgeInsets.only(left: 1, right: 1, top: 12),
-                  height: 100,
-                  child: NotificationTile(
-                      title: 'your order has been accepted',
-                    name: 'Fira Jonce',
-                    ontap: () {
-                      showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(40),
-                          ),
-                        ),
-                        builder: (context) =>
-                            Wrap(children: [NotificationModal()]),
-                      );
-                    },
-                  )),
-                    Container(
-                  padding: const EdgeInsets.only(left: 1, right: 1, top: 12),
-                  height: 100,
-                  child: NotificationTile(
-                    title: 'your order has been accepted',
-                    name: 'Fira Jonce',
-                    ontap: () {
-                      showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(40),
-                          ),
-                        ),
-                        builder: (context) =>
-                            Wrap(children: [NotificationModal()]),
-                      );
-                    },
-                  )),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

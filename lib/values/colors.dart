@@ -32,3 +32,4 @@ const documentgrey = Color(4292467161);
 const progressBackgroud = Color(4281084972);
 const unSelectedProgress = Color(4294898357);
 const white = Colors.white;
+const completed = Color(4278236456);

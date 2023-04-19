@@ -29,59 +29,56 @@ class PPaymentMethod extends StatefulWidget {
 class _PPaymentMethodState extends State<PPaymentMethod> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 12,right: 12),
-      child: InkWell(
-        onTap: widget.onchaged,
-        child: Container(
-          margin: EdgeInsets.only(left: 34),
-          padding: EdgeInsets.only(top: 7, bottom: 7),
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: ListTile(
-                  title: Transform.translate(
-                    offset:  Offset(-25, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Image(
-                          image: AssetImage(widget.image),
-                          height: 25,
-                          width: 25,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          widget.title,
-                          style: TextStyle(
-                              fontSize: 16.0, fontWeight: FontWeight.w400),
-                        )
-                      ],
-                    ),
+    return InkWell(
+      onTap: widget.onchaged,
+      child: Container(
+        margin: EdgeInsets.only(left: 34),
+        padding: EdgeInsets.only(top: 7, bottom: 7),
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: ListTile(
+                title: Transform.translate(
+                  offset:  Offset(-25, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Image(
+                        image: AssetImage(widget.image),
+                        height: 25,
+                        width: 25,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        widget.title,
+                        style: TextStyle(
+                            fontSize: 16.0, fontWeight: FontWeight.w400),
+                      )
+                    ],
                   ),
-                  
-                  trailing: Transform.scale(
-                      scale: 1.2,
-                      child: Radio(
-                          value: widget.value.toString(),
-                          groupValue: widget.groupvalue.toString(),
-                          fillColor: MaterialStateColor.resolveWith(
-                              (states) => greenish),
-                          onChanged: (value) {
-                            widget.onchaged();
-    
-                          })),
-                  dense: true,
-                  contentPadding: EdgeInsets.only(left: 0.0, right: 0.0),
                 ),
+                
+                trailing: Transform.scale(
+                    scale: 1.2,
+                    child: Radio(
+                        value: widget.value.toString(),
+                        groupValue: widget.groupvalue.toString(),
+                        fillColor: MaterialStateColor.resolveWith(
+                            (states) => greenish),
+                        onChanged: (value) {
+                          widget.onchaged();
+    
+                        })),
+                dense: true,
+                contentPadding: EdgeInsets.only(left: 0.0, right: 0.0),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -34,14 +34,20 @@ class _ChangePassword_screenState extends State<ChangePassword_screen> {
             StackInputField(
               hint: 'Enter Current Password',
               lable: 'Current Password',
+              obscure: true,
+
             ),
             StackInputField(
               hint: 'Enter New Password',
               lable: 'New Password',
+              obscure: true,
+
             ),
             StackInputField(
               hint: 'Enter Confirm Password',
               lable: 'Confirm Password',
+              obscure: true,
+
             ),
             SizedBox(
               height: 40,
