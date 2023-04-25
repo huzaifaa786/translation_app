@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:translation/static/button.dart';
 import 'package:translation/values/colors.dart';
-import 'package:translation/models/intro_slide_model/introslidemodel.dart';
+import 'package:translation/models/introslidemodel.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
