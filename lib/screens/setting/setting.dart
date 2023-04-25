@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:translation/screens/enter_amount/enteramount.dart';
 import 'package:translation/screens/company_login/company_login_screen.dart';
 import 'package:translation/screens/setting/bug_report_modal.dart';
 import 'package:translation/static/language.dart';
 import 'package:translation/static/settingcard.dart';
 import 'package:translation/values/colors.dart';
-import 'package:translation/screens/main_screen/home.dart';
 import 'package:translation/screens/profile/profile.dart';
 import 'package:translation/static/titletopbar.dart';
 import 'package:translation/static/balancecard.dart';

@@ -1,9 +1,10 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:translation/screens/favorites_screen/favorites.dart';
 import 'package:translation/screens/notification/notification.dart';
 import 'package:translation/screens/profile/profile.dart';
-import 'package:translation/static/topBar.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/screens/chat/chats.dart';
 import 'package:translation/static/main_card.dart';
@@ -48,16 +49,18 @@ List<PersistentBottomNavBarItem> _navBarItem() {
     PersistentBottomNavBarItem(
       icon: FaIcon(FontAwesomeIcons.house),
       title: ('Home'),
-      textStyle: TextStyle(fontFamily: 'Poppins',fontSize: 10,fontWeight: FontWeight.w400),
-      iconSize: 20, 
+      textStyle: TextStyle(
+          fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
+      iconSize: 20,
       activeColorSecondary: greenish,
       inactiveColorPrimary: kblack,
     ),
     PersistentBottomNavBarItem(
       icon: FaIcon(FontAwesomeIcons.commentDots),
-      iconSize: 20, 
+      iconSize: 20,
       title: ('Chat'),
-      textStyle: TextStyle(fontFamily: 'Poppins',fontSize: 10,fontWeight: FontWeight.w400),
+      textStyle: TextStyle(
+          fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
       activeColorSecondary: greenish,
       inactiveColorPrimary: kblack,
     ),
@@ -71,7 +74,8 @@ List<PersistentBottomNavBarItem> _navBarItem() {
       icon: FaIcon(FontAwesomeIcons.clipboardList),
       iconSize: 20,
       title: ('Orders'),
-      textStyle: TextStyle(fontFamily: 'Poppins',fontSize: 10,fontWeight: FontWeight.w400),
+      textStyle: TextStyle(
+          fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
       activeColorSecondary: greenish,
       inactiveColorPrimary: kblack,
     ),
@@ -79,7 +83,8 @@ List<PersistentBottomNavBarItem> _navBarItem() {
       icon: FaIcon(FontAwesomeIcons.gear),
       iconSize: 20,
       title: ('Setting'),
-      textStyle: TextStyle(fontFamily: 'Poppins',fontSize: 10,fontWeight: FontWeight.w400),
+      textStyle: TextStyle(
+          fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
       activeColorSecondary: greenish,
       inactiveColorPrimary: kblack,
     ),
