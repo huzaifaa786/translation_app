@@ -62,7 +62,7 @@ class SettingCard extends StatelessWidget {
                       child: Text(
                         title,
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 17),
+                            fontWeight: FontWeight.w600, fontSize: 17,fontFamily: 'Lato'),
                       ),
                     ),
                   ],

@@ -47,6 +47,7 @@ dependencies:
   flutter_launcher_icons: ^0.13.0
   rflutter_alert: ^2.0.4
   location: ^4.4.0
+  font_awesome_flutter: ^10.4.0
 
 
 
@@ -130,6 +131,33 @@ flutter:
         - asset: assets/fonts/Poppins-Regular.ttf
         - asset: assets/fonts/Poppins-SemiBold.ttf
         - asset: assets/fonts/Poppins-Thin.ttf
+
+    - family: NunitoSans
+      fonts:
+        - asset: assets/fonts/NunitoSans-Black.ttf
+        - asset: assets/fonts/NunitoSans-Bold.ttf
+        - asset: assets/fonts/NunitoSans-ExtraBold.ttf
+        - asset: assets/fonts/NunitoSans-ExtraLight.ttf
+        - asset: assets/fonts/NunitoSans-Light.ttf
+        - asset: assets/fonts/NunitoSans-Regular.ttf
+        - asset: assets/fonts/NunitoSans-SemiBold.ttf
+
+    - family: Lato
+      fonts:
+        - asset: assets/fonts/Lato-Black.ttf
+        - asset: assets/fonts/Lato-Bold.ttf
+        - asset: assets/fonts/Lato-Hairline.ttf
+        - asset: assets/fonts/Lato-Heavy.ttf
+        - asset: assets/fonts/Lato-Light.ttf
+        - asset: assets/fonts/Lato-Medium.ttf
+        - asset: assets/fonts/Lato-Regular.ttf
+        - asset: assets/fonts/Lato-SemiBold.ttf
+        - asset: assets/fonts/Lato-Thin.ttf
+
+    - family: Merriweather
+      fonts:
+        - asset: assets/fonts/Merriweather-Bold.ttf
+        - asset: assets/fonts/Merriweather-Regular.ttf
 
   #   - family: Trajan Pro
   #     fonts:
