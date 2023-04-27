@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:translation/controllers/auth_controller.dart';
 import 'package:translation/screens/bottom_nav_screen/bottom_nav.dart';
 import 'package:translation/screens/login/login_screen.dart';
 import 'package:translation/screens/Otp/verifyphoneno.dart';
@@ -8,6 +10,7 @@ import 'package:translation/screens/translator_screens/notranslator.dart';
 import 'package:translation/values/styles.dart';
 
 void main() async {
+  Get.put(AuthController());
   runApp(const MyApp());
 }
 
