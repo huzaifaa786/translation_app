@@ -61,8 +61,7 @@ class LanguageCard extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 25),
                       child: Text(
                         title,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 17),
+                        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17,fontFamily: 'Lato'),
                       ),
                     ),
                   ],
@@ -72,7 +71,7 @@ class LanguageCard extends StatelessWidget {
                     Text(
                       "AR",
                       style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 17,fontFamily: 'Lato'),
                     )
                   ],
                 ),

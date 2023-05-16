@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:translation/values/colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -68,7 +69,7 @@ class InputField1 extends StatelessWidget {
               ),
               child: Padding(
                 padding: EdgeInsets.all(8.0),
-                child: SvgPicture.asset(icon,height: 20,width: 20),
+                child: SvgPicture.asset(icon, height: 20, width: 20),
               ),
             ),
             SizedBox(
@@ -101,6 +102,10 @@ class InputField1 extends StatelessWidget {
                   ),
                   cursorColor: Colors.black,
                   maxLines: maxlines == true ? null : 1,
+                  autovalidateMode: autovalidateMode ??
+                      (validator == true.obs
+                          ? AutovalidateMode.always
+                          : AutovalidateMode.onUserInteraction),
                 )),
           ],
         ),

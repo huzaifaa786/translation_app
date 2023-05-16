@@ -1,9 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:translation/controllers/auth_controller.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/static/input_field1.dart';
 import 'package:translation/static/large_button.dart';
+import 'package:translation/values/controllers.dart';
+import 'package:translation/values/validator.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -13,13 +16,8 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  int index = 0;
-
-  getindex(id) async {
-    setState(() {
-      index = id;
-    });
-  }
+ 
+  
 
   @override
   Widget build(BuildContext context) {
@@ -71,12 +69,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           InputField1(
                             hint: 'Username',
                             icon: 'assets/images/user.svg',
+                            controller: authController.name,
+                              validator: (password) =>
+                                  Validators.passwordValidator(password),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(bottom: 4,top: 4),
+                            padding: const EdgeInsets.only(bottom: 4, top: 4),
                             child: InputField1(
                               icon: 'assets/images/email.svg',
                               hint: 'Email Address',
+                              controller: authController.email,
+                              type: TextInputType.emailAddress,
                             ),
                           ),
                           Padding(
@@ -84,12 +87,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             child: InputField1(
                               hint: 'Phone Number',
                               icon: 'assets/images/phone.svg',
+                              controller: authController.phone,
+                              type: TextInputType.number,
                             ),
                           ),
                           InputField1(
                             hint: 'Password',
                             icon: 'assets/images/lock.svg',
                             obscure: true,
+                            controller: authController.password,
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 4, bottom: 20),
@@ -97,12 +103,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               hint: 'Confirm Password',
                               icon: 'assets/images/lock.svg',
                               obscure: true,
+                              controller: authController.confirmPassword,
                             ),
                           ),
                           LargeButton(
                             title: 'Sign Up',
                             sreenRatio: 0.9,
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {});
+                              authController.register();
+                            },
                             color: greenish,
                             textcolor: Colors.white,
                             buttonWidth: 0.95,

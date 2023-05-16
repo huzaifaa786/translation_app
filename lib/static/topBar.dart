@@ -23,39 +23,37 @@ class TopBar extends StatelessWidget {
             height: 30,
             width: 30,
           ),
-          Container(
-            width: MediaQuery.of(context).size.width * 0.25,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                  onTap: onFavTap,
-                  child: Icon(
-                    Icons.favorite,
-                    color: white,
-                  ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              InkWell(
+                onTap: onFavTap,
+                child: Icon(
+                  Icons.favorite,
+                  color: white,
                 ),
-                InkWell(
-                  onTap: onNotiTap,
-                  child: SvgPicture.asset(
-                    'assets/images/bell.svg',
-                    color: white,
-                  ),
+              ),
+              SizedBox(width: 8),
+              InkWell(
+                onTap: onNotiTap,
+                child: SvgPicture.asset(
+                  'assets/images/bell.svg',
+                  color: white,
                 ),
-                InkWell(
-                  onTap: onProfileTap,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(45),
-                    child: Image.asset(
-                      'assets/images/placeholder.png',
-                      height: 35,
-                      width: 35,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+              // InkWell(
+              //   onTap: onProfileTap,
+              //   child: ClipRRect(
+              //     borderRadius: BorderRadius.circular(45),
+              //     child: Image.asset(
+              //       'assets/images/placeholder.png',
+              //       height: 35,
+              //       width: 35,
+              //       fit: BoxFit.fill,
+              //     ),
+              //   ),
+              // ),
+            ],
           )
         ],
       ),

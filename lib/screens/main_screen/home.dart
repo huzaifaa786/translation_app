@@ -1,16 +1,17 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:translation/screens/favorites_screen/favorites.dart';
 import 'package:translation/screens/notification/notification.dart';
 import 'package:translation/screens/profile/profile.dart';
-import 'package:translation/static/topBar.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/screens/chat/chats.dart';
 import 'package:translation/static/main_card.dart';
 import 'package:translation/screens/orderhistory/orderhistory.dart';
 import 'package:translation/screens/setting/setting.dart';
 import 'package:translation/screens/translator_screens/translator_screen.dart';
-import 'package:translation/static/input_field.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:translation/static/dropdown.dart';
 
 import '../../../static/large_button.dart';
@@ -46,14 +47,20 @@ class _Home_screenState extends State<Home_screen> {
 List<PersistentBottomNavBarItem> _navBarItem() {
   return [
     PersistentBottomNavBarItem(
-      icon: Icon(Icons.home),
+      icon: FaIcon(FontAwesomeIcons.house),
       title: ('Home'),
+      textStyle: TextStyle(
+          fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
+      iconSize: 20,
       activeColorSecondary: greenish,
       inactiveColorPrimary: kblack,
     ),
     PersistentBottomNavBarItem(
-      icon: Icon(Icons.chat),
+      icon: FaIcon(FontAwesomeIcons.commentDots),
+      iconSize: 20,
       title: ('Chat'),
+      textStyle: TextStyle(
+          fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
       activeColorSecondary: greenish,
       inactiveColorPrimary: kblack,
     ),
@@ -64,14 +71,20 @@ List<PersistentBottomNavBarItem> _navBarItem() {
       inactiveColorPrimary: kblack,
     ),
     PersistentBottomNavBarItem(
-      icon: Icon(Icons.list_alt),
+      icon: FaIcon(FontAwesomeIcons.clipboardList),
+      iconSize: 20,
       title: ('Orders'),
+      textStyle: TextStyle(
+          fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
       activeColorSecondary: greenish,
       inactiveColorPrimary: kblack,
     ),
     PersistentBottomNavBarItem(
-      icon: Icon(Icons.settings),
-      title: ('Settings'),
+      icon: FaIcon(FontAwesomeIcons.gear),
+      iconSize: 20,
+      title: ('Setting'),
+      textStyle: TextStyle(
+          fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
       activeColorSecondary: greenish,
       inactiveColorPrimary: kblack,
     ),

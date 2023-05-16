@@ -54,7 +54,7 @@ class BalanceCard extends StatelessWidget {
                                 color: Colors.white,
                                 fontSize: 15,
                                 fontWeight: FontWeight.w400,
-                                fontFamily: 'Mazzard'),
+                                fontFamily: 'Lato'),
                           ),
                         ),
                       ],
@@ -67,9 +67,9 @@ class BalanceCard extends StatelessWidget {
                             "AED ",
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 25,
+                                fontSize: 24,
                                 fontWeight: FontWeight.w700,
-                                fontFamily: 'Mazzard'),
+                                fontFamily: 'Merriweather'),
                           ),
                         ),
                         Padding(
@@ -79,7 +79,7 @@ class BalanceCard extends StatelessWidget {
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 24,
-                                fontFamily: 'Mazzard',
+                                fontFamily: 'Merriweather',
                                 fontWeight: FontWeight.w700),
                           ),
                         ),
@@ -98,7 +98,7 @@ class BalanceCard extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.white,
-                                fontWeight: FontWeight.w500),
+                                fontWeight: FontWeight.w500,fontFamily: 'Poppins'),
                           ),
                         ),
                         GestureDetector(
@@ -124,7 +124,7 @@ class BalanceCard extends StatelessWidget {
                                   'Top Up',
                                   style: TextStyle(
                                       fontSize: 16,
-                                      fontWeight: FontWeight.w500),
+                                      fontWeight: FontWeight.w600,fontFamily: 'Lato'),
                                 ),
                                 style: ElevatedButton.styleFrom(
                                   minimumSize: Size(78, 26),

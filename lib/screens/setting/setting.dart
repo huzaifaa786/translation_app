@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:translation/screens/enter_amount/enteramount.dart';
 import 'package:translation/screens/company_login/company_login_screen.dart';
 import 'package:translation/screens/setting/bug_report_modal.dart';
 import 'package:translation/static/language.dart';
 import 'package:translation/static/settingcard.dart';
 import 'package:translation/values/colors.dart';
-import 'package:translation/screens/main_screen/home.dart';
 import 'package:translation/screens/profile/profile.dart';
 import 'package:translation/static/titletopbar.dart';
 import 'package:translation/static/balancecard.dart';
@@ -80,33 +78,37 @@ class _Setting_screenState extends State<Setting_screen> {
               height: 20,
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 16.0),
+              padding: const EdgeInsets.only(top: 12.0),
               child: InkWell(
                 onTap: () {
                   logout(context);
                 },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Log Out",
-                      style: TextStyle(
-                          color: Colors.red,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 17),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: SvgPicture.asset(
-                        "assets/icons/arrow.svg", // replace with your logo asset path
-                        height: 12,
-                        width: 12,
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Log Out",
+                        style: TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'Lato',
+                            fontSize: 17),
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        width: 10,
+                      ),
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: SvgPicture.asset(
+                          "assets/icons/arrow.svg", // replace with your logo asset path
+                          height: 12,
+                          width: 12,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -137,27 +139,37 @@ class _Setting_screenState extends State<Setting_screen> {
       context: context,
       image: Padding(
         padding: const EdgeInsets.only(bottom: 8),
-        child: Image.asset('assets/images/wrning.png'),
+        child: SvgPicture.asset('assets/images/logout.svg'),
       ),
       title: "Are you sure you want to logout?",
       buttons: [
         DialogButton(
           height: 55,
+          radius: BorderRadius.circular(13),
           child: Text(
-            "yes",
-            style: TextStyle(color: Colors.white, fontSize: 20),
+            "Yes",
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w600),
           ),
           onPressed: () => Navigator.pop(context),
           color: greenish,
         ),
         DialogButton(
           height: 55,
+          radius: BorderRadius.circular(13),
           border: Border.all(
-            color: Colors.black,
+            color: Colors.black54,
           ),
           child: Text(
             "No",
-            style: TextStyle(color: white, fontSize: 20),
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w600),
           ),
           onPressed: () => Navigator.pop(context),
           color: Colors.black,

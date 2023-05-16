@@ -1,3 +1,3 @@
-import 'package:translation/screens/login/authcontroller.dart';
+import 'package:translation/controllers/auth_controller.dart';
 
 AuthController authController = AuthController.instance;

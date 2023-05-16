@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:translation/screens/Otp/verifyphoneno.dart';
 import 'package:translation/screens/main_screen/home.dart';
-import 'package:translation/screens/register/sign_up.dart';
+import 'package:translation/screens/login/sign_up.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/static/input_field1.dart';
 import 'package:translation/static/large_button.dart';

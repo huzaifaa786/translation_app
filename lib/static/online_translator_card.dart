@@ -42,7 +42,7 @@ class OnlineTranslatorCard extends StatelessWidget {
               ),
               Text(
                 "Watson",
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700,fontFamily: 'NunitoSans'),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -55,7 +55,7 @@ class OnlineTranslatorCard extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 4, left: 4),
                     child: Text('5.0',
                         style: TextStyle(
-                            fontSize: 11, fontWeight: FontWeight.w400)),
+                            fontSize: 11, fontWeight: FontWeight.w400,fontFamily: 'NunitoSans')),
                   ),
                 ],
               ),
@@ -66,11 +66,11 @@ class OnlineTranslatorCard extends StatelessWidget {
                   children: [
                     Text(
                       "Rate per 30 mins:  ",
-                      style: TextStyle(fontSize: 9, fontWeight: FontWeight.w700),
+                      style: TextStyle(fontSize: 9, fontWeight: FontWeight.w700,fontFamily: 'NunitoSans'),
                     ),
                     Text(
                       "100 AED",
-                      style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700),
+                      style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700,fontFamily: 'NunitoSans'),
                     )
                   ],
                 ),

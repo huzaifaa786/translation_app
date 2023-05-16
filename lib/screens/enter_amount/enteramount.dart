@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:translation/screens/enter_amount/ppaymentmethod.dart';
-import 'package:translation/screens/setting/setting.dart';
 import 'package:translation/static/box.dart';
 import 'package:translation/static/large_button.dart';
 import 'package:translation/static/titletopbar.dart';
@@ -15,11 +13,11 @@ class Topup_screen extends StatefulWidget {
   State<Topup_screen> createState() => _Topup_screenState();
 }
 
-enum payMethod { materCard, googlePay, applePay,walletpay }
+enum payMethod { materCard, googlePay, applePay, walletpay }
 
 class _Topup_screenState extends State<Topup_screen> {
   String? Selectedvalue = "00";
-  payMethod _site = payMethod.materCard;
+  payMethod _site = payMethod.googlePay;
   void toggleplan(payMethod value) {
     setState(() {
       _site = value;
@@ -110,46 +108,49 @@ class _Topup_screenState extends State<Topup_screen> {
                 ),
               ),
               SizedBox(
-                height: 30,
+                height: 20,
               ),
-
-              PPaymentMethod(
-                title: 'Googlepay',
-                image: "assets/icons/googlepay.png",
-                groupvalue: _site,
-                value: payMethod.googlePay,
-                onchaged: () {
-                  toggleplan(payMethod.googlePay);
-                },
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15),
+                child: Column(children: [
+                  PPaymentMethod(
+                    title: 'Googlepay',
+                    image: "assets/icons/googlepay.png",
+                    groupvalue: _site,
+                    value: payMethod.googlePay,
+                    onchaged: () {
+                      toggleplan(payMethod.googlePay);
+                    },
+                  ),
+                  PPaymentMethod(
+                    title: 'Applepay',
+                    image: "assets/icons/applepay.png",
+                    groupvalue: _site,
+                    value: payMethod.applePay,
+                    onchaged: () {
+                      toggleplan(payMethod.applePay);
+                    },
+                  ),
+                  PPaymentMethod(
+                    title: 'Form Wallet',
+                    image: "assets/icons/walletpay.png",
+                    groupvalue: _site,
+                    value: payMethod.walletpay,
+                    onchaged: () {
+                      toggleplan(payMethod.walletpay);
+                    },
+                  ),
+                  PPaymentMethod(
+                    title: 'Credit/visa card',
+                    image: "assets/icons/visapay.png",
+                    groupvalue: _site,
+                    value: payMethod.materCard,
+                    onchaged: () {
+                      toggleplan(payMethod.materCard);
+                    },
+                  ),
+                ]),
               ),
-                PPaymentMethod(
-                title: 'Applepay',
-                image: "assets/icons/applepay.png",
-                groupvalue: _site,
-                value: payMethod.applePay,
-                onchaged: () {
-                  toggleplan(payMethod.applePay);
-                },
-              ),
-                PPaymentMethod(
-                title: 'Form Wallet',
-                image: "assets/icons/walletpay.png",
-                groupvalue: _site,
-                value: payMethod.walletpay,
-                onchaged: () {
-                  toggleplan(payMethod.walletpay);
-                },
-              ),
-                PPaymentMethod(
-                title: 'Credit/visa card',
-                image: "assets/icons/visapay.png",
-                groupvalue: _site,
-                value: payMethod.materCard,
-                onchaged: () {
-                  toggleplan(payMethod.materCard);
-                },
-              ),
-              
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Center(

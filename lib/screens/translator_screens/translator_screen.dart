@@ -28,12 +28,12 @@ class _Translator_State extends State<Translator_> {
                 children: [
                   Text(
                     "Online People",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,fontFamily: 'Poppins'),
                   ),
                   Text(
-                    "View all",
+                    "View All",
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 14,fontFamily: 'Poppins',color: Colors.grey[600]
                     ),
                   ),
                 ],
@@ -41,7 +41,7 @@ class _Translator_State extends State<Translator_> {
             ),
             Container(
               padding: EdgeInsets.only(left: 10),
-              height: MediaQuery.of(context).size.height * 0.21,
+              height: MediaQuery.of(context).size.height * 0.22,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
@@ -56,7 +56,7 @@ class _Translator_State extends State<Translator_> {
                 children: [
                   Text(
                     "Offline People",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,fontFamily: 'Poppins'),
                   ),
                   GestureDetector(
                     onTap: () {
@@ -67,9 +67,9 @@ class _Translator_State extends State<Translator_> {
                       );
                     },
                     child: Text(
-                      "View all",
+                      "View All",
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 14,fontFamily: 'Poppins',color: Colors.grey[600]
                       ),
                     ),
                   ),

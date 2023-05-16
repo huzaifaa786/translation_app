@@ -42,39 +42,45 @@ class OfflineTranslattorCard extends StatelessWidget {
                         const Text(
                           "Theresea Webb",
                           style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold),
+                              fontSize: 14, fontWeight: FontWeight.w700,fontFamily: 'NunitoSans'),
                         ),
-                        Row(
-                          children: [
-                            Text(
-                              "Rate per 30 mins:  ",
-                              style: TextStyle(
-                                  fontSize: 9, fontWeight: FontWeight.w700),
-                            ),
-                            Text(
-                              "100 AED",
-                              style: TextStyle(
-                                  fontSize: 11, fontWeight: FontWeight.w700),
-                            )
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.only(top:2,bottom: 2),
+                          child: Row(
+                            children: [
+                              Text(
+                                "Rate per 30 mins:  ",
+                                style: TextStyle(
+                                    fontSize: 9, fontWeight: FontWeight.w700,fontFamily: 'NunitoSans'),
+                              ),
+                              Text(
+                                "100 AED",
+                                style: TextStyle(
+                                    fontSize: 11, fontWeight: FontWeight.w700,fontFamily: 'NunitoSans'),
+                              )
+                            ],
+                          ),
                         ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: SvgPicture.asset(
-                                    'assets/images/star.svg',
-                                    height: 11,
-                                    width: 11)),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 4, left: 2),
-                              child: Text('5.0',
-                                  style: TextStyle(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.w400)),
-                            ),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 4),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: SvgPicture.asset(
+                                      'assets/images/star.svg',
+                                      height: 11,
+                                      width: 11)),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 4, left: 2),
+                                child: Text('5.0',
+                                    style: TextStyle(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w400,fontFamily: 'NunitoSans')),
+                              ),
+                            ],
+                          ),
                         ),
                         Row(
                           children: [
@@ -90,7 +96,6 @@ class OfflineTranslattorCard extends StatelessWidget {
                               ),
                               child: Text(
                                 'Arabic',
-                                textDirection: TextDirection.rtl,
                                 style: TextStyle(fontSize: 12),
                               ),
                             ),
@@ -106,7 +111,6 @@ class OfflineTranslattorCard extends StatelessWidget {
                               ),
                               child: Text(
                                 'Turkish',
-                                textDirection: TextDirection.rtl,
                                 style: TextStyle(fontSize: 12),
                               ),
                             ),
@@ -122,7 +126,6 @@ class OfflineTranslattorCard extends StatelessWidget {
                               ),
                               child: Text(
                                 'English',
-                                textDirection: TextDirection.rtl,
                                 style: TextStyle(fontSize: 12),
                               ),
                             )
@@ -133,7 +136,7 @@ class OfflineTranslattorCard extends StatelessWidget {
                   ),
                 ],
               ),
-              SvgPicture.asset("assets/icons/forward.svg"),
+              FittedBox(fit: BoxFit.scaleDown, child: SvgPicture.asset("assets/icons/forward.svg",height: 30,width: 30)),
             ],
           ),
         ),
