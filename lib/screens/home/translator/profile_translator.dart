@@ -46,40 +46,34 @@ class _profile_translatorState extends State<profile_translator> {
   bool doc = false;
 
   int i = 0;
-getlocation ()
- async{
-Location location = new Location();
+  getlocation() async {
+    Location location = new Location();
 
-bool _serviceEnabled;
-PermissionStatus _permissionGranted;
-LocationData _locationData;
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+    LocationData _locationData;
 
-_serviceEnabled = await location.serviceEnabled();
-if (!_serviceEnabled) {
-  _serviceEnabled = await location.requestService();
-  if (!_serviceEnabled) {
-    return;
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return;
+      }
+    }
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+
+    _locationData = await location.getLocation();
+    print(
+        'latitude: ${_locationData.latitude}, longitude: ${_locationData.longitude}');
   }
-}
 
-_permissionGranted = await location.hasPermission();
-if (_permissionGranted == PermissionStatus.denied) {
-  _permissionGranted = await location.requestPermission();
-  if (_permissionGranted != PermissionStatus.granted) {
-    return;
-  }
-}
-
-_locationData = await location.getLocation();
-print('latitude: ${_locationData.latitude}, longitude: ${_locationData.longitude}');
-
-
-
-
-
-
-}
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -342,7 +336,8 @@ print('latitude: ${_locationData.latitude}, longitude: ${_locationData.longitude
                                     DateDayCard(
                                       date: 10,
                                       day: 'Tue',
-                                      color: Color.fromARGB(255, 224, 224, 224).withOpacity(0.6),
+                                      color: Color.fromARGB(255, 224, 224, 224)
+                                          .withOpacity(0.6),
                                     ),
                                     DateDayCard(
                                       date: 11,
@@ -351,7 +346,8 @@ print('latitude: ${_locationData.latitude}, longitude: ${_locationData.longitude
                                     DateDayCard(
                                       date: 12,
                                       day: 'Thu',
-                                      color: Color.fromARGB(255, 224, 224, 224).withOpacity(0.6),
+                                      color: Color.fromARGB(255, 224, 224, 224)
+                                          .withOpacity(0.6),
                                     ),
                                     DateDayCard(
                                       date: 13,
@@ -360,7 +356,8 @@ print('latitude: ${_locationData.latitude}, longitude: ${_locationData.longitude
                                     DateDayCard(
                                       date: 14,
                                       day: 'Sat',
-                                      color: Color.fromARGB(255, 224, 224, 224).withOpacity(0.6),
+                                      color: Color.fromARGB(255, 224, 224, 224)
+                                          .withOpacity(0.6),
                                     ),
                                     DateDayCard(
                                       date: 15,
@@ -497,7 +494,6 @@ print('latitude: ${_locationData.latitude}, longitude: ${_locationData.longitude
                                                     color: Colors.black,
                                                   ),
                                                 ),
-                                                
                                               ],
                                             ),
                                           ),
@@ -609,7 +605,7 @@ print('latitude: ${_locationData.latitude}, longitude: ${_locationData.longitude
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => Checkout_screen()));
-                                    //  update(context);
+                            //  update(context);
                           },
                           color: greenish,
                           textcolor: Colors.white,

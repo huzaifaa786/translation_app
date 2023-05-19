@@ -6,6 +6,7 @@ import 'package:translation/values/colors.dart';
 import 'package:translation/static/input_field1.dart';
 import 'package:translation/static/large_button.dart';
 import 'package:translation/values/controllers.dart';
+import 'package:translation/values/validator.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -15,13 +16,8 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  int index = 0;
-
-  getindex(id) async {
-    setState(() {
-      index = id;
-    });
-  }
+ 
+  
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +70,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             hint: 'Username',
                             icon: 'assets/images/user.svg',
                             controller: authController.name,
+                              validator: (password) =>
+                                  Validators.passwordValidator(password),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(bottom: 4, top: 4),

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:translation/controllers/auth_controller.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:translation/helper/loading.dart';
 import 'package:translation/screens/bottom_nav_screen/bottom_nav.dart';
+import 'package:translation/screens/login/authcontroller.dart';
 import 'package:translation/screens/login/login_screen.dart';
 import 'package:translation/screens/Otp/verifyphoneno.dart';
 import 'package:translation/screens/profile/profile.dart';
@@ -10,7 +13,9 @@ import 'package:translation/screens/translator_screens/notranslator.dart';
 import 'package:translation/values/styles.dart';
 
 void main() async {
+   await LoadingHelper.init();
   Get.put(AuthController());
+   await GetStorage.init();
   runApp(const MyApp());
 }
 
@@ -30,6 +35,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
       theme: Styles.lightTheme,
+        builder: EasyLoading.init(),
       title: "translation",
       initialRoute: 'splash',
       routes: {
