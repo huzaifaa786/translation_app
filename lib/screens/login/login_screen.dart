@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:translation/screens/Otp/verifyphoneno.dart';
 import 'package:translation/screens/main_screen/home.dart';
@@ -8,6 +9,7 @@ import 'package:translation/screens/login/sign_up.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/static/input_field1.dart';
 import 'package:translation/static/large_button.dart';
+import 'package:translation/values/controllers.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -112,7 +114,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       index == 0
                           ? Container(
-                              padding: const EdgeInsets.only(left: 20, right: 20),
+                              padding:
+                                  const EdgeInsets.only(left: 20, right: 20),
                               height: MediaQuery.of(context).size.height * 0.65,
                               child: SingleChildScrollView(
                                 child: Padding(
@@ -131,16 +134,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.only(bottom: 4),
+                                        padding:
+                                            const EdgeInsets.only(bottom: 4),
                                         child: InputField1(
                                           icon: 'assets/images/email.svg',
                                           hint: 'Email Address',
+                                          controller: authController.email,
                                         ),
                                       ),
                                       InputField1(
                                         icon: 'assets/images/lock.svg',
                                         hint: 'Password',
                                         obscure: true,
+                                        controller: authController.password,
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.only(
@@ -156,7 +162,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 style: TextStyle(
                                                     fontSize: 18,
                                                     color: Colors.black54,
-                                                    fontWeight: FontWeight.w600),
+                                                    fontWeight:
+                                                        FontWeight.w600),
                                               ),
                                             )
                                           ],
@@ -166,12 +173,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                         title: 'Login',
                                         sreenRatio: 0.9,
                                         onPressed: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Home_screen(),
-                                              ));
+                                          setState(() {});
+                                          authController.SignIn((success) {
+                                            if (success) {
+                                              authController
+                                                      .validateSignUpForm =
+                                                  false.obs;
+                                              Get.offAll(Home_screen());
+                                            }
+                                          });
                                         },
                                         color: greenish,
                                         textcolor: Colors.white,
@@ -203,7 +213,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 child: Text(
                                                   'Register Now',
                                                   style: TextStyle(
-                                                      fontWeight: FontWeight.w600,
+                                                      fontWeight:
+                                                          FontWeight.w600,
                                                       color: greenish,
                                                       fontSize: 15),
                                                 ),
@@ -254,7 +265,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                             Padding(
                                                 padding: EdgeInsets.only(
                                                     left: 12, right: 12)),
-                                            Image.asset("assets/images/apple.png",
+                                            Image.asset(
+                                                "assets/images/apple.png",
                                                 height: 34),
                                           ],
                                         ),
@@ -265,7 +277,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             )
                           : Container(
-                              padding: const EdgeInsets.only(left: 20, right: 20),
+                              padding:
+                                  const EdgeInsets.only(left: 20, right: 20),
                               height: MediaQuery.of(context).size.height * 0.65,
                               child: SingleChildScrollView(
                                 child: Column(
@@ -282,7 +295,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(bottom: 24),
+                                      padding:
+                                          const EdgeInsets.only(bottom: 24),
                                       child: InputField1(
                                         icon: 'assets/images/phone.svg',
                                         hint: 'Phone Number',
@@ -295,7 +309,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) => VerifyPhone(),
+                                              builder: (context) =>
+                                                  VerifyPhone(),
                                             ));
                                       },
                                       color: greenish,
@@ -341,7 +356,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Image.asset("assets/images/google.png",
+                                          Image.asset(
+                                              "assets/images/google.png",
                                               height: 34),
                                           Padding(
                                               padding: EdgeInsets.only(

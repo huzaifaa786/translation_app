@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:translation/controllers/auth_controller.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/static/input_field1.dart';
@@ -16,9 +17,6 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
- 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,9 +67,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           InputField1(
                             hint: 'Username',
                             icon: 'assets/images/user.svg',
-                            controller: authController.name,
-                              validator: (password) =>
-                                  Validators.passwordValidator(password),
+                            controller: authController.userName,
+                            validator: (user) =>
+                                Validators.emptyStringValidator(user, 'UserName'),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(bottom: 4, top: 4),
@@ -79,6 +77,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               icon: 'assets/images/email.svg',
                               hint: 'Email Address',
                               controller: authController.email,
+                                 validator: (user) =>
+                                Validators.emptyStringValidator(user, 'email'),
                               type: TextInputType.emailAddress,
                             ),
                           ),
@@ -88,6 +88,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               hint: 'Phone Number',
                               icon: 'assets/images/phone.svg',
                               controller: authController.phone,
+                                validator: (user) =>
+                                Validators.emptyStringValidator(user, 'Number'),
                               type: TextInputType.number,
                             ),
                           ),
@@ -111,7 +113,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             sreenRatio: 0.9,
                             onPressed: () {
                               setState(() {});
-                              authController.register();
+                              authController.SignUp((success) {
+                                if (success) {
+                                  authController.ClearSignupVariables();
+                                  authController.validateSignUpForm = false.obs;
+                                }
+                              });
                             },
                             color: greenish,
                             textcolor: Colors.white,

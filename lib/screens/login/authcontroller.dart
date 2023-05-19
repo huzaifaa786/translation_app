@@ -85,41 +85,45 @@ class AuthController extends GetxController {
       LoadingHelper.dismiss();
       showErrors();
     }
+  }
 
-    void login(void Function(bool) callback) async {
-      LoadingHelper.show();
-      print('object');
-      final bool isFormValid =
-          Validators.emptyStringValidator(email.text, '') == null &&
-              Validators.emptyStringValidator(password.text, '') == null;
-      if (isFormValid) {
-        var url = BASE_URL + 'vendor/login';
-        // var token = await FirebaseMessaging.instance.getToken();
-        var data = {
-          'email': userName.text,
-          'password': password.text,
-          // 'firebase_token': token,
-        };
+  void SignIn(void Function(bool) callback) async {
+    LoadingHelper.show();
+    print('objcvcect');
+    print(email.text);
+    print(password.text);
+    final bool isFormValid =
+        Validators.emptyStringValidator(email.text, '') == null &&
+            Validators.emptyStringValidator(password.text, '') == null;
+    if (isFormValid) {
+      var url = BASE_URL + 'user/login';
+      // var token = await FirebaseMessaging.instance.getToken();
+      var data = {
+        'email': email.text,
+        'password': password.text,
+        // 'firebase_token': token,
+      };
 
-        var response = await Api.execute(url: url, data: data);
-        if (!response['error']) {
-          User user = User(response['user']);
-          GetStorage box = GetStorage();
-          box.write('api_token', user.apiToken);
-          LoadingHelper.dismiss();
-          return callback(true);
-        } else {
-          LoadingHelper.dismiss();
-          Get.snackbar('ERROR!', response['error_data'],
-              snackPosition: SnackPosition.BOTTOM,
-              backgroundColor: Colors.red,
-              colorText: Colors.white);
-          return callback(false);
-        }
+      var response = await Api.execute(url: url, data: data);
+      if (!response['error']) {
+        User user = User(response['User']);
+        GetStorage box = GetStorage();
+        box.write('api_token', user.apiToken);
+        LoadingHelper.dismiss();
+        return callback(true);
       } else {
         LoadingHelper.dismiss();
-        showSignInErrors();
+        print(response['error_data']);
+        Get.snackbar('ERROR!', response['error_data'],
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.red,
+            colorText: Colors.white);
+        return callback(false);
       }
+    } else {
+      LoadingHelper.dismiss();
+      print('error');
+      showSignInErrors();
     }
   }
 }

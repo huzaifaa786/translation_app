@@ -7,6 +7,7 @@ import 'package:translation/screens/bottom_nav_screen/bottom_nav.dart';
 import 'package:translation/screens/login/authcontroller.dart';
 import 'package:translation/screens/login/login_screen.dart';
 import 'package:translation/screens/Otp/verifyphoneno.dart';
+import 'package:translation/screens/main_screen/homecontroller.dart';
 import 'package:translation/screens/profile/profile.dart';
 import 'package:translation/screens/splash_screen/splash_main.dart';
 import 'package:translation/screens/translator_screens/notranslator.dart';
@@ -15,6 +16,7 @@ import 'package:translation/values/styles.dart';
 void main() async {
    await LoadingHelper.init();
   Get.put(AuthController());
+  Get.put(HomeController());
    await GetStorage.init();
   runApp(const MyApp());
 }
@@ -31,13 +33,13 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
       theme: Styles.lightTheme,
         builder: EasyLoading.init(),
       title: "translation",
-      initialRoute: 'splash',
+      initialRoute: 'login',
       routes: {
         'splash': (_) => SplashScreen(),
         'login': (_) => LoginScreen(),
