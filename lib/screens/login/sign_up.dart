@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:translation/controllers/auth_controller.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/static/input_field1.dart';
 import 'package:translation/static/large_button.dart';
