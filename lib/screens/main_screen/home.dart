@@ -13,6 +13,8 @@ import 'package:translation/screens/setting/setting.dart';
 import 'package:translation/screens/translator_screens/translator_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:translation/static/dropdown.dart';
+import 'package:translation/values/controllers.dart';
+import 'package:translation/values/language.dart';
 
 import '../../../static/large_button.dart';
 
@@ -110,18 +112,18 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final List<String> items = [
-    'Item1',
-    'Item2',
-    'Item3',
-    'Item4',
-    'Item5',
-    'Item6',
-    'Item7',
-    'Item8',
-  ];
-  String? selectedValue;
-  String? selectedValue1;
+  switchfromlang(value) {
+    setState(() {
+      homeController.fromSelectedLanguage = value as String;
+    });
+  }
+
+  switchtoLang(value) {
+    setState(() {
+      homeController.toSelectedLanguage = value as String;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -182,17 +184,12 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     DropdownField(
-                      text: 'Select Language',
-                      selectedvalue: selectedValue,
-                      items: items.toList(),
-                      icon:
-                          ImageIcon(AssetImage('assets/images/drop_arrow.png')),
-                      onChange: (value) {
-                        setState(() {
-                          selectedValue = value;
-                        });
-                      },
-                    ),
+                      items: Languages(),
+                        text: 'Select Language',
+                        selectedvalue: homeController.fromSelectedLanguage,
+                        icon: ImageIcon(
+                            AssetImage('assets/images/drop_arrow.png')),
+                        onChange: switchfromlang),
                     Padding(
                       padding: const EdgeInsets.only(top: 12),
                       child: Text(
@@ -204,17 +201,12 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     DropdownField(
-                      text: 'Select Language',
-                      selectedvalue: selectedValue,
-                      items: items.toList(),
-                      icon:
-                          ImageIcon(AssetImage('assets/images/drop_arrow.png')),
-                      onChange: (value) {
-                        setState(() {
-                          selectedValue1 = value;
-                        });
-                      },
-                    ),
+                      items: Languages(),
+                        text: 'Select Language',
+                        selectedvalue: homeController.toSelectedLanguage,
+                        icon: ImageIcon(
+                            AssetImage('assets/images/drop_arrow.png')),
+                        onChange: switchtoLang),
                     Padding(
                       padding: EdgeInsets.only(top: 35, bottom: 20),
                       child: LargeButton(
