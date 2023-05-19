@@ -1,5 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:translation/screens/login/login_screen.dart';
 import 'package:translation/screens/splash_screen/splash_screen1.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -25,15 +28,19 @@ class _SplashScreenState extends State<SplashScreen> {
 
   startTime() async {
     var duration = const Duration(seconds: 3);
-    return Timer(duration, route);
+    return Timer(duration, checkFirstSeen);
   }
 
-  route() {
-    Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const OnBoardingScreen(),
-        ));
+  Future checkFirstSeen() async {
+    GetStorage box = await GetStorage();
+    bool _seen = (box.read('seen') ?? false);
+
+    if (_seen) {
+      Get.offAll(LoginScreen());
+    } else {
+      await box.write('seen', true);
+      Get.offAll(OnBoardingScreen());
+    }
   }
 }
 
