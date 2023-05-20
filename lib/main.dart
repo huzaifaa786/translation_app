@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
       theme: Styles.lightTheme,
         builder: EasyLoading.init(),
       title: "translation",
-      initialRoute: 'login',
+      initialRoute: 'splash',
       routes: {
         'splash': (_) => SplashScreen(),
         'login': (_) => LoginScreen(),

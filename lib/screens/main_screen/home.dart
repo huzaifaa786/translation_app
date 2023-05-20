@@ -184,7 +184,7 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     DropdownField(
-                      items: Languages(),
+                        items: Languages(),
                         text: 'Select Language',
                         selectedvalue: homeController.fromSelectedLanguage,
                         icon: ImageIcon(
@@ -201,7 +201,7 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     DropdownField(
-                      items: Languages(),
+                        items: Languages(),
                         text: 'Select Language',
                         selectedvalue: homeController.toSelectedLanguage,
                         icon: ImageIcon(
@@ -213,11 +213,12 @@ class _HomeState extends State<Home> {
                         title: 'Translate',
                         sreenRatio: 0.9,
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Translator_(),
-                              ));
+                          homeController.online();
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => Translator_(),
+                          //     ));
                         },
                         color: greenish,
                         textcolor: Colors.white,

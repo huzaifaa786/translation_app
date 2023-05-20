@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:translation/screens/login/login_screen.dart';
+import 'package:translation/screens/main_screen/home.dart';
 import 'package:translation/screens/splash_screen/splash_screen1.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -27,19 +28,24 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   startTime() async {
-    var duration = const Duration(seconds: 3);
+    var duration = const Duration(seconds: 5);
     return Timer(duration, checkFirstSeen);
   }
 
   Future checkFirstSeen() async {
     GetStorage box = await GetStorage();
+    String? api_token = await box.read('api_token');
     bool _seen = (box.read('seen') ?? false);
 
     if (_seen) {
-      Get.offAll(LoginScreen());
+      if (api_token == null) {
+        Get.offAll(() => LoginScreen());
+      } else {
+        Get.offAll(() => Home_screen());
+      }
     } else {
       await box.write('seen', true);
-      Get.offAll(OnBoardingScreen());
+      Get.offAll(() => OnBoardingScreen());
     }
   }
 }

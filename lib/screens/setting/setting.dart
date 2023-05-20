@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:translation/screens/company_login/company_login_screen.dart';
+import 'package:translation/screens/login/login_screen.dart';
 import 'package:translation/screens/setting/bug_report_modal.dart';
 import 'package:translation/static/language.dart';
 import 'package:translation/static/settingcard.dart';
@@ -154,7 +157,11 @@ class _Setting_screenState extends State<Setting_screen> {
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w600),
           ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            GetStorage box = GetStorage();
+            box.remove('api_token');
+            Get.offAll(() => LoginScreen());
+          },
           color: greenish,
         ),
         DialogButton(

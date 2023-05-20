@@ -46,6 +46,7 @@ class AuthController extends GetxController {
             Validators.emptyStringValidator(confirmPassword.text, '') == null;
     if (isFormValid) {
       if (password.text == confirmPassword.text) {
+        GetStorage box = GetStorage();
         var url = BASE_URL + 'user/register';
         var data;
         data = {
@@ -62,8 +63,9 @@ class AuthController extends GetxController {
 
         if (!response['error']) {
           LoadingHelper.dismiss();
-          User user = User(response['user']);
-          print(User);
+          User user = User(response['Vendor']);
+          box.write('api_token', user.apiToken);
+          update();
           return callback(true);
         } else {
           LoadingHelper.dismiss();
