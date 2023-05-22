@@ -1,8 +1,10 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:translation/screens/favorites_screen/favorites.dart';
+import 'package:translation/screens/main_screen/homecontroller.dart';
 import 'package:translation/screens/notification/notification.dart';
 import 'package:translation/screens/profile/profile.dart';
 import 'package:translation/values/colors.dart';
@@ -10,7 +12,6 @@ import 'package:translation/screens/chat/chats.dart';
 import 'package:translation/static/main_card.dart';
 import 'package:translation/screens/orderhistory/orderhistory.dart';
 import 'package:translation/screens/setting/setting.dart';
-import 'package:translation/screens/translator_screens/translator_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:translation/static/dropdown.dart';
 import 'package:translation/values/controllers.dart';
@@ -128,7 +129,8 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
+          child: GetBuilder<HomeController>(
+        builder: (controller) => Column(
           children: [
             MainStackCard(
               onFavTap: () {
@@ -213,12 +215,7 @@ class _HomeState extends State<Home> {
                         title: 'Translate',
                         sreenRatio: 0.9,
                         onPressed: () {
-                          homeController.online();
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (context) => Translator_(),
-                          //     ));
+                          homeController.fetchVendors();
                         },
                         color: greenish,
                         textcolor: Colors.white,
@@ -231,7 +228,7 @@ class _HomeState extends State<Home> {
             ),
           ],
         ),
-      ),
+      )),
     );
   }
 }

@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:translation/screens/home/translator/profile_translator.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class OnlineTranslatorCard extends StatelessWidget {
-  const OnlineTranslatorCard({super.key});
+  const OnlineTranslatorCard(
+      {super.key, required this.name, required this.image, this.vendor});
+  final name;
+  final image;
+  final vendor;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => profile_translator()));
+        Get.to(() => profile_translator(detail: vendor));
       },
       child: Card(
         shape: RoundedRectangleBorder(
@@ -31,18 +36,27 @@ class OnlineTranslatorCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(24),
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(22),
-                  child: SvgPicture.asset(
-                    "assets/images/splash_3.svg",
-                    width: MediaQuery.of(context).size.width * 0.2,
-                    height: MediaQuery.of(context).size.height * 0.1,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                    borderRadius: BorderRadius.circular(22),
+                    child: image == ''
+                        ? Image.asset(
+                            "assets/images/5907.jpg",
+                            width: MediaQuery.of(context).size.width * 0.2,
+                            height: MediaQuery.of(context).size.height * 0.1,
+                            fit: BoxFit.cover,
+                          )
+                        : CachedNetworkImage(
+                            imageUrl: image,
+                            fit: BoxFit.cover,
+                            width: MediaQuery.of(context).size.width * 0.2,
+                            height: MediaQuery.of(context).size.height * 0.1,
+                          )),
               ),
               Text(
-                "Watson",
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700,fontFamily: 'NunitoSans'),
+                name,
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: 'NunitoSans'),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -55,22 +69,30 @@ class OnlineTranslatorCard extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 4, left: 4),
                     child: Text('5.0',
                         style: TextStyle(
-                            fontSize: 11, fontWeight: FontWeight.w400,fontFamily: 'NunitoSans')),
+                            fontSize: 11,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'NunitoSans')),
                   ),
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 4,left: 4),
+                padding: const EdgeInsets.only(right: 4, left: 4),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       "Rate per 30 mins:  ",
-                      style: TextStyle(fontSize: 9, fontWeight: FontWeight.w700,fontFamily: 'NunitoSans'),
+                      style: TextStyle(
+                          fontSize: 9,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: 'NunitoSans'),
                     ),
                     Text(
                       "100 AED",
-                      style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700,fontFamily: 'NunitoSans'),
+                      style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: 'NunitoSans'),
                     )
                   ],
                 ),

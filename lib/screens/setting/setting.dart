@@ -190,7 +190,9 @@ class _Setting_screenState extends State<Setting_screen> {
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w600),
           ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            Get.back();
+          },
           color: Colors.black,
         ),
       ],
