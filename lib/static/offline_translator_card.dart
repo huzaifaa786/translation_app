@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class OfflineTranslattorCard extends StatelessWidget {
-  const OfflineTranslattorCard({super.key});
+  const OfflineTranslattorCard(
+      {super.key, required this.name, required this.image, required this.lang});
+  final name;
+  final image;
+  final lang;
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +29,20 @@ class OfflineTranslattorCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(24),
                     ),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(22),
-                      child: Image.asset(
-                        "assets/images/placeholder.png",
-                        width: 64,
-                        height: 64,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                        borderRadius: BorderRadius.circular(22),
+                        child: image == ''
+                            ? Image.asset(
+                                "assets/images/5907.jpg",
+                                width: 64,
+                                height: 64,
+                                fit: BoxFit.cover,
+                              )
+                            : CachedNetworkImage(
+                                imageUrl: image,
+                                fit: BoxFit.cover,
+                                width: 64,
+                                height: 64,
+                              )),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 8),
@@ -39,24 +50,30 @@ class OfflineTranslattorCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "Theresea Webb",
+                        Text(
+                          name,
                           style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w700,fontFamily: 'NunitoSans'),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: 'NunitoSans'),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top:2,bottom: 2),
+                          padding: const EdgeInsets.only(top: 2, bottom: 2),
                           child: Row(
                             children: [
                               Text(
                                 "Rate per 30 mins:  ",
                                 style: TextStyle(
-                                    fontSize: 9, fontWeight: FontWeight.w700,fontFamily: 'NunitoSans'),
+                                    fontSize: 9,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'NunitoSans'),
                               ),
                               Text(
                                 "100 AED",
                                 style: TextStyle(
-                                    fontSize: 11, fontWeight: FontWeight.w700,fontFamily: 'NunitoSans'),
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'NunitoSans'),
                               )
                             ],
                           ),
@@ -77,58 +94,61 @@ class OfflineTranslattorCard extends StatelessWidget {
                                 child: Text('5.0',
                                     style: TextStyle(
                                         fontSize: 11,
-                                        fontWeight: FontWeight.w400,fontFamily: 'NunitoSans')),
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: 'NunitoSans')),
                               ),
                             ],
                           ),
                         ),
                         Row(
                           children: [
-                            Container(
-                              margin: EdgeInsets.only(left: 4),
-                              padding: EdgeInsets.all(4),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(
-                                    color: Color.fromRGBO(0, 0, 0, 0.24),
-                                    width: 1),
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: Text(
-                                'Arabic',
-                                style: TextStyle(fontSize: 12),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(left: 4),
-                              padding: EdgeInsets.all(4),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(
-                                    color: Color.fromRGBO(0, 0, 0, 0.24),
-                                    width: 1),
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: Text(
-                                'Turkish',
-                                style: TextStyle(fontSize: 12),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(left: 4),
-                              padding: EdgeInsets.all(4),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(
-                                    color: Color.fromRGBO(0, 0, 0, 0.24),
-                                    width: 1),
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: Text(
-                                'English',
-                                style: TextStyle(fontSize: 12),
-                              ),
-                            )
+                            for (var i = 0; i < 3; i++)
+                              if (i < lang.length)
+                                Container(
+                                  margin: EdgeInsets.only(left: 4),
+                                  padding: EdgeInsets.all(4),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border.all(
+                                        color: Color.fromRGBO(0, 0, 0, 0.24),
+                                        width: 1),
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Text(
+                                    lang[i],
+                                    style: TextStyle(fontSize: 12),
+                                  ),
+                                ),
+                            // Container(
+                            //   margin: EdgeInsets.only(left: 4),
+                            //   padding: EdgeInsets.all(4),
+                            //   decoration: BoxDecoration(
+                            //     color: Colors.white,
+                            //     border: Border.all(
+                            //         color: Color.fromRGBO(0, 0, 0, 0.24),
+                            //         width: 1),
+                            //     borderRadius: BorderRadius.circular(6),
+                            //   ),
+                            //   child: Text(
+                            //     'Turkish',
+                            //     style: TextStyle(fontSize: 12),
+                            //   ),
+                            // ),
+                            // Container(
+                            //   margin: EdgeInsets.only(left: 4),
+                            //   padding: EdgeInsets.all(4),
+                            //   decoration: BoxDecoration(
+                            //     color: Colors.white,
+                            //     border: Border.all(
+                            //         color: Color.fromRGBO(0, 0, 0, 0.24),
+                            //         width: 1),
+                            //     borderRadius: BorderRadius.circular(6),
+                            //   ),
+                            //   child: Text(
+                            //     'English',
+                            //     style: TextStyle(fontSize: 12),
+                            //   ),
+                            // )
                           ],
                         ),
                       ],
@@ -136,7 +156,10 @@ class OfflineTranslattorCard extends StatelessWidget {
                   ),
                 ],
               ),
-              FittedBox(fit: BoxFit.scaleDown, child: SvgPicture.asset("assets/icons/forward.svg",height: 30,width: 30)),
+              FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: SvgPicture.asset("assets/icons/forward.svg",
+                      height: 30, width: 30)),
             ],
           ),
         ),

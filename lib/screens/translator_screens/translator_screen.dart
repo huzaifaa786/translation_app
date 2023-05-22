@@ -50,16 +50,21 @@ class _Translator_State extends State<Translator_> {
                 ],
               ),
             ),
-            homeController.onlineVendor.length != 0
+            controller.onlineVendor.length != 0
                 ? Container(
                     padding: EdgeInsets.only(left: 10),
                     height: MediaQuery.of(context).size.height * 0.22,
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
-                        itemCount: homeController.onlineVendor.length,
-                        itemBuilder: (context, index) =>
-                            OnlineTranslatorCard()),
+                        itemCount: controller.onlineVendor.length > 6
+                            ? 6
+                            : controller.onlineVendor.length,
+                        itemBuilder: (context, index) => OnlineTranslatorCard(
+                              name: controller.onlineVendor[index].name,
+                              image: controller.onlineVendor[index].profilePic,
+                              vendor: controller.onlineVendor[index],
+                            )),
                   )
                 : Container(
                     height: MediaQuery.of(context).size.height * 0.22,
@@ -104,12 +109,16 @@ class _Translator_State extends State<Translator_> {
                 ],
               ),
             ),
-            homeController.offlineVendor.length != 0
+            controller.offlineVendor.length != 0
                 ? Expanded(
                     child: ListView.builder(
-                        itemCount: homeController.offlineVendor.length,
-                        itemBuilder: (context, index) =>
-                            OfflineTranslattorCard()),
+                        itemCount: controller.offlineVendor.length > 6
+                            ? 6
+                            : controller.offlineVendor.length,
+                        itemBuilder: (context, index) => OfflineTranslattorCard(
+                            name: controller.offlineVendor[index].name,
+                            image: controller.offlineVendor[index].profilePic,
+                            lang: controller.offlineVendor[index].language)),
                   )
                 : Container(
                     height: MediaQuery.of(context).size.height * 0.25,

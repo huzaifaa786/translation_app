@@ -7,6 +7,7 @@ import 'package:translation/static/offline_translator_card.dart';
 import 'package:translation/static/search_topbar.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/static/large_button.dart';
+import 'package:translation/values/controllers.dart';
 
 class OfflinePeople_screen extends StatefulWidget {
   const OfflinePeople_screen({super.key});
@@ -90,8 +91,12 @@ class _OfflinePeople_screenState extends State<OfflinePeople_screen> {
             ),
             Expanded(
               child: ListView.builder(
-                  itemCount: 5,
-                  itemBuilder: (context, index) => OfflineTranslattorCard()),
+                  itemCount: homeController.offlineVendor.length,
+                  itemBuilder: (context, index) => OfflineTranslattorCard(
+                        name: homeController.offlineVendor[index].name,
+                        image: homeController.offlineVendor[index].profilePic,
+                        lang: homeController.offlineVendor[index].language,
+                      )),
             ),
           ],
         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:translation/models/vendor.dart';
 import 'package:translation/screens/home/translator/radio_btn.dart';
 import 'package:translation/screens/home/translator/traling_radio.dart';
 import 'package:translation/static/add_remove.dart';
@@ -8,16 +9,17 @@ import 'package:translation/static/day_date_card.dart';
 import 'package:translation/static/freeitaminput.dart';
 import 'package:translation/static/icon_button.dart';
 import 'package:translation/static/lang_box.dart';
-import 'package:translation/static/large_button.dart';
 import 'package:translation/static/profile_detail.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/screens/checkout/checkout.dart';
 import 'package:translation/screens/translator_screens/translator_screen.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:location/location.dart';
+import 'package:translation/values/controllers.dart';
 
 class profile_translator extends StatefulWidget {
-  const profile_translator({super.key});
+  const profile_translator({super.key, required this.detail});
+  final Vendor? detail;
 
   @override
   State<profile_translator> createState() => _profile_translatorState();
@@ -81,6 +83,7 @@ class _profile_translatorState extends State<profile_translator> {
         child: Padding(
           padding: const EdgeInsets.only(top: 12),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20, bottom: 12),
@@ -111,7 +114,7 @@ class _profile_translatorState extends State<profile_translator> {
                   child: Column(
                     children: [
                       ProfileDetail(
-                        name: 'Watson',
+                        name: widget.detail!.name,
                         rating: '5.0',
                       ),
                       Padding(
@@ -133,11 +136,10 @@ class _profile_translatorState extends State<profile_translator> {
                           direction: Axis.horizontal,
                           runAlignment: WrapAlignment.start,
                           children: [
-                            LanguageBox(lang: 'English'),
-                            LanguageBox(lang: 'Arabic'),
-                            LanguageBox(lang: 'Arabic'),
-                            LanguageBox(lang: 'Persian'),
-                            LanguageBox(lang: 'Pilipino'),
+                            for (var i = 0;
+                                i < widget.detail!.language!.length;
+                                i++)
+                              LanguageBox(lang: widget.detail!.language![i]),
                           ],
                         ),
                       ),
@@ -153,24 +155,36 @@ class _profile_translatorState extends State<profile_translator> {
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 15, bottom: 15),
-                        child: Row(
-                          children: [
-                            SvgPicture.asset("assets/images/certificate.svg"),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 12),
-                              child: Text(
-                                "lorem ipsum dolor sit",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.black,
-                                ),
+                      widget.detail!.certificate == ''
+                          ? Padding(
+                              padding: const EdgeInsets.only(top: 8, bottom: 8),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text("No certificate uploaded!"),
+                                ],
+                              ),
+                            )
+                          : Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 15, bottom: 15),
+                              child: Row(
+                                children: [
+                                  SvgPicture.asset(
+                                      "assets/images/certificate.svg"),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 12),
+                                    child: Text(
+                                      "lorem ipsum dolor sit",
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                      ),
                       Row(
                         children: [
                           Text(
