@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:translation/screens/company_login/company_login_screen.dart';
 import 'package:translation/screens/login/login_screen.dart';
 import 'package:translation/screens/setting/bug_report_modal.dart';
+import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/static/language.dart';
 import 'package:translation/static/settingcard.dart';
 import 'package:translation/values/colors.dart';
@@ -12,6 +13,7 @@ import 'package:translation/screens/profile/profile.dart';
 import 'package:translation/static/titletopbar.dart';
 import 'package:translation/static/balancecard.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:translation/values/controllers.dart';
 
 class Setting_screen extends StatefulWidget {
   const Setting_screen({super.key});
@@ -21,11 +23,21 @@ class Setting_screen extends StatefulWidget {
 }
 
 class _Setting_screenState extends State<Setting_screen> {
+
+   void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      settingController.getbalance();
+      
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
+        child:GetBuilder<SettingController>(
+            builder: (controller) => SingleChildScrollView(
           child: Column(children: [
             TitleTopbar(
               text: 'Setting',
@@ -34,7 +46,7 @@ class _Setting_screenState extends State<Setting_screen> {
               },
             ),
             BalanceCard(
-              balance: '134.34',
+              balance: settingController.balance.toString(),
               name: 'willam jones',
             ),
             Padding(
@@ -119,7 +131,7 @@ class _Setting_screenState extends State<Setting_screen> {
               height: 20,
             ),
           ]),
-        ),
+        ),)
       ),
     );
   }

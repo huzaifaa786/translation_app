@@ -9,15 +9,17 @@ import 'package:translation/screens/login/login_screen.dart';
 import 'package:translation/screens/Otp/verifyphoneno.dart';
 import 'package:translation/screens/main_screen/homecontroller.dart';
 import 'package:translation/screens/profile/profile.dart';
+import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/screens/splash_screen/splash_main.dart';
 import 'package:translation/screens/translator_screens/notranslator.dart';
 import 'package:translation/values/styles.dart';
 
 void main() async {
-   await LoadingHelper.init();
+  await LoadingHelper.init();
   Get.put(AuthController());
   Get.put(HomeController());
-   await GetStorage.init();
+  Get.put(SettingController());
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
@@ -37,7 +39,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
       theme: Styles.lightTheme,
-        builder: EasyLoading.init(),
+      builder: EasyLoading.init(),
       title: "translation",
       initialRoute: 'splash',
       routes: {

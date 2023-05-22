@@ -65,6 +65,7 @@ class AuthController extends GetxController {
           LoadingHelper.dismiss();
           User user = User(response['Vendor']);
           box.write('api_token', user.apiToken);
+          box.write('user_id', user.id);
           update();
           return callback(true);
         } else {
@@ -111,6 +112,7 @@ class AuthController extends GetxController {
         User user = User(response['User']);
         GetStorage box = GetStorage();
         box.write('api_token', user.apiToken);
+        box.write('user_id', user.id);
         LoadingHelper.dismiss();
         return callback(true);
       } else {
