@@ -10,7 +10,9 @@ class DateDayCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+    
       padding: EdgeInsets.only(top: 8, bottom: 8),
+      margin: EdgeInsets.only(left: 4, right: 4,top: 8,bottom: 8),
       child:
           Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
         Text(
@@ -19,9 +21,9 @@ class DateDayCard extends StatelessWidget {
         ),
         Text(date.toString(), style: TextStyle(fontSize: 16))
       ]),
-      width: MediaQuery.of(context).size.width * 0.12,
+      width: MediaQuery.of(context).size.width * 0.22,
       height: MediaQuery.of(context).size.height * 0.09,
-      margin: EdgeInsets.only(top: 16, bottom: 16),
+     
       decoration: BoxDecoration(
         color: color,
         border: Border.all(color: hintText.withOpacity(0.4)),

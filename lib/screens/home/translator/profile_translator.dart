@@ -75,6 +75,12 @@ class _profile_translatorState extends State<profile_translator> {
     print(
         'latitude: ${_locationData.latitude}, longitude: ${_locationData.longitude}');
   }
+DateTime getDateOfCurrentWeekByDayName(String dayName) => DateTime.now().subtract(Duration(days: DateTime.now().weekday - 1)).add(Duration(days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].indexOf(dayName)));
+  @override
+  void initState() {
+    print(widget.detail.toString());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +121,7 @@ class _profile_translatorState extends State<profile_translator> {
                     children: [
                       ProfileDetail(
                         name: widget.detail!.name,
-                        rating: '5.0',
+                        rating: widget.detail!.rating,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 8),
@@ -262,6 +268,7 @@ class _profile_translatorState extends State<profile_translator> {
                                   '00:30 mins',
                                   style: TextStyle(fontSize: 12),
                                 ),
+                                
                               ),
                             ),
                             Container(
@@ -277,7 +284,7 @@ class _profile_translatorState extends State<profile_translator> {
                               ),
                               child: Center(
                                 child: Text(
-                                  '00:30 mins',
+                                  '01:00 mins',
                                   style: TextStyle(fontSize: 12),
                                 ),
                               ),
@@ -295,7 +302,7 @@ class _profile_translatorState extends State<profile_translator> {
                               ),
                               child: Center(
                                 child: Text(
-                                  '00:30 mins',
+                                  '01:30 mins',
                                   style: TextStyle(fontSize: 12),
                                 ),
                               ),
@@ -338,46 +345,31 @@ class _profile_translatorState extends State<profile_translator> {
                                           getlocation();
                                         })
                                     : Container(),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    DateDayCard(
-                                      date: 9,
-                                      day: 'Mon',
-                                      color: white,
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Container(
+                                    padding: EdgeInsets.only(left: 10),
+                                    height:
+                                        MediaQuery.of(context).size.height * 0.15,
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      shrinkWrap: true,
+                                      itemCount: widget
+                                          .detail!.service!.schedual!.length,
+                                      itemBuilder: (context, index) =>
+                                          DateDayCard(
+                                        date: getDateOfCurrentWeekByDayName(widget.detail!.service!
+                                            .schedual![index].day!).day,
+                                        day: widget.detail!.service!
+                                            .schedual![index].day,
+                                        color: widget.detail!.service!
+                                                .schedual![index].isFrozen!
+                                            ? Color.fromARGB(255, 224, 224, 224)
+                                                .withOpacity(0.6)
+                                            : white,
+                                      ),
                                     ),
-                                    DateDayCard(
-                                      date: 10,
-                                      day: 'Tue',
-                                      color: Color.fromARGB(255, 224, 224, 224)
-                                          .withOpacity(0.6),
-                                    ),
-                                    DateDayCard(
-                                      date: 11,
-                                      day: 'Wed',
-                                    ),
-                                    DateDayCard(
-                                      date: 12,
-                                      day: 'Thu',
-                                      color: Color.fromARGB(255, 224, 224, 224)
-                                          .withOpacity(0.6),
-                                    ),
-                                    DateDayCard(
-                                      date: 13,
-                                      day: 'Fri',
-                                    ),
-                                    DateDayCard(
-                                      date: 14,
-                                      day: 'Sat',
-                                      color: Color.fromARGB(255, 224, 224, 224)
-                                          .withOpacity(0.6),
-                                    ),
-                                    DateDayCard(
-                                      date: 15,
-                                      day: 'Sun',
-                                    )
-                                  ],
+                                  ),
                                 ),
                                 Row(
                                   children: [

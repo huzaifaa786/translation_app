@@ -32,10 +32,7 @@ class _NoTransFound_screenState extends State<NoTransFound_screen> {
                         onTap: () {
                           Navigator.pop(context);
                         },
-                        child: FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: SvgPicture.asset('assets/icons/back.svg'),
-                        )),
+                        child: SvgPicture.asset('assets/icons/back.svg')),
                   ),
                 ),
               ],

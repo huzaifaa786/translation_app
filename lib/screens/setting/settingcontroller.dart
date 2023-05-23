@@ -27,30 +27,14 @@ class SettingController extends GetxController {
     Account account = Account(response['balance']);
     balance = account.balance!;
   }
+
+
+
+
+
+
+
+
+
   
-
-
-    Future<bool> confirmPayment() async {
-    print("Asdfasdfsdfasfd");
-
-    try {
-      // 3. display the payment sheet.
-      await Stripe.instance.presentPaymentSheet();
-      print('object');
-
-      // Fluttertoast.showToast(msg: 'Payment succesfully completed');
-      // addbalance();
-      return true;
-    } on Exception catch (e) {
-      if (e is StripeException) {
-        print('adsfasdfasdfadsfadsfa');
-        // Fluttertoast.showToast(
-        //     msg: 'Error from Stripe: ${e.error.localizedMessage}');
-        return false;
-      } else {
-        // Fluttertoast.showToast(msg: 'Unforeseen error: ${e}');
-        return false;
-      }
-    }
-  }
 }

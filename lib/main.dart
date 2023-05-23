@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:translation/helper/loading.dart';
 import 'package:translation/screens/bottom_nav_screen/bottom_nav.dart';
+import 'package:translation/screens/enter_amount/amountcontroller.dart';
 import 'package:translation/screens/login/authcontroller.dart';
 import 'package:translation/screens/login/login_screen.dart';
 import 'package:translation/screens/Otp/verifyphoneno.dart';
@@ -12,6 +13,7 @@ import 'package:translation/screens/profile/profile.dart';
 import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/screens/splash_screen/splash_main.dart';
 import 'package:translation/screens/translator_screens/notranslator.dart';
+import 'package:translation/values/controllers.dart';
 import 'package:translation/values/styles.dart';
 
 void main() async {
@@ -19,6 +21,7 @@ void main() async {
   Get.put(AuthController());
   Get.put(HomeController());
   Get.put(SettingController());
+  Get.put(AmountController());
   await GetStorage.init();
   runApp(const MyApp());
 }

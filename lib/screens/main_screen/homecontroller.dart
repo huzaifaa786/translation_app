@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class HomeController extends GetxController {
 
   void fetchVendors() async {
     LoadingHelper.show();
-    var url = BASE_URL + 'vendor/get';
+    var url = BASE_URL + 'vendor/search';
     var data = {
       'form': fromSelectedLanguage,
       'to': toSelectedLanguage,
@@ -31,16 +32,22 @@ class HomeController extends GetxController {
     if (!response['error']) {
       List<Vendor> vendor = <Vendor>[];
       for (var van in response['vendor']) {
+       
+
         vendor.add(Vendor(van));
       }
       vendors = vendor;
+      print(vendor.first.service!.schedual!.first.day);
       searchVendor = vendor;
       onlineVendor = vendor.where((i) => i.online == 1).toList();
       offlineVendor = vendor.where((i) => i.online == 0).toList();
+    
       update();
+   
       if (vendor.isNotEmpty) {
         Get.to(() => Translator_());
       } else {
+        print(vendor);
         Get.to(() => NoTransFound_screen());
       }
     } else {

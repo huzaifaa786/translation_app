@@ -1,4 +1,7 @@
 import 'dart:convert';
+import 'dart:developer';
+
+import 'package:translation/models/service.dart';
 
 class Vendor {
   int? id;
@@ -11,7 +14,9 @@ class Vendor {
   String? certificate;
   String? status;
   int? online;
+  int? rating;
   List<dynamic>? language;
+  VendorService? service;
 
   Vendor(vendor) {
     id = vendor['id'];
@@ -24,7 +29,9 @@ class Vendor {
     certificate = vendor['certificate'] ?? '';
     profilePic = vendor['profilepic'] ?? '';
     status = vendor['status'];
+    rating = vendor['rating'];
     online = vendor['online'];
     language = jsonDecode(vendor['language']);
+    service =  VendorService(vendor['service']) ;
   }
 }

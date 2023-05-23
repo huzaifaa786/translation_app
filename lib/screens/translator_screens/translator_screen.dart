@@ -63,6 +63,7 @@ class _Translator_State extends State<Translator_> {
                         itemBuilder: (context, index) => OnlineTranslatorCard(
                               name: controller.onlineVendor[index].name,
                               image: controller.onlineVendor[index].profilePic,
+                              rating: controller.onlineVendor[index].rating,
                               vendor: controller.onlineVendor[index],
                             )),
                   )
@@ -73,7 +74,7 @@ class _Translator_State extends State<Translator_> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text("No Offline Translator Found!"),
+                        Text("No Online Translator Found!"),
                       ],
                     ),
                   ),

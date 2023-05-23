@@ -6,10 +6,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 class OnlineTranslatorCard extends StatelessWidget {
   const OnlineTranslatorCard(
-      {super.key, required this.name, required this.image, this.vendor});
+      {super.key, required this.name, required this.image, this.vendor, this.rating});
   final name;
   final image;
   final vendor;
+  final rating;
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +68,7 @@ class OnlineTranslatorCard extends StatelessWidget {
                           height: 11, width: 11)),
                   Padding(
                     padding: const EdgeInsets.only(top: 4, left: 4),
-                    child: Text('5.0',
+                    child: Text(rating.toString(),
                         style: TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w400,

@@ -15,6 +15,7 @@ class Api {
       result = await dio.post(url, data: data);
       print(result);
       var response = jsonDecode(result.toString());
+      print(response.toString());
 
       return response;
     } catch (e) {
