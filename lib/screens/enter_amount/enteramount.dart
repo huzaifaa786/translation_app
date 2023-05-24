@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:translation/screens/enter_amount/amountcontroller.dart';
 import 'package:translation/screens/enter_amount/ppaymentmethod.dart';
+import 'package:translation/screens/main_screen/home.dart';
 import 'package:translation/static/box.dart';
 import 'package:translation/static/large_button.dart';
 import 'package:translation/static/titletopbar.dart';
@@ -169,7 +170,8 @@ class _Topup_screenState extends State<Topup_screen> {
                     title: 'Top Up',
                     sreenRatio: 0.9,
                     onPressed: () {
-                      amountController.paayment();
+                      amountController.confirmPayment();
+                     
                     },
                     color: greenish,
                     textcolor: Colors.white,

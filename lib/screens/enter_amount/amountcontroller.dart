@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -7,6 +8,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:translation/api/api.dart';
 import 'package:translation/helper/loading.dart';
 import 'package:translation/models/account.dart';
+import 'package:translation/screens/main_screen/home.dart';
 import 'package:translation/values/string.dart';
 
 class AmountController extends GetxController {
@@ -16,76 +18,99 @@ class AmountController extends GetxController {
 
   paayment() async {
     LoadingHelper.show();
-    print('dsfsdfsdfdsfsdfsdfds');
-    print(Selectedvalue);
-    var data = await addbalance(Selectedvalue);
-
+    var data = await paymentIntent();
     data = jsonDecode(data.toString());
-    print('sdsa');
-    print(data['paymentIntent']);
-    await Stripe.instance.initPaymentSheet(
-      paymentSheetParameters: SetupPaymentSheetParameters(
-        paymentIntentClientSecret: data['paymentIntent'],
-        merchantDisplayName: 'Translation',
-
-        applePay: PaymentSheetApplePay(merchantCountryCode: 'UAE'),
-        googlePay: PaymentSheetGooglePay(
-          merchantCountryCode: 'UAE',
-          currencyCode: 'AED',
-          testEnv: true,
+    try {
+      await Stripe.instance.initPaymentSheet(
+        paymentSheetParameters: SetupPaymentSheetParameters(
+          paymentIntentClientSecret: data['paymentIntent'],
+          merchantDisplayName: 'Translation',
+          googlePay: PaymentSheetGooglePay(
+            merchantCountryCode: 'UAE',
+            currencyCode: 'AED',
+            testEnv: true,
+          ),
+          style: ThemeMode.dark,
+          // customFlow: true
+          // billingDetails: billingDetails,
         ),
-        style: ThemeMode.dark,
-        // customFlow: true
-        // billingDetails: billingDetails,
-      ),
-    );
+      );
+    } on Exception catch (e) {
+      if (e is StripeException) {
+        Get.snackbar('Error from Stripe: ', '${e.error.localizedMessage}',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.red,
+            colorText: Colors.white);
+
+        return false;
+      }
+    }
+
     LoadingHelper.dismiss();
-    // confirmPayment();
   }
 
-  addbalance(Selectedvalue) async {
+  addbalance() async {
     LoadingHelper.show();
 
     var url = BASE_URL + 'balance/add';
 
     GetStorage box = GetStorage();
     int id = box.read('user_id');
-    print('user_id');
+    String api_token = box.read('api_token');
+
     var data;
 
-    data = {'balance': int.parse(Selectedvalue), 'id': id};
+    data = {
+      'balance': int.parse(Selectedvalue!),
+      'id': id,
+      'api_token': api_token
+    };
 
     var response = await Api.execute(
       url: url,
       data: data,
     );
-    print(response);
+
     LoadingHelper.dismiss();
     Account account = Account(response['account']);
+    update();
+
+    Get.offAll(() => Home_screen());
     return account;
   }
 
   Future<bool> confirmPayment() async {
-    print("Asdfasdfsdfasfd");
-
     try {
+      await paayment();
       // 3. display the payment sheet.
       await Stripe.instance.presentPaymentSheet();
-      print('object');
 
-      // Fluttertoast.showToast(msg: 'Payment succesfully completed');
-      // addbalance();
+      addbalance();
       return true;
     } on Exception catch (e) {
       if (e is StripeException) {
-        print('adsfasdfasdfadsfadsfa');
-        // Fluttertoast.showToast(
-        //     msg: 'Error from Stripe: ${e.error.localizedMessage}');
+        Get.snackbar('Error from Stripe: ', '${e.error.localizedMessage}',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.red,
+            colorText: Colors.white);
+
         return false;
       } else {
-        // Fluttertoast.showToast(msg: 'Unforeseen error: ${e}');
+        Get.snackbar('Error from Stripe: ', 'Unforeseen error: ${e}',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.red,
+            colorText: Colors.white);
+
         return false;
       }
     }
+  }
+
+  paymentIntent() async {
+    var url = BASE_URL + 'payment/intent';
+    log(Selectedvalue!);
+    var data = {'price': int.parse(Selectedvalue!)};
+    var response = await Api.execute(url: url, data: data);
+    return response['intent'];
   }
 }

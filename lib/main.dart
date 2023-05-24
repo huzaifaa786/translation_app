@@ -15,6 +15,7 @@ import 'package:translation/screens/splash_screen/splash_main.dart';
 import 'package:translation/screens/translator_screens/notranslator.dart';
 import 'package:translation/values/controllers.dart';
 import 'package:translation/values/styles.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 
 void main() async {
   await LoadingHelper.init();
@@ -23,6 +24,13 @@ void main() async {
   Get.put(SettingController());
   Get.put(AmountController());
   await GetStorage.init();
+
+
+   Stripe.publishableKey =
+      'pk_test_51MlTmPAN8zi2vyFswyWqxxJKbe8NnGRtoOo55Z2P65V8EykUYWk034zKSkXkh2THsQZ6OYZzdoQOUxXmSmPiPz9G00dQnMo69A';
+  Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
+  Stripe.urlScheme = 'flutterstripe';
+  await Stripe.instance.applySettings();
   runApp(const MyApp());
 }
 

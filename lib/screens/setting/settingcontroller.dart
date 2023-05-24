@@ -25,7 +25,10 @@ class SettingController extends GetxController {
     print(response);
     LoadingHelper.dismiss();
     Account account = Account(response['balance']);
+    print(account.balance);
+    
     balance = account.balance!;
+    update();
   }
 
 
