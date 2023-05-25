@@ -25,6 +25,12 @@ class ProfileController extends GetxController {
     validateChangepasswordForm = true.obs;
   }
 
+  ClearchangepasswordVariables() {
+    currentpasswordController.clear();
+    newpasswordController.clear();
+    confirmpasswordController.clear();
+  }
+
   _getFromGallery() async {
     ImagePicker pickedFile = await ImagePicker();
     if (pickedFile != null) {
@@ -53,9 +59,21 @@ class ProfileController extends GetxController {
         };
         var response = await Api.execute(url: url, data: data);
         print(response);
-        LoadingHelper.dismiss();
-        update();
-        return callback(true);
+        if (!response['error']) {
+          LoadingHelper.dismiss();
+          update();
+          ClearchangepasswordVariables();
+
+          update();
+          return callback(true);
+        } else {
+          LoadingHelper.dismiss();
+          Get.snackbar("Error!", response['error_data'],
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.red,
+              colorText: Colors.white);
+          return callback(false);
+        }
       } else {
         LoadingHelper.dismiss();
         Get.snackbar(

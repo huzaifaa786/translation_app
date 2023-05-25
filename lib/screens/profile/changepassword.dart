@@ -96,7 +96,9 @@ class _ChangePassword_screenState extends State<ChangePassword_screen> {
             "Ok",
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            Get.back();
+          },
           color: greenish,
         ),
       ],
