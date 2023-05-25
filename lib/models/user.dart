@@ -10,7 +10,7 @@ class User {
   User(user) {
     id = user['id'];
     username = user['username'];
-    number = user['number'];
+    number = user['phone'];
     apiToken = user['api_token'] ?? '';
     email = user['email'];
   }

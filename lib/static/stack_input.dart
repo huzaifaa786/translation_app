@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class StackInputField extends StatelessWidget {
   const StackInputField(
@@ -45,13 +46,21 @@ class StackInputField extends StatelessWidget {
     // bool isDark = Provider.of<DarkThemeProvider>(context).darkTheme;
 
     return Padding(
-      padding: const EdgeInsets.only(top: 19,left: 20,right: 20),
-      child: TextField(
+      padding: const EdgeInsets.only(top: 19, left: 20, right: 20),
+      child: TextFormField(
+        readOnly: readOnly,
         obscureText: obscure,
+        controller: controller,
+        validator: validator,
+        autovalidateMode: autovalidateMode ??
+            (validator == true.obs
+                ? AutovalidateMode.always
+                : AutovalidateMode.onUserInteraction),
         decoration: InputDecoration(
           floatingLabelBehavior: FloatingLabelBehavior.always,
           fillColor: Colors.grey,
-          border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(12))),
           hoverColor: Colors.grey,
           focusColor: Colors.grey,
           labelText: lable,

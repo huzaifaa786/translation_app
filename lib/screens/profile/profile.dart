@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation/screens/profile/changepassword.dart';
-import 'package:translation/screens/main_screen/home.dart';
-import 'package:translation/static/button.dart';
+import 'package:translation/screens/profile/profilecontroller.dart';
 import 'package:translation/static/largebutton.dart';
-import 'package:translation/static/large_button.dart';
 import 'package:translation/static/password.dart';
 import 'package:translation/static/stack_input.dart';
 import 'package:translation/static/titletopbar.dart';
+import 'package:translation/values/controllers.dart';
 
 import '../../../values/colors.dart';
 
@@ -76,8 +75,8 @@ class _Profile_screenState extends State<Profile_screen> {
               height: 25,
             ),
             Center(
-              child: const Text(
-                "William Jones",
+              child: Text(
+                homeController.user!.username!,
                 style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.w700,
@@ -90,29 +89,33 @@ class _Profile_screenState extends State<Profile_screen> {
             StackInputField(
               hint: 'Enter your name',
               lable: 'Username',
+              controller: profileController.nameController,
             ),
             StackInputField(
+              readOnly: true,
               hint: 'Enter your Email',
               lable: 'Email Address',
+              controller: profileController.emailController,
             ),
             StackInputField(
+              readOnly: true,
               hint: 'Enter your phone number',
               lable: 'Phone Number',
+              controller: profileController.phoneController,
             ),
             SizedBox(
               height: 10,
             ),
             ChangePassword(
-              onPressed: (){
+              onPressed: () {
                 Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ChangePassword_screen(),
-                  ));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ChangePassword_screen(),
+                    ));
               },
               title: 'Change Password',
             ),
-          
             LargeButtons(
               onPressed: () {
                 update(context);
@@ -133,12 +136,15 @@ class _Profile_screenState extends State<Profile_screen> {
       ),
       context: context,
       title: "Successfully Updated ",
-      image: SvgPicture.asset("assets/images/tick.svg", height: 90,),
+      image: SvgPicture.asset(
+        "assets/images/tick.svg",
+        height: 90,
+      ),
       buttons: [
         DialogButton(
-           radius: BorderRadius.all(
-                  Radius.circular(12),
-                ),
+          radius: BorderRadius.all(
+            Radius.circular(12),
+          ),
           height: 60,
           child: Text(
             "Ok",
@@ -147,7 +153,6 @@ class _Profile_screenState extends State<Profile_screen> {
           onPressed: () => Navigator.pop(context),
           color: greenish,
         ),
-       
       ],
     ).show();
   }

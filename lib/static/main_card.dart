@@ -4,7 +4,8 @@ import 'package:translation/static/topBar.dart';
 import 'package:translation/screens/freeitem.dart/freeitem.dart';
 
 class MainStackCard extends StatelessWidget {
-  const MainStackCard({super.key,this.onNotiTap,this.onFavTap,this.onProfileTap,this.name});
+  const MainStackCard(
+      {super.key, this.onNotiTap, this.onFavTap, this.onProfileTap, this.name});
   final onNotiTap;
   final onProfileTap;
   final onFavTap;
@@ -37,18 +38,22 @@ class MainStackCard extends StatelessWidget {
                 onProfileTap: onProfileTap,
               ),
               SizedBox(
+                // width: MediaQuery.of(context).size.width*0.3,
                 height: MediaQuery.of(context).size.height * 0.12,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      'Good Morning, ' + name,
-                      maxLines: 2,
-                      style: TextStyle(
-                          fontSize: 23,
-                          fontWeight: FontWeight.w600,
-                          color: white),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.85,
+                      child: Text(
+                        'Good Morning, ' + name,
+                        maxLines: 2,
+                        style: TextStyle(
+                            fontSize: 23,
+                            fontWeight: FontWeight.w600,
+                            color: white),
+                      ),
                     ),
                   ],
                 ),

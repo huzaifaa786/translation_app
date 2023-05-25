@@ -3,7 +3,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:translation/screens/company_login/company_login_screen.dart';
+import 'package:translation/screens/enter_amount/amountcontroller.dart';
+import 'package:translation/screens/login/authcontroller.dart';
 import 'package:translation/screens/login/login_screen.dart';
+import 'package:translation/screens/main_screen/homecontroller.dart';
+import 'package:translation/screens/profile/profilecontroller.dart';
 import 'package:translation/screens/setting/bug_report_modal.dart';
 import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/static/language.dart';
@@ -23,21 +27,19 @@ class Setting_screen extends StatefulWidget {
 }
 
 class _Setting_screenState extends State<Setting_screen> {
-
-   void initState() {
+  void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       settingController.getbalance();
-      
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child:GetBuilder<SettingController>(
-            builder: (controller) => SingleChildScrollView(
+          child: GetBuilder<SettingController>(
+        builder: (controller) => SingleChildScrollView(
           child: Column(children: [
             TitleTopbar(
               text: 'Setting',
@@ -131,8 +133,8 @@ class _Setting_screenState extends State<Setting_screen> {
               height: 20,
             ),
           ]),
-        ),)
-      ),
+        ),
+      )),
     );
   }
 
@@ -172,6 +174,13 @@ class _Setting_screenState extends State<Setting_screen> {
           onPressed: () {
             GetStorage box = GetStorage();
             box.remove('api_token');
+            Get.deleteAll();
+            // Ge/
+            // Get.put(AuthController());
+            // Get.put(HomeController());
+            // Get.put(SettingController());
+            // Get.put(AmountController());
+            // Get.put(ProfileController());
             Get.offAll(() => LoginScreen());
           },
           color: greenish,

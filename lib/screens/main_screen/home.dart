@@ -125,6 +125,16 @@ class _HomeState extends State<Home> {
     });
   }
 
+  fetchUser() async {
+    await homeController.getuser();
+  }
+
+  @override
+  void initState() {
+    fetchUser();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -154,7 +164,7 @@ class _HomeState extends State<Home> {
                       builder: (context) => Profile_screen(),
                     ));
               },
-              name: 'Williams',
+              name: controller.user == null ? "" : controller.user!.username,
             ),
             Container(
               padding: EdgeInsets.only(left: 20, right: 20, top: 35),

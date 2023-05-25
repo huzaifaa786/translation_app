@@ -9,11 +9,10 @@ import 'package:translation/screens/login/authcontroller.dart';
 import 'package:translation/screens/login/login_screen.dart';
 import 'package:translation/screens/Otp/verifyphoneno.dart';
 import 'package:translation/screens/main_screen/homecontroller.dart';
-import 'package:translation/screens/profile/profile.dart';
+import 'package:translation/screens/profile/profilecontroller.dart';
 import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/screens/splash_screen/splash_main.dart';
 import 'package:translation/screens/translator_screens/notranslator.dart';
-import 'package:translation/values/controllers.dart';
 import 'package:translation/values/styles.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
@@ -23,6 +22,7 @@ void main() async {
   Get.put(HomeController());
   Get.put(SettingController());
   Get.put(AmountController());
+  Get.put(ProfileController());
   await GetStorage.init();
 
 
