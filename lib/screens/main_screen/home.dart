@@ -127,6 +127,7 @@ class _HomeState extends State<Home> {
 
   fetchUser() async {
     await homeController.getuser();
+    setState(() {});
   }
 
   @override
@@ -164,7 +165,9 @@ class _HomeState extends State<Home> {
                       builder: (context) => Profile_screen(),
                     ));
               },
-              name: controller.user == null ? "" : controller.user!.username,
+              name: homeController.user == null
+                  ? ""
+                  : homeController.user!.username,
             ),
             Container(
               padding: EdgeInsets.only(left: 20, right: 20, top: 35),

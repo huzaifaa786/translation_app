@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -56,10 +58,8 @@ class _Setting_screenState extends State<Setting_screen> {
               child: SettingCard(
                 title: 'Profile',
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Profile_screen()),
-                  );
+                  profileController.clearField();
+                  Get.to(() => Profile_screen());
                 },
                 imgicon: "assets/icons/profile.svg",
               ),
@@ -175,12 +175,11 @@ class _Setting_screenState extends State<Setting_screen> {
             GetStorage box = GetStorage();
             box.remove('api_token');
             Get.deleteAll();
-            // Ge/
-            // Get.put(AuthController());
-            // Get.put(HomeController());
-            // Get.put(SettingController());
-            // Get.put(AmountController());
-            // Get.put(ProfileController());
+            Get.put(AuthController());
+            Get.put(HomeController());
+            Get.put(SettingController());
+            Get.put(AmountController());
+            Get.put(ProfileController());
             Get.offAll(() => LoginScreen());
           },
           color: greenish,

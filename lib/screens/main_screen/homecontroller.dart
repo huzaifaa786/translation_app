@@ -35,9 +35,6 @@ class HomeController extends GetxController {
     LoadingHelper.dismiss();
     if (!response['error']) {
       user = User(response['user']);
-      profileController.nameController.text = user!.username!;
-      profileController.emailController.text = user!.email!;
-      profileController.phoneController.text = user!.number!;
       update();
     } else {
       Get.snackbar("Error!", response['error_data'],

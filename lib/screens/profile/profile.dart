@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation/screens/profile/changepassword.dart';
 import 'package:translation/screens/profile/profilecontroller.dart';
@@ -8,6 +11,7 @@ import 'package:translation/static/password.dart';
 import 'package:translation/static/stack_input.dart';
 import 'package:translation/static/titletopbar.dart';
 import 'package:translation/values/controllers.dart';
+import 'package:translation/values/validator.dart';
 
 import '../../../values/colors.dart';
 
@@ -19,43 +23,87 @@ class Profile_screen extends StatefulWidget {
 }
 
 class _Profile_screenState extends State<Profile_screen> {
+  fetchUser() async {
+    await profileController.getuser();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    fetchUser();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 2),
-          child: Column(children: [
-            TitleTopbar(
-              text: 'Profile',
-              ontap: () {
-                Navigator.pop(context);
-              },
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  height: 130,
-                  width: 132,
-                  padding: EdgeInsets.all(2.0),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black,
-                    ),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(70),
-                    ),
-                  ),
-                  child: Stack(
-                    fit: StackFit.expand,
+        body: SafeArea(
+      child: GetBuilder<ProfileController>(
+        builder: (controller) => Builder(builder: (context) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 2),
+            child: Column(children: [
+              TitleTopbar(
+                text: 'Profile',
+                ontap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Stack(
                     children: [
-                      Image.asset("assets/images/profile.png"),
+                      Container(
+                        height: 130,
+                        width: 132,
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.black,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(70),
+                          ),
+                        ),
+                        child: Stack(
+                          fit: StackFit.expand,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(55),
+                              ),
+                              child: profileController.profileImage!.path != ''
+                                  ? FittedBox(
+                                      fit: BoxFit.scaleDown,
+                                      child: Image.file(
+                                        File(profileController
+                                            .profileImage!.path),
+                                        height: 120,
+                                        width: 120,
+                                        fit: BoxFit.fill,
+                                      ),
+                                    )
+                                  : FittedBox(
+                                      fit: BoxFit.scaleDown,
+                                      child: Image.asset(
+                                        "assets/images/5907.jpg",
+                                        height: 120,
+                                        width: 120,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                            ),
+                          ],
+                        ),
+                      ),
                       Positioned(
                           bottom: 0,
                           right: -25,
                           child: RawMaterialButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              profileController.selectProfileImage();
+                            },
                             elevation: 1.0,
                             fillColor: greenish,
                             child: Icon(
@@ -67,66 +115,78 @@ class _Profile_screenState extends State<Profile_screen> {
                             shape: CircleBorder(),
                           )),
                     ],
-                  ),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 25,
-            ),
-            Center(
-              child: Text(
-                homeController.user!.username!,
-                style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: 'Mazzard'),
+                  )
+                ],
               ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            StackInputField(
-              hint: 'Enter your name',
-              lable: 'Username',
-              controller: profileController.nameController,
-            ),
-            StackInputField(
-              readOnly: true,
-              hint: 'Enter your Email',
-              lable: 'Email Address',
-              controller: profileController.emailController,
-            ),
-            StackInputField(
-              readOnly: true,
-              hint: 'Enter your phone number',
-              lable: 'Phone Number',
-              controller: profileController.phoneController,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            ChangePassword(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ChangePassword_screen(),
-                    ));
-              },
-              title: 'Change Password',
-            ),
-            LargeButtons(
-              onPressed: () {
-                update(context);
-              },
-              title: 'Update',
-              textcolor: white,
-            ),
-          ]),
-        ),
+              // profileController.profileImage!.path == ''
+              //     ? Container()
+              //     : Text(profileController.profileImage!.path),
+              SizedBox(
+                height: 25,
+              ),
+              Center(
+                child: Text(
+                  profileController.user == null
+                      ? ''
+                      : profileController.user!.username!,
+                  style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: 'Mazzard'),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              StackInputField(
+                hint: 'Enter your name',
+                lable: 'Username',
+                controller: profileController.nameController,
+                validator: (user) =>
+                    Validators.emptyStringValidator(user, 'user'),
+              ),
+              StackInputField(
+                readOnly: true,
+                hint: 'Enter your Email',
+                lable: 'Email Address',
+                controller: profileController.emailController,
+              ),
+              StackInputField(
+                readOnly: true,
+                hint: 'Enter your phone number',
+                lable: 'Phone Number',
+                controller: profileController.phoneController,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              ChangePassword(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChangePassword_screen(),
+                      ));
+                },
+                title: 'Change Password',
+              ),
+              LargeButtons(
+                onPressed: () {
+                  profileController.EditProfile((success) {
+                    if (success) {
+                      update(context);
+                    }
+                  });
+                  
+                },
+                title: 'Update',
+                textcolor: white,
+              ),
+            ]),
+          );
+        }),
       ),
-    );
+    ));
   }
 
   update(context) {
