@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:translation/static/freeitaminput.dart';
 import 'package:translation/values/colors.dart';
+import 'package:translation/static/buginput.dart';
+import 'package:translation/values/controllers.dart';
 
 class BugReportModal extends StatelessWidget {
   const BugReportModal({super.key});
@@ -20,18 +23,23 @@ class BugReportModal extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          Container(
-            width: 43,
-            height: 43,
-            decoration: BoxDecoration(
-              color: greenish.withOpacity(0.2),
-              shape: BoxShape.circle,
+          InkWell(
+            onTap: () {
+              settingController.selectbugImage();
+            },
+            child: Container(
+              width: 43,
+              height: 43,
+              decoration: BoxDecoration(
+                color: greenish.withOpacity(0.2),
+                shape: BoxShape.circle,
+              ),
+              child: Center(
+                  child: SvgPicture.asset(
+                "assets/icons/attachFile.svg",
+                height: 22,
+              )),
             ),
-            child: Center(
-                child: SvgPicture.asset(
-              "assets/icons/attachFile.svg",
-              height: 22,
-            )),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 16),
@@ -44,24 +52,9 @@ class BugReportModal extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                width: 270,
-                height: 100,
-                margin: EdgeInsets.only(
-                  
-                  top: 8,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 1,
-                    color: greenish,
-                  ),
-                  borderRadius: BorderRadius.circular(9),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(""),
-                ),
+              BugInput(
+                controller: settingController.bugcontroller,
+                text: 'type',
               ),
             ],
           ),
@@ -73,6 +66,7 @@ class BugReportModal extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: ElevatedButton(
                 onPressed: () {
+                 settingController.addbug();
                   Navigator.pop(context);
                 },
                 child: Text('Send'),
