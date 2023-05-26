@@ -8,10 +8,12 @@ import 'package:translation/helper/loading.dart';
 class Api {
   static execute({url, data}) async {
     try {
+  
       var result;
 
       Dio dio = Dio();
-
+    print(url);
+      print(data);
       result = await dio.post(url, data: data);
       print(result);
       var response = jsonDecode(result.toString());

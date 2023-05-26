@@ -14,6 +14,7 @@ class HistoryCard extends StatelessWidget {
     this.type,
     this.ontap,
     this.name,
+    this.price,
   });
   final type;
   final name;
@@ -21,6 +22,7 @@ class HistoryCard extends StatelessWidget {
   final title;
   final day;
   final ontap;
+  final price;
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +95,7 @@ class HistoryCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      'AED  50',
+                      price,
                       style: TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.w600,
