@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:translation/api/api.dart';
 import 'package:translation/helper/loading.dart';
 import 'package:translation/models/user.dart';
+import 'package:translation/values/controllers.dart';
 import 'package:translation/values/string.dart';
 import 'package:translation/values/validator.dart';
 
@@ -74,6 +75,8 @@ class ProfileController extends GetxController {
       LoadingHelper.dismiss();
       if (!response['error']) {
         user = User(response['user']);
+        homeController.user = User(response['user']);
+        homeController.refresh();
         update();
         return callback(true);
       } else {

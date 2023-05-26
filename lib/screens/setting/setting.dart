@@ -39,103 +39,106 @@ class _Setting_screenState extends State<Setting_screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-          child: GetBuilder<SettingController>(
-        builder: (controller) => SingleChildScrollView(
-          child: Column(children: [
-            TitleTopbar(
-              text: 'Setting',
-              ontap: () {
-                Navigator.pop(context);
-              },
-            ),
-            BalanceCard(
-              balance: settingController.balance.toString(),
-              name: 'willam jones',
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: SettingCard(
-                title: 'Profile',
-                onPressed: () {
-                  profileController.clearField();
-                  Get.to(() => Profile_screen());
-                },
-                imgicon: "assets/icons/profile.svg",
-              ),
-            ),
-            LanguageCard(
-              title: 'Language',
-              onPressed: () {},
-              imgicon: "assets/icons/msgss.svg",
-            ),
-            SettingCard(
-              title: 'Report bug/issues',
-              onPressed: () {
-                onBugTAp(context);
-              },
-              imgicon: "assets/icons/warning.svg",
-            ),
-            SettingCard(
-              title: 'Vendor Access',
-              onPressed: () {},
-              imgicon: "assets/icons/unprofile.svg",
-            ),
-            SettingCard(
-              title: 'Company Access',
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginCompanyScreen()),
-                );
-              },
-              imgicon: "assets/icons/home.svg",
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 12.0),
-              child: InkWell(
-                onTap: () {
-                  logout(context);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Log Out",
-                        style: TextStyle(
-                            color: Colors.red,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: 'Lato',
-                            fontSize: 17),
+        body: SafeArea(
+      child: GetBuilder<HomeController>(
+          builder: (controller) => GetBuilder<SettingController>(
+                builder: (controller) => SingleChildScrollView(
+                  child: Column(children: [
+                    TitleTopbar(
+                      text: 'Setting',
+                      ontap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    BalanceCard(
+                      balance: settingController.balance.toString(),
+                      name: homeController.user!.username,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16.0),
+                      child: SettingCard(
+                        title: 'Profile',
+                        onPressed: () {
+                          profileController.clearField();
+                          Get.to(() => Profile_screen());
+                        },
+                        imgicon: "assets/icons/profile.svg",
                       ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: SvgPicture.asset(
-                          "assets/icons/arrow.svg", // replace with your logo asset path
-                          height: 12,
-                          width: 12,
+                    ),
+                    LanguageCard(
+                      title: 'Language',
+                      onPressed: () {},
+                      imgicon: "assets/icons/msgss.svg",
+                    ),
+                    SettingCard(
+                      title: 'Report bug/issues',
+                      onPressed: () {
+                        settingController.ClearbugVariables();
+                        onBugTAp(context);
+                      },
+                      imgicon: "assets/icons/warning.svg",
+                    ),
+                    SettingCard(
+                      title: 'Vendor Access',
+                      onPressed: () {},
+                      imgicon: "assets/icons/unprofile.svg",
+                    ),
+                    SettingCard(
+                      title: 'Company Access',
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginCompanyScreen()),
+                        );
+                      },
+                      imgicon: "assets/icons/home.svg",
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 12.0),
+                      child: InkWell(
+                        onTap: () {
+                          logout(context);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Log Out",
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: 'Lato',
+                                    fontSize: 17),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: SvgPicture.asset(
+                                  "assets/icons/arrow.svg", // replace with your logo asset path
+                                  height: 12,
+                                  width: 12,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                  ]),
                 ),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-          ]),
-        ),
-      )),
-    );
+              )),
+    ));
   }
 
   onBugTAp(context) {

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation/screens/enter_amount/amountcontroller.dart';
 import 'package:translation/screens/enter_amount/ppaymentmethod.dart';
 import 'package:translation/screens/main_screen/home.dart';
 import 'package:translation/static/box.dart';
+import 'package:translation/static/input_field.dart';
 import 'package:translation/static/large_button.dart';
 import 'package:translation/static/titletopbar.dart';
 import 'package:translation/values/controllers.dart';
@@ -35,15 +37,25 @@ class _Topup_screenState extends State<Topup_screen> {
           builder: (controller) => SingleChildScrollView(
             child: Column(
               children: [
-                TitleTopbar(text: 'Enter amount'),
+                TitleTopbar(
+                  text: 'Enter amount',
+                  ontap: () {
+                    Get.back();
+                  },
+                ),
                 SizedBox(
                   height: 30,
                 ),
-                Center(
-                    child: Text(
-                  amountController.Selectedvalue!,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 31),
-                )),
+                InkWell(
+                  onTap: () {
+                    Enteramount();
+                  },
+                  child: Center(
+                      child: Text(
+                    amountController.Selectedvalue!,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 31),
+                  )),
+                ),
                 SizedBox(
                   height: 10,
                 ),
@@ -171,7 +183,6 @@ class _Topup_screenState extends State<Topup_screen> {
                     sreenRatio: 0.9,
                     onPressed: () {
                       amountController.confirmPayment();
-                     
                     },
                     color: greenish,
                     textcolor: Colors.white,
@@ -184,5 +195,39 @@ class _Topup_screenState extends State<Topup_screen> {
         ),
       ),
     );
+  }
+
+  Enteramount() {
+    Alert(
+        context: context,
+        title: "Enter your amount",
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(height: 6),
+            Text(
+              "Enter amount",
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+            ),
+            SizedBox(height: 4),
+            InputField(
+              hint: "Enter your amount",
+              controller: amountController.amount,
+              type: TextInputType.number,
+            ),
+          ],
+        ),
+        buttons: [
+          DialogButton(
+            color: greenish,
+            onPressed: () async {
+              amountController.chnageAmount();
+            },
+            child: Text(
+              "ADD",
+              style: TextStyle(color: Colors.white, fontSize: 14),
+            ),
+          )
+        ]).show();
   }
 }

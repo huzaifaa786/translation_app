@@ -15,6 +15,7 @@ class AmountController extends GetxController {
   static AmountController instance = Get.find();
 
   String? Selectedvalue = "00";
+  TextEditingController amount = TextEditingController();
 
   paayment() async {
     LoadingHelper.show();
@@ -112,5 +113,15 @@ class AmountController extends GetxController {
     var data = {'price': int.parse(Selectedvalue!)};
     var response = await Api.execute(url: url, data: data);
     return response['intent'];
+  }
+
+  clearVariables() {
+    Selectedvalue = "00";
+  }
+
+  chnageAmount() {
+    Selectedvalue = amount.text;
+    update();
+    Get.back();
   }
 }
