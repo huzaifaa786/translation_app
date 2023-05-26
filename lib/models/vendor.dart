@@ -32,6 +32,6 @@ class Vendor {
     rating = vendor['rating'];
     online = vendor['online'];
     language = jsonDecode(vendor['language']);
-    service =  VendorService(vendor['service']) ;
+    service =  vendor['service'] != null ? VendorService(vendor['service']) : null ;
   }
 }
