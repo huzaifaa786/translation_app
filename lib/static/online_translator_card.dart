@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:translation/screens/home/translator/profile_translator.dart';
+import 'package:translation/screens/translator/profile_translator.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class OnlineTranslatorCard extends StatelessWidget {

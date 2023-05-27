@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:translation/models/vendor.dart';
-import 'package:translation/screens/home/translator/radio_btn.dart';
-import 'package:translation/screens/home/translator/traling_radio.dart';
+import 'package:translation/screens/translator/radio_btn.dart';
+import 'package:translation/screens/translator/traling_radio.dart';
 import 'package:translation/static/add_remove.dart';
 import 'package:translation/static/checkout_button.dart';
 import 'package:translation/static/day_date_card.dart';
@@ -15,7 +15,6 @@ import 'package:translation/screens/checkout/checkout.dart';
 import 'package:translation/screens/translator_screens/translator_screen.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:location/location.dart';
-import 'package:translation/values/controllers.dart';
 
 class profile_translator extends StatefulWidget {
   const profile_translator({super.key, required this.detail});
