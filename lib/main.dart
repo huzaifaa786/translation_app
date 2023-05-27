@@ -26,9 +26,7 @@ void main() async {
   Get.put(ProfileController());
   Get.put(OrderController());
   await GetStorage.init();
-
-
-   Stripe.publishableKey =
+  Stripe.publishableKey =
       'pk_test_51MlTmPAN8zi2vyFswyWqxxJKbe8NnGRtoOo55Z2P65V8EykUYWk034zKSkXkh2THsQZ6OYZzdoQOUxXmSmPiPz9G00dQnMo69A';
   Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
   Stripe.urlScheme = 'flutterstripe';

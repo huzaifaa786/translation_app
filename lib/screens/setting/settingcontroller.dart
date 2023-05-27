@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
@@ -28,6 +27,7 @@ class SettingController extends GetxController {
 
   ClearbugVariables() {
     bugcontroller.clear();
+    bugImage = XFile('');
   }
 
   void getbalance() async {
@@ -35,10 +35,8 @@ class SettingController extends GetxController {
     var url = BASE_URL + 'balance/get';
     GetStorage box = GetStorage();
     int id = box.read('user_id');
-    print('user_id');
-    var data = {
-      'id': id,
-    };
+    print(box.read('api_token'));
+    var data = {'id': id, 'api_token': box.read('api_token')};
     var response = await Api.execute(url: url, data: data);
     print(response);
     LoadingHelper.dismiss();
@@ -68,6 +66,11 @@ class SettingController extends GetxController {
       LoadingHelper.dismiss();
       ClearbugVariables();
       update();
+      Get.snackbar("Report Submit Successfully.",
+          "Thank you for reporting the bug successfully! We appreciate your efforts in helping us improve our system. Our team will review the bug report and work towards resolving the issue. If we require any further information or clarification, we will reach out to you. Thank you for your patience and for being a valued member of our community!",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.white);
     }
   }
 }

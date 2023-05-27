@@ -12,7 +12,7 @@ import 'package:translation/static/stack_input.dart';
 import 'package:translation/static/titletopbar.dart';
 import 'package:translation/values/controllers.dart';
 import 'package:translation/values/validator.dart';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import '../../../values/colors.dart';
 
 class Profile_screen extends StatefulWidget {
@@ -84,15 +84,36 @@ class _Profile_screenState extends State<Profile_screen> {
                                         fit: BoxFit.fill,
                                       ),
                                     )
-                                  : FittedBox(
-                                      fit: BoxFit.scaleDown,
-                                      child: Image.asset(
-                                        "assets/images/5907.jpg",
-                                        height: 120,
-                                        width: 120,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
+                                  : profileController.user == null
+                                      ? FittedBox(
+                                          fit: BoxFit.scaleDown,
+                                          child: Image.asset(
+                                            "assets/images/5907.jpg",
+                                            height: 120,
+                                            width: 120,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )
+                                      : profileController.user!.profilePic == ''
+                                          ? FittedBox(
+                                              fit: BoxFit.scaleDown,
+                                              child: Image.asset(
+                                                "assets/images/5907.jpg",
+                                                height: 120,
+                                                width: 120,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            )
+                                          : FittedBox(
+                                              fit: BoxFit.scaleDown,
+                                              child: CachedNetworkImage(
+                                                imageUrl: profileController
+                                                    .user!.profilePic!,
+                                                height: 120,
+                                                width: 120,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
                             ),
                           ],
                         ),
@@ -177,7 +198,6 @@ class _Profile_screenState extends State<Profile_screen> {
                       update(context);
                     }
                   });
-                  
                 },
                 title: 'Update',
                 textcolor: white,

@@ -59,7 +59,7 @@ class HomeController extends GetxController {
         vendor.add(Vendor(van));
       }
       vendors = vendor;
-      print(vendor.first.service!.schedual!.first.day);
+      // print(vendor.first.service!.schedual!.first.day);
       searchVendor = vendor;
       onlineVendor = vendor.where((i) => i.online == 1).toList();
       offlineVendor = vendor.where((i) => i.online == 0).toList();

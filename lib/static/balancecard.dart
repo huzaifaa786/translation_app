@@ -2,9 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:translation/screens/enter_amount/enteramount.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/static/bagee.dart';
+import 'package:translation/values/controllers.dart';
 
 class BalanceCard extends StatelessWidget {
   const BalanceCard({
@@ -32,8 +34,9 @@ class BalanceCard extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width * 0.9,
             decoration: BoxDecoration(
-              image:
-                  DecorationImage(image: AssetImage("assets/images/topUp.png"),fit: BoxFit.fill),
+              image: DecorationImage(
+                  image: AssetImage("assets/images/topUp.png"),
+                  fit: BoxFit.fill),
               border: Border.all(
                 width: 1,
                 color: Color.fromRGBO(0, 0, 0, 0.17),
@@ -98,7 +101,8 @@ class BalanceCard extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.white,
-                                fontWeight: FontWeight.w500,fontFamily: 'Poppins'),
+                                fontWeight: FontWeight.w500,
+                                fontFamily: 'Poppins'),
                           ),
                         ),
                         GestureDetector(
@@ -113,18 +117,16 @@ class BalanceCard extends StatelessWidget {
                             child: Center(
                               child: ElevatedButton(
                                 onPressed: () {
-                                  // Add your button's onPressed function here
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Topup_screen()),
-                                  );
+                                  amountController.clearVariables();
+                                  Get.to(() => Topup_screen());
+                                  // );
                                 },
                                 child: Text(
                                   'Top Up',
                                   style: TextStyle(
                                       fontSize: 16,
-                                      fontWeight: FontWeight.w600,fontFamily: 'Lato'),
+                                      fontWeight: FontWeight.w600,
+                                      fontFamily: 'Lato'),
                                 ),
                                 style: ElevatedButton.styleFrom(
                                   minimumSize: Size(78, 26),

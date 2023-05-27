@@ -112,7 +112,7 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home>{
   switchfromlang(value) {
     setState(() {
       homeController.fromSelectedLanguage = value as String;
