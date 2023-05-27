@@ -48,8 +48,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         child: ListView.builder(
                           itemCount: controller.orders.length,
                             itemBuilder: (context, index) => HistoryCard(
-                                  title: 'jhfgj',
-                                  name: "controller.orders[index].name",
+                                  title: controller.orders[index].id,
+                                  name: controller.orders[index].vendor!.name,
                                   image: "controller.orders[index].profilePic",
                                   price: controller.orders[index].price,
                                   type: controller.orders[index].servicetype,
