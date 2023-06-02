@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -192,7 +193,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                                       authController
                                                               .validateSignUpForm =
                                                           false.obs;
-                                                      Get.offAll(() => Home_screen());
+                                                      Get.offAll(
+                                                          () => Home_screen());
                                                     }
                                                   });
                                                 },

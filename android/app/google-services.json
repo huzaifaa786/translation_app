@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "697566705821",
+    "project_id": "trnaslation-app",
+    "storage_bucket": "trnaslation-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:697566705821:android:030197a14ed9b8ebd0bc74",
+        "android_client_info": {
+          "package_name": "com.example.translation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "697566705821-peon8rpabet1lofejvja0m4082ltlimc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.translation",
+            "certificate_hash": "7fcdb3799ecf46658f131ed7ebe19a2735101b61"
+          }
+        },
+        {
+          "client_id": "697566705821-e8pcp3i709m7j497hff46n6nc69gnpm3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXykr3CbxsIbFUD0fVcmwL5V1FUtEH4IU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "697566705821-e8pcp3i709m7j497hff46n6nc69gnpm3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

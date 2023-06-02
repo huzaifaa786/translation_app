@@ -16,8 +16,11 @@ import 'package:translation/screens/splash_screen/splash_main.dart';
 import 'package:translation/screens/translator_screens/notranslator.dart';
 import 'package:translation/values/styles.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await LoadingHelper.init();
   Get.put(AuthController());
   Get.put(HomeController());

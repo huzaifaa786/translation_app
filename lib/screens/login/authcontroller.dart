@@ -4,7 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:translation/api/api.dart';
 import 'package:translation/helper/loading.dart';
 import 'package:translation/models/user.dart';
-
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:translation/values/string.dart';
 import 'package:translation/values/validator.dart';
 
@@ -48,12 +48,14 @@ class AuthController extends GetxController {
       if (password.text == confirmPassword.text) {
         GetStorage box = GetStorage();
         var url = BASE_URL + 'user/register';
+        var token = await FirebaseMessaging.instance.getToken();
         var data;
         data = {
           'email': email.text.toString(),
           'username': userName.text.toString(),
           'password': password.text.toString(),
           'phone': phone.text.toString(),
+          'firebase_token': token,
         };
 
         var response = await Api.execute(
@@ -101,11 +103,11 @@ class AuthController extends GetxController {
             Validators.emptyStringValidator(password.text, '') == null;
     if (isFormValid) {
       var url = BASE_URL + 'user/login';
-      // var token = await FirebaseMessaging.instance.getToken();
+      var token = await FirebaseMessaging.instance.getToken();
       var data = {
         'email': email.text,
         'password': password.text,
-        // 'firebase_token': token,
+        'firebase_token': token,
       };
 
       var response = await Api.execute(url: url, data: data);

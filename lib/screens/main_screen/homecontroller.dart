@@ -7,6 +7,11 @@ import 'package:translation/api/api.dart';
 import 'package:translation/helper/loading.dart';
 import 'package:translation/models/user.dart';
 import 'package:translation/models/vendor.dart';
+import 'package:translation/screens/enter_amount/amountcontroller.dart';
+import 'package:translation/screens/login/authcontroller.dart';
+import 'package:translation/screens/login/login_screen.dart';
+import 'package:translation/screens/profile/profilecontroller.dart';
+import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/screens/translator_screens/notranslator.dart';
 import 'package:translation/screens/translator_screens/translator_screen.dart';
 import 'package:translation/values/controllers.dart';
@@ -37,10 +42,28 @@ class HomeController extends GetxController {
       user = User(response['user']);
       update();
     } else {
-      Get.snackbar("Error!", response['error_data'],
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white);
+      if (response['error_data'] == "Unauthorized access") {
+        GetStorage box = GetStorage();
+        box.remove('api_token');
+        Get.deleteAll();
+        Get.put(AuthController());
+        Get.put(HomeController());
+        Get.put(SettingController());
+        Get.put(AmountController());
+        Get.put(ProfileController());
+        Get.offAll(() => LoginScreen());
+        LoadingHelper.dismiss();
+        Get.snackbar("Error!", response['error_data'],
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.red,
+            colorText: Colors.white);
+      } else {
+        LoadingHelper.dismiss();
+        Get.snackbar("Error!", response['error_data'],
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.red,
+            colorText: Colors.white);
+      }
     }
   }
 
