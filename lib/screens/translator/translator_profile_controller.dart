@@ -103,7 +103,7 @@ class TranslatorProfileController extends GetxController {
       return;
     }
 
-    // check availability goes here Api name "order/checkavailability (start time, end time, date, vendor_id"
+    // check availability goes here Api name "order/checkavailability (starttime, endtime, date, vendor_id"
     LoadingHelper.show();
     var url = BASE_URL + 'user/order';
     var data;
