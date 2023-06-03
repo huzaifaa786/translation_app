@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:translation/models/notification.dart';
 import 'package:translation/static/large_button.dart';
 import 'package:translation/values/colors.dart';
 
 class NotificationModal extends StatelessWidget {
-  const NotificationModal({super.key});
-
+  const NotificationModal({super.key,this.notification});
+ final Notificationn? notification;
   @override
   Widget build(BuildContext context) {
     return Container(
