@@ -108,7 +108,9 @@ DateTime getDateOfCurrentWeekByDayName(String dayName) => DateTime.now().subtrac
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
                     ),
-                    SvgPicture.asset("assets/images/heart.svg"),
+                    InkWell(
+                      onTap: (){},
+                      child: SvgPicture.asset("assets/images/heart.svg")),
                   ],
                 ),
               ),

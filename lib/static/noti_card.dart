@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:translation/static/bagee.dart';
 import 'package:translation/values/colors.dart';
-
+import 'package:cached_network_image/cached_network_image.dart';
 class NotificationTile extends StatelessWidget {
   const NotificationTile({
     super.key,
     this.image,
     this.title,
     this.day,
+    this.status,
     this.ontap,
     this.badgetitle,
     this.badgecolor,
@@ -16,6 +17,7 @@ class NotificationTile extends StatelessWidget {
   final name;
   final image;
   final title;
+  final status;
   final day;
   final ontap;
   final badgetitle;
@@ -36,17 +38,20 @@ class NotificationTile extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.12,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(25)),
-                    ),
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
-                        child: Image(
-                            image:
-                                AssetImage('assets/images/placeholder.png'))),
-                  ),
+                 ClipRRect(
+                        borderRadius: BorderRadius.circular(45),
+                        child: image == ''
+                            ? Image(
+                                image: AssetImage('assets/images/5907.jpg'),
+                                height: 65,
+                                width: 65,
+                              )
+                            : CachedNetworkImage(
+                                imageUrl: image,
+                                height: 65,
+                                width: 65,
+                              ),
+                      ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -69,7 +74,7 @@ class NotificationTile extends StatelessWidget {
                               child: Text(
                                 title,
                                 style: TextStyle(
-                                    fontSize: 10,
+                                    fontSize: 13,
                                     fontWeight: FontWeight.w400,
                                     color: hintText),
                                 maxLines: 2,
@@ -83,9 +88,17 @@ class NotificationTile extends StatelessWidget {
                 ],
               ),
               Badgee(
-                title: badgetitle,
-                color: badgecolor,
-              ),
+                      title: status == "3"
+                          ? 'Completed'
+                          : status == "2"
+                              ? "Rejected"
+                              : "In progress",
+                      color: status == "3"
+                          ? Colors.green
+                          : status == "2"
+                              ? Colors.red
+                              : greenish,
+                    ),
             ],
           ),
         ),

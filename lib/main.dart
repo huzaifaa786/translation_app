@@ -9,6 +9,7 @@ import 'package:translation/screens/login/authcontroller.dart';
 import 'package:translation/screens/login/login_screen.dart';
 import 'package:translation/screens/Otp/verifyphoneno.dart';
 import 'package:translation/screens/main_screen/homecontroller.dart';
+import 'package:translation/screens/notification/notificationcontroller.dart';
 import 'package:translation/screens/orderhistory/ordercontroller.dart';
 import 'package:translation/screens/profile/profilecontroller.dart';
 import 'package:translation/screens/setting/settingcontroller.dart';
@@ -24,6 +25,7 @@ void main() async {
   Get.put(SettingController());
   Get.put(AmountController());
   Get.put(ProfileController());
+  Get.put(NotificationController());
   Get.put(OrderController());
   await GetStorage.init();
   Stripe.publishableKey =
@@ -52,7 +54,7 @@ class _MyAppState extends State<MyApp> {
       theme: Styles.lightTheme,
       builder: EasyLoading.init(),
       title: "translation",
-      initialRoute: 'splash',
+      initialRoute: 'login',
       routes: {
         'splash': (_) => SplashScreen(),
         'login': (_) => LoginScreen(),
