@@ -3,9 +3,9 @@ import 'package:translation/values/colors.dart';
 
 class TralingRadioBtn extends StatelessWidget {
   const TralingRadioBtn(
-      {super.key, this.text, this.schedule = false, this.ontap});
+      {super.key, this.text, this.isSelected , this.ontap});
   final text;
-  final schedule;
+  final isSelected;
   final ontap;
 
   @override
@@ -42,7 +42,7 @@ class TralingRadioBtn extends StatelessWidget {
                       width: 12,
                       margin: EdgeInsets.all(2),
                       decoration: BoxDecoration(
-                          color: schedule == true ? greenish : white,
+                          color: isSelected == true ? greenish : white,
                           borderRadius: BorderRadius.all(Radius.circular(25))),
                     ),
                   ),

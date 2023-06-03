@@ -65,8 +65,6 @@ class _ChangePassword_screenState extends State<ChangePassword_screen> {
                         update(context);
                       }
                     });
-                    ;
-                    // update(context);
                   })
             ]),
           ),

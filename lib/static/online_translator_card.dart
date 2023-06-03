@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:translation/screens/translator/profile_translator.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:translation/screens/translator/translator_profile.dart';
 
 class OnlineTranslatorCard extends StatelessWidget {
   const OnlineTranslatorCard(
@@ -16,7 +16,7 @@ class OnlineTranslatorCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(() => profile_translator(detail: vendor));
+        Get.to(() => TraslatorProfile(detail: vendor));
       },
       child: Card(
         shape: RoundedRectangleBorder(

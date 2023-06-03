@@ -55,6 +55,11 @@ dependencies:
   flutter_stripe: ^9.2.0
   cached_network_image: ^3.2.3
   image_picker: ^0.8.7+5
+  cloud_firestore: ^4.8.0
+  firebase_core: ^2.13.1
+  firebase_messaging: ^14.6.2
+  date_time_picker: ^2.1.0
+  table_calendar: ^3.0.8
 
 dev_dependencies:
   flutter_test:

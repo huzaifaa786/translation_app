@@ -12,4 +12,8 @@ SettingController settingController = SettingController.instance;
 AmountController amountController = AmountController.instance;
 ProfileController profileController = ProfileController.instance;
 OrderController orderController = OrderController.instance;
+<<<<<<< HEAD
 NotificationController notificationController = NotificationController.instance;
+=======
+ProfileController translatorProfileController = ProfileController.instance;
+>>>>>>> cde6f37ba5e1a52b0002fc8388a098c4fd86058d
