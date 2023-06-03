@@ -313,7 +313,7 @@ DateTime getDateOfCurrentWeekByDayName(String dayName) => DateTime.now().subtrac
                       ),
                       TralingRadioBtn(
                         text: 'Schedule',
-                        schedule: schedule,
+                        isSelected: schedule,
                         ontap: () {
                           setState(() {
                             schedule = !schedule;
@@ -440,7 +440,7 @@ DateTime getDateOfCurrentWeekByDayName(String dayName) => DateTime.now().subtrac
                           : Container(),
                       TralingRadioBtn(
                         text: 'Document Type',
-                        schedule: doc,
+                        isSelected: doc,
                         ontap: () {
                           setState(() {
                             doc = !doc;
