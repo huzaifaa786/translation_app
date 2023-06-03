@@ -11,3 +11,4 @@ SettingController settingController = SettingController.instance;
 AmountController amountController = AmountController.instance;
 ProfileController profileController = ProfileController.instance;
 OrderController orderController = OrderController.instance;
+ProfileController translatorProfileController = ProfileController.instance;

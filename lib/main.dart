@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:translation/helper/loading.dart';
 import 'package:translation/screens/bottom_nav_screen/bottom_nav.dart';
 import 'package:translation/screens/enter_amount/amountcontroller.dart';
+import 'package:translation/screens/home/translator/translator_profile_controller.dart';
 import 'package:translation/screens/login/authcontroller.dart';
 import 'package:translation/screens/login/login_screen.dart';
 import 'package:translation/screens/Otp/verifyphoneno.dart';
@@ -21,10 +22,12 @@ void main() async {
   await LoadingHelper.init();
   Get.put(AuthController());
   Get.put(HomeController());
+  Get.put(ProfileController());
   Get.put(SettingController());
   Get.put(AmountController());
   Get.put(ProfileController());
   Get.put(OrderController());
+  Get.put(TranslatorProfileController());
   await GetStorage.init();
   Stripe.publishableKey =
       'pk_test_51MlTmPAN8zi2vyFswyWqxxJKbe8NnGRtoOo55Z2P65V8EykUYWk034zKSkXkh2THsQZ6OYZzdoQOUxXmSmPiPz9G00dQnMo69A';
