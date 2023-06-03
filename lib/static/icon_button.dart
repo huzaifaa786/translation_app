@@ -50,7 +50,7 @@ class IconsButton extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(right: 8.0),
-              child: Icon(Icons.my_location_rounded,color: white),
+              child: Icon(icon,color: white),
             ),
             Text(
               title,
