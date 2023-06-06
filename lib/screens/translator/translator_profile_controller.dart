@@ -5,6 +5,7 @@ import 'package:location/location.dart';
 import 'package:translation/api/api.dart';
 import 'package:translation/helper/loading.dart';
 import 'package:translation/models/user.dart';
+import 'package:translation/models/vendor.dart';
 import 'package:translation/values/string.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -14,6 +15,8 @@ enum ServiceType { Instant, Schedule, Document }
 enum ScheduleType { AudioVideo, InPerson }
 
 enum DocumentType { Urgent, NotUrgent }
+
+enum InstantType { audio, video }
 
 class TranslatorProfileController extends GetxController {
   static TranslatorProfileController instance = Get.find();
@@ -26,10 +29,17 @@ class TranslatorProfileController extends GetxController {
   ServiceType serviceType = ServiceType.Instant;
   ScheduleType scheduleType = ScheduleType.AudioVideo;
   DocumentType documentType = DocumentType.Urgent;
+  InstantType instantType = InstantType.audio;
+
+  // default times for instant
+
+  String instantTime = ''.obs.toString();
 
   // default times to schedule
   String startTime = '';
   String endTime = '';
+  int totalAmount = 0.obs.toInt();
+  int duration = 0.obs.toInt();
 
   //default date for calender
   var selectedDay = DateTime.now().obs;
@@ -48,6 +58,30 @@ class TranslatorProfileController extends GetxController {
     scheduleType = value;
   }
 
+  // reset instant value
+  resetInstant() {
+    instantTime = ''.obs.toString();
+    totalAmount = 0.obs.toInt();
+    instantType = InstantType.audio;
+    update();
+  }
+
+  // get amount by slot type
+  setAmountBySlot(
+      int hour, int minutes, String time, Vendor vendor, int durattion) {
+    totalAmount =
+        ((hour * 2 + (minutes / 30)) * int.parse(vendor.service!.audiovideo!))
+            .toInt();
+    instantTime = time;
+    
+    duration = durattion;
+    startTime = DateTime.now().toString();
+    endTime = DateTime.now().add(Duration(hours: 0, minutes: duration)).toString();
+
+    
+    update();
+  }
+
   //set selected and focused days received from calender
   setSelectedDay(DateTime _selectedDay, DateTime _focusedDay) {
     selectedDay.value = _selectedDay;
@@ -60,13 +94,39 @@ class TranslatorProfileController extends GetxController {
     documentType = value;
   }
 
-  placeOrder() async {
+  placeOrder(Vendor vendor) async {
+    if (totalAmount <= 0) {
+      Get.snackbar("Error!", "Order amount can't be zero",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white);
+      return;
+    }
+
+    // check availability goes here Api name "order/checkavailability (starttime, endtime, date, vendor_id"
     LoadingHelper.show();
     var url = BASE_URL + 'user/order';
     var data;
     GetStorage box = GetStorage();
-    print(box.read('api_token'));
-    data = {'api_token': box.read('api_token')!};
+    var servicetype = serviceType == ServiceType.Instant
+          ? 'instant'
+          : serviceType == ServiceType.Schedule
+              ? 'schedule'
+              : 'document';
+    data = {
+      'api_token': box.read('api_token')!,
+      'servicetype':servicetype,
+      'vendor_id': vendor.id.toString(),
+      'price': totalAmount.toString(),
+      'duration': duration,
+      'date': DateTime.now().toString(),
+      'starttime': startTime,
+      'endtime': endTime,
+      'meetingtype': instantType == InstantType.audio ? 'audio' : 'video',
+      'scheduletype': scheduleType == ScheduleType.AudioVideo
+          ? 'audio/video'
+          : 'inperson',
+    };
     var response = await Api.execute(url: url, data: data);
     LoadingHelper.dismiss();
     // if (!response['error']) {
