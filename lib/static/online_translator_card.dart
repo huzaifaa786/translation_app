@@ -10,11 +10,12 @@ class OnlineTranslatorCard extends StatelessWidget {
       required this.name,
       required this.image,
       this.vendor,
-      this.rating});
+      this.rating,this.price});
   final name;
   final image;
   final vendor;
   final rating;
+  final price;
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +94,7 @@ class OnlineTranslatorCard extends StatelessWidget {
                           fontFamily: 'NunitoSans'),
                     ),
                     Text(
-                      "100 AED",
+                      price +" AED",
                       style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.w700,

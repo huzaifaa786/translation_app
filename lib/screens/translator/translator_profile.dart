@@ -17,6 +17,7 @@ import 'package:translation/values/colors.dart';
 import 'package:translation/screens/checkout/checkout.dart';
 import 'package:translation/screens/translator_screens/translator_screen.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:translation/values/controllers.dart';
 
 class TraslatorProfile extends StatefulWidget {
   const TraslatorProfile({super.key, required this.detail});
@@ -295,8 +296,12 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
 
                                         return GestureDetector(
                                           onTap: () {
-                                            controller.setAmountBySlot(hour,
-                                                minutes, time, widget.detail!,totalMinutes);
+                                            controller.setAmountBySlot(
+                                                hour,
+                                                minutes,
+                                                time,
+                                                widget.detail!,
+                                                totalMinutes);
                                           },
                                           child: Container(
                                             margin: EdgeInsets.all(9),
@@ -527,6 +532,9 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                           timeLabelText: "End time",
                                           onChanged: (val) {
                                             controller.endTime = val;
+                                            print(controller.endTime);
+                                            translatorProfileController
+                                                .calTotalTime(widget.detail!);
                                           },
                                           validator: (val) {
                                             return null;
@@ -566,7 +574,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                     value: DocumentType.NotUrgent,
                                     onChanged: () {
                                       controller.toggledocumentplan(
-                                          DocumentType.Urgent);
+                                          DocumentType.NotUrgent);
                                     },
                                   ),
                                   Row(
@@ -669,7 +677,12 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                               AddRemoveBtn(
                                                   ontap: () {
                                                     setState(() {
-                                                      controller.pages--;
+                                                      if (controller.pages ==
+                                                          0) {
+                                                        print(controller.pages);
+                                                      } else {
+                                                        controller.pages--;
+                                                      }
                                                     });
                                                   },
                                                   icon: '-'),
@@ -715,7 +728,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                             price: controller.totalAmount.toString(),
                             sreenRatio: 0.9,
                             onPressed: () {
-                              controller.placeOrder(widget.detail!);
+                              controller.checkavailability(widget.detail!);
 
                               //  update(context);
                             },
