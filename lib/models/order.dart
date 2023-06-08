@@ -5,11 +5,11 @@ import 'package:translation/models/vendor.dart';
 class Order {
   int? id;
   int? user_id;
-  String? price;
+  int? price;
   String? servicetype;
   String? documenttype;
   String? status;
-  String? vendor_id;
+  int? vendor_id;
   User? user;
   Vendor? vendor;
    //  Orderdoc? document;
