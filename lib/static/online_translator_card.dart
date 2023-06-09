@@ -6,11 +6,16 @@ import 'package:translation/screens/translator/translator_profile.dart';
 
 class OnlineTranslatorCard extends StatelessWidget {
   const OnlineTranslatorCard(
-      {super.key, required this.name, required this.image, this.vendor, this.rating});
+      {super.key,
+      required this.name,
+      required this.image,
+      this.vendor,
+      this.rating,this.price});
   final name;
   final image;
   final vendor;
   final rating;
+  final price;
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +73,7 @@ class OnlineTranslatorCard extends StatelessWidget {
                           height: 11, width: 11)),
                   Padding(
                     padding: const EdgeInsets.only(top: 4, left: 4),
-                    child: Text(rating.toString(),
+                    child: Text(rating == null ? '0.0' : rating.toString(),
                         style: TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w400,
@@ -89,7 +94,7 @@ class OnlineTranslatorCard extends StatelessWidget {
                           fontFamily: 'NunitoSans'),
                     ),
                     Text(
-                      "100 AED",
+                      price +" AED",
                       style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.w700,

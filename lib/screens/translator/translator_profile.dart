@@ -17,6 +17,7 @@ import 'package:translation/values/colors.dart';
 import 'package:translation/screens/checkout/checkout.dart';
 import 'package:translation/screens/translator_screens/translator_screen.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:translation/values/controllers.dart';
 
 class TraslatorProfile extends StatefulWidget {
   const TraslatorProfile({super.key, required this.detail});
@@ -38,7 +39,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20, bottom: 12),
+                  padding:
+                      const EdgeInsets.only(left: 20, right: 20, bottom: 12),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -52,8 +54,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                           child: SvgPicture.asset("assets/icons/back.svg")),
                       Text(
                         "Detail",
-                        style:
-                            TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 21),
                       ),
                       SvgPicture.asset("assets/images/heart.svg"),
                     ],
@@ -109,7 +111,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                         ),
                         widget.detail!.certificate == ''
                             ? Padding(
-                                padding: const EdgeInsets.only(top: 8, bottom: 8),
+                                padding:
+                                    const EdgeInsets.only(top: 8, bottom: 8),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
@@ -153,72 +156,192 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                             style: TextStyle(fontSize: 14),
                           ),
                         ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 48,
-                          margin: EdgeInsets.only(top: 8),
-                          decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 255, 255, 255),
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(color: greenish)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                        TralingRadioBtn(
+                          text: 'Instant',
+                          isSelected:
+                              controller.serviceType == ServiceType.Instant,
+                          ontap: () {
+                            setState(() {
+                              controller.serviceType = ServiceType.Instant;
+                            });
+                          },
+                        ),
+                        controller.serviceType == ServiceType.Instant
+                            ? Column(
                                 children: [
-                                  SvgPicture.asset("assets/icons/audio.svg"),
-                                  Text("Audio Now"),
-                                ],
-                              ),
-                              Text("/"),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  SvgPicture.asset("assets/icons/video.svg"),
-                                  Text("Video Now"),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 48,
+                                    margin: EdgeInsets.only(top: 8),
+                                    decoration: BoxDecoration(
+                                        color:
+                                            Color.fromARGB(255, 255, 255, 255),
+                                        borderRadius: BorderRadius.circular(8),
+                                        border: Border.all(color: greenish)),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              controller.instantType =
+                                                  InstantType.audio;
+                                            });
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.only(right: 15),
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(7),
+                                                  bottomLeft:
+                                                      Radius.circular(7)),
+                                              color: controller.instantType ==
+                                                      InstantType.audio
+                                                  ? greenish
+                                                  : Color.fromARGB(
+                                                      255, 255, 255, 255),
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                SvgPicture.asset(
+                                                    "assets/icons/audio.svg"),
+                                                Text(
+                                                  "Audio Now",
+                                                  style: TextStyle(
+                                                    color: controller
+                                                                .instantType ==
+                                                            InstantType.audio
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Text("/"),
+                                        InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              controller.instantType =
+                                                  InstantType.video;
+                                            });
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.only(right: 15),
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.only(
+                                                  topRight: Radius.circular(7),
+                                                  bottomRight:
+                                                      Radius.circular(7)),
+                                              color: controller.instantType ==
+                                                      InstantType.video
+                                                  ? greenish
+                                                  : Color.fromARGB(
+                                                      255, 255, 255, 255),
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                SvgPicture.asset(
+                                                    "assets/icons/video.svg"),
+                                                Text(
+                                                  "Video Now",
+                                                  style: TextStyle(
+                                                    color: controller
+                                                                .instantType ==
+                                                            InstantType.video
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "How many hours do you need translator",
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      children: List.generate(7, (index) {
+                                        // Calculate the time for each slot
+                                        int hour = (index + 1) ~/
+                                            2; // Divide by 2 to get the hour value
+                                        int minutes = ((index + 1) % 2) *
+                                            30; // Multiply by 30 to get the minutes value
+
+                                        int totalMinutes = hour * 60 + minutes;
+                                        // Format the time as a string
+                                        String time =
+                                            '${hour.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}';
+
+                                        return GestureDetector(
+                                          onTap: () {
+                                            controller.setAmountBySlot(
+                                                hour,
+                                                minutes,
+                                                time,
+                                                widget.detail!,
+                                                totalMinutes);
+                                          },
+                                          child: Container(
+                                            margin: EdgeInsets.all(9),
+                                            width: 125,
+                                            height: 43,
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                color: Color.fromRGBO(
+                                                    0, 0, 0, 0.24),
+                                                width: 1,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              color:
+                                                  controller.instantTime == time
+                                                      ? greenish
+                                                      : Colors.white,
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                '$time' == '00:30'
+                                                    ? '$time' + ' min'
+                                                    : '$time' + ' hr',
+                                                style: TextStyle(
+                                                    fontSize: 12,
+                                                    color: controller
+                                                                .instantTime ==
+                                                            time
+                                                        ? Colors.white
+                                                        : Colors.black),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }),
+                                    ),
+                                  ),
                                 ],
                               )
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: Row(
-                            children: [
-                              Text(
-                                "How many hours do you need translator",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.all(9),
-                                width: 125,
-                                height: 43,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      color: Color.fromRGBO(0, 0, 0, 0.24),
-                                      width: 1),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    '00:30 mins',
-                                    style: TextStyle(fontSize: 12),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                            : Container(),
                         TralingRadioBtn(
                           text: 'Schedule',
                           isSelected:
@@ -226,6 +349,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                           ontap: () {
                             setState(() {
                               controller.serviceType = ServiceType.Schedule;
+                              controller.resetInstant();
                             });
                           },
                         ),
@@ -250,7 +374,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                           .toggleplan(ScheduleType.InPerson);
                                     },
                                   ),
-                                  controller.scheduleType == ScheduleType.InPerson
+                                  controller.scheduleType ==
+                                          ScheduleType.InPerson
                                       ? IconsButton(
                                           title: 'Choose location',
                                           icon: Icons.my_location_rounded,
@@ -278,9 +403,9 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                   DateTime focusedDay) {
                                                 controller.setSelectedDay(
                                                     selectedDay, focusedDay);
-                                                    setState(() {});
+                                                setState(() {});
                                               }
-    
+
                                               return Column(
                                                 children: [
                                                   Expanded(
@@ -289,9 +414,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                           2010, 10, 16),
                                                       lastDay: DateTime.utc(
                                                           2030, 3, 14),
-                                                      focusedDay:
-                                                          controller.focusedDay
-                                                              .value,
+                                                      focusedDay: controller
+                                                          .focusedDay.value,
                                                       calendarStyle:
                                                           CalendarStyle(
                                                         selectedDecoration:
@@ -313,7 +437,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                           (day) {
                                                         return isSameDay(
                                                             controller
-                                                                .selectedDay.value,
+                                                                .selectedDay
+                                                                .value,
                                                             day);
                                                       },
                                                       onDaySelected:
@@ -323,10 +448,11 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                   Container(
                                                     padding: EdgeInsets.only(
                                                         bottom: 16),
-                                                    width: MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        0.8,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.8,
                                                     child: ElevatedButton(
                                                       onPressed: () {
                                                         // Call the callback to update the button text
@@ -367,12 +493,14 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Container(
-                                        width: MediaQuery.of(context).size.width *
-                                            0.38,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.38,
                                         height: 60,
                                         decoration: BoxDecoration(
                                           color: Colors.white,
-                                          borderRadius: BorderRadius.circular(8),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                         ),
                                         child: DateTimePicker(
                                           type: DateTimePickerType.time,
@@ -389,12 +517,14 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                       ),
                                       Text("To"),
                                       Container(
-                                        width: MediaQuery.of(context).size.width *
-                                            0.38,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.38,
                                         height: 60,
                                         decoration: BoxDecoration(
                                           color: Colors.white,
-                                          borderRadius: BorderRadius.circular(8),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                         ),
                                         child: DateTimePicker(
                                           type: DateTimePickerType.time,
@@ -402,6 +532,9 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                           timeLabelText: "End time",
                                           onChanged: (val) {
                                             controller.endTime = val;
+                                            print(controller.endTime);
+                                            translatorProfileController
+                                                .calTotalTime(widget.detail!);
                                           },
                                           validator: (val) {
                                             return null;
@@ -441,7 +574,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                     value: DocumentType.NotUrgent,
                                     onChanged: () {
                                       controller.toggledocumentplan(
-                                          DocumentType.Urgent);
+                                          DocumentType.NotUrgent);
                                     },
                                   ),
                                   Row(
@@ -449,25 +582,27 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       SizedBox(
-                                        width: MediaQuery.of(context).size.width *
-                                            0.42,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.42,
                                         child: Row(
                                           children: [
                                             Container(
                                                 padding: EdgeInsets.all(8),
                                                 decoration: BoxDecoration(
-                                                    color:
-                                                        greenish.withOpacity(0.2),
+                                                    color: greenish
+                                                        .withOpacity(0.2),
                                                     borderRadius:
                                                         BorderRadius.all(
-                                                            Radius.circular(25))),
+                                                            Radius.circular(
+                                                                25))),
                                                 child: SvgPicture.asset(
                                                   "assets/icons/doc.svg",
                                                   height: 22,
                                                 )),
                                             Padding(
-                                              padding:
-                                                  const EdgeInsets.only(left: 12),
+                                              padding: const EdgeInsets.only(
+                                                  left: 12),
                                               child: Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
@@ -486,8 +621,9 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                         ),
                                       ),
                                       SizedBox(
-                                        width: MediaQuery.of(context).size.width *
-                                            0.42,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.42,
                                         child: Row(
                                           children: [
                                             Container(
@@ -497,14 +633,15 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                         color: greenish),
                                                     borderRadius:
                                                         BorderRadius.all(
-                                                            Radius.circular(25))),
+                                                            Radius.circular(
+                                                                25))),
                                                 child: SvgPicture.asset(
                                                   "assets/icons/attachFile.svg",
                                                   height: 22,
                                                 )),
                                             Padding(
-                                              padding:
-                                                  const EdgeInsets.only(left: 8),
+                                              padding: const EdgeInsets.only(
+                                                  left: 8),
                                               child: Text(
                                                 "Attach File",
                                                 style: TextStyle(
@@ -529,9 +666,10 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                           style: TextStyle(fontSize: 14),
                                         ),
                                         SizedBox(
-                                          width:
-                                              MediaQuery.of(context).size.width *
-                                                  0.2,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.2,
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
@@ -539,7 +677,12 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                               AddRemoveBtn(
                                                   ontap: () {
                                                     setState(() {
-                                                      controller.pages--;
+                                                      if (controller.pages ==
+                                                          0) {
+                                                        print(controller.pages);
+                                                      } else {
+                                                        controller.pages--;
+                                                      }
                                                     });
                                                   },
                                                   icon: '-'),
@@ -582,14 +725,11 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                           padding: const EdgeInsets.only(top: 16, bottom: 30),
                           child: CheckOutButton(
                             title: 'Checkout',
-                            price: '50',
+                            price: controller.totalAmount.toString(),
                             sreenRatio: 0.9,
                             onPressed: () {
-                              setState(() {});
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Checkout_screen()));
+                              controller.checkavailability(widget.detail!);
+
                               //  update(context);
                             },
                             color: greenish,

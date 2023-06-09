@@ -32,6 +32,7 @@ class OrderController extends GetxController {
       update();
     } else {
       print(response['error']);
+      LoadingHelper.dismiss();
     }
   }
 }

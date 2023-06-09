@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:translation/models/notification.dart';
+import 'package:translation/screens/translator_screens/offline_translator/offline_people.dart';
 import 'package:translation/static/large_button.dart';
 import 'package:translation/values/colors.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:translation/values/controllers.dart';
 
 class NotificationModal extends StatelessWidget {
-  const NotificationModal({super.key});
-
+  const NotificationModal({super.key, this.notification});
+  final Notificationn? notification;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,19 +30,24 @@ class NotificationModal extends StatelessWidget {
                   borderRadius: BorderRadius.circular(70),
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(22),
-                  child: SvgPicture.asset(
-                    "assets/images/splash_3.svg",
-                    width: 64,
-                    height: 64,
-                    fit: BoxFit.cover,
-                  ),
+                  borderRadius: BorderRadius.circular(45),
+                  child: notification!.vendor!.profilePic! == ''
+                      ? Image(
+                          image: AssetImage('assets/images/5907.jpg'),
+                          height: 65,
+                          width: 65,
+                        )
+                      : CachedNetworkImage(
+                          imageUrl: notification!.vendor!.profilePic!,
+                          height: 65,
+                          width: 65,
+                        ),
                 ),
               ),
             ),
             Center(
-              child: const Text(
-                "William Jones",
+              child: Text(
+                notification!.vendor!.name!,
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
             ),
@@ -55,17 +66,25 @@ class NotificationModal extends StatelessWidget {
               height: 40,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  width: 100,
-                ),
-                Icon(Icons.star, color: Colors.yellow, size: 40),
-                Icon(Icons.star, color: Colors.yellow, size: 40),
-                Icon(Icons.star, color: Colors.yellow, size: 40),
-                Icon(Icons.star,
-                    color: Color.fromARGB(255, 180, 180, 180), size: 40),
-                Icon(Icons.star,
-                    color: Color.fromARGB(255, 160, 160, 160), size: 40),
+                RatingBar.builder(
+                  initialRating: 5,
+                  minRating: 1,
+                  glow: false,
+                  direction: Axis.horizontal,
+                  allowHalfRating: true,
+                  itemCount: 5,
+                  itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                  itemBuilder: (context, _) => Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                  ),
+                  onRatingUpdate: (rating) {
+                    print(rating);
+                    notificationController.rating = rating;
+                  },
+                )
               ],
             ),
             const SizedBox(
@@ -78,8 +97,11 @@ class NotificationModal extends StatelessWidget {
                 title: 'Submit',
                 sreenRatio: 0.8,
                 onPressed: () {
-                  // authController.signIn();
-                  // Navigator.pushNamed(context, 'home');
+                  notificationController.addrating(
+                      notificationController.rating,
+                      notification!.orderr!.id!,
+                      notification!.vendor!.id!);
+                      Get.back();
                 },
                 color: greenish,
                 textcolor: Colors.white,

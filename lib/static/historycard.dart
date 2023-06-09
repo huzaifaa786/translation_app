@@ -110,7 +110,7 @@ class HistoryCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                     'AED '+price,
+                     'AED '+price.toString(),
                       style: TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.w600,

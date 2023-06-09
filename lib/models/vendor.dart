@@ -13,8 +13,9 @@ class Vendor {
   String? profilePic;
   String? certificate;
   String? status;
+  String? rating;
   int? online;
-  int? rating;
+
   List<dynamic>? language;
   VendorService? service;
 
@@ -29,9 +30,11 @@ class Vendor {
     certificate = vendor['certificate'] ?? '';
     profilePic = vendor['profilepic'] ?? '';
     status = vendor['status'];
-    rating = vendor['rating'];
+    rating = vendor['rating_avg_rating'];
+
     online = vendor['online'];
     language = jsonDecode(vendor['language']);
-    service =  vendor['service'] != null ? VendorService(vendor['service']) : null ;
+    service =
+        vendor['service'] != null ? VendorService(vendor['service']) : null;
   }
 }

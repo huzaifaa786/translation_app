@@ -4,12 +4,15 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:translation/helper/loading.dart';
 import 'package:translation/screens/translator/map.dart';
+import 'package:translation/screens/checkout/checkout_controller.dart';
 import 'package:translation/screens/enter_amount/amountcontroller.dart';
 import 'package:translation/screens/login/authcontroller.dart';
 import 'package:translation/screens/login/login_screen.dart';
 import 'package:translation/screens/Otp/verifyphoneno.dart';
 import 'package:translation/screens/main_screen/homecontroller.dart';
+import 'package:translation/screens/notification/notificationcontroller.dart';
 import 'package:translation/screens/orderhistory/ordercontroller.dart';
+import 'package:translation/screens/orderhistory/ordercontroller.dart'; 
 import 'package:translation/screens/profile/profilecontroller.dart';
 import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/screens/splash_screen/splash_main.dart';
@@ -29,8 +32,10 @@ void main() async {
   Get.put(SettingController());
   Get.put(AmountController());
   Get.put(ProfileController());
+  Get.put(NotificationController());
   Get.put(OrderController());
   Get.put(TranslatorProfileController());
+  Get.put(CheckOutController());
   await GetStorage.init();
   Stripe.publishableKey =
       'pk_test_51MlTmPAN8zi2vyFswyWqxxJKbe8NnGRtoOo55Z2P65V8EykUYWk034zKSkXkh2THsQZ6OYZzdoQOUxXmSmPiPz9G00dQnMo69A';

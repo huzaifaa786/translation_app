@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:translation/screens/main_screen/home.dart';
 import 'package:translation/screens/notification/notification.dart';
 import 'package:translation/static/large_button.dart';
 
@@ -61,13 +63,13 @@ class _CardAdded_ScreenState extends State<CardAdded_Screen> {
             sreenRatio: 0.8,
             onPressed: () {
               setState(() {});
-
+              Get.offAll(()=> Home_screen());
               // authController.signIn();
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Notification_screen(),
-                  ));
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => Notification_screen(),
+              //     ));
             },
             color: greenish,
             textcolor: Colors.white,
