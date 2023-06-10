@@ -1,4 +1,6 @@
+import 'dart:developer';
 import 'dart:io';
+
 import 'package:dio/dio.dart' as dio;
 
 import 'package:file_picker/file_picker.dart';
@@ -209,10 +211,15 @@ class TranslatorProfileController extends GetxController {
         : serviceType == ServiceType.Schedule
             ? 'schedule'
             : 'document';
+      var response;
+
 
     if (serviceType == ServiceType.Document) {
+      String fileName = file!.path.split('/').last;
+
       data = dio.FormData.fromMap({
-        "file": convertFile,
+        "file":
+            await dio.MultipartFile.fromFile(file!.path, filename: fileName),
         'api_token': box.read('api_token')!,
         'servicetype': servicetype,
         'vendor_id': vendor.id.toString(),
@@ -229,6 +236,7 @@ class TranslatorProfileController extends GetxController {
         'pages': pages,
         'description': descriptionController
       });
+      response = await Api.execute(url: url, data: data,image: true);
     } else {
       data = {
         'api_token': box.read('api_token')!,
@@ -243,15 +251,10 @@ class TranslatorProfileController extends GetxController {
         'scheduletype': scheduleType == ScheduleType.AudioVideo
             ? 'audio/video'
             : 'inperson',
-        'documenttype': documentType,
-        'pages': pages,
-        'file': file,
-        'description': descriptionController
       };
+      response = await Api.execute(url: url, data: data);
     }
-    print(file);
-    print('fffffffffffffffffffffffffffffffffffffffffffffffff');
-    var response = await Api.execute(url: url, data: data);
+
     LoadingHelper.dismiss();
     print(response);
     if (!response['error']) {
