@@ -14,7 +14,7 @@ class DeliveryMap extends StatefulWidget {
 
 class _DeliveryMapState extends State<DeliveryMap> {
   LatLng deliveryAreaCenter = LatLng(32.0999459, 72.7076235);
-  double deliveryAreaRadius = 5000.0; // meters
+  double deliveryAreaRadius = 5000.0;
   LatLng? selectedLocation;
 
   @override
