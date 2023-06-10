@@ -10,6 +10,7 @@ class VendorService {
   List<Schedual>? schedual;
   String? inperson;
   String? audiovideo;
+  String? onlineaudiovideoPrice;
   String? urgentprice;
   String? unurgentprice;
 
@@ -18,6 +19,7 @@ class VendorService {
     vendor_id = service['vendor_id'];
     inperson = service['inperson'];
     audiovideo = service['audiovideo'];
+    onlineaudiovideoPrice = service['onlineaudiovideo'];
     urgentprice = service['urgentprice'];
     unurgentprice = service['unurgentprice'];
     urgent = jsonDecode(service['urgent']);

@@ -1,9 +1,11 @@
 import 'dart:io';
+import 'package:dio/dio.dart' as dio;
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
 import 'package:translation/api/api.dart';
 import 'package:translation/helper/loading.dart';
@@ -69,8 +71,14 @@ class TranslatorProfileController extends GetxController {
   resetInstant() {
     instantTime = ''.obs.toString();
     totalAmount = 0.obs.toInt();
+    pages = 0;
     instantType = InstantType.audio;
     update();
+  }
+
+  resetvalue() {
+    totalAmount = 0.obs.toInt();
+    pages = 0;
   }
 
   // get amount by slot type
@@ -93,18 +101,18 @@ class TranslatorProfileController extends GetxController {
     if (documentType == DocumentType.Urgent) {
       totalAmount = pages * int.parse(vendor.service!.urgentprice.toString());
     } else {
-      pages * int.parse(vendor.service!.unurgentprice.toString());
+      totalAmount = pages * int.parse(vendor.service!.unurgentprice.toString());
     }
   }
 
-  PlatformFile? file;
+  File? file;
   Future<void> picksinglefile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['pdf'],
     );
     if (result != null) {
-      File file = File(result.files.single.path!);
+      file = File(result.files.single.path!);
     } else {
       // User canceled the picker
     }
@@ -143,6 +151,8 @@ class TranslatorProfileController extends GetxController {
   }
 
   placeOrder(vendor) async {
+    print('dfffffffffffffffffffffffffffff');
+    print(vendor);
     LoadingHelper.show();
     var url = BASE_URL + 'user/order';
     var data;
@@ -152,25 +162,51 @@ class TranslatorProfileController extends GetxController {
         : serviceType == ServiceType.Schedule
             ? 'schedule'
             : 'document';
-    data = {
-      'api_token': box.read('api_token')!,
-      'servicetype': servicetype,
-      'vendor_id': vendor.id.toString(),
-      'price': totalAmount.toString(),
-      'duration': duration,
-      'date': DateTime.now().toString(),
-      'starttime': startTime,
-      'endtime': endTime,
-      'meetingtype': instantType == InstantType.audio ? 'audio' : 'video',
-      'scheduletype':
-          scheduleType == ScheduleType.AudioVideo ? 'audio/video' : 'inperson',
-      'documenttype': documentType,
-      'pages': pages,
-      'file': file,
-      'description': descriptionController
-    };
+
+    if (serviceType == ServiceType.Document) {
+    data = dio.FormData.fromMap({
+        "file": convertFile,
+        'api_token': box.read('api_token')!,
+        'servicetype': servicetype,
+        'vendor_id': vendor.id.toString(),
+        'price': totalAmount.toString(),
+        'duration': duration,
+        'date': DateTime.now().toString(),
+        'starttime': startTime,
+        'endtime': endTime,
+        'meetingtype': instantType == InstantType.audio ? 'audio' : 'video',
+        'scheduletype': scheduleType == ScheduleType.AudioVideo
+            ? 'audio/video'
+            : 'inperson',
+        'documenttype': documentType,
+        'pages': pages,
+        'description': descriptionController
+      });
+    } else {
+      data = {
+        'api_token': box.read('api_token')!,
+        'servicetype': servicetype,
+        'vendor_id': vendor.id.toString(),
+        'price': totalAmount.toString(),
+        'duration': duration,
+        'date': DateTime.now().toString(),
+        'starttime': startTime,
+        'endtime': endTime,
+        'meetingtype': instantType == InstantType.audio ? 'audio' : 'video',
+        'scheduletype': scheduleType == ScheduleType.AudioVideo
+            ? 'audio/video'
+            : 'inperson',
+        'documenttype': documentType,
+        'pages': pages,
+        'file': file,
+        'description': descriptionController
+      };
+    }
+    print(file);
+    print('fffffffffffffffffffffffffffffffffffffffffffffffff');
     var response = await Api.execute(url: url, data: data);
     LoadingHelper.dismiss();
+    print(response);
     if (!response['error']) {
       Get.offAll(() => CardAdded_Screen());
       update();
@@ -180,6 +216,13 @@ class TranslatorProfileController extends GetxController {
           backgroundColor: Colors.red,
           colorText: Colors.white);
     }
+  }
+
+  convertFile() async {
+    String fileName = file!.path.split('/').last;
+    var MultipartFile =
+        await dio.MultipartFile.fromFile(file!.path, filename: fileName);
+    return MultipartFile;
   }
 
   /// code to get location
