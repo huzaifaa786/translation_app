@@ -64,7 +64,7 @@ class _MyAppState extends State<MyApp> {
       title: "translation",
       initialRoute: 'splash',
       routes: {
-        'map': (_) => DeliveryMap(),
+        // 'map': (_) => DeliveryMap(),
         'splash': (_) => SplashScreen(),
         'login': (_) => LoginScreen(),
         'VerifyPhone': (_) => VerifyPhone(),

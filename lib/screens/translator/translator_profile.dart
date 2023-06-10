@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:translation/models/vendor.dart';
+import 'package:translation/screens/translator/map.dart';
 import 'package:translation/screens/translator/radio_btn.dart';
 import 'package:translation/screens/translator/traling_radio.dart';
 import 'package:translation/screens/translator/translator_profile_controller.dart';
@@ -380,7 +381,9 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                           title: 'Choose location',
                                           icon: Icons.my_location_rounded,
                                           onPressed: () {
-                                            controller.getlocation();
+                                            // controller.getlocation();
+                                            Get.to(() =>
+                                                DeliveryMap(widget.detail));
                                           })
                                       : Container(),
                                   SizedBox(
@@ -508,6 +511,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                           timeLabelText: "Start time",
                                           onChanged: (val) {
                                             controller.startTime = val;
+                                            setState(() {});
+                                            print(controller.startTime);
                                           },
                                           validator: (val) {
                                             return null;
@@ -515,32 +520,38 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                           onSaved: (val) => print(val),
                                         ),
                                       ),
-                                      Text("To"),
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.38,
-                                        height: 60,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        child: DateTimePicker(
-                                          type: DateTimePickerType.time,
-                                          initialValue: '',
-                                          timeLabelText: "End time",
-                                          onChanged: (val) {
-                                            controller.endTime = val;
-                                            print(controller.endTime);
-                                            translatorProfileController
-                                                .calTotalTime(widget.detail!);
-                                          },
-                                          validator: (val) {
-                                            return null;
-                                          },
-                                        ),
-                                      ),
+                                      controller.startTime == ''
+                                          ? Container()
+                                          : Text("To"),
+                                      controller.startTime == ''
+                                          ? Container()
+                                          : Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.38,
+                                              height: 60,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                              ),
+                                              child: DateTimePicker(
+                                                type: DateTimePickerType.time,
+                                                initialValue: '',
+                                                timeLabelText: "End time",
+                                                onChanged: (val) {
+                                                  controller.endTime = val;
+                                                  print(controller.endTime);
+                                                  translatorProfileController
+                                                      .calTotalTime(
+                                                          widget.detail!);
+                                                },
+                                                validator: (val) {
+                                                  return null;
+                                                },
+                                              ),
+                                            ),
                                     ],
                                   ),
                                 ],

@@ -2,23 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:translation/models/vendor.dart';
 import 'dart:math' as math;
 
 import 'package:translation/static/large_button.dart';
 import 'package:translation/values/colors.dart';
+import 'package:translation/values/controllers.dart';
 
 class DeliveryMap extends StatefulWidget {
+  const DeliveryMap(this.vendor);
+  final Vendor? vendor;
   @override
   _DeliveryMapState createState() => _DeliveryMapState();
 }
 
 class _DeliveryMapState extends State<DeliveryMap> {
-  LatLng deliveryAreaCenter = LatLng(32.0999459, 72.7076235);
-  double deliveryAreaRadius = 5000.0;
   LatLng? selectedLocation;
 
   @override
   Widget build(BuildContext context) {
+    LatLng deliveryAreaCenter = LatLng(
+        double.parse(widget.vendor!.service!.lat!),
+        double.parse(widget.vendor!.service!.lng!));
+    double deliveryAreaRadius = double.parse(widget.vendor!.service!.radius!);
     Set<Circle> circles = Set.from([
       Circle(
         circleId: CircleId('circle'),
@@ -32,6 +38,43 @@ class _DeliveryMapState extends State<DeliveryMap> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Select Metting Location'),
+      ),
+      floatingActionButton: FloatingActionButton(
+        heroTag: "btn2",
+        backgroundColor: greenish,
+        onPressed: () {
+          if (selectedLocation != null) {
+            translatorProfileController.selectedLocation = selectedLocation;
+            setState(() {});
+            Get.back();
+            Get.snackbar(
+              'Selected',
+              'Loaction Selected Successfully.',
+              colorText: white,
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: greenish,
+            );
+            return;
+          } else {
+            Get.snackbar(
+              "Empty!",
+              'Please Select Area first before saving range.',
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.red,
+              colorText: Colors.white,
+            );
+          }
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.save, size: 20, color: Colors.white),
+            Text(
+              "Save",
+              style: TextStyle(fontSize: 9, color: Colors.white),
+            )
+          ],
+        ),
       ),
       body: GoogleMap(
         initialCameraPosition: CameraPosition(
@@ -47,7 +90,6 @@ class _DeliveryMapState extends State<DeliveryMap> {
               selectedLocation = location;
             });
             print(selectedLocation);
-            // Location is within the allowed area, proceed with delivery
           } else {
             showDialog(
               context: context,
@@ -96,7 +138,7 @@ class _DeliveryMapState extends State<DeliveryMap> {
   }
 
   double calculateDistance(LatLng point1, LatLng point2) {
-    const int radiusOfEarth = 6371000; // meters
+    const int radiusOfEarth = 6371000;
     final double lat1 = _radians(point1.latitude);
     final double lon1 = _radians(point1.longitude);
     final double lat2 = _radians(point2.latitude);

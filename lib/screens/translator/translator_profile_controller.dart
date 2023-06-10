@@ -2,15 +2,15 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:translation/api/api.dart';
 import 'package:translation/helper/loading.dart';
-import 'package:translation/models/user.dart';
 import 'package:translation/models/vendor.dart';
 import 'package:translation/screens/checkout/checkout.dart';
 import 'package:translation/screens/order_confirm.dart/cardAdded.dart';
+import 'package:translation/values/colors.dart';
 import 'package:translation/values/string.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
@@ -27,6 +27,7 @@ enum InstantType { audio, video }
 class TranslatorProfileController extends GetxController {
   static TranslatorProfileController instance = Get.find();
   Vendor? vendors;
+  LatLng? selectedLocation;
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -62,6 +63,9 @@ class TranslatorProfileController extends GetxController {
   //togle schedule type
   toggleplan(ScheduleType value) {
     scheduleType = value;
+    startTime = '';
+    endTime = '';
+    totalAmount = 0;
     update();
   }
 
@@ -111,22 +115,65 @@ class TranslatorProfileController extends GetxController {
   }
 
   calTotalTime(Vendor vendor) {
-    DateTime start = DateFormat('d-M-yyyy HH:mm').parse(
-        '${selectedDay.value.day}-${selectedDay.value.month}-${selectedDay.value.year} $startTime');
-    DateTime end = DateFormat('d-M-yyyy HH:mm').parse(
-        '${selectedDay.value.day}-${selectedDay.value.month}-${selectedDay.value.year} $endTime');
+    if (scheduleType == ScheduleType.InPerson) {
+      DateTime start = DateFormat('d-M-yyyy HH:mm').parse(
+          '${selectedDay.value.day}-${selectedDay.value.month}-${selectedDay.value.year} $startTime');
+      DateTime end = DateFormat('d-M-yyyy HH:mm').parse(
+          '${selectedDay.value.day}-${selectedDay.value.month}-${selectedDay.value.year} $endTime');
 
-    int differenceInMinutes = end.difference(start).inMinutes;
+      int differenceInMinutes = end.difference(start).inMinutes;
 
-    print(differenceInMinutes);
-    duration = differenceInMinutes;
-    print(duration);
-    int numberOfSlots = (differenceInMinutes ~/ 30);
+      print(differenceInMinutes);
+      duration = differenceInMinutes;
+      print(duration);
+      double numberOfSlots = (differenceInMinutes / 30);
+      print('Number of slots: $numberOfSlots');
+      double amount = numberOfSlots * int.parse(vendor.service!.inperson!);
+      if (amount <= 0) {
+        totalAmount = 0;
+        Get.snackbar('Invalid Time Format!',
+            'End time must be greater then Start time, And less then 00:00',
+            snackPosition: SnackPosition.BOTTOM,
+            colorText: white,
+            backgroundColor: Colors.red);
+      } else {
+        String totalSlotAmount = amount.toStringAsFixed(0);
+        totalAmount = int.parse(totalSlotAmount);
+        print('totalAmount: $totalAmount');
+      }
+      update();
+    } else {
+      print('vendor.service!.audiovideo!');
+      print(vendor.service!.audiovideo!);
+      print('vendor.service!.inperson!');
+      print(vendor.service!.inperson!);
+      DateTime start = DateFormat('d-M-yyyy HH:mm').parse(
+          '${selectedDay.value.day}-${selectedDay.value.month}-${selectedDay.value.year} $startTime');
+      DateTime end = DateFormat('d-M-yyyy HH:mm').parse(
+          '${selectedDay.value.day}-${selectedDay.value.month}-${selectedDay.value.year} $endTime');
 
-    print('Number of slots: $numberOfSlots');
-    totalAmount = numberOfSlots * int.parse(vendor.service!.audiovideo!);
-    print('totalAmount: $totalAmount');
-    update();
+      int differenceInMinutes = end.difference(start).inMinutes;
+
+      print(differenceInMinutes);
+      duration = differenceInMinutes;
+      print(duration);
+      double numberOfSlots = (differenceInMinutes / 30);
+      print('Number of slots: $numberOfSlots');
+      double amount = numberOfSlots * int.parse(vendor.service!.audiovideo!);
+      if (amount <= 0) {
+        totalAmount = 0;
+        Get.snackbar('Invalid Time Format!',
+            'End time must be greater then Start time, And less then 00:00',
+            snackPosition: SnackPosition.BOTTOM,
+            colorText: white,
+            backgroundColor: Colors.red);
+      } else {
+        String totalSlotAmount = amount.toStringAsFixed(0);
+        totalAmount = int.parse(totalSlotAmount);
+        print('totalAmount: $totalAmount');
+      }
+      update();
+    }
   }
 
   //set selected and focused days received from calender

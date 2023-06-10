@@ -12,6 +12,9 @@ class VendorService {
   String? audiovideo;
   String? urgentprice;
   String? unurgentprice;
+  String? radius;
+  String? lat;
+  String? lng;
 
   VendorService(service) {
     id = service['id'];
@@ -20,6 +23,9 @@ class VendorService {
     audiovideo = service['audiovideo'];
     urgentprice = service['urgentprice'];
     unurgentprice = service['unurgentprice'];
+    radius = service['radius'];
+    lat = service['latitude'];
+    lng = service['longitude'];
     urgent = jsonDecode(service['urgent']);
     unurgent = jsonDecode(service['unurgent']);
     schedual = schedulelist(jsonDecode(service['schedual']));
