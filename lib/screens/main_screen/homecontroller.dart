@@ -29,6 +29,15 @@ class HomeController extends GetxController {
   List<Vendor> offlineVendor = [];
   User? user;
 
+  clear() {
+    vendors = [];
+    searchVendor = [];
+    onlineVendor = [];
+    offlineVendor = [];
+    fromSelectedLanguage = null;
+    toSelectedLanguage = null;
+  }
+
   getuser() async {
     LoadingHelper.show();
     var url = BASE_URL + 'user/get';
@@ -45,12 +54,6 @@ class HomeController extends GetxController {
       if (response['error_data'] == "Unauthorized access") {
         GetStorage box = GetStorage();
         box.remove('api_token');
-        Get.deleteAll();
-        Get.put(AuthController());
-        Get.put(HomeController());
-        Get.put(SettingController());
-        Get.put(AmountController());
-        Get.put(ProfileController());
         Get.offAll(() => LoginScreen());
         LoadingHelper.dismiss();
         Get.snackbar("Error!", response['error_data'],
@@ -68,6 +71,7 @@ class HomeController extends GetxController {
   }
 
   void fetchVendors() async {
+    print(fromSelectedLanguage);
     LoadingHelper.show();
     var url = BASE_URL + 'vendor/search';
     var data = {

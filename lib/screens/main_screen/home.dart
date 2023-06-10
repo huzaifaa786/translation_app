@@ -126,6 +126,7 @@ class _HomeState extends State<Home> {
   }
 
   fetchUser() async {
+    homeController.clear();
     await homeController.getuser();
     setState(() {});
   }
