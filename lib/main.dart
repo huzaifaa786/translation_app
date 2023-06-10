@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:translation/helper/loading.dart';
+import 'package:translation/screens/translator/map.dart';
 import 'package:translation/screens/checkout/checkout_controller.dart';
 import 'package:translation/screens/enter_amount/amountcontroller.dart';
 import 'package:translation/screens/login/authcontroller.dart';
@@ -64,6 +65,7 @@ class _MyAppState extends State<MyApp> {
       title: "translation",
       initialRoute: 'splash',
       routes: {
+        'map': (_) => DeliveryMap(),
         'splash': (_) => SplashScreen(),
         'login': (_) => LoginScreen(),
         'VerifyPhone': (_) => VerifyPhone(),

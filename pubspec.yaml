@@ -60,6 +60,8 @@ dependencies:
   firebase_messaging: ^14.6.2
   date_time_picker: ^2.1.0
   table_calendar: ^3.0.8
+  google_maps_place_picker_mb: ^3.0.2
+  google_maps_flutter: ^2.3.0
   flutter_rating_bar: ^4.0.1
   intl: ^0.17.0
   file_picker: ^5.3.1
