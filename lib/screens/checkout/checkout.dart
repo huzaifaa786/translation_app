@@ -131,7 +131,9 @@ class _Checkout_screenState extends State<Checkout_screen> {
                                 fontWeight: FontWeight.w500,
                                 color: hintText)),
                         Text(
-                          "AED " + translatorProfileController.totalAmount.toString(),
+                          "AED " +
+                              translatorProfileController.totalAmount
+                                  .toString(),
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w600),
                         )
@@ -149,7 +151,9 @@ class _Checkout_screenState extends State<Checkout_screen> {
                                 fontWeight: FontWeight.w500,
                                 color: greenish)),
                         Text(
-                          "AED " + translatorProfileController.totalAmount.toString(),
+                          "AED " +
+                              translatorProfileController.totalAmount
+                                  .toString(),
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w600),
                         )
@@ -212,8 +216,21 @@ class _Checkout_screenState extends State<Checkout_screen> {
                     title: 'Next',
                     sreenRatio: 0.9,
                     onPressed: () {
-                      checkoutController.confirmPayment();
-
+                      if (translatorProfileController.scheduleType ==
+                          ScheduleType.InPerson) {
+                        if (translatorProfileController.selectedLocation ==
+                            null) {
+                          Get.snackbar('Error!',
+                              'You may need to select location to get translator inperson service.',
+                              backgroundColor: Colors.red,
+                              colorText: white,
+                              snackPosition: SnackPosition.BOTTOM);
+                        } else {
+                          checkoutController.confirmPayment();
+                        }
+                      } else {
+                        checkoutController.confirmPayment();
+                      }
                       // authController.signIn();
                       // Navigator.push(
                       //     context,
