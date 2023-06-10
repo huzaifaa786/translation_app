@@ -1,4 +1,6 @@
+import 'dart:developer';
 import 'dart:io';
+
 import 'package:dio/dio.dart' as dio;
 
 import 'package:file_picker/file_picker.dart';
@@ -162,10 +164,15 @@ class TranslatorProfileController extends GetxController {
         : serviceType == ServiceType.Schedule
             ? 'schedule'
             : 'document';
+      var response;
+
 
     if (serviceType == ServiceType.Document) {
-    data = dio.FormData.fromMap({
-        "file": convertFile,
+      String fileName = file!.path.split('/').last;
+
+      data = dio.FormData.fromMap({
+        "file":
+            await dio.MultipartFile.fromFile(file!.path, filename: fileName),
         'api_token': box.read('api_token')!,
         'servicetype': servicetype,
         'vendor_id': vendor.id.toString(),
@@ -182,6 +189,7 @@ class TranslatorProfileController extends GetxController {
         'pages': pages,
         'description': descriptionController
       });
+      response = await Api.execute(url: url, data: data,image: true);
     } else {
       data = {
         'api_token': box.read('api_token')!,
@@ -196,15 +204,10 @@ class TranslatorProfileController extends GetxController {
         'scheduletype': scheduleType == ScheduleType.AudioVideo
             ? 'audio/video'
             : 'inperson',
-        'documenttype': documentType,
-        'pages': pages,
-        'file': file,
-        'description': descriptionController
       };
+      response = await Api.execute(url: url, data: data);
     }
-    print(file);
-    print('fffffffffffffffffffffffffffffffffffffffffffffffff');
-    var response = await Api.execute(url: url, data: data);
+
     LoadingHelper.dismiss();
     print(response);
     if (!response['error']) {
@@ -216,13 +219,6 @@ class TranslatorProfileController extends GetxController {
           backgroundColor: Colors.red,
           colorText: Colors.white);
     }
-  }
-
-  convertFile() async {
-    String fileName = file!.path.split('/').last;
-    var MultipartFile =
-        await dio.MultipartFile.fromFile(file!.path, filename: fileName);
-    return MultipartFile;
   }
 
   /// code to get location
