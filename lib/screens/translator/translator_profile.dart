@@ -635,9 +635,15 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                         BorderRadius.all(
                                                             Radius.circular(
                                                                 25))),
-                                                child: SvgPicture.asset(
-                                                  "assets/icons/attachFile.svg",
-                                                  height: 22,
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    translatorProfileController
+                                                        .picksinglefile();
+                                                  },
+                                                  child: SvgPicture.asset(
+                                                    "assets/icons/attachFile.svg",
+                                                    height: 22,
+                                                  ),
                                                 )),
                                             Padding(
                                               padding: const EdgeInsets.only(
@@ -682,6 +688,9 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                         print(controller.pages);
                                                       } else {
                                                         controller.pages--;
+                                                        translatorProfileController
+                                                            .documentprice(
+                                                                widget.detail!);
                                                       }
                                                     });
                                                   },
@@ -691,6 +700,9 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                 ontap: () {
                                                   setState(() {
                                                     controller.pages++;
+                                                    translatorProfileController
+                                                        .documentprice(
+                                                            widget.detail!);
                                                   });
                                                 },
                                                 icon: '+',
@@ -717,6 +729,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                   ),
                                   FreeItemInput(
                                     padding: false,
+                                    controller: translatorProfileController
+                                        .descriptionController,
                                   ),
                                 ],
                               )

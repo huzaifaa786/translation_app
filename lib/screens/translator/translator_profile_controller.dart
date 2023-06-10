@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -27,7 +30,7 @@ class TranslatorProfileController extends GetxController {
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-
+  TextEditingController descriptionController = TextEditingController();
   //default types for radio Buttons (change from here)
   ServiceType serviceType = ServiceType.Instant;
   ScheduleType scheduleType = ScheduleType.AudioVideo;
@@ -86,6 +89,27 @@ class TranslatorProfileController extends GetxController {
     update();
   }
 
+  documentprice(Vendor vendor) {
+    if (documentType == DocumentType.Urgent) {
+      totalAmount = pages * int.parse(vendor.service!.urgentprice.toString());
+    } else {
+      pages * int.parse(vendor.service!.unurgentprice.toString());
+    }
+  }
+
+  PlatformFile? file;
+  Future<void> picksinglefile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'],
+    );
+    if (result != null) {
+      File file = File(result.files.single.path!);
+    } else {
+      // User canceled the picker
+    }
+  }
+
   calTotalTime(Vendor vendor) {
     DateTime start = DateFormat('d-M-yyyy HH:mm').parse(
         '${selectedDay.value.day}-${selectedDay.value.month}-${selectedDay.value.year} $startTime');
@@ -140,6 +164,10 @@ class TranslatorProfileController extends GetxController {
       'meetingtype': instantType == InstantType.audio ? 'audio' : 'video',
       'scheduletype':
           scheduleType == ScheduleType.AudioVideo ? 'audio/video' : 'inperson',
+      'documenttype': documentType,
+      'pages': pages,
+      'file': file,
+      'description': descriptionController
     };
     var response = await Api.execute(url: url, data: data);
     LoadingHelper.dismiss();

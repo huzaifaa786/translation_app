@@ -62,6 +62,7 @@ dependencies:
   table_calendar: ^3.0.8
   flutter_rating_bar: ^4.0.1
   intl: ^0.17.0
+  file_picker: ^5.3.1
 
 dev_dependencies:
   flutter_test:
