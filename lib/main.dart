@@ -12,7 +12,6 @@ import 'package:translation/screens/Otp/verifyphoneno.dart';
 import 'package:translation/screens/main_screen/homecontroller.dart';
 import 'package:translation/screens/notification/notificationcontroller.dart';
 import 'package:translation/screens/orderhistory/ordercontroller.dart';
-import 'package:translation/screens/orderhistory/ordercontroller.dart'; 
 import 'package:translation/screens/profile/profilecontroller.dart';
 import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/screens/splash_screen/splash_main.dart';
