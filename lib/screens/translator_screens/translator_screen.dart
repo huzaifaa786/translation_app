@@ -65,7 +65,8 @@ class _Translator_State extends State<Translator_> {
                               image: controller.onlineVendor[index].profilePic,
                               rating: controller.onlineVendor[index].rating,
                               vendor: controller.onlineVendor[index],
-                              price: '10',
+                              // price: '10',
+                              price: controller.onlineVendor[index].service!.onlineaudiovideoPrice,
                             )),
                   )
                 : Container(

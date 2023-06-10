@@ -29,6 +29,18 @@ class TraslatorProfile extends StatefulWidget {
 }
 
 class _TraslatorProfileState extends State<TraslatorProfile> {
+  vendor() async {
+    translatorProfileController.vendors = widget.detail;
+    print(translatorProfileController.vendors);
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    vendor();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<TranslatorProfileController>(
@@ -577,6 +589,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                     onChanged: () {
                                       controller.toggledocumentplan(
                                           DocumentType.Urgent);
+                                      translatorProfileController.resetvalue();
                                     },
                                   ),
                                   RadioBtn(
@@ -586,6 +599,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                     onChanged: () {
                                       controller.toggledocumentplan(
                                           DocumentType.NotUrgent);
+                                      translatorProfileController.resetvalue();
                                     },
                                   ),
                                   Row(
@@ -753,7 +767,12 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                             price: controller.totalAmount.toString(),
                             sreenRatio: 0.9,
                             onPressed: () {
-                              controller.checkavailability(widget.detail!);
+                              if (controller.serviceType ==
+                                  ServiceType.Document) {
+                                Get.to(() => Checkout_screen());
+                              } else {
+                                controller.checkavailability(widget.detail!);
+                              }
 
                               //  update(context);
                             },
