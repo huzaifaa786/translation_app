@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:translation/screens/Otp/verifyphoneno.dart';
+import 'package:translation/screens/forgot.dart/forgotAccount.dart';
 import 'package:translation/screens/login/authcontroller.dart';
 import 'package:translation/screens/main_screen/home.dart';
 import 'package:translation/screens/login/sign_up.dart';
@@ -166,8 +166,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.end,
                                                   children: [
-                                                    GestureDetector(
-                                                      onTap: () {},
+                                                    InkWell(
+                                                      onTap: () {
+                                                        Get.to(() =>
+                                                            ForgotScreen());
+                                                      },
                                                       child: Text(
                                                         "Forgot Password?",
                                                         style: TextStyle(

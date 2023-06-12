@@ -5,6 +5,7 @@ import 'package:translation/api/api.dart';
 import 'package:translation/helper/loading.dart';
 import 'package:translation/models/user.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:translation/values/colors.dart';
 import 'package:translation/values/string.dart';
 import 'package:translation/values/validator.dart';
 
@@ -133,6 +134,84 @@ class AuthController extends GetxController {
       LoadingHelper.dismiss();
       print('error');
       showSignInErrors();
+    }
+  }
+
+///////////////////////////////////// Forgot Screen Functionality & Variables /////////////////////////////////
+
+  TextEditingController forgotemail = TextEditingController();
+  TextEditingController resetPassword = TextEditingController();
+  var otp;
+  RxBool verify = true.obs;
+  RxBool validateForgotForm = false.obs;
+
+  ClearForgotVariable() {
+    forgotemail.clear();
+    resetPassword.clear();
+    update();
+  }
+
+  void showError() {
+    validateForgotForm = true.obs;
+    update();
+  }
+
+  getOTPusingEmail(void Function(bool) callback) async {
+    LoadingHelper.show();
+    print(forgotemail.text);
+    if (forgotemail.text.isNotEmpty) {
+      var url = BASE_URL + 'forgetuserpassword';
+      var data = {'email': forgotemail.text.toString()};
+
+      var response = await Api.execute(url: url, data: data);
+      LoadingHelper.dismiss();
+      if (!response['error']) {
+        otp = response['otp'];
+        Get.snackbar('OTP sent successfully!',
+            'We have sent a One-Time Password (OTP) to your registered email address.',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: greenish,
+            colorText: Colors.white);
+        return callback(true);
+      } else {
+        LoadingHelper.dismiss();
+        print(response['error_data']);
+        Get.snackbar('ERROR!', response['error_data'],
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.red,
+            colorText: Colors.white);
+        return callback(false);
+      }
+    } else {
+      LoadingHelper.dismiss();
+    }
+  }
+
+  ResetPassword(void Function(bool) callback) async {
+    print(resetPassword.text);
+    final bool isFormValid =
+        Validators.passwordValidator(resetPassword.text) == null;
+    if (!isFormValid) {
+      return callback(false);
+    } else {
+      LoadingHelper.show();
+      var url = BASE_URL + 'forgetchangepassword';
+      var data = {
+        'email': forgotemail.text.toString(),
+        'password': resetPassword.text.toString()
+      };
+      var response = await Api.execute(url: url, data: data);
+      print(response);
+      if (!response['error']) {
+        LoadingHelper.dismiss();
+        // GetStorage box = GetStorage();
+        // box.write('api_token', response['update']['api_token']);
+        ClearForgotVariable();
+        return callback(true);
+      } else {
+        LoadingHelper.dismiss();
+        return callback(false);
+      }
     }
   }
 }

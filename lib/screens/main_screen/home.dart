@@ -170,75 +170,77 @@ class _HomeState extends State<Home> {
                           ? ""
                           : homeController.user!.username,
                     ),
-                    Container(
-                      padding: EdgeInsets.only(left: 20, right: 20, top: 35),
-                      height: MediaQuery.of(context).size.height * 0.60,
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Choose Language',
+                    Flexible(
+                      child: Container(
+                        padding: EdgeInsets.only(left: 20, right: 20, top: 35),
+                        height: MediaQuery.of(context).size.height * 0.60,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Choose Language',
+                                    style: TextStyle(
+                                        fontSize: 23,
+                                        fontWeight: FontWeight.bold,
+                                        color: greenish),
+                                  ),
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 16),
+                                child: Text(
+                                  'From:',
                                   style: TextStyle(
-                                      fontSize: 23,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.bold,
-                                      color: greenish),
+                                      color: kblack),
                                 ),
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 16),
-                              child: Text(
-                                'From:',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: kblack),
                               ),
-                            ),
-                            DropdownField(
-                                items: Languages(),
-                                text: 'Select Language',
-                                selectedvalue:
-                                    homeController.fromSelectedLanguage,
-                                icon: ImageIcon(
-                                    AssetImage('assets/images/drop_arrow.png')),
-                                onChange: switchfromlang),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 12),
-                              child: Text(
-                                'To:',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: kblack),
+                              DropdownField(
+                                  items: Languages(),
+                                  text: 'Select Language',
+                                  selectedvalue:
+                                      homeController.fromSelectedLanguage,
+                                  icon: ImageIcon(AssetImage(
+                                      'assets/images/drop_arrow.png')),
+                                  onChange: switchfromlang),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 12),
+                                child: Text(
+                                  'To:',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: kblack),
+                                ),
                               ),
-                            ),
-                            DropdownField(
-                                items: Languages(),
-                                text: 'Select Language',
-                                selectedvalue:
-                                    homeController.toSelectedLanguage,
-                                icon: ImageIcon(
-                                    AssetImage('assets/images/drop_arrow.png')),
-                                onChange: switchtoLang),
-                            Padding(
-                              padding: EdgeInsets.only(top: 35, bottom: 20),
-                              child: LargeButton(
-                                title: 'Translate',
-                                sreenRatio: 0.9,
-                                onPressed: () {
-                                  homeController.fetchVendors();
-                                },
-                                color: greenish,
-                                textcolor: Colors.white,
-                                buttonWidth: 0.95,
+                              DropdownField(
+                                  items: Languages(),
+                                  text: 'Select Language',
+                                  selectedvalue:
+                                      homeController.toSelectedLanguage,
+                                  icon: ImageIcon(AssetImage(
+                                      'assets/images/drop_arrow.png')),
+                                  onChange: switchtoLang),
+                              Padding(
+                                padding: EdgeInsets.only(top: 35, bottom: 20),
+                                child: LargeButton(
+                                  title: 'Translate',
+                                  sreenRatio: 0.9,
+                                  onPressed: () {
+                                    homeController.fetchVendors();
+                                  },
+                                  color: greenish,
+                                  textcolor: Colors.white,
+                                  buttonWidth: 0.95,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),

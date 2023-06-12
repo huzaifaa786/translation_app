@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:translation/helper/loading.dart';
+import 'package:translation/screens/forgot.dart/emailOtp.dart';
 import 'package:translation/screens/translator/map.dart';
 import 'package:translation/screens/checkout/checkout_controller.dart';
 import 'package:translation/screens/enter_amount/amountcontroller.dart';
@@ -69,6 +70,8 @@ class _MyAppState extends State<MyApp> {
         'login': (_) => LoginScreen(),
         'VerifyPhone': (_) => VerifyPhone(),
         'NoTranslator': (_) => NoTransFound_screen(),
+        'Verify': (_) => EmailOtpVerifyScreen(),
+
       },
     );
   }
