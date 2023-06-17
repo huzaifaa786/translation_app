@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SearchTopBar extends StatelessWidget {
-  const SearchTopBar({super.key});
+  const   SearchTopBar({super.key});
 
   @override
   Widget build(BuildContext context) {
