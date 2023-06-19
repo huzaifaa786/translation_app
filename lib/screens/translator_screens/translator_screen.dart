@@ -50,23 +50,23 @@ class _Translator_State extends State<Translator_> {
                 ],
               ),
             ),
-            controller.onlineVendor.length != 0
+            homeController.onlineVendor.length != 0
                 ? Container(
                     padding: EdgeInsets.only(left: 10),
                     height: MediaQuery.of(context).size.height * 0.22,
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
-                        itemCount: controller.onlineVendor.length > 6
+                        itemCount: homeController.onlineVendor.length > 6
                             ? 6
-                            : controller.onlineVendor.length,
+                            : homeController.onlineVendor.length,
                         itemBuilder: (context, index) => OnlineTranslatorCard(
-                              name: controller.onlineVendor[index].name,
-                              image: controller.onlineVendor[index].profilePic,
-                              rating: controller.onlineVendor[index].rating,
-                              vendor: controller.onlineVendor[index],
+                              name: homeController.onlineVendor[index].name,
+                              image: homeController.onlineVendor[index].profilePic,
+                              rating: homeController.onlineVendor[index].rating,
+                              vendor: homeController.onlineVendor[index],
                               // price: '10',
-                              price: controller.onlineVendor[index].service!.onlineaudiovideoPrice,
+                              price: homeController.onlineVendor[index].service!.onlineaudiovideoPrice,
                             )),
                   )
                 : Container(
@@ -112,16 +112,16 @@ class _Translator_State extends State<Translator_> {
                 ],
               ),
             ),
-            controller.offlineVendor.length != 0
+            homeController.offlineVendor.length != 0
                 ? Expanded(
                     child: ListView.builder(
-                        itemCount: controller.offlineVendor.length > 6
+                        itemCount: homeController.offlineVendor.length > 6
                             ? 6
-                            : controller.offlineVendor.length,
+                            : homeController.offlineVendor.length,
                         itemBuilder: (context, index) => OfflineTranslattorCard(
-                            name: controller.offlineVendor[index].name,
-                            image: controller.offlineVendor[index].profilePic,
-                            lang: controller.offlineVendor[index].language)),
+                            name: homeController.offlineVendor[index].name,
+                            image: homeController.offlineVendor[index].profilePic,
+                            lang: homeController.offlineVendor[index].language)),
                   )
                 : Container(
                     height: MediaQuery.of(context).size.height * 0.25,

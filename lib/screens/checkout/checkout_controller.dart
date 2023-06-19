@@ -24,9 +24,11 @@ class CheckOutController extends GetxController {
       await paayment();
       // 3. display the payment sheet.
       await Stripe.instance.presentPaymentSheet();
-
-      translatorProfileController
-          .placeOrder(translatorProfileController.vendors);
+      translatorProfileController.scheduleType == ScheduleType.InPerson
+          ? translatorProfileController.InpersonplaceOrder(
+              translatorProfileController.vendors)
+          : translatorProfileController
+              .placeOrder(translatorProfileController.vendors);
       return true;
     } on Exception catch (e) {
       if (e is StripeException) {

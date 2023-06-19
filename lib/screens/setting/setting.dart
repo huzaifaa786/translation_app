@@ -177,12 +177,6 @@ class _Setting_screenState extends State<Setting_screen> {
           onPressed: () {
             GetStorage box = GetStorage();
             box.remove('api_token');
-            Get.deleteAll();
-            Get.put(AuthController());
-            Get.put(HomeController());
-            Get.put(SettingController());
-            Get.put(AmountController());
-            Get.put(ProfileController());
             Get.offAll(() => LoginScreen());
           },
           color: greenish,

@@ -106,13 +106,13 @@ List<Widget> _buildScreens() {
 }
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  // const Home({super.key});
 
   @override
   State<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home>{
+class _HomeState extends State<Home> {
   switchfromlang(value) {
     setState(() {
       homeController.fromSelectedLanguage = value as String;
@@ -126,6 +126,7 @@ class _HomeState extends State<Home>{
   }
 
   fetchUser() async {
+    homeController.clear();
     await homeController.getuser();
     setState(() {});
   }
@@ -138,110 +139,114 @@ class _HomeState extends State<Home>{
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-          child: GetBuilder<HomeController>(
-        builder: (controller) => Column(
-          children: [
-            MainStackCard(
-              onFavTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Favorites_screen(),
-                    ));
-              },
-              onNotiTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Notification_screen(),
-                    ));
-              },
-              onProfileTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Profile_screen(),
-                    ));
-              },
-              name: homeController.user == null
-                  ? ""
-                  : homeController.user!.username,
-            ),
-            Container(
-              padding: EdgeInsets.only(left: 20, right: 20, top: 35),
-              height: MediaQuery.of(context).size.height * 0.60,
-              child: SingleChildScrollView(
+    return GetBuilder<HomeController>(
+        builder: (controller) => Scaffold(
+              body: SafeArea(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Choose Language',
-                          style: TextStyle(
-                              fontSize: 23,
-                              fontWeight: FontWeight.bold,
-                              color: greenish),
+                    MainStackCard(
+                      onFavTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Favorites_screen(),
+                            ));
+                      },
+                      onNotiTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Notification_screen(),
+                            ));
+                      },
+                      onProfileTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Profile_screen(),
+                            ));
+                      },
+                      name: homeController.user == null
+                          ? ""
+                          : homeController.user!.username,
+                    ),
+                    Flexible(
+                      child: Container(
+                        padding: EdgeInsets.only(left: 20, right: 20, top: 35),
+                        height: MediaQuery.of(context).size.height * 0.60,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Choose Language',
+                                    style: TextStyle(
+                                        fontSize: 23,
+                                        fontWeight: FontWeight.bold,
+                                        color: greenish),
+                                  ),
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 16),
+                                child: Text(
+                                  'From:',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: kblack),
+                                ),
+                              ),
+                              DropdownField(
+                                  items: Languages(),
+                                  text: 'Select Language',
+                                  selectedvalue:
+                                      homeController.fromSelectedLanguage,
+                                  icon: ImageIcon(AssetImage(
+                                      'assets/images/drop_arrow.png')),
+                                  onChange: switchfromlang),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 12),
+                                child: Text(
+                                  'To:',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: kblack),
+                                ),
+                              ),
+                              DropdownField(
+                                  items: Languages(),
+                                  text: 'Select Language',
+                                  selectedvalue:
+                                      homeController.toSelectedLanguage,
+                                  icon: ImageIcon(AssetImage(
+                                      'assets/images/drop_arrow.png')),
+                                  onChange: switchtoLang),
+                              Padding(
+                                padding: EdgeInsets.only(top: 35, bottom: 20),
+                                child: LargeButton(
+                                  title: 'Translate',
+                                  sreenRatio: 0.9,
+                                  onPressed: () {
+                                    homeController.fetchVendors();
+                                  },
+                                  color: greenish,
+                                  textcolor: Colors.white,
+                                  buttonWidth: 0.95,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16),
-                      child: Text(
-                        'From:',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: kblack),
-                      ),
-                    ),
-                    DropdownField(
-                        items: Languages(),
-                        text: 'Select Language',
-                        selectedvalue: homeController.fromSelectedLanguage,
-                        icon: ImageIcon(
-                            AssetImage('assets/images/drop_arrow.png')),
-                        onChange: switchfromlang),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 12),
-                      child: Text(
-                        'To:',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: kblack),
-                      ),
-                    ),
-                    DropdownField(
-                        items: Languages(),
-                        text: 'Select Language',
-                        selectedvalue: homeController.toSelectedLanguage,
-                        icon: ImageIcon(
-                            AssetImage('assets/images/drop_arrow.png')),
-                        onChange: switchtoLang),
-                    Padding(
-                      padding: EdgeInsets.only(top: 35, bottom: 20),
-                      child: LargeButton(
-                        title: 'Translate',
-                        sreenRatio: 0.9,
-                        onPressed: () {
-                          homeController.fetchVendors();
-                        },
-                        color: greenish,
-                        textcolor: Colors.white,
-                        buttonWidth: 0.95,
                       ),
                     ),
                   ],
                 ),
               ),
-            ),
-          ],
-        ),
-      )),
-    );
+            ));
   }
 }

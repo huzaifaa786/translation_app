@@ -268,6 +268,52 @@ class TranslatorProfileController extends GetxController {
     }
   }
 
+  InpersonplaceOrder(vendor) async {
+    print('selectedLocation!.latitude');
+    print(selectedLocation!.latitude);
+    LoadingHelper.show();
+    var url = BASE_URL + 'user/order';
+    var data;
+    GetStorage box = GetStorage();
+    var servicetype = serviceType == ServiceType.Instant
+        ? 'instant'
+        : serviceType == ServiceType.Schedule
+            ? 'schedule'
+            : 'document';
+    data = {
+      'api_token': box.read('api_token')!,
+      'servicetype': servicetype,
+      'vendor_id': vendor.id.toString(),
+      'price': totalAmount.toString(),
+      'duration': duration,
+      'date': DateTime.now().toString(),
+      'starttime': startTime,
+      'endtime': endTime,
+      'scheduletype':
+          scheduleType == ScheduleType.AudioVideo ? 'audio/video' : 'inperson',
+      'latitude': selectedLocation!.latitude,
+      'longitude': selectedLocation!.longitude,
+    };
+    var response = await Api.execute(url: url, data: data);
+    LoadingHelper.dismiss();
+    if (!response['error']) {
+      Get.offAll(() => CardAdded_Screen());
+      update();
+    } else {
+      Get.snackbar("Error!", response['error_data'],
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white);
+    }
+  }
+
+  convertFile() async {
+    String fileName = file!.path.split('/').last;
+    var MultipartFile =
+        await dio.MultipartFile.fromFile(file!.path, filename: fileName);
+    return MultipartFile;
+  }
+
   /// code to get location
   getlocation() async {
     Location location = new Location();
@@ -350,5 +396,25 @@ class TranslatorProfileController extends GetxController {
     LoadingHelper.dismiss();
 
     update();
+  }
+
+  clear() {
+    selectedLocation = null;
+    serviceType = ServiceType.Instant;
+    scheduleType = ScheduleType.AudioVideo;
+    documentType = DocumentType.Urgent;
+    instantType = InstantType.audio;
+    nameController.clear();
+    phoneController.clear();
+    emailController.clear();
+    descriptionController.clear();
+    instantTime = ''.obs.toString();
+    startTime = '';
+    endTime = '';
+    totalAmount = 0.obs.toInt();
+    duration = 0.obs.toInt();
+    selectedDay = DateTime.now().obs;
+    focusedDay = DateTime.now().obs;
+    pages = 0;
   }
 }

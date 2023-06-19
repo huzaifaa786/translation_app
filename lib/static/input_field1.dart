@@ -18,7 +18,7 @@ class InputField1 extends StatelessWidget {
       this.imageIcon,
       this.validator,
       this.autovalidateMode,
-      // this.validate,
+      this.validate,
       this.icon,
       this.type = TextInputType.text,
       this.fontSize = 17.0,
@@ -27,7 +27,7 @@ class InputField1 extends StatelessWidget {
 
   final controller;
   final validator;
-  // final RxBool? validate;
+  final validate;
   final obscure;
   final hint;
   final type;
@@ -103,7 +103,7 @@ class InputField1 extends StatelessWidget {
                   cursorColor: Colors.black,
                   maxLines: maxlines == true ? null : 1,
                   autovalidateMode: autovalidateMode ??
-                      (validator == true.obs
+                      (validate == true.obs
                           ? AutovalidateMode.always
                           : AutovalidateMode.onUserInteraction),
                 )),

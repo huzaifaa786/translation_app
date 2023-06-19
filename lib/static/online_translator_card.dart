@@ -22,7 +22,7 @@ class OnlineTranslatorCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // translatorProfileController.clear();
+        translatorProfileController.clear();
         Get.to(() => TraslatorProfile(detail: vendor));
       },
       child: Card(

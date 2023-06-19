@@ -89,6 +89,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                         ProfileDetail(
                           name: widget.detail!.name,
                           rating: widget.detail!.rating,
+                          image: widget.detail!.profilePic,
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 8),
