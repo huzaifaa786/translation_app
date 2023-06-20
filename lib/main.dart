@@ -13,6 +13,7 @@ import 'package:translation/screens/main_screen/homecontroller.dart';
 import 'package:translation/screens/notification/notificationcontroller.dart';
 import 'package:translation/screens/orderhistory/ordercontroller.dart';
 import 'package:translation/screens/profile/profilecontroller.dart';
+import 'package:translation/screens/chat/chatcontroller.dart';
 import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/screens/splash_screen/splash_main.dart';
 import 'package:translation/screens/translator_screens/notranslator.dart';
@@ -22,6 +23,7 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:translation/screens/translator/translator_profile_controller.dart';
+import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,7 +43,11 @@ void main() async {
   Get.put(CheckOutController());
   Get.put(OTPServices());
 
+  Get.put(ChatController());
   await GetStorage.init();
+  PusherChannelsFlutter pusher = PusherChannelsFlutter.getInstance();
+  await pusher.init(apiKey: "4341ec79756753dcfb7b", cluster: "ap2");
+  await pusher.connect();
   Stripe.publishableKey =
       'pk_test_51MlTmPAN8zi2vyFswyWqxxJKbe8NnGRtoOo55Z2P65V8EykUYWk034zKSkXkh2THsQZ6OYZzdoQOUxXmSmPiPz9G00dQnMo69A';
   Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';

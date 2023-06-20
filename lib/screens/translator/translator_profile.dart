@@ -70,7 +70,13 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 21),
                       ),
-                      SvgPicture.asset("assets/images/heart.svg"),
+                      InkWell(
+                          onTap: () {
+                            translatorProfileController
+                                .addfavorit(widget.detail!);
+                                
+                          },
+                          child: SvgPicture.asset("assets/images/heart.svg")),
                     ],
                   ),
                 ),

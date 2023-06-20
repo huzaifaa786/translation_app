@@ -32,6 +32,7 @@ class TranslatorProfileController extends GetxController {
   static TranslatorProfileController instance = Get.find();
   Vendor? vendors;
   LatLng? selectedLocation;
+  RxBool? fav = false.obs;
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -381,6 +382,22 @@ class TranslatorProfileController extends GetxController {
           backgroundColor: Colors.red,
           colorText: Colors.white);
     }
+    LoadingHelper.dismiss();
+
+    update();
+  }
+
+  addfavorit(Vendor vendor) async {
+    LoadingHelper.show();
+    var url = BASE_URL + 'add/favorities';
+    GetStorage box = GetStorage();
+
+    var data = {
+      'vendor_id': vendor.id.toString(),
+      'api_token': box.read('api_token')!,
+    };
+    var response = await Api.execute(url: url, data: data);
+    print(response);
     LoadingHelper.dismiss();
 
     update();

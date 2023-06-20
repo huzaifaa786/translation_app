@@ -8,6 +8,7 @@ import 'package:translation/screens/profile/profilecontroller.dart';
 import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/screens/translator/translator_profile_controller.dart';
 import 'package:translation/services/auth_services/mobileotp_services.dart';
+import 'package:translation/screens/chat/chatcontroller.dart';
 
 AuthController authController = AuthController.instance;
 HomeController homeController = HomeController.instance;
@@ -16,6 +17,8 @@ AmountController amountController = AmountController.instance;
 ProfileController profileController = ProfileController.instance;
 OrderController orderController = OrderController.instance;
 NotificationController notificationController = NotificationController.instance;
-TranslatorProfileController translatorProfileController = TranslatorProfileController.instance;
+TranslatorProfileController translatorProfileController =
+    TranslatorProfileController.instance;
 CheckOutController checkoutController = CheckOutController.instance;
 OTPServices otpServices = OTPServices.instance;
+ChatController chatController = ChatController.instance;
