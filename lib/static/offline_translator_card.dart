@@ -1,18 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:get/get.dart';
+import 'package:translation/screens/translator/translator_profile.dart';
+import 'package:translation/values/controllers.dart';
 
 class OfflineTranslattorCard extends StatelessWidget {
   const OfflineTranslattorCard(
-      {super.key, required this.name, required this.image, required this.lang});
+      {super.key,
+      required this.name,
+      required this.image,
+      required this.lang,
+      required this.price,
+      required this.rating,
+      required this.vendor});
   final name;
   final image;
   final lang;
+  final price;
+  final rating;
+  final vendor;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        translatorProfileController.clear();
+        Get.to(() => TraslatorProfile(detail: vendor));
+      },
       child: Card(
         color: Color.fromARGB(255, 255, 255, 255),
         child: Container(
@@ -69,7 +84,7 @@ class OfflineTranslattorCard extends StatelessWidget {
                                     fontFamily: 'NunitoSans'),
                               ),
                               Text(
-                                "100 AED",
+                                price + " AED",
                                 style: TextStyle(
                                     fontSize: 11,
                                     fontWeight: FontWeight.w700,
@@ -91,7 +106,7 @@ class OfflineTranslattorCard extends StatelessWidget {
                                       width: 11)),
                               Padding(
                                 padding: const EdgeInsets.only(top: 4, left: 2),
-                                child: Text('5.0',
+                                child: Text(rating == null ? '0.0' : rating.toString(),
                                     style: TextStyle(
                                         fontSize: 11,
                                         fontWeight: FontWeight.w400,

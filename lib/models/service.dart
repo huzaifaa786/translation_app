@@ -4,7 +4,7 @@ import 'package:translation/models/schedual.dart';
 
 class VendorService {
   int? id;
-  int? vendor_id;
+  String? vendor_id;
   List<dynamic>? urgent;
   List<dynamic>? unurgent;
   List<Schedual>? schedual;

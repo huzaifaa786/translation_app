@@ -6,14 +6,14 @@ import 'package:translation/static/large_button.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:translation/values/controllers.dart';
 
-class EmailOtpVerifyScreen extends StatefulWidget {
-  const EmailOtpVerifyScreen({super.key});
+class LoginOtpVerifyScreen extends StatefulWidget {
+  const LoginOtpVerifyScreen({super.key});
 
   @override
-  State<EmailOtpVerifyScreen> createState() => _EmailOtpVerifyScreenState();
+  State<LoginOtpVerifyScreen> createState() => _LoginOtpVerifyScreenState();
 }
 
-class _EmailOtpVerifyScreenState extends State<EmailOtpVerifyScreen> {
+class _LoginOtpVerifyScreenState extends State<LoginOtpVerifyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,19 +60,14 @@ class _EmailOtpVerifyScreenState extends State<EmailOtpVerifyScreen> {
                 ),
                 OtpTextField(
                   margin: EdgeInsets.only(right: 14),
-                  numberOfFields: 4,
+                  numberOfFields: 6,
                   fieldWidth: 50,
-                  borderColor: Color(0xFF512DA8),
+                  borderColor: greenish,
                   showFieldAsBox: true,
-                  onCodeChanged: (String code) {},
-                  onSubmit: (String verificationCode) {
-                    if (authController.otp.toString() == verificationCode) {
-                      authController.verify = true.obs;
-                      Get.to(() => ResetPasswordScreen());
-                    } else {
-                      authController.verify = false.obs;
-                    }
+                  onCodeChanged: (String code) {
+                    otpServices.otp = code;
                   },
+                  onSubmit: (String verificationCode) {},
                 ),
                 const SizedBox(
                   height: 40,
@@ -125,20 +120,7 @@ class _EmailOtpVerifyScreenState extends State<EmailOtpVerifyScreen> {
                   title: 'Submit',
                   sreenRatio: 0.85,
                   onPressed: () {
-                    if (authController.verify.value == true) {
-                      Get.snackbar('OTP verified successfully!',
-                          'You have successfully completed the verification process.',
-                          snackPosition: SnackPosition.BOTTOM,
-                          backgroundColor: greenish,
-                          colorText: Colors.white);
-                      Get.to(() => ResetPasswordScreen());
-                    } else {
-                      Get.snackbar('ERROR!',
-                          "Entered Otp is incorrect. Please enter correct Otp to proceed Further.",
-                          snackPosition: SnackPosition.BOTTOM,
-                          backgroundColor: Colors.red,
-                          colorText: Colors.white);
-                    }
+                    otpServices.verifyPhone();
                   },
                   color: greenish,
                   textcolor: Colors.white,

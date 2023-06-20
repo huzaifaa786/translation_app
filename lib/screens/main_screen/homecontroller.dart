@@ -72,11 +72,13 @@ class HomeController extends GetxController {
 
   void fetchVendors() async {
     print(fromSelectedLanguage);
+    GetStorage box = GetStorage();
     LoadingHelper.show();
     var url = BASE_URL + 'vendor/search';
     var data = {
       'form': fromSelectedLanguage,
       'to': toSelectedLanguage,
+      'api_token': box.read('api_token'),
     };
     var response = await Api.execute(url: url, data: data);
     LoadingHelper.dismiss();

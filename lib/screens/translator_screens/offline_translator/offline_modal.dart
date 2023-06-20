@@ -42,7 +42,7 @@ class FilterModal extends StatelessWidget {
               ),
               isExpanded: true,
               hint: const Text(
-                'Highest price to lowest price',
+                'by price',
                 style: TextStyle(fontSize: 14),
               ),
               items: price,

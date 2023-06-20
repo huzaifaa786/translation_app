@@ -6,14 +6,14 @@ import 'package:translation/static/large_button.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:translation/values/controllers.dart';
 
-class EmailOtpVerifyScreen extends StatefulWidget {
-  const EmailOtpVerifyScreen({super.key});
+class SignUpOtpVerifyScreen extends StatefulWidget {
+  const SignUpOtpVerifyScreen({super.key});
 
   @override
-  State<EmailOtpVerifyScreen> createState() => _EmailOtpVerifyScreenState();
+  State<SignUpOtpVerifyScreen> createState() => _SignUpOtpVerifyScreenState();
 }
 
-class _EmailOtpVerifyScreenState extends State<EmailOtpVerifyScreen> {
+class _SignUpOtpVerifyScreenState extends State<SignUpOtpVerifyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,15 +60,15 @@ class _EmailOtpVerifyScreenState extends State<EmailOtpVerifyScreen> {
                 ),
                 OtpTextField(
                   margin: EdgeInsets.only(right: 14),
-                  numberOfFields: 4,
+                  numberOfFields: 6,
                   fieldWidth: 50,
-                  borderColor: Color(0xFF512DA8),
+                  borderColor: greenish,
                   showFieldAsBox: true,
                   onCodeChanged: (String code) {},
                   onSubmit: (String verificationCode) {
-                    if (authController.otp.toString() == verificationCode) {
+                    if (otpServices.otp.toString() == verificationCode) {
                       authController.verify = true.obs;
-                      Get.to(() => ResetPasswordScreen());
+                      // Get.to(() => ResetPasswordScreen());
                     } else {
                       authController.verify = false.obs;
                     }

@@ -79,6 +79,11 @@ class TranslatorProfileController extends GetxController {
     totalAmount = 0.obs.toInt();
     pages = 0;
     instantType = InstantType.audio;
+    scheduleType = ScheduleType.AudioVideo;
+    documentType = DocumentType.Urgent;
+    selectedLocation = null;
+    startTime = '';
+    endTime = '';
     update();
   }
 
@@ -211,8 +216,7 @@ class TranslatorProfileController extends GetxController {
         : serviceType == ServiceType.Schedule
             ? 'schedule'
             : 'document';
-      var response;
-
+    var response;
 
     if (serviceType == ServiceType.Document) {
       String fileName = file!.path.split('/').last;
@@ -236,7 +240,7 @@ class TranslatorProfileController extends GetxController {
         'pages': pages,
         'description': descriptionController
       });
-      response = await Api.execute(url: url, data: data,image: true);
+      response = await Api.execute(url: url, data: data, image: true);
     } else {
       data = {
         'api_token': box.read('api_token')!,

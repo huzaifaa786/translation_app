@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:translation/api/api.dart';
 import 'package:translation/helper/loading.dart';
 import 'package:translation/models/user.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:translation/screens/main_screen/home.dart';
+import 'package:translation/services/auth_services/google_services.dart';
+import 'package:translation/services/auth_services/mobileotp_services.dart';
 import 'package:translation/values/colors.dart';
+import 'package:translation/values/controllers.dart';
 import 'package:translation/values/string.dart';
 import 'package:translation/values/validator.dart';
 
@@ -21,6 +26,9 @@ class AuthController extends GetxController {
   TextEditingController confirmPassword = TextEditingController();
   TextEditingController phone = TextEditingController();
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////// Show auth Errors //////////////////////////////////////////////////
+
   void showErrors() {
     validateSignUpForm = true.obs;
   }
@@ -29,6 +37,8 @@ class AuthController extends GetxController {
     validateSignInForm = true.obs;
   }
 
+//////////////////////////////////////////// Clear Auth Variables ///////////////////////////////////////////
+
   ClearSignupVariables() {
     userName.clear();
     phone.clear();
@@ -36,6 +46,9 @@ class AuthController extends GetxController {
     email.clear();
     confirmPassword.clear();
   }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////// Register Screen Functionality //////////////////////////////////////////
 
   void SignUp(void Function(bool) callback) async {
     LoadingHelper.show();
@@ -51,6 +64,7 @@ class AuthController extends GetxController {
         var url = BASE_URL + 'user/register';
         var token = await FirebaseMessaging.instance.getToken();
         var data;
+        //////////// Register Data /////////////
         data = {
           'email': email.text.toString(),
           'username': userName.text.toString(),
@@ -93,6 +107,9 @@ class AuthController extends GetxController {
       showErrors();
     }
   }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////// Login Screen Functionality /////////////////////////////////////////////
 
   void SignIn(void Function(bool) callback) async {
     LoadingHelper.show();
@@ -137,6 +154,7 @@ class AuthController extends GetxController {
     }
   }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////// Forgot Screen Functionality & Variables /////////////////////////////////
 
   TextEditingController forgotemail = TextEditingController();
@@ -145,16 +163,22 @@ class AuthController extends GetxController {
   RxBool verify = true.obs;
   RxBool validateForgotForm = false.obs;
 
+////////////////////////////////// Clear Forgot Screen Variables //////////////////////////////////////////////
+
   ClearForgotVariable() {
     forgotemail.clear();
     resetPassword.clear();
     update();
   }
 
+////////////////////////////////// Show Errors For Invalid Input ////////////////////////////////////////////////
+
   void showError() {
     validateForgotForm = true.obs;
     update();
   }
+
+////////////////////////////////// Fetch User AND Send Otp to Mail if user exit ////////////////////////////////
 
   getOTPusingEmail(void Function(bool) callback) async {
     LoadingHelper.show();
@@ -187,6 +211,8 @@ class AuthController extends GetxController {
     }
   }
 
+//////////////////// Call This function after otp Successfully placed to reset Password ////////////////////
+
   ResetPassword(void Function(bool) callback) async {
     print(resetPassword.text);
     final bool isFormValid =
@@ -213,5 +239,81 @@ class AuthController extends GetxController {
         return callback(false);
       }
     }
+  }
+
+//////////////////////////////////////////// Google Login OR Register ////////////////////////////////////////
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  signInwithGoogle() async {
+    // try {
+    LoadingHelper.show();
+    final GoogleSignInAccount? googleSignInAccount =
+        await _googleSignIn.signIn();
+    var email1 = googleSignInAccount!.email;
+    var name = googleSignInAccount.displayName;
+    print('email1');
+    print(email1);
+    print('name');
+    print(name);
+    LoadingHelper.dismiss();
+    if (await GoogleServices.googlelogin(email1)) {
+      Get.to(() => Home_screen());
+    } else {
+      print('name');
+      print(name);
+      if (await GoogleServices.googleSignup(name, email1, 'google')) {
+        print('00000000000000000000000000000000000000000000001');
+        Get.to(() => Home_screen());
+      }
+    }
+    // } catch (e) {
+    //   Get.snackbar('Google SignIn Failed!', e.toString(),
+    //       snackPosition: SnackPosition.BOTTOM,
+    //       colorText: white,
+    //       backgroundColor: Colors.red);
+    //   LoadingHelper.dismiss();
+    // }
+  }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////// OTP Login  ///////////////////////////////////////////////////////
+  String? completeNumber = '';
+
+  getuser() async {
+    print('completeNumber');
+    print(completeNumber);
+    var muser = await Mobilelogin(completeNumber);
+    if (muser == null) {
+      LoadingHelper.dismiss();
+      otpServices.sendTokenforSignUP(completeNumber.toString());
+    } else {
+      User user = muser;
+      LoadingHelper.dismiss();
+      otpServices.sendToken(completeNumber.toString());
+    }
+  }
+
+  static Mobilelogin(phone) async {
+    LoadingHelper.show();
+    var url = BASE_URL + 'otplogin';
+    var data = {
+      'phone': phone,
+    };
+
+    var response = await Api.execute(url: url, data: data);
+    LoadingHelper.dismiss();
+    if (!response['error']) {
+      User user = User(response['data']);
+      return user;
+    } else {
+      return null;
+    }
+  }
+
+  clear(){
+    completeNumber = '';
+    phone.clear(); 
+    email.clear();
+    password.clear();
+    update();
   }
 }
