@@ -1,6 +1,6 @@
 import 'package:translation/screens/checkout/checkout_controller.dart';
 import 'package:translation/screens/enter_amount/amountcontroller.dart';
-import 'package:translation/screens/login/authcontroller.dart';
+import 'package:translation/screens/auth/authcontroller.dart';
 import 'package:translation/screens/main_screen/homecontroller.dart';
 import 'package:translation/screens/notification/notificationcontroller.dart';
 import 'package:translation/screens/orderhistory/ordercontroller.dart';

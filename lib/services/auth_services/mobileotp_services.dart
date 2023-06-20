@@ -4,8 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:translation/helper/loading.dart';
-import 'package:translation/screens/login/otp_verify/loginOtp.dart';
-import 'package:translation/screens/login/otp_verify/signup.dart';
+import 'package:translation/screens/auth/otp_verify/loginOtp.dart';
+import 'package:translation/screens/auth/otp_verify/signup.dart';
 import 'package:translation/values/colors.dart';
 
 class OTPServices extends GetxController {
