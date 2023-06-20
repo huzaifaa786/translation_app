@@ -1,12 +1,20 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:translation/api/api.dart';
 import 'package:translation/helper/loading.dart';
+import 'package:translation/screens/auth/otp_signup.dart';
 import 'package:translation/screens/auth/otp_verify/loginOtp.dart';
 import 'package:translation/screens/auth/otp_verify/signup.dart';
+import 'package:translation/screens/main_screen/home.dart';
 import 'package:translation/values/colors.dart';
+import 'package:translation/values/controllers.dart';
+import 'package:translation/values/string.dart';
+import 'package:translation/values/validator.dart';
 
 class OTPServices extends GetxController {
   static OTPServices instance = Get.find();
@@ -15,14 +23,14 @@ class OTPServices extends GetxController {
   String verificationid = "";
   int? resendtoken;
   String? otp;
+  String? api_Token;
+  int? user_id;
 
 /////////////////////////// SignIn Send Token /////////////////////////////////////////////////////////////
 
-  void sendToken(String phone) async {
+  void sendToken(String phone, users) async {
     LoadingHelper.show();
     log('log ???????????????????????????????????????? 01');
-    print(phone);
-
     try {
       FirebaseAuth auth = FirebaseAuth.instance;
       await auth.verifyPhoneNumber(
@@ -38,16 +46,16 @@ class OTPServices extends GetxController {
         },
         forceResendingToken: resendtoken,
         codeSent: (String verificationId, int? resendToken) {
-          last2 = phone.substring(phone.length - 2).obs;
+          last2 = phone.substring(phone.length - 3).obs;
           verificationid = verificationId;
           resendtoken = resendToken;
           LoadingHelper.dismiss();
-          Get.snackbar('OTP has been successfully send signin', '',
+          Get.snackbar('OTP has been successfully sent', '',
               snackPosition: SnackPosition.BOTTOM,
               backgroundColor: Colors.green,
               colorText: primaryTextColor);
           log('log ?????????????????? phone verification?????????????????????? 04');
-          Get.to(() => LoginOtpVerifyScreen);
+          Get.to(() => LoginOtpVerifyScreen(user: users));
         },
         codeAutoRetrievalTimeout: (String verificationId) {
           verificationid = verificationId;
@@ -77,17 +85,18 @@ class OTPServices extends GetxController {
         verificationCompleted: (PhoneAuthCredential credential) async {},
         verificationFailed: (FirebaseAuthException e) {
           LoadingHelper.dismiss();
-          Get.snackbar('Verification failed', e.message!,
+          Get.snackbar('Verification failed', e.message.toString(),
               snackPosition: SnackPosition.BOTTOM,
               backgroundColor: Colors.red,
               colorText: primaryTextColor);
         },
         forceResendingToken: resendtoken,
         codeSent: (String verificationId, int? resendToken) {
+          last2 = phone.substring(phone.length - 3).obs;
           verificationid = verificationId;
           resendtoken = resendToken;
           LoadingHelper.dismiss();
-          Get.snackbar('OTP has been successfully send SIgnup', '',
+          Get.snackbar('OTP has been successfully sent', '',
               snackPosition: SnackPosition.BOTTOM,
               backgroundColor: Colors.green,
               colorText: primaryTextColor);
@@ -110,7 +119,7 @@ class OTPServices extends GetxController {
     }
   }
 
-/////////////////////////// Verify Otp Token ///////////////////////////////////////////////////////////////
+/////////////////////////// Verify Login Otp Token ///////////////////////////////////////////////////////////////
 
   void verifyPhone() async {
     try {
@@ -122,12 +131,40 @@ class OTPServices extends GetxController {
           smsCode: otp!,
         ))
             .then((value) async {
-          // Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //         builder: (context) => CheckOutScreen(
-          //               data: carinfo,
-          //             )));
+          GetStorage box = GetStorage();
+          box.write('api_token', api_Token);
+          box.write('user_id', user_id);
+          Get.offAll(() => Home_screen());
+          LoadingHelper.dismiss();
+        });
+      } else {
+        Get.snackbar('Error!', 'Plese Enter Complete Code',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.red,
+            colorText: white);
+      }
+    } on FirebaseAuthException catch (e) {
+      LoadingHelper.dismiss();
+      Get.snackbar('Error!', e.message!,
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: white);
+    }
+  }
+
+//////////////////////////////// Signup otp verify //////////////////////////////////////////////////////////
+
+  SignupverifyPhone() async {
+    try {
+      if (otp!.length == 6) {
+        LoadingHelper.show();
+        await FirebaseAuth.instance
+            .signInWithCredential(PhoneAuthProvider.credential(
+          verificationId: verificationid,
+          smsCode: otp!,
+        ))
+            .then((value) {
+          Get.to(() => OtpRegisterScreen());
           LoadingHelper.dismiss();
         });
       } else {

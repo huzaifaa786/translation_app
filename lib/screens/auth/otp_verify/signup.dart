@@ -34,7 +34,7 @@ class _SignUpOtpVerifyScreenState extends State<SignUpOtpVerifyScreen> {
                 Container(
                   padding: EdgeInsets.only(top: 10),
                   child: Text(
-                    'Verify Your Email',
+                    'Verify Your Phone Number',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -48,7 +48,9 @@ class _SignUpOtpVerifyScreenState extends State<SignUpOtpVerifyScreen> {
                   margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
                   padding: EdgeInsets.all(4),
                   child: Text(
-                    'Entered the 4 digit code received on your entered email.',
+                    'Entered the 6 digit code received on your entered number ended with *********' +
+                        otpServices.last2.toString() +
+                        '.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 17,
@@ -59,19 +61,13 @@ class _SignUpOtpVerifyScreenState extends State<SignUpOtpVerifyScreen> {
                   height: 40,
                 ),
                 OtpTextField(
-                  margin: EdgeInsets.only(right: 14),
                   numberOfFields: 6,
-                  fieldWidth: 50,
                   borderColor: greenish,
                   showFieldAsBox: true,
                   onCodeChanged: (String code) {},
                   onSubmit: (String verificationCode) {
-                    if (otpServices.otp.toString() == verificationCode) {
-                      authController.verify = true.obs;
-                      // Get.to(() => ResetPasswordScreen());
-                    } else {
-                      authController.verify = false.obs;
-                    }
+                    otpServices.otp = verificationCode;
+                    otpServices.SignupverifyPhone();
                   },
                 ),
                 const SizedBox(
@@ -125,20 +121,7 @@ class _SignUpOtpVerifyScreenState extends State<SignUpOtpVerifyScreen> {
                   title: 'Submit',
                   sreenRatio: 0.85,
                   onPressed: () {
-                    if (authController.verify.value == true) {
-                      Get.snackbar('OTP verified successfully!',
-                          'You have successfully completed the verification process.',
-                          snackPosition: SnackPosition.BOTTOM,
-                          backgroundColor: greenish,
-                          colorText: Colors.white);
-                      Get.to(() => ResetPasswordScreen());
-                    } else {
-                      Get.snackbar('ERROR!',
-                          "Entered Otp is incorrect. Please enter correct Otp to proceed Further.",
-                          snackPosition: SnackPosition.BOTTOM,
-                          backgroundColor: Colors.red,
-                          colorText: Colors.white);
-                    }
+                    otpServices.verifyPhone();
                   },
                   color: greenish,
                   textcolor: Colors.white,

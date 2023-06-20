@@ -71,6 +71,7 @@ class AuthController extends GetxController {
           'password': password.text.toString(),
           'phone': phone.text.toString(),
           'firebase_token': token,
+          'user_type': 'Email',
         };
 
         var response = await Api.execute(
@@ -242,36 +243,31 @@ class AuthController extends GetxController {
   }
 
 //////////////////////////////////////////// Google Login OR Register ////////////////////////////////////////
+
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+
   signInwithGoogle() async {
-    // try {
-    LoadingHelper.show();
-    final GoogleSignInAccount? googleSignInAccount =
-        await _googleSignIn.signIn();
-    var email1 = googleSignInAccount!.email;
-    var name = googleSignInAccount.displayName;
-    print('email1');
-    print(email1);
-    print('name');
-    print(name);
-    LoadingHelper.dismiss();
-    if (await GoogleServices.googlelogin(email1)) {
-      Get.to(() => Home_screen());
-    } else {
-      print('name');
-      print(name);
-      if (await GoogleServices.googleSignup(name, email1, 'google')) {
-        print('00000000000000000000000000000000000000000000001');
+    try {
+      LoadingHelper.show();
+      final GoogleSignInAccount? googleSignInAccount =
+          await _googleSignIn.signIn();
+      var email1 = googleSignInAccount!.email;
+      var name = googleSignInAccount.displayName;
+      LoadingHelper.dismiss();
+      if (await GoogleServices.googlelogin(email1)) {
         Get.to(() => Home_screen());
+      } else {
+        if (await GoogleServices.googleSignup(name, email1, 'google')) {
+          Get.to(() => Home_screen());
+        }
       }
+    } catch (e) {
+      Get.snackbar('Google SignIn Failed!', e.toString(),
+          snackPosition: SnackPosition.BOTTOM,
+          colorText: white,
+          backgroundColor: Colors.red);
+      LoadingHelper.dismiss();
     }
-    // } catch (e) {
-    //   Get.snackbar('Google SignIn Failed!', e.toString(),
-    //       snackPosition: SnackPosition.BOTTOM,
-    //       colorText: white,
-    //       backgroundColor: Colors.red);
-    //   LoadingHelper.dismiss();
-    // }
   }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -288,7 +284,7 @@ class AuthController extends GetxController {
     } else {
       User user = muser;
       LoadingHelper.dismiss();
-      otpServices.sendToken(completeNumber.toString());
+      otpServices.sendToken(completeNumber.toString(), user);
     }
   }
 
@@ -309,9 +305,57 @@ class AuthController extends GetxController {
     }
   }
 
-  clear(){
+  ////////////////////////////////Register Using OTp after verifying //////////////////////////////////
+
+  void OtpSignUp(void Function(bool) callback) async {
+    LoadingHelper.show();
+    final bool isFormValid =
+        Validators.emptyStringValidator(email.text, '') == null &&
+            Validators.emptyStringValidator(userName.text, '') == null;
+    if (isFormValid) {
+      GetStorage box = GetStorage();
+      var url = BASE_URL + 'user/register';
+      var token = await FirebaseMessaging.instance.getToken();
+      var data;
+      //////////// Register Data /////////////
+      data = {
+        'email': email.text.toString(),
+        'username': userName.text.toString(),
+        'user_type': 'OTP',
+        'phone': authController.completeNumber,
+        'firebase_token': token,
+      };
+
+      var response = await Api.execute(
+        url: url,
+        data: data,
+      );
+
+      if (!response['error']) {
+        LoadingHelper.dismiss();
+        User user = User(response['Vendor']);
+        box.write('api_token', user.apiToken);
+        box.write('user_id', user.id);
+        ClearSignupVariables();
+        update();
+        return callback(true);
+      } else {
+        LoadingHelper.dismiss();
+        Get.snackbar("Error!", response['error_data'],
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.red,
+            colorText: Colors.white);
+        return callback(false);
+      }
+    } else {
+      LoadingHelper.dismiss();
+      showErrors();
+    }
+  }
+
+  clear() {
     completeNumber = '';
-    phone.clear(); 
+    phone.clear();
     email.clear();
     password.clear();
     update();
