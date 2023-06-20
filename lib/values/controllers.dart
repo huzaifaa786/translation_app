@@ -7,6 +7,7 @@ import 'package:translation/screens/orderhistory/ordercontroller.dart';
 import 'package:translation/screens/profile/profilecontroller.dart';
 import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/screens/translator/translator_profile_controller.dart';
+import 'package:translation/screens/chat/chatcontroller.dart';
 
 AuthController authController = AuthController.instance;
 HomeController homeController = HomeController.instance;
@@ -17,3 +18,4 @@ OrderController orderController = OrderController.instance;
 NotificationController notificationController = NotificationController.instance;
 TranslatorProfileController translatorProfileController = TranslatorProfileController.instance;
 CheckOutController checkoutController = CheckOutController.instance;
+ChatController  chatController = ChatController.instance;

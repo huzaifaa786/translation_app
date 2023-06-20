@@ -30,6 +30,17 @@ class _Checkout_screenState extends State<Checkout_screen> {
     });
   }
 
+  fetchcoupon() async {
+    await CheckOutController.getcoupon();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    fetchcoupon();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
