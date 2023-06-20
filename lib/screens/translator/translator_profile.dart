@@ -169,13 +169,25 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                             ),
                           ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15.0, bottom: 15),
-                          child: Text(
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae amet placerat dignissim nibh dictum sit. Pretium ornare viverra.,",
-                            style: TextStyle(fontSize: 14),
-                          ),
-                        ),
+                        widget.detail!.aboutEnglish == ''
+                            ? Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 8, bottom: 8),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text("About Empty."),
+                                  ],
+                                ),
+                              )
+                            : Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 15.0, bottom: 15),
+                                child: Text(
+                                  widget.detail!.aboutEnglish!,
+                                  style: TextStyle(fontSize: 14),
+                                ),
+                              ),
                         TralingRadioBtn(
                           text: 'Instant',
                           isSelected:
@@ -183,6 +195,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                           ontap: () {
                             setState(() {
                               controller.serviceType = ServiceType.Instant;
+                              controller.resetInstant();
                             });
                           },
                         ),
@@ -583,6 +596,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                           ontap: () {
                             setState(() {
                               controller.serviceType = ServiceType.Document;
+                              controller.resetInstant();
                             });
                           },
                         ),

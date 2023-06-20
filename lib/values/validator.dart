@@ -33,7 +33,7 @@ class Validators {
   }
 
   /// Validates the Password for User Authentication
-  static passwordValidator(password) {
+  static String? passwordValidator(String? password) {
     // ignore: unnecessary_raw_strings
     // final digitRegExp =
     //     RegExp(r'^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{1,}$');

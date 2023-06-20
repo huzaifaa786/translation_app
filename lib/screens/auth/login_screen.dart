@@ -1,20 +1,20 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_ _ ructors
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-import 'package:translation/screens/Otp/verifyphoneno.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:translation/screens/forgot.dart/forgotAccount.dart';
-import 'package:translation/screens/login/authcontroller.dart';
+import 'package:translation/screens/auth/authcontroller.dart';
 import 'package:translation/screens/main_screen/home.dart';
-import 'package:translation/screens/login/sign_up.dart';
+import 'package:translation/screens/auth/sign_up.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/static/input_field1.dart';
 import 'package:translation/static/large_button.dart';
 import 'package:translation/values/controllers.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -26,6 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
   getindex(id) async {
     setState(() {
       index = id;
+      authController.clear();
     });
   }
 
@@ -45,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     Column(
                       children: [
-                        const Padding(
+                        Padding(
                           padding: EdgeInsets.fromLTRB(0, 30, 0, 30),
                           child: Center(
                             child: Image(
@@ -57,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         Container(
                           width: MediaQuery.of(context).size.width,
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                               color: Color.fromARGB(255, 250, 250, 250),
                               borderRadius: BorderRadius.only(
                                   topRight: Radius.circular(30),
@@ -65,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Column(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(top: 16),
+                                padding: EdgeInsets.only(top: 16),
                                 child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.all(
@@ -76,12 +77,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                           color: Colors.grey.withOpacity(0.2),
                                           spreadRadius: 5,
                                           blurRadius: 7,
-                                          offset: const Offset(0, 3))
+                                          offset: Offset(0, 3))
                                     ],
                                   ),
                                   child: ToggleSwitch(
                                     initialLabelIndex: index,
-                                    labels: const [
+                                    labels: [
                                       'Email',
                                       'OTP',
                                     ],
@@ -97,12 +98,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                     cornerRadius: 40,
                                     changeOnTap: true,
                                     inactiveFgColor:
-                                        const Color.fromARGB(255, 9, 9, 9),
-                                    activeFgColor: const Color.fromARGB(
-                                        255, 255, 255, 255),
-                                    inactiveBgColor: const Color.fromARGB(
-                                        255, 255, 255, 255),
-                                    activeBgColor: const [greenish],
+                                        Color.fromARGB(255, 9, 9, 9),
+                                    activeFgColor:
+                                        Color.fromARGB(255, 255, 255, 255),
+                                    inactiveBgColor:
+                                        Color.fromARGB(255, 255, 255, 255),
+                                    activeBgColor: [greenish],
                                     activeBorders: [
                                       Border.all(
                                         color: greenish,
@@ -118,8 +119,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               index == 0
                                   ? Container(
-                                      padding: const EdgeInsets.only(
-                                          left: 20, right: 20),
+                                      padding:
+                                          EdgeInsets.only(left: 20, right: 20),
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.65,
@@ -130,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           child: Column(
                                             children: [
                                               Container(
-                                                padding: const EdgeInsets.only(
+                                                padding: EdgeInsets.only(
                                                     top: 20, bottom: 20),
                                                 child: Text(
                                                   'WELCOME BACK',
@@ -142,8 +143,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    bottom: 4),
+                                                padding:
+                                                    EdgeInsets.only(bottom: 4),
                                                 child: InputField1(
                                                   icon:
                                                       'assets/images/email.svg',
@@ -160,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     authController.password,
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(
+                                                padding: EdgeInsets.only(
                                                     top: 12, bottom: 16),
                                                 child: Row(
                                                   mainAxisAlignment:
@@ -206,7 +207,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 buttonWidth: 0.95,
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(
+                                                padding: EdgeInsets.only(
                                                     top: 40, bottom: 25),
                                                 child: Center(
                                                   child: Row(
@@ -278,23 +279,29 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 ],
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(
+                                                padding: EdgeInsets.only(
                                                     top: 25, bottom: 20),
                                                 child: Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,
                                                   children: [
-                                                    Image.asset(
-                                                        "assets/images/google.png",
-                                                        height: 34),
-                                                    Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 12,
-                                                                right: 12)),
-                                                    Image.asset(
-                                                        "assets/images/apple.png",
-                                                        height: 34),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        authController
+                                                            .signInwithGoogle();
+                                                      },
+                                                      child: Image.asset(
+                                                          "assets/images/google.png",
+                                                          height: 34),
+                                                    ),
+                                                    // Padding(
+                                                    //     padding:
+                                                    //         EdgeInsets.only(
+                                                    //             left: 12,
+                                                    //             right: 12)),
+                                                    // Image.asset(
+                                                    //     "assets/images/apple.png",
+                                                    //     height: 34),
                                                   ],
                                                 ),
                                               ),
@@ -304,8 +311,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                       ),
                                     )
                                   : Container(
-                                      padding: const EdgeInsets.only(
-                                          left: 20, right: 20),
+                                      padding:
+                                          EdgeInsets.only(left: 20, right: 20),
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.65,
@@ -313,7 +320,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         child: Column(
                                           children: [
                                             Container(
-                                              padding: const EdgeInsets.only(
+                                              padding: EdgeInsets.only(
                                                   top: 30, bottom: 30),
                                               child: Text(
                                                 'WELCOME BACK',
@@ -323,84 +330,127 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     color: greenish),
                                               ),
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 24),
-                                              child: InputField1(
-                                                icon: 'assets/images/phone.svg',
-                                                hint: 'Phone Number',
+                                            Container(
+                                              height: 100,
+                                              child: IntlPhoneField(
+                                                style: TextStyle(fontSize: 14),
+                                                controller:
+                                                    authController.phone,
+                                                decoration: InputDecoration(
+                                                  contentPadding:
+                                                      EdgeInsets.only(
+                                                          bottom: 0.5),
+                                                  hintStyle:
+                                                      TextStyle(fontSize: 12),
+                                                  filled: true,
+                                                  fillColor: white,
+                                                  border: OutlineInputBorder(
+                                                      borderSide: BorderSide(),
+                                                      gapPadding: 50),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: greenish),
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: greenish),
+                                                  ),
+                                                ),
+                                                initialCountryCode: 'AE',
+                                                onChanged: (phone) {
+                                                  authController
+                                                          .completeNumber =
+                                                      phone.completeNumber;
+                                                      print('authController.completeNumber');
+                                                      print(phone.completeNumber);
+                                                      print(authController.completeNumber);
+                                                },
+                                                keyboardType:
+                                                    TextInputType.phone,
                                               ),
                                             ),
+                                            // Padding(
+                                            //   padding:   EdgeInsets.only(
+                                            //       bottom: 24),
+                                            //   child: InputField1(
+                                            //     controller: authController.phone,
+                                            //     icon: 'assets/images/phone.svg',
+                                            //     hint: 'Phone Number',
+                                            //   ),
+                                            // ),
                                             LargeButton(
                                               title: 'Request OTP',
                                               sreenRatio: 0.9,
                                               onPressed: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          VerifyPhone(),
-                                                    ));
+                                                authController.getuser();
+                                                // Navigator.push(
+                                                //     context,
+                                                //     MaterialPageRoute(
+                                                //       builder: (context) =>
+                                                //           VerifyPhone(),
+                                                //     ));
                                               },
                                               color: greenish,
                                               textcolor: Colors.white,
                                               buttonWidth: 0.95,
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 40),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Expanded(
-                                                    child: Divider(
-                                                      color: Colors.grey,
-                                                      height: 1,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 10),
-                                                    child: Text(
-                                                      'Or login with',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 18,
-                                                          color:
-                                                              Colors.black54),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Divider(
-                                                      color: Colors.grey,
-                                                      height: 1,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 25, bottom: 20),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Image.asset(
-                                                      "assets/images/google.png",
-                                                      height: 34),
-                                                  Padding(
-                                                      padding: EdgeInsets.only(
-                                                          left: 12, right: 12)),
-                                                  Image.asset(
-                                                      "assets/images/apple.png",
-                                                      height: 34),
-                                                ],
-                                              ),
-                                            ),
+                                            // Padding(
+                                            //   padding:   EdgeInsets.only(
+                                            //       top: 40),
+                                            //   child: Row(
+                                            //     mainAxisAlignment:
+                                            //         MainAxisAlignment.center,
+                                            //     children: [
+                                            //       Expanded(
+                                            //         child: Divider(
+                                            //           color: Colors.grey,
+                                            //           height: 1,
+                                            //         ),
+                                            //       ),
+                                            //       Padding(
+                                            //         padding:
+                                            //             EdgeInsets.symmetric(
+                                            //                 horizontal: 10),
+                                            //         child: Text(
+                                            //           'Or login with',
+                                            //           style: TextStyle(
+                                            //               fontWeight:
+                                            //                   FontWeight.w500,
+                                            //               fontSize: 18,
+                                            //               color:
+                                            //                   Colors.black54),
+                                            //         ),
+                                            //       ),
+                                            //       Expanded(
+                                            //         child: Divider(
+                                            //           color: Colors.grey,
+                                            //           height: 1,
+                                            //         ),
+                                            //       ),
+                                            //     ],
+                                            //   ),
+                                            // ),
+                                            // Padding(
+                                            //   padding:   EdgeInsets.only(
+                                            //       top: 25, bottom: 20),
+                                            //   child: Row(
+                                            //     mainAxisAlignment:
+                                            //         MainAxisAlignment.center,
+                                            //     children: [
+                                            //       Image.asset(
+                                            //           "assets/images/google.png",
+                                            //           height: 34),
+                                            //       // Padding(
+                                            //       //     padding: EdgeInsets.only(
+                                            //       //         left: 12, right: 12)),
+                                            //       // Image.asset(
+                                            //       //     "assets/images/apple.png",
+                                            //       //     height: 34),
+                                            //     ],
+                                            //   ),
+                                            // ),
                                           ],
                                         ),
                                       ),

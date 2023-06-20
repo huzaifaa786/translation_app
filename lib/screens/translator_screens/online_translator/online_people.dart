@@ -1,22 +1,18 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:translation/screens/translator_screens/offline_translator/offline_modal.dart';
-import 'package:translation/screens/translator_screens/translator_screen.dart';
 import 'package:translation/static/offline_translator_card.dart';
 import 'package:translation/static/search_topbar.dart';
-import 'package:translation/values/colors.dart';
-import 'package:translation/static/large_button.dart';
 import 'package:translation/values/controllers.dart';
 
-class OfflinePeople_screen extends StatefulWidget {
-  const OfflinePeople_screen({super.key});
+class OnlinePeople_screen extends StatefulWidget {
+  const OnlinePeople_screen({super.key});
 
   @override
-  State<OfflinePeople_screen> createState() => _OfflinePeople_screenState();
+  State<OnlinePeople_screen> createState() => _OnlinePeople_screenState();
 }
 
-class _OfflinePeople_screenState extends State<OfflinePeople_screen> {
+class _OnlinePeople_screenState extends State<OnlinePeople_screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +27,7 @@ class _OfflinePeople_screenState extends State<OfflinePeople_screen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Offline People",
+                    "Online People",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                   GestureDetector(
@@ -91,15 +87,15 @@ class _OfflinePeople_screenState extends State<OfflinePeople_screen> {
             ),
             Expanded(
               child: ListView.builder(
-                  itemCount: homeController.offlineVendor.length,
+                  itemCount: homeController.onlineVendor.length,
                   itemBuilder: (context, index) => OfflineTranslattorCard(
-                        name: homeController.offlineVendor[index].name,
-                        image: homeController.offlineVendor[index].profilePic,
-                        lang: homeController.offlineVendor[index].language,
-                        vendor: homeController.offlineVendor[index],
-                        price: homeController.offlineVendor[index].service!
-                            .onlineaudiovideoPrice,
-                        rating: homeController.offlineVendor[index].rating,
+                        name: homeController.onlineVendor[index].name,
+                        image: homeController.onlineVendor[index].profilePic,
+                        lang: homeController.onlineVendor[index].language,
+                        vendor: homeController.onlineVendor[index],
+                        price: homeController
+                            .onlineVendor[index].service!.onlineaudiovideoPrice,
+                        rating: homeController.onlineVendor[index].rating,
                       )),
             ),
           ],

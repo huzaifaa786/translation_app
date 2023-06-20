@@ -49,7 +49,7 @@ class ProfileController extends GetxController {
     if (!response['error']) {
       user = User(response['user']);
       nameController.text = user!.username!;
-      phoneController.text = user!.number!;
+      phoneController.text = user!.number.toString();
       emailController.text = user!.email!;
       update();
     } else {

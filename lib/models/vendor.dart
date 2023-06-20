@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'package:translation/models/service.dart';
 
 class Vendor {
-  int? id;
+  String? id;
   String? name;
   String? username;
   String? apiToken;
@@ -15,7 +15,8 @@ class Vendor {
   String? status;
   String? rating;
   int? online;
-
+  String? aboutArabic;
+  String? aboutEnglish;
   List<dynamic>? language;
   VendorService? service;
 
@@ -31,7 +32,8 @@ class Vendor {
     profilePic = vendor['profilepic'] ?? '';
     status = vendor['status'];
     rating = vendor['rating_avg_rating'];
-
+    aboutArabic = vendor['about(arabic)'] ?? '';
+    aboutEnglish = vendor['about(Eng)'] ?? '';
     online = vendor['online'];
     language = jsonDecode(vendor['language']);
     service =

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:translation/models/vendor.dart';
 import 'package:translation/screens/main_screen/homecontroller.dart';
 import 'package:translation/screens/translator_screens/offline_translator/offline_people.dart';
+import 'package:translation/screens/translator_screens/online_translator/online_people.dart';
 import 'package:translation/static/offline_translator_card.dart';
 import 'package:translation/static/online_translator_card.dart';
 import 'package:translation/static/search_topbar.dart';
@@ -40,12 +41,21 @@ class _Translator_State extends State<Translator_> {
                         fontWeight: FontWeight.w600,
                         fontFamily: 'Poppins'),
                   ),
-                  Text(
-                    "View All",
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: 'Poppins',
-                        color: Colors.grey[600]),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => OnlinePeople_screen()),
+                      );
+                    },
+                    child: Text(
+                      "View All",
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          color: Colors.grey[600]),
+                    ),
                   ),
                 ],
               ),
@@ -62,11 +72,13 @@ class _Translator_State extends State<Translator_> {
                             : homeController.onlineVendor.length,
                         itemBuilder: (context, index) => OnlineTranslatorCard(
                               name: homeController.onlineVendor[index].name,
-                              image: homeController.onlineVendor[index].profilePic,
+                              image:
+                                  homeController.onlineVendor[index].profilePic,
                               rating: homeController.onlineVendor[index].rating,
                               vendor: homeController.onlineVendor[index],
                               // price: '10',
-                              price: homeController.onlineVendor[index].service!.onlineaudiovideoPrice,
+                              price: homeController.onlineVendor[index].service!
+                                  .onlineaudiovideoPrice,
                             )),
                   )
                 : Container(
@@ -119,9 +131,17 @@ class _Translator_State extends State<Translator_> {
                             ? 6
                             : homeController.offlineVendor.length,
                         itemBuilder: (context, index) => OfflineTranslattorCard(
-                            name: homeController.offlineVendor[index].name,
-                            image: homeController.offlineVendor[index].profilePic,
-                            lang: homeController.offlineVendor[index].language)),
+                              name: homeController.offlineVendor[index].name,
+                              image: homeController
+                                  .offlineVendor[index].profilePic,
+                              lang:
+                                  homeController.offlineVendor[index].language,
+                              vendor: homeController.offlineVendor[index],
+                              price: homeController.offlineVendor[index]
+                                  .service!.onlineaudiovideoPrice,
+                              rating:
+                                  homeController.offlineVendor[index].rating,
+                            )),
                   )
                 : Container(
                     height: MediaQuery.of(context).size.height * 0.25,

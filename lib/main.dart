@@ -4,11 +4,10 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:translation/helper/loading.dart';
 import 'package:translation/screens/forgot.dart/emailOtp.dart';
-import 'package:translation/screens/translator/map.dart';
 import 'package:translation/screens/checkout/checkout_controller.dart';
 import 'package:translation/screens/enter_amount/amountcontroller.dart';
-import 'package:translation/screens/login/authcontroller.dart';
-import 'package:translation/screens/login/login_screen.dart';
+import 'package:translation/screens/auth/authcontroller.dart';
+import 'package:translation/screens/auth/login_screen.dart';
 import 'package:translation/screens/Otp/verifyphoneno.dart';
 import 'package:translation/screens/main_screen/homecontroller.dart';
 import 'package:translation/screens/notification/notificationcontroller.dart';
@@ -18,15 +17,19 @@ import 'package:translation/screens/chat/chatcontroller.dart';
 import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/screens/splash_screen/splash_main.dart';
 import 'package:translation/screens/translator_screens/notranslator.dart';
+import 'package:translation/services/auth_services/mobileotp_services.dart';
 import 'package:translation/values/styles.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:translation/screens/translator/translator_profile_controller.dart';
 import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await LoadingHelper.init();
   Get.put(AuthController());
   Get.put(HomeController());
@@ -38,6 +41,8 @@ void main() async {
   Get.put(OrderController());
   Get.put(TranslatorProfileController());
   Get.put(CheckOutController());
+  Get.put(OTPServices());
+
   Get.put(ChatController());
   await GetStorage.init();
   PusherChannelsFlutter pusher = PusherChannelsFlutter.getInstance();
@@ -74,7 +79,7 @@ class _MyAppState extends State<MyApp> {
         // 'map': (_) => DeliveryMap(),
         'splash': (_) => SplashScreen(),
         'login': (_) => LoginScreen(),
-        'VerifyPhone': (_) => VerifyPhone(),
+        // 'VerifyPhone': (_) => VerifyPhone(),
         'NoTranslator': (_) => NoTransFound_screen(),
         'Verify': (_) => EmailOtpVerifyScreen(),
       },

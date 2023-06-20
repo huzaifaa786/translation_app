@@ -80,6 +80,11 @@ class TranslatorProfileController extends GetxController {
     totalAmount = 0.obs.toInt();
     pages = 0;
     instantType = InstantType.audio;
+    scheduleType = ScheduleType.AudioVideo;
+    documentType = DocumentType.Urgent;
+    selectedLocation = null;
+    startTime = '';
+    endTime = '';
     update();
   }
 

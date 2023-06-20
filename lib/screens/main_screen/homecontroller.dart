@@ -8,8 +8,8 @@ import 'package:translation/helper/loading.dart';
 import 'package:translation/models/user.dart';
 import 'package:translation/models/vendor.dart';
 import 'package:translation/screens/enter_amount/amountcontroller.dart';
-import 'package:translation/screens/login/authcontroller.dart';
-import 'package:translation/screens/login/login_screen.dart';
+import 'package:translation/screens/auth/authcontroller.dart';
+import 'package:translation/screens/auth/login_screen.dart';
 import 'package:translation/screens/profile/profilecontroller.dart';
 import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/screens/translator_screens/notranslator.dart';
@@ -72,8 +72,8 @@ class HomeController extends GetxController {
 
   void fetchVendors() async {
     print(fromSelectedLanguage);
+    GetStorage box = GetStorage();
     LoadingHelper.show();
-     GetStorage box = GetStorage();
      print(box.read('api_token'));
     var url = BASE_URL + 'vendor/search';
     var data = {
