@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:translation/api/api.dart';
 import 'package:translation/helper/loading.dart';
+import 'package:translation/models/account.dart';
 import 'package:translation/models/coupon.dart';
 import 'package:translation/screens/translator/translator_profile_controller.dart';
 import 'package:translation/values/controllers.dart';
@@ -13,7 +14,7 @@ import 'package:translation/values/string.dart';
 
 class CheckOutController extends GetxController {
   static CheckOutController instance = Get.find();
-
+  int balance = 0;
   paymentIntent() async {
     var url = BASE_URL + 'payment/intent';
     var data = {'price': translatorProfileController.totalAmount};
@@ -100,5 +101,19 @@ class CheckOutController extends GetxController {
     } else {
       return null;
     }
+  }
+
+   static getbalance() async {
+    LoadingHelper.show();
+    var url = BASE_URL + 'balance/get';
+    GetStorage box = GetStorage();
+    int id = box.read('user_id');
+    print(box.read('api_token'));
+    var data = {'id': id, 'api_token': box.read('api_token')};
+    var response = await Api.execute(url: url, data: data);
+    print(response);
+    LoadingHelper.dismiss();
+    Account account = Account(response['balance']);
+
   }
 }
