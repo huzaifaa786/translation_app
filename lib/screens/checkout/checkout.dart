@@ -34,10 +34,16 @@ class _Checkout_screenState extends State<Checkout_screen> {
     await CheckOutController.getcoupon();
     setState(() {});
   }
+    getbalance() async {
+    await CheckOutController.getbalance();
+    setState(() {});
+  }
 
   @override
   void initState() {
     fetchcoupon();
+    getbalance();
+
     super.initState();
   }
 
