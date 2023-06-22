@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:translation/models/order.dart';
 import 'package:translation/screens/checkout/checkout_controller.dart';
 import 'package:translation/screens/enter_amount/ppaymentmethod.dart';
 import 'package:translation/screens/translator/translator_profile_controller.dart';
@@ -14,16 +15,16 @@ import '../../../../values/colors.dart';
 import '../../../../static/large_button.dart';
 
 class Checkout_screen extends StatefulWidget {
-  const Checkout_screen({super.key});
-
+  const Checkout_screen({super.key, required this.totalAmount});
+  final String totalAmount;
   @override
   State<Checkout_screen> createState() => _Checkout_screenState();
 }
 
-enum payMethod { materCard, googlePay, applePay, walletpay }
+enum payMethod { materCard, walletpay }
 
 class _Checkout_screenState extends State<Checkout_screen> {
-  payMethod _site = payMethod.googlePay;
+  payMethod _site = payMethod.materCard;
   void toggleplan(payMethod value) {
     setState(() {
       _site = value;
@@ -31,20 +32,37 @@ class _Checkout_screenState extends State<Checkout_screen> {
   }
 
   fetchcoupon() async {
-    await CheckOutController.getcoupon();
+    await checkoutController.getcoupon();
     setState(() {});
   }
-    getbalance() async {
-    await CheckOutController.getbalance();
+
+  getbalance() async {
+    await checkoutController.getbalance();
     setState(() {});
   }
 
   @override
   void initState() {
-    fetchcoupon();
     getbalance();
 
     super.initState();
+  }
+
+  substractbalance() {
+    checkoutController.substractbalance(widget.totalAmount);
+  }
+
+  walletpayment() {
+    if (checkoutController.account!.balance! < int.parse(widget.totalAmount)) {
+      Get.snackbar("Balance low", 'Order amount is greater then your balance',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white);
+    } else {
+      translatorProfileController
+          .placeOrder(translatorProfileController.vendors);
+      substractbalance();
+    }
   }
 
   @override
@@ -127,6 +145,9 @@ class _Checkout_screenState extends State<Checkout_screen> {
                             color: greenish,
                           )),
                       child: TextField(
+                        onSubmitted: (value) {
+                          // fetchcoupon();
+                        },
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.only(left: 12, top: 14),
                           hintText: 'Promo Code',
@@ -190,21 +211,12 @@ class _Checkout_screenState extends State<Checkout_screen> {
                     ],
                   ),
                   PPaymentMethod(
-                    title: 'Googlepay',
-                    image: "assets/icons/googlepay.png",
+                    title: 'Credit/Debit card',
+                    image: "assets/icons/visapay.png",
                     groupvalue: _site,
-                    value: payMethod.googlePay,
+                    value: payMethod.materCard,
                     onchaged: () {
-                      toggleplan(payMethod.googlePay);
-                    },
-                  ),
-                  PPaymentMethod(
-                    title: 'Applepay',
-                    image: "assets/icons/applepay.png",
-                    groupvalue: _site,
-                    value: payMethod.applePay,
-                    onchaged: () {
-                      toggleplan(payMethod.applePay);
+                      toggleplan(payMethod.materCard);
                     },
                   ),
                   PPaymentMethod(
@@ -214,15 +226,6 @@ class _Checkout_screenState extends State<Checkout_screen> {
                     value: payMethod.walletpay,
                     onchaged: () {
                       toggleplan(payMethod.walletpay);
-                    },
-                  ),
-                  PPaymentMethod(
-                    title: 'Credit/visa card',
-                    image: "assets/icons/visapay.png",
-                    groupvalue: _site,
-                    value: payMethod.materCard,
-                    onchaged: () {
-                      toggleplan(payMethod.materCard);
                     },
                   ),
                   SizedBox(
@@ -243,10 +246,18 @@ class _Checkout_screenState extends State<Checkout_screen> {
                               colorText: white,
                               snackPosition: SnackPosition.BOTTOM);
                         } else {
-                          checkoutController.confirmPayment();
+                          if (_site == payMethod.walletpay) {
+                            walletpayment();
+                          } else {
+                            checkoutController.confirmPayment();
+                          }
                         }
                       } else {
-                        checkoutController.confirmPayment();
+                        if (_site == payMethod.walletpay) {
+                          walletpayment();
+                        } else {
+                          checkoutController.confirmPayment();
+                        }
                       }
                       // authController.signIn();
                       // Navigator.push(

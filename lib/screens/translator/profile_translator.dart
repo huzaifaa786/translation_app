@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:translation/models/vendor.dart';
 import 'package:translation/screens/translator/radio_btn.dart';
 import 'package:translation/screens/translator/traling_radio.dart';
+import 'package:translation/screens/translator/translator_profile_controller.dart';
 import 'package:translation/static/add_remove.dart';
 import 'package:translation/static/checkout_button.dart';
 import 'package:translation/static/day_date_card.dart';
@@ -74,7 +76,19 @@ class _profile_translatorState extends State<profile_translator> {
     print(
         'latitude: ${_locationData.latitude}, longitude: ${_locationData.longitude}');
   }
-DateTime getDateOfCurrentWeekByDayName(String dayName) => DateTime.now().subtract(Duration(days: DateTime.now().weekday - 1)).add(Duration(days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].indexOf(dayName)));
+
+  DateTime getDateOfCurrentWeekByDayName(String dayName) => DateTime.now()
+      .subtract(Duration(days: DateTime.now().weekday - 1))
+      .add(Duration(
+          days: [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday'
+      ].indexOf(dayName)));
   @override
   void initState() {
     print(widget.detail.toString());
@@ -85,545 +99,564 @@ DateTime getDateOfCurrentWeekByDayName(String dayName) => DateTime.now().subtrac
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 12),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Translator_()));
-                        },
-                        child: SvgPicture.asset("assets/icons/back.svg")),
-                    Text(
-                      "Detail",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
-                    ),
-                    InkWell(
-                      onTap: (){},
-                      child: SvgPicture.asset("assets/images/heart.svg")),
-                  ],
-                ),
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.834,
-                padding: EdgeInsets.only(right: 20, left: 20),
-                child: SingleChildScrollView(
-                  child: Column(
+        child: GetBuilder<TranslatorProfileController>(
+          builder: (controller) => Padding(
+            padding: const EdgeInsets.only(top: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 20, right: 20, bottom: 12),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ProfileDetail(
-                        name: widget.detail!.name,
-                        rating: widget.detail!.rating,
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Translator_()));
+                          },
+                          child: SvgPicture.asset("assets/icons/back.svg")),
+                      Text(
+                        "Detail",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 21),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8),
-                        child: Row(
+                      InkWell(
+                          onTap: () {},
+                          child: SvgPicture.asset("assets/images/heart.svg")),
+                    ],
+                  ),
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.834,
+                  padding: EdgeInsets.only(right: 20, left: 20),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        ProfileDetail(
+                          name: widget.detail!.name,
+                          rating: widget.detail!.rating,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: Row(
+                            children: [
+                              Text(
+                                "Language",
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.only(top: 8),
+                          width: double.infinity,
+                          child: Wrap(
+                            direction: Axis.horizontal,
+                            runAlignment: WrapAlignment.start,
+                            children: [
+                              for (var i = 0;
+                                  i < widget.detail!.language!.length;
+                                  i++)
+                                LanguageBox(lang: widget.detail!.language![i]),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: Row(
+                            children: [
+                              Text(
+                                "Certificates",
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                        widget.detail!.certificate == ''
+                            ? Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 8, bottom: 8),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text("No certificate uploaded!"),
+                                  ],
+                                ),
+                              )
+                            : Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 15, bottom: 15),
+                                child: Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                        "assets/images/certificate.svg"),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 12),
+                                      child: Text(
+                                        "lorem ipsum dolor sit",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                        Row(
                           children: [
                             Text(
-                              "Language",
+                              "About",
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(top: 8),
-                        width: double.infinity,
-                        child: Wrap(
-                          direction: Axis.horizontal,
-                          runAlignment: WrapAlignment.start,
-                          children: [
-                            for (var i = 0;
-                                i < widget.detail!.language!.length;
-                                i++)
-                              LanguageBox(lang: widget.detail!.language![i]),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.only(top: 15.0, bottom: 15),
+                          child: Text(
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae amet placerat dignissim nibh dictum sit. Pretium ornare viverra.,",
+                            style: TextStyle(fontSize: 14),
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Certificates",
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                      ),
-                      widget.detail!.certificate == ''
-                          ? Padding(
-                              padding: const EdgeInsets.only(top: 8, bottom: 8),
-                              child: Row(
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 48,
+                          margin: EdgeInsets.only(top: 8),
+                          decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: greenish)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text("No certificate uploaded!"),
+                                  SvgPicture.asset("assets/icons/audio.svg"),
+                                  Text("Audio Now"),
                                 ],
                               ),
-                            )
-                          : Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 15, bottom: 15),
-                              child: Row(
+                              Text("/"),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  SvgPicture.asset(
-                                      "assets/images/certificate.svg"),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 12),
-                                    child: Text(
-                                      "lorem ipsum dolor sit",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ),
+                                  SvgPicture.asset("assets/icons/video.svg"),
+                                  Text("Video Now"),
                                 ],
-                              ),
-                            ),
-                      Row(
-                        children: [
-                          Text(
-                            "About",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                              )
+                            ],
                           ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 15.0, bottom: 15),
-                        child: Text(
-                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae amet placerat dignissim nibh dictum sit. Pretium ornare viverra.,",
-                          style: TextStyle(fontSize: 14),
                         ),
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 48,
-                        margin: EdgeInsets.only(top: 8),
-                        decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 255, 255, 255),
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: greenish)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                SvgPicture.asset("assets/icons/audio.svg"),
-                                Text("Audio Now"),
-                              ],
-                            ),
-                            Text("/"),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                SvgPicture.asset("assets/icons/video.svg"),
-                                Text("Video Now"),
-                              ],
-                            )
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Row(
+                            children: [
+                              Text(
+                                "How many hours do you need translator",
+                                style: TextStyle(
+                                    fontSize: 14, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Row(
-                          children: [
-                            Text(
-                              "How many hours do you need translator",
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.bold),
-                            ),
-                          ],
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.all(9),
+                                width: 125,
+                                height: 43,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(
+                                      color: Color.fromRGBO(0, 0, 0, 0.24),
+                                      width: 1),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '00:30 mins',
+                                    style: TextStyle(fontSize: 12),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.all(9),
+                                width: 125,
+                                height: 43,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(
+                                      color: Color.fromRGBO(0, 0, 0, 0.24),
+                                      width: 1),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '01:00 mins',
+                                    style: TextStyle(fontSize: 12),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.all(9),
+                                width: 125,
+                                height: 43,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(
+                                      color: Color.fromRGBO(0, 0, 0, 0.24),
+                                      width: 1),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '01:30 mins',
+                                    style: TextStyle(fontSize: 12),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.all(9),
-                              width: 125,
-                              height: 43,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(
-                                    color: Color.fromRGBO(0, 0, 0, 0.24),
-                                    width: 1),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  '00:30 mins',
-                                  style: TextStyle(fontSize: 12),
-                                ),
-                                
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.all(9),
-                              width: 125,
-                              height: 43,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(
-                                    color: Color.fromRGBO(0, 0, 0, 0.24),
-                                    width: 1),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  '01:00 mins',
-                                  style: TextStyle(fontSize: 12),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.all(9),
-                              width: 125,
-                              height: 43,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(
-                                    color: Color.fromRGBO(0, 0, 0, 0.24),
-                                    width: 1),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  '01:30 mins',
-                                  style: TextStyle(fontSize: 12),
-                                ),
-                              ),
-                            ),
-                          ],
+                        TralingRadioBtn(
+                          text: 'Schedule',
+                          isSelected: schedule,
+                          ontap: () {
+                            setState(() {
+                              schedule = !schedule;
+                            });
+                          },
                         ),
-                      ),
-                      TralingRadioBtn(
-                        text: 'Schedule',
-                        isSelected: schedule,
-                        ontap: () {
-                          setState(() {
-                            schedule = !schedule;
-                          });
-                        },
-                      ),
-                      schedule == true
-                          ? Column(
-                              children: [
-                                RadioBtn(
-                                  text: 'Audio/Video',
-                                  groupvalue: _site,
-                                  value: meetingMethod.AudioVideo,
-                                  onChanged: () {
-                                    toggleplan(meetingMethod.AudioVideo);
-                                  },
-                                ),
-                                RadioBtn(
-                                  text: 'In person',
-                                  groupvalue: _site,
-                                  value: meetingMethod.InPerson,
-                                  onChanged: () {
-                                    toggleplan(meetingMethod.InPerson);
-                                  },
-                                ),
-                                _site == meetingMethod.InPerson
-                                    ? IconsButton(
-                                        title: 'Choose location',
-                                        onPressed: () {
-                                          getlocation();
-                                        })
-                                    : Container(),
-                                SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Container(
-                                    padding: EdgeInsets.only(left: 10),
-                                    height:
-                                        MediaQuery.of(context).size.height * 0.15,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      shrinkWrap: true,
-                                      itemCount: widget
-                                          .detail!.service!.schedual!.length,
-                                      itemBuilder: (context, index) =>
-                                          DateDayCard(
-                                        date: getDateOfCurrentWeekByDayName(widget.detail!.service!
-                                            .schedual![index].day!).day,
-                                        day: widget.detail!.service!
-                                            .schedual![index].day,
-                                        color: widget.detail!.service!
-                                                .schedual![index].isFrozen!
-                                            ? Color.fromARGB(255, 224, 224, 224)
-                                                .withOpacity(0.6)
-                                            : white,
+                        schedule == true
+                            ? Column(
+                                children: [
+                                  RadioBtn(
+                                    text: 'Audio/Video',
+                                    groupvalue: _site,
+                                    value: meetingMethod.AudioVideo,
+                                    onChanged: () {
+                                      toggleplan(meetingMethod.AudioVideo);
+                                    },
+                                  ),
+                                  RadioBtn(
+                                    text: 'In person',
+                                    groupvalue: _site,
+                                    value: meetingMethod.InPerson,
+                                    onChanged: () {
+                                      toggleplan(meetingMethod.InPerson);
+                                    },
+                                  ),
+                                  _site == meetingMethod.InPerson
+                                      ? IconsButton(
+                                          title: 'Choose location',
+                                          onPressed: () {
+                                            getlocation();
+                                          })
+                                      : Container(),
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Container(
+                                      padding: EdgeInsets.only(left: 10),
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.15,
+                                      child: ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        shrinkWrap: true,
+                                        itemCount: widget
+                                            .detail!.service!.schedual!.length,
+                                        itemBuilder: (context, index) =>
+                                            DateDayCard(
+                                          date: getDateOfCurrentWeekByDayName(
+                                                  widget.detail!.service!
+                                                      .schedual![index].day!)
+                                              .day,
+                                          day: widget.detail!.service!
+                                              .schedual![index].day,
+                                          color: widget.detail!.service!
+                                                  .schedual![index].isFrozen!
+                                              ? Color.fromARGB(
+                                                      255, 224, 224, 224)
+                                                  .withOpacity(0.6)
+                                              : white,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 10, bottom: 10),
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            "Set Time",
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.38,
-                                      height: 43,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        border: Border.all(
-                                            color:
-                                                Color.fromRGBO(0, 0, 0, 0.24),
-                                            width: 1),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          '00:30 ',
-                                          style: TextStyle(fontSize: 12),
-                                        ),
-                                      ),
-                                    ),
-                                    Text("To"),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.38,
-                                      height: 43,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        border: Border.all(
-                                            color:
-                                                Color.fromRGBO(0, 0, 0, 0.24),
-                                            width: 1),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          '00:30 ',
-                                          style: TextStyle(fontSize: 12),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            )
-                          : Container(),
-                      TralingRadioBtn(
-                        text: 'Document Type',
-                        isSelected: doc,
-                        ontap: () {
-                          setState(() {
-                            doc = !doc;
-                          });
-                        },
-                      ),
-                      doc == true
-                          ? Column(
-                              children: [
-                                RadioBtn(
-                                  text: 'Urgent Document',
-                                  groupvalue: _site1,
-                                  value: meetingTypeMethod.Urgent,
-                                  onChanged: () {
-                                    toggleplan1(meetingTypeMethod.Urgent);
-                                  },
-                                ),
-                                RadioBtn(
-                                  text: 'Not Urgent Document',
-                                  groupvalue: _site1,
-                                  value: meetingTypeMethod.NotUrgent,
-                                  onChanged: () {
-                                    toggleplan1(meetingTypeMethod.NotUrgent);
-                                  },
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.42,
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                              padding: EdgeInsets.all(8),
-                                              decoration: BoxDecoration(
-                                                  color:
-                                                      greenish.withOpacity(0.2),
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(25))),
-                                              child: SvgPicture.asset(
-                                                "assets/icons/doc.svg",
-                                                height: 22,
-                                              )),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(left: 12),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "Document",
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    color: Colors.black,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.42,
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                              padding: EdgeInsets.all(8),
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: greenish),
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(25))),
-                                              child: SvgPicture.asset(
-                                                "assets/icons/attachFile.svg",
-                                                height: 22,
-                                              )),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(left: 8),
-                                            child: Text(
-                                              "Attach File",
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 10, bottom: 10),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              "Set Time",
                                               style: TextStyle(
-                                                fontSize: 14,
-                                                color: Colors.black,
-                                              ),
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 10),
-                                  child: Row(
+                                    ],
+                                  ),
+                                  Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        "How many pages in a doc",
-                                        style: TextStyle(fontSize: 14),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.38,
+                                        height: 43,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border: Border.all(
+                                              color:
+                                                  Color.fromRGBO(0, 0, 0, 0.24),
+                                              width: 1),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            '00:30 ',
+                                            style: TextStyle(fontSize: 12),
+                                          ),
+                                        ),
+                                      ),
+                                      Text("To"),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.38,
+                                        height: 43,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border: Border.all(
+                                              color:
+                                                  Color.fromRGBO(0, 0, 0, 0.24),
+                                              width: 1),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            '00:30 ',
+                                            style: TextStyle(fontSize: 12),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              )
+                            : Container(),
+                        TralingRadioBtn(
+                          text: 'Document Type',
+                          isSelected: doc,
+                          ontap: () {
+                            setState(() {
+                              doc = !doc;
+                            });
+                          },
+                        ),
+                        doc == true
+                            ? Column(
+                                children: [
+                                  RadioBtn(
+                                    text: 'Urgent Document',
+                                    groupvalue: _site1,
+                                    value: meetingTypeMethod.Urgent,
+                                    onChanged: () {
+                                      toggleplan1(meetingTypeMethod.Urgent);
+                                    },
+                                  ),
+                                  RadioBtn(
+                                    text: 'Not Urgent Document',
+                                    groupvalue: _site1,
+                                    value: meetingTypeMethod.NotUrgent,
+                                    onChanged: () {
+                                      toggleplan1(meetingTypeMethod.NotUrgent);
+                                    },
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.42,
+                                        child: Row(
+                                          children: [
+                                            Container(
+                                                padding: EdgeInsets.all(8),
+                                                decoration: BoxDecoration(
+                                                    color: greenish
+                                                        .withOpacity(0.2),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                25))),
+                                                child: SvgPicture.asset(
+                                                  "assets/icons/doc.svg",
+                                                  height: 22,
+                                                )),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 12),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "Document",
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       SizedBox(
                                         width:
                                             MediaQuery.of(context).size.width *
-                                                0.2,
+                                                0.42,
                                         child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            AddRemoveBtn(
-                                                ontap: () {
-                                                  setState(() {
-                                                    i--;
-                                                  });
-                                                },
-                                                icon: '-'),
-                                            Text(i.toString()),
-                                            AddRemoveBtn(
-                                              ontap: () {
-                                                setState(() {
-                                                  i++;
-                                                });
-                                              },
-                                              icon: '+',
-                                              color: greenish,
-                                              iconcolor: white,
-                                            )
+                                            Container(
+                                                padding: EdgeInsets.all(8),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: greenish),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                25))),
+                                                child: SvgPicture.asset(
+                                                  "assets/icons/attachFile.svg",
+                                                  height: 22,
+                                                )),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 8),
+                                              child: Text(
+                                                "Attach File",
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ),
                                           ],
                                         ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 12, bottom: 12),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        "Will deliver in: 3 days",
-                                        style: TextStyle(fontSize: 14),
                                       ),
                                     ],
                                   ),
-                                ),
-                                FreeItemInput(
-                                  padding: false,
-                                ),
-                              ],
-                            )
-                          : Container(),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 16, bottom: 30),
-                        child: CheckOutButton(
-                          title: 'Checkout',
-                          price: '50',
-                          sreenRatio: 0.9,
-                          onPressed: () {
-                            setState(() {});
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Checkout_screen()));
-                            //  update(context);
-                          },
-                          color: greenish,
-                          textcolor: Colors.white,
-                          buttonWidth: 0.95,
-                        ),
-                      )
-                    ],
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "How many pages in a doc",
+                                          style: TextStyle(fontSize: 14),
+                                        ),
+                                        SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.2,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              AddRemoveBtn(
+                                                  ontap: () {
+                                                    setState(() {
+                                                      i--;
+                                                    });
+                                                  },
+                                                  icon: '-'),
+                                              Text(i.toString()),
+                                              AddRemoveBtn(
+                                                ontap: () {
+                                                  setState(() {
+                                                    i++;
+                                                  });
+                                                },
+                                                icon: '+',
+                                                color: greenish,
+                                                iconcolor: white,
+                                              )
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 12, bottom: 12),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Will deliver in: 3 days",
+                                          style: TextStyle(fontSize: 14),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  FreeItemInput(
+                                    padding: false,
+                                  ),
+                                ],
+                              )
+                            : Container(),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16, bottom: 30),
+                          child: CheckOutButton(
+                            title: 'Checkout',
+                            price: '50',
+                            sreenRatio: 0.9,
+                            onPressed: () {
+                              setState(() {});
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Checkout_screen(
+                                            totalAmount: controller.totalAmount
+                                                .toString(),
+                                          )));
+                              //  update(context);
+                            },
+                            color: greenish,
+                            textcolor: Colors.white,
+                            buttonWidth: 0.95,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

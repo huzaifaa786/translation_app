@@ -218,7 +218,6 @@ class TranslatorProfileController extends GetxController {
             ? 'schedule'
             : 'document';
     var response;
-
     if (serviceType == ServiceType.Document) {
       String fileName = file!.path.split('/').last;
 
@@ -373,7 +372,9 @@ class TranslatorProfileController extends GetxController {
     print(response);
     if (!response["error"]) {
       // placeOrder(vendor);
-      Get.to(() => Checkout_screen());
+      Get.to(() => Checkout_screen(
+            totalAmount: totalAmount.toString(),
+          ));
       LoadingHelper.dismiss();
     } else {
       LoadingHelper.dismiss();
@@ -421,5 +422,6 @@ class TranslatorProfileController extends GetxController {
     selectedDay = DateTime.now().obs;
     focusedDay = DateTime.now().obs;
     pages = 0;
+    file = null;
   }
 }
