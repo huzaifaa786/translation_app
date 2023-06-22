@@ -15,6 +15,7 @@ import 'package:translation/values/string.dart';
 class CheckOutController extends GetxController {
   static CheckOutController instance = Get.find();
   int balance = 0;
+  List<Coupon> coupons = [];
   paymentIntent() async {
     var url = BASE_URL + 'payment/intent';
     var data = {'price': translatorProfileController.totalAmount};
@@ -85,7 +86,7 @@ class CheckOutController extends GetxController {
     LoadingHelper.dismiss();
   }
 
-  static getcoupon() async {
+  getcoupon() async {
     LoadingHelper.show();
     var url = BASE_URL + 'getcoupon';
     var data;
@@ -94,16 +95,20 @@ class CheckOutController extends GetxController {
     data = {'api_token': box.read('api_token')!};
     var response = await Api.execute(url: url, data: data);
     if (!response['error']) {
-      Coupon? coupon = Coupon(response['coupons']);
-      print(coupon);
+      coupons = [];
+      for (var van in response['coupons']) {
+        coupons.add(Coupon(van));
+      }
+      print(response);
       LoadingHelper.dismiss();
-      return coupon;
     } else {
-      return null;
+      print(response['error']);
+      LoadingHelper.dismiss();
     }
   }
 
-   static getbalance() async {
+  Account? account;
+  getbalance() async {
     LoadingHelper.show();
     var url = BASE_URL + 'balance/get';
     GetStorage box = GetStorage();
@@ -113,7 +118,22 @@ class CheckOutController extends GetxController {
     var response = await Api.execute(url: url, data: data);
     print(response);
     LoadingHelper.dismiss();
-    Account account = Account(response['balance']);
+    account = Account(response['balance']);
+  }
 
+  substractbalance(totalAmount) async {
+    LoadingHelper.show();
+    var url = BASE_URL + 'balancesubtract';
+    GetStorage box = GetStorage();
+    int id = box.read('user_id');
+    print(box.read('api_token'));
+    var data = {
+      'id': id,
+      'api_token': box.read('api_token'),
+      'balance': totalAmount
+    };
+    var response = await Api.execute(url: url, data: data);
+    print(response);
+    LoadingHelper.dismiss();
   }
 }

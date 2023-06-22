@@ -805,7 +805,17 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                             onPressed: () {
                               if (controller.serviceType ==
                                   ServiceType.Document) {
-                                Get.to(() => Checkout_screen());
+                                if (translatorProfileController.file == null) {
+                                  Get.snackbar("Error!", "file can't be null",
+                                      snackPosition: SnackPosition.BOTTOM,
+                                      backgroundColor: Colors.red,
+                                      colorText: Colors.white);
+                                  return;
+                                }
+                                Get.to(() => Checkout_screen(
+                                      totalAmount:
+                                          controller.totalAmount.toString(),
+                                    ));
                               } else {
                                 controller.checkavailability(widget.detail!);
                               }
