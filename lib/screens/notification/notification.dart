@@ -38,67 +38,73 @@ class _Notification_screenState extends State<Notification_screen> {
       backgroundColor: Colors.white,
       body: SafeArea(
           child: GetBuilder<NotificationController>(
-        builder: (controller) => Padding(
-          padding: const EdgeInsets.only(left: 12, right: 12),
-          child: Column(
-            children: [
-              TitleTopbar(
-                text: 'Notifications',
-                ontap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              SizedBox(
-                height: 23,
-              ),
-              controller.notifications.length != 0
-                  ? Container(
-                      height: MediaQuery.of(context).size.height * 0.81,
-                      child: ListView.builder(
-                          itemCount: controller.notifications.length,
-                          itemBuilder: (context, index) => NotificationTile(
-                                ontap: controller.notifications[index].orderr!
-                                            .status ==
-                                        '3'
-                                    ? () {
-                                        showModalBottomSheet(
-                                          context: context,
-                                          isScrollControlled: true,
-                                          shape: const RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.vertical(
-                                              top: Radius.circular(40),
+        builder: (controller) => Column(
+          children: [
+            TitleTopbar(
+              text: 'Notifications',
+              ontap: () {
+                Navigator.pop(context);
+              },
+            ),
+            SizedBox(
+              height: 23,
+            ),
+            controller.notifications.length != 0
+                ? Padding(
+                    padding: const EdgeInsets.only(left: 12, right: 12),
+                    child: Flexible(
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * 0.81,
+                        child: ListView.builder(
+                            itemCount: controller.notifications.length,
+                            itemBuilder: (context, index) => NotificationTile(
+                                  ontap: controller.notifications[index].orderr!
+                                              .status ==
+                                          '3'
+                                      ? () {
+                                          showModalBottomSheet(
+                                            context: context,
+                                            isScrollControlled: true,
+                                            shape: const RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.vertical(
+                                                top: Radius.circular(40),
+                                              ),
                                             ),
-                                          ),
-                                          builder: (context) => Wrap(children: [
-                                            NotificationModal(
-                                                notification: controller
-                                                    .notifications[index])
-                                          ]),
-                                        );
-                                      }
-                                    : () {},
-                                name: controller
-                                    .notifications[index].vendor!.username,
-                                image: controller
-                                    .notifications[index].vendor!.profilePic,
-                                title: controller.notifications[index].title,
-                                status: controller
-                                    .notifications[index].orderr!.status,
-                              )),
-                    )
-                  : Container(
-                      height: MediaQuery.of(context).size.height * 0.22,
+                                            builder: (context) => Wrap(
+                                                children: [
+                                                  NotificationModal(
+                                                      notification: controller
+                                                          .notifications[index])
+                                                ]),
+                                          );
+                                        }
+                                      : () {},
+                                  name: controller
+                                      .notifications[index].vendor!.username,
+                                  image: controller
+                                      .notifications[index].vendor!.profilePic,
+                                  title: controller.notifications[index].title,
+                                  status: controller
+                                      .notifications[index].orderr!.status,
+                                )),
+                      ),
+                    ),
+                  )
+                : Flexible(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.81,
                       width: MediaQuery.of(context).size.width,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text("No Order Found!"),
+                          Text("No Notification Found!"),
                         ],
                       ),
                     ),
-            ],
-          ),
+                  ),
+          ],
         ),
       )),
     );

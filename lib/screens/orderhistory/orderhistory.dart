@@ -41,39 +41,39 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 Navigator.pop(context);
               },
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0),
-              child: Column(
-                children: [
-                  controller.orders.length != 0
-                      ? Container(
-                          height: MediaQuery.of(context).size.height * 0.81,
-                          child: ListView.builder(
-                              itemCount: controller.orders.length,
-                              itemBuilder: (context, index) => HistoryCard(
-                                    id: controller.orders[index].id,
-                                    name: controller.orders[index].vendor!.name,
-                                    image: controller
-                                        .orders[index].vendor!.profilePic,
-                                    price: controller.orders[index].price,
-                                    type: controller.orders[index].servicetype,
-                                    status: controller.orders[index].status,
-                                  )),
-                        )
-                      : Container(
-                          height: MediaQuery.of(context).size.height * 0.22,
-                          width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text("No Order Found!"),
-                            ],
-                          ),
-                        ),
-                ],
-              ),
-            )
+            SizedBox(
+              height: 23,
+            ),
+            controller.orders.length != 0
+                ? Flexible(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.85,
+                      child: ListView.builder(
+                          itemCount: controller.orders.length,
+                          itemBuilder: (context, index) => HistoryCard(
+                                id: controller.orders[index].id,
+                                name: controller.orders[index].vendor!.name,
+                                image:
+                                    controller.orders[index].vendor!.profilePic,
+                                price: controller.orders[index].price,
+                                type: controller.orders[index].servicetype,
+                                status: controller.orders[index].status,
+                              )),
+                    ),
+                  )
+                : Flexible(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.85,
+                      width: MediaQuery.of(context).size.width,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text("No Order Found!"),
+                        ],
+                      ),
+                    ),
+                  )
           ],
         ),
       )),

@@ -1,20 +1,12 @@
-import 'dart:convert';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:translation/api/api.dart';
 import 'package:translation/helper/loading.dart';
 import 'package:translation/models/user.dart';
 import 'package:translation/models/vendor.dart';
-import 'package:translation/screens/enter_amount/amountcontroller.dart';
-import 'package:translation/screens/auth/authcontroller.dart';
 import 'package:translation/screens/auth/login_screen.dart';
-import 'package:translation/screens/profile/profilecontroller.dart';
-import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/screens/translator_screens/notranslator.dart';
 import 'package:translation/screens/translator_screens/translator_screen.dart';
-import 'package:translation/values/controllers.dart';
 import 'package:translation/values/string.dart';
 import 'package:get_storage/get_storage.dart';
 

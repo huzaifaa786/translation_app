@@ -36,9 +36,14 @@ class TopBar extends StatelessWidget {
               SizedBox(width: 8),
               InkWell(
                 onTap: onNotiTap,
-                child: SvgPicture.asset(
-                  'assets/images/bell.svg',
-                  color: white,
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: SvgPicture.asset(
+                    'assets/images/bell.svg',
+                    color: white,
+                    height: 30,
+                    width: 30,
+                  ),
                 ),
               ),
               // InkWell(

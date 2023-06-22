@@ -32,7 +32,7 @@ class HistoryCard extends StatelessWidget {
     return InkWell(
       onTap: ontap,
       child: Padding(
-        padding: const EdgeInsets.all(4),
+        padding: const EdgeInsets.only(top:4,bottom: 4,left: 12,right: 12),
         child: Column(
           children: [
             Row(
@@ -56,55 +56,59 @@ class HistoryCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Order id # ' + id.toString(),
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: 'Mazzard'),
-                    ),
-                    SizedBox(
-                      height: 4,
-                    ),
-                    Text(
-                      name,
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: 'Mazzard'),
-                    ),
-                    SizedBox(
-                      height: 4,
-                    ),
-                    Text(
-                      type,
-                      style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: 'Mazzard'),
-                    ),
-                    SizedBox(
-                      height: 4,
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.access_time_outlined,
-                          size: 14,
-                        ),
-                        SizedBox(
-                          width: 4,
-                        ),
-                        Text(
-                          "08:00-16:00 | 03.12.2022 ",
-                          style: TextStyle(fontSize: 11),
-                        ),
-                      ],
-                    ),
-                  ],
+                Container(
+                   padding: const EdgeInsets.only(left: 8),
+                        width: MediaQuery.of(context).size.width * 0.45,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Order id # ' + id.toString(),
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'Mazzard'),
+                      ),
+                      SizedBox(
+                        height: 4,
+                      ),
+                      Text(
+                        name,
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'Mazzard'),
+                      ),
+                      SizedBox(
+                        height: 4,
+                      ),
+                      Text(
+                        type,
+                        style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'Mazzard'),
+                      ),
+                      SizedBox(
+                        height: 4,
+                      ),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.access_time_outlined,
+                            size: 14,
+                          ),
+                          SizedBox(
+                            width: 4,
+                          ),
+                          Text(
+                            "08:00-16:00 | 03.12.2022 ",
+                            style: TextStyle(fontSize: 11),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

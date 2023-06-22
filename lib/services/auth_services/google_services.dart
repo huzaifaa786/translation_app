@@ -41,7 +41,6 @@ class GoogleServices {
       url: url,
       data: data,
     );
-    print('00000000000000000000000000000000000000000000001');
     print(response);
     LoadingHelper.dismiss();
     if (!response['error']) {
@@ -49,11 +48,8 @@ class GoogleServices {
       GetStorage box = GetStorage();
       await box.write('api_token', user.apiToken!);
       await box.write('user_id', user.id);
-      print('jgfjfj64444444444444444444444444444444444444444444444444444');
       return true;
     } else {
-      print('00000000000000000000000000000000000000000000002');
-      print('error');
       return false;
     }
   }

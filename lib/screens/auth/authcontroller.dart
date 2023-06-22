@@ -253,6 +253,10 @@ class AuthController extends GetxController {
           await _googleSignIn.signIn();
       var email1 = googleSignInAccount!.email;
       var name = googleSignInAccount.displayName;
+      var image = googleSignInAccount.photoUrl;
+      print('image');
+      print(image);
+
       LoadingHelper.dismiss();
       if (await GoogleServices.googlelogin(email1)) {
         Get.to(() => Home_screen());

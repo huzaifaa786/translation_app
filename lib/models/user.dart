@@ -5,6 +5,7 @@ class User {
   String? number;
   String? email;
   String? profilePic;
+  String? type;
 
   User(user) {
     id = user['id'];
@@ -13,5 +14,6 @@ class User {
     apiToken = user['api_token'] ?? '';
     email = user['email'];
     profilePic = user['profilepic'] ?? '';
+    type = user['user_type'];
   }
 }
