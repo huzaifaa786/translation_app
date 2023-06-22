@@ -34,7 +34,7 @@ class GoogleServices {
       'username': name,
       'email': email.toString(),
       'firebase_token': token,
-      // 'user_type': type,
+      'user_type': type,
     };
 
     var response = await Api.execute(
