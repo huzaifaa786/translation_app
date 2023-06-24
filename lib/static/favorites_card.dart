@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class FavoritesCard extends StatelessWidget {
-  const FavoritesCard({super.key});
+  const FavoritesCard({super.key,this.ontap});
+  final ontap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: ontap,
       child: Card(
         color: Color.fromARGB(255, 255, 255, 255),
         child: Container(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class SearchTopBar extends StatelessWidget {
   const   SearchTopBar({super.key});
@@ -25,7 +26,7 @@ class SearchTopBar extends StatelessWidget {
         children: [
           GestureDetector(
               onTap: () {
-                Navigator.pop(context);
+                Get.back();
               },
               child: FittedBox(
                 fit: BoxFit.scaleDown,

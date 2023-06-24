@@ -27,17 +27,15 @@ class Home_screen extends StatefulWidget {
 }
 
 class _Home_screenState extends State<Home_screen> {
+  PersistentTabController _controller =
+      PersistentTabController(initialIndex: 0);
   @override
   Widget build(BuildContext context) {
-    PersistentTabController _controller;
-    _controller = PersistentTabController(initialIndex: 0);
-
     return PersistentTabView(
       context,
-      // controller: _controller,
+      controller: _controller,
       screens: _buildScreens(),
       items: _navBarItem(),
-
       navBarStyle: NavBarStyle.style16,
       decoration: NavBarDecoration(
         borderRadius: BorderRadius.circular(1.0),
@@ -45,53 +43,60 @@ class _Home_screenState extends State<Home_screen> {
       ),
     );
   }
-}
 
-List<PersistentBottomNavBarItem> _navBarItem() {
-  return [
-    PersistentBottomNavBarItem(
-      icon: FaIcon(FontAwesomeIcons.house),
-      title: ('Home'),
-      textStyle: TextStyle(
-          fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
-      iconSize: 20,
-      activeColorSecondary: greenish,
-      inactiveColorPrimary: kblack,
-    ),
-    PersistentBottomNavBarItem(
-      icon: FaIcon(FontAwesomeIcons.commentDots),
-      iconSize: 20,
-      title: ('Chat'),
-      textStyle: TextStyle(
-          fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
-      activeColorSecondary: greenish,
-      inactiveColorPrimary: kblack,
-    ),
-    PersistentBottomNavBarItem(
-      icon: Icon(Icons.video_call_sharp),
-      activeColorPrimary: greenish,
-      activeColorSecondary: white,
-      inactiveColorPrimary: kblack,
-    ),
-    PersistentBottomNavBarItem(
-      icon: FaIcon(FontAwesomeIcons.clipboardList),
-      iconSize: 20,
-      title: ('Orders'),
-      textStyle: TextStyle(
-          fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
-      activeColorSecondary: greenish,
-      inactiveColorPrimary: kblack,
-    ),
-    PersistentBottomNavBarItem(
-      icon: FaIcon(FontAwesomeIcons.gear),
-      iconSize: 20,
-      title: ('Setting'),
-      textStyle: TextStyle(
-          fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
-      activeColorSecondary: greenish,
-      inactiveColorPrimary: kblack,
-    ),
-  ];
+  List<PersistentBottomNavBarItem> _navBarItem() {
+    return [
+      PersistentBottomNavBarItem(
+        // onPressed: (BuildContext? context) async {
+        //   homeController.clear();
+        //   await homeController.getuser();
+        //   setState(() {
+        //     _controller.index = 0;
+        //   });
+        // },
+        icon: FaIcon(FontAwesomeIcons.house),
+        title: ('Home'),
+        textStyle: TextStyle(
+            fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
+        iconSize: 20,
+        activeColorSecondary: greenish,
+        inactiveColorPrimary: kblack,
+      ),
+      PersistentBottomNavBarItem(
+        icon: FaIcon(FontAwesomeIcons.commentDots),
+        iconSize: 20,
+        title: ('Chat'),
+        textStyle: TextStyle(
+            fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
+        activeColorSecondary: greenish,
+        inactiveColorPrimary: kblack,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(Icons.video_call_sharp),
+        activeColorPrimary: greenish,
+        activeColorSecondary: white,
+        inactiveColorPrimary: kblack,
+      ),
+      PersistentBottomNavBarItem(
+        icon: FaIcon(FontAwesomeIcons.clipboardList),
+        iconSize: 20,
+        title: ('Orders'),
+        textStyle: TextStyle(
+            fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
+        activeColorSecondary: greenish,
+        inactiveColorPrimary: kblack,
+      ),
+      PersistentBottomNavBarItem(
+        icon: FaIcon(FontAwesomeIcons.gear),
+        iconSize: 20,
+        title: ('Setting'),
+        textStyle: TextStyle(
+            fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
+        activeColorSecondary: greenish,
+        inactiveColorPrimary: kblack,
+      ),
+    ];
+  }
 }
 
 @override
@@ -145,20 +150,6 @@ class _HomeState extends State<Home> {
                 child: Column(
                   children: [
                     MainStackCard(
-                      onFavTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Favorites_screen(),
-                            ));
-                      },
-                      onNotiTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Notification_screen(),
-                            ));
-                      },
                       onProfileTap: () {
                         Navigator.push(
                             context,

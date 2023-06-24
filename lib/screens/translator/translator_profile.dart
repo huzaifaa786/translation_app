@@ -16,7 +16,6 @@ import 'package:translation/static/lang_box.dart';
 import 'package:translation/static/profile_detail.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/screens/checkout/checkout.dart';
-import 'package:translation/screens/translator_screens/translator_screen.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation/values/controllers.dart';
 
@@ -63,10 +62,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                     children: [
                       GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Translator_()));
+                            Get.back();
                           },
                           child: SvgPicture.asset("assets/icons/back.svg")),
                       Text(

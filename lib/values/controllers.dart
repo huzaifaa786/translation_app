@@ -1,6 +1,7 @@
 import 'package:translation/screens/checkout/checkout_controller.dart';
 import 'package:translation/screens/enter_amount/amountcontroller.dart';
 import 'package:translation/screens/auth/authcontroller.dart';
+import 'package:translation/screens/favorites_screen/favorites_controller.dart';
 import 'package:translation/screens/main_screen/homecontroller.dart';
 import 'package:translation/screens/notification/notificationcontroller.dart';
 import 'package:translation/screens/orderhistory/ordercontroller.dart';
@@ -22,3 +23,4 @@ TranslatorProfileController translatorProfileController =
 CheckOutController checkoutController = CheckOutController.instance;
 OTPServices otpServices = OTPServices.instance;
 ChatController chatController = ChatController.instance;
+FavController favController = FavController.instance;

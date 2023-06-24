@@ -22,14 +22,20 @@ class Notification_screen extends StatefulWidget {
 }
 
 class _Notification_screenState extends State<Notification_screen> {
-  fetchOrder() async {
+  fetchNoti() async {
     await notificationController.getnoti();
+    setState(() {});
+  }
+
+  readnotification() async {
+    await notificationController.readnotifications();
     setState(() {});
   }
 
   @override
   void initState() {
-    fetchOrder();
+    fetchNoti();
+    readnotification();
     super.initState();
   }
 

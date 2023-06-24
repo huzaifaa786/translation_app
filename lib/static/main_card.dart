@@ -5,10 +5,8 @@ import 'package:translation/screens/freeitem.dart/freeitem.dart';
 
 class MainStackCard extends StatelessWidget {
   const MainStackCard(
-      {super.key, this.onNotiTap, this.onFavTap, this.onProfileTap, this.name});
-  final onNotiTap;
+      {super.key,this.onProfileTap, this.name});
   final onProfileTap;
-  final onFavTap;
   final name;
 
   @override
@@ -33,8 +31,6 @@ class MainStackCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TopBar(
-                onFavTap: onFavTap,
-                onNotiTap: onNotiTap,
                 onProfileTap: onProfileTap,
               ),
               SizedBox(
