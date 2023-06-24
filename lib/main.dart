@@ -1,3 +1,7 @@
+
+
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -46,9 +50,8 @@ void main() async {
   Get.put(FavController());
   Get.put(ChatController());
   await GetStorage.init();
-  PusherChannelsFlutter pusher = PusherChannelsFlutter.getInstance();
-  await pusher.init(apiKey: "4341ec79756753dcfb7b", cluster: "ap2");
-  await pusher.connect();
+
+  
   Stripe.publishableKey =
       'pk_test_51MlTmPAN8zi2vyFswyWqxxJKbe8NnGRtoOo55Z2P65V8EykUYWk034zKSkXkh2THsQZ6OYZzdoQOUxXmSmPiPz9G00dQnMo69A';
   Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';

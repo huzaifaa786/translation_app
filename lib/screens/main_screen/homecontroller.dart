@@ -72,7 +72,7 @@ class HomeController extends GetxController {
     print(fromSelectedLanguage);
     GetStorage box = GetStorage();
     LoadingHelper.show();
-     print(box.read('api_token'));
+    print(box.read('api_token'));
     var url = BASE_URL + 'vendor/search';
     var data = {
       'api_token': box.read('api_token'),
@@ -111,7 +111,6 @@ class HomeController extends GetxController {
 
 /////////////////////////////////// Check Notifications /////////////////////////////////////////////////////////
 
-
   CheckNotications() async {
     LoadingHelper.show();
     var url = BASE_URL + 'user/check';
@@ -120,12 +119,12 @@ class HomeController extends GetxController {
     String api_token = box.read('api_token');
     var data = {'api_token': api_token};
     var response = await Api.execute(url: url, data: data);
-
+    print(response);
     LoadingHelper.dismiss();
     if (response['exist'] == true) {
       return true;
     } else {
       return false;
     }
-  }  
+  }
 }

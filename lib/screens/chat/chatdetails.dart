@@ -13,29 +13,27 @@ import 'package:translation/values/controllers.dart';
 import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
 
 class Chatdetails_screen extends StatefulWidget {
-  const Chatdetails_screen({super.key});
-
+  const Chatdetails_screen({super.key, this.id});
+  final String? id;
   @override
   State<Chatdetails_screen> createState() => _Chatdetails_screenState();
 }
 
 class _Chatdetails_screenState extends State<Chatdetails_screen> {
-   onEvent(PusherEvent event) {
-   log ("onEvent: $event");
-    print('fdfddddddddddddfdfdffdfdfdfdfdfdfdfdf');
- 
-  }
-
   PusherChannelsFlutter pusher = PusherChannelsFlutter.getInstance();
-  chatpusher() async {
-    
-       ;
-  }
 
   @override
   void initState() {
-    chatpusher();
+    chatController.initPusher(widget.id);
+    
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    pusher.disconnect();
+    pusher.unsubscribe(channelName: "private-chatify.${widget.id}");
+    super.dispose();
   }
 
   @override
@@ -187,7 +185,6 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
                     child: TextField(
                       onSubmitted: (value) {
                         chatController.sendmassage();
-                        chatpusher();
                       },
                       controller: chatController.massage,
                       decoration: InputDecoration(

@@ -70,6 +70,12 @@ class _Home_screenState extends State<Home_screen> {
             fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
         activeColorSecondary: greenish,
         inactiveColorPrimary: kblack,
+        onPressed: (BuildContext? context) async {
+          await chatController.getContacts();
+          setState(() {
+            _controller.index = 1;
+          });
+        },
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.video_call_sharp),

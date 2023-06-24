@@ -135,6 +135,7 @@ class HistoryCard extends StatelessWidget {
                               ? Colors.red
                               : greenish,
                     ),
+                   
                   ],
                 )
               ],

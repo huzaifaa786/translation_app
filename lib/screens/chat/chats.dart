@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:translation/screens/chat/chatdetails.dart';
 
 import 'package:translation/static/chart.dart';
+import 'package:translation/values/controllers.dart';
 
 class Chats_screen extends StatefulWidget {
   const Chats_screen({super.key});
@@ -12,6 +13,11 @@ class Chats_screen extends StatefulWidget {
 }
 
 class _Chats_screenState extends State<Chats_screen> {
+  @override
+  void initState() {
+     chatController.getContacts();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,17 +95,17 @@ class _Chats_screenState extends State<Chats_screen> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: 5,
+              itemCount: chatController.contacts.length,
               itemBuilder: (context, index) => ChartCards(
                   onPressed: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Chatdetails_screen(),
+                          builder: (context) => Chatdetails_screen(id:chatController.contacts[index].id),
                         ));
                   },
                   msg: 'ok see you then',
-                  name: 'Cody Fisher',
+                  name: chatController.contacts[index].username,
                   imgicon: "assets/images/splash_3.svg"),
             ),
           ),

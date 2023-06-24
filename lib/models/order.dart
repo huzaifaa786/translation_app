@@ -9,7 +9,7 @@ class Order {
   String? servicetype;
   String? documenttype;
   String? status;
-  int? vendor_id;
+  String? vendor_id;
   User? user;
   Vendor? vendor;
    //  Orderdoc? document;
