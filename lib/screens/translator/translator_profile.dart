@@ -16,7 +16,6 @@ import 'package:translation/static/lang_box.dart';
 import 'package:translation/static/profile_detail.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/screens/checkout/checkout.dart';
-import 'package:translation/screens/translator_screens/translator_screen.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation/values/controllers.dart';
 
@@ -35,8 +34,12 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
     setState(() {});
   }
 
+  DateTime now = DateTime.now();
+  DateTime? nextSixMonths;
+
   @override
   void initState() {
+    nextSixMonths = now.add(Duration(days: 180));
     vendor();
     super.initState();
   }
@@ -59,10 +62,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                     children: [
                       GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Translator_()));
+                            Get.back();
                           },
                           child: SvgPicture.asset("assets/icons/back.svg")),
                       Text(
@@ -444,14 +444,26 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                 children: [
                                                   Expanded(
                                                     child: TableCalendar(
-                                                      firstDay: DateTime.utc(
-                                                          2010, 10, 16),
-                                                      lastDay: DateTime.utc(
-                                                          2030, 3, 14),
+                                                      calendarFormat:
+                                                          CalendarFormat.month,
+                                                      availableCalendarFormats: const {
+                                                        CalendarFormat.month:
+                                                            'Month',
+                                                        // CalendarFormat.week: 'Week',
+                                                      },
+                                                      firstDay: now,
+                                                      lastDay: nextSixMonths!,
                                                       focusedDay: controller
                                                           .focusedDay.value,
                                                       calendarStyle:
                                                           CalendarStyle(
+                                                        todayDecoration:
+                                                            BoxDecoration(
+                                                                color: greenish
+                                                                    .withOpacity(
+                                                                        0.5),
+                                                                shape: BoxShape
+                                                                    .circle),
                                                         selectedDecoration:
                                                             BoxDecoration(
                                                           color:

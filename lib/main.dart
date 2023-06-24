@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:translation/helper/loading.dart';
+import 'package:translation/screens/favorites_screen/favorites_controller.dart';
 import 'package:translation/screens/forgot.dart/emailOtp.dart';
 import 'package:translation/screens/checkout/checkout_controller.dart';
 import 'package:translation/screens/enter_amount/amountcontroller.dart';
@@ -42,7 +43,7 @@ void main() async {
   Get.put(TranslatorProfileController());
   Get.put(CheckOutController());
   Get.put(OTPServices());
-
+  Get.put(FavController());
   Get.put(ChatController());
   await GetStorage.init();
   PusherChannelsFlutter pusher = PusherChannelsFlutter.getInstance();

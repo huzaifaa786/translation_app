@@ -57,7 +57,7 @@ class NotificationTile extends StatelessWidget {
                     children: [
                       Container(
                         padding: const EdgeInsets.only(left: 12),
-                        width: MediaQuery.of(context).size.width * 0.5,
+                        width: MediaQuery.of(context).size.width * 0.45,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

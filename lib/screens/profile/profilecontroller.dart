@@ -99,6 +99,8 @@ class ProfileController extends GetxController {
       LoadingHelper.dismiss();
       if (!response['error']) {
         user = User(response['user']);
+        homeController.user = User(response['user']);
+        homeController.refresh();
         update();
         return callback(true);
       } else {

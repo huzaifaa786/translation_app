@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:translation/models/vendor.dart';
 import 'dart:math' as math;
-
 import 'package:translation/static/large_button.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/values/controllers.dart';

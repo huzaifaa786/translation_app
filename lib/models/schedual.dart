@@ -6,12 +6,9 @@ class Schedual {
   bool? isFrozen;
 
   Schedual(schedual){
-
     day = schedual['day'];
     startTime = schedual['startTime'];
     endTime = schedual['endTime'];
     isFrozen = schedual['isFrozen'];
   }
-
- 
 }

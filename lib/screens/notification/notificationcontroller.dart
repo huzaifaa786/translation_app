@@ -10,7 +10,10 @@ class NotificationController extends GetxController {
   static NotificationController instance = Get.find();
 
   List<Notificationn> notifications = [];
-  double? rating; 
+  double? rating;
+
+/////////////////////////////////// Get Notifications /////////////////////////////////////////////////////////
+
   getnoti() async {
     LoadingHelper.show();
     var url = BASE_URL + 'user/notification';
@@ -37,7 +40,9 @@ class NotificationController extends GetxController {
     }
   }
 
-  addrating(rating, id,vendor_id) async {
+/////////////////////////////////// Gave Rating After Order complete on noti /////////////////////////////////////////////////////////
+
+  addrating(rating, id, vendor_id) async {
     LoadingHelper.show();
     var url = BASE_URL + 'user/rating';
     GetStorage box = GetStorage();
@@ -47,21 +52,33 @@ class NotificationController extends GetxController {
     var data = {
       'rating': rating,
       'order_id': id,
-      'vendor_id':vendor_id,
+      'vendor_id': vendor_id,
       'api_token': api_token,
     };
     print(data);
     var response = await Api.execute(url: url, data: data);
     if (!response['error']) {
-    
       LoadingHelper.dismiss();
     } else {
-     Get.snackbar(
-            "Invalid Password.", 'You give rating time on signal order',
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Colors.red,
-            colorText: Colors.white);
+      Get.snackbar("Invalid Password.", 'You give rating time on signal order',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white);
       LoadingHelper.dismiss();
     }
+  }
+
+/////////////////////////////////// Read Notifications /////////////////////////////////////////////////////////
+
+  readnotifications() async {
+    LoadingHelper.show();
+    print('object');
+    var url = BASE_URL + 'usernotification/read';
+    GetStorage box = GetStorage();
+    String api_token = box.read('api_token');
+    var data;
+    data = {'api_token': api_token};
+    await Api.execute(url: url, data: data);
+    LoadingHelper.dismiss();
   }
 }

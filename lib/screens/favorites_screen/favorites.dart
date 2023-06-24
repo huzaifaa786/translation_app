@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:translation/screens/main_screen/home.dart';
+import 'package:get/get.dart';
+import 'package:translation/screens/translator/translator_profile.dart';
+import 'package:translation/screens/translator_screens/translator_screen.dart';
 import 'package:translation/static/favorites_card.dart';
 import 'package:translation/static/titletopbar.dart';
+import 'package:translation/values/controllers.dart';
 
 class Favorites_screen extends StatefulWidget {
   const Favorites_screen({super.key});
@@ -12,6 +14,17 @@ class Favorites_screen extends StatefulWidget {
 }
 
 class _Favorites_screenState extends State<Favorites_screen> {
+  fetchFav() async {
+    await favController.getFav();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    fetchFav();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,16 +34,22 @@ class _Favorites_screenState extends State<Favorites_screen> {
             TitleTopbar(
               text: 'Favorites',
               ontap: () {
-                Navigator.pop(context);
+                Get.back();
               },
             ),
             SizedBox(
               height: 20,
             ),
-             Expanded(
+            Expanded(
               child: ListView.builder(
-                  itemCount: 5,
-                  itemBuilder: (context, index) => FavoritesCard()),
+                  itemCount: favController.Fav.length,
+                  itemBuilder: (context, index) => FavoritesCard(
+                        ontap: () {
+                          Get.to(() => TraslatorProfile(
+                                detail: favController.Fav[index].vendor,
+                              ));
+                        },
+                      )),
             ),
           ],
         ),
