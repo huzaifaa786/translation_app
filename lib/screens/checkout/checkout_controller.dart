@@ -15,7 +15,10 @@ import 'package:translation/values/string.dart';
 class CheckOutController extends GetxController {
   static CheckOutController instance = Get.find();
   int balance = 0;
-  List<Coupon> coupons = [];
+  String? percentage = '0';
+  String? amountDeducted = '0';
+  TextEditingController coupon = TextEditingController();
+  // List<Coupon> coupons = [];
   paymentIntent() async {
     var url = BASE_URL + 'payment/intent';
     var data = {'price': translatorProfileController.totalAmount};
@@ -86,23 +89,69 @@ class CheckOutController extends GetxController {
     LoadingHelper.dismiss();
   }
 
-  getcoupon() async {
+  Coupon? coupons;
+  getcoupon(void Function(bool) callback) async {
     LoadingHelper.show();
     var url = BASE_URL + 'getcoupon';
     var data;
     GetStorage box = GetStorage();
     print(box.read('api_token'));
-    data = {'api_token': box.read('api_token')!};
+    data = {
+      'api_token': box.read('api_token')!,
+      'coupon': coupon.text.toString()
+    };
     var response = await Api.execute(url: url, data: data);
     if (!response['error']) {
-      coupons = [];
-      for (var van in response['coupons']) {
-        coupons.add(Coupon(van));
-      }
-      print(response);
+      coupons = Coupon(response['coupons']);
+
+      LoadingHelper.dismiss();
+
+      update();
+      return callback(true);
+    } else {
+      LoadingHelper.dismiss();
+      print(response['error_data']);
+      Get.snackbar('ERROR!', response['error_data'],
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white);
+      return callback(false);
+    }
+  }
+
+  discount(totalAmount) {
+    var per = int.parse(coupons!.percentage!) / 100;
+    var discount = per * int.parse(totalAmount);
+    print(discount);
+    print(double.parse(coupons!.maximum!));
+    if (discount <= double.parse(coupons!.maximum!)) {
+      amountDeducted = discount.toStringAsFixed(0);
+      var amount = int.parse(amountDeducted!);
+      var totalp = int.parse(totalAmount) - amount;
+      totalAmount = totalp.toString();
+      percentage = coupons!.percentage!;
+      update();
+      translatorProfileController.totalAmount = int.parse(totalAmount);
+
+      print(translatorProfileController.totalAmount);
       LoadingHelper.dismiss();
     } else {
-      print(response['error']);
+      var per = int.parse(coupons!.maximum!) / totalAmount;
+      // percentage = per.toStringAsFixed(3);
+      var discount = per * 100;
+      percentage = discount.toStringAsFixed(2);
+      var perVal = double.parse(percentage.toString()) / 100;
+      var discountval = perVal * totalAmount!;
+      amountDeducted = discountval.toStringAsFixed(0);
+      var amount = int.parse(amountDeducted!);
+      var totalp = totalAmount! - amount;
+      totalAmount = totalp.toInt();
+      update();
+      translatorProfileController.totalAmount = totalAmount;
+
+      print(translatorProfileController.totalAmount);
+
+      translatorProfileController.refresh();
       LoadingHelper.dismiss();
     }
   }

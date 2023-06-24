@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:translation/helper/loading.dart';
+import 'package:translation/models/coupon.dart';
 import 'package:translation/models/order.dart';
 import 'package:translation/screens/checkout/checkout_controller.dart';
 import 'package:translation/screens/enter_amount/ppaymentmethod.dart';
@@ -25,15 +27,11 @@ enum payMethod { materCard, walletpay }
 
 class _Checkout_screenState extends State<Checkout_screen> {
   payMethod _site = payMethod.materCard;
+  bool readonly = false;
   void toggleplan(payMethod value) {
     setState(() {
       _site = value;
     });
-  }
-
-  fetchcoupon() async {
-    await checkoutController.getcoupon();
-    setState(() {});
   }
 
   getbalance() async {
@@ -44,7 +42,7 @@ class _Checkout_screenState extends State<Checkout_screen> {
   @override
   void initState() {
     getbalance();
-
+    print(widget.totalAmount);
     super.initState();
   }
 
@@ -145,13 +143,43 @@ class _Checkout_screenState extends State<Checkout_screen> {
                             color: greenish,
                           )),
                       child: TextField(
-                        onSubmitted: (value) {
-                          // fetchcoupon();
-                        },
+                        controller: checkoutController.coupon,
+                        readOnly: readonly,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.only(left: 12, top: 14),
                           hintText: 'Promo Code',
-                          suffixIcon: Icon(Icons.copy),
+                          // suffixIcon:Text('dfd');
+                          suffixIcon: readonly != true
+                              ? InkWell(
+                                  onTap: () {
+                                    setState(() {});
+                                    if (checkoutController.coupon.text != '') {
+                                      checkoutController.getcoupon((success) {
+                                        readonly = true;
+                                        if (success) {
+                                          checkoutController
+                                              .discount(widget.totalAmount);
+                                        }
+                                      });
+                                    } else {
+                                      readonly = false;
+                                      Get.snackbar('Error!',
+                                          "Coupon doesn't apply on empty field.",
+                                          snackPosition: SnackPosition.BOTTOM,
+                                          backgroundColor: Colors.red,
+                                          colorText: white);
+                                    }
+                                  },
+                                  child: Icon(Icons.check))
+                              : InkWell(
+                                  onTap: () {
+                                    readonly = false;
+                                    translatorProfileController.totalAmount =
+                                        int.parse(widget.totalAmount);
+                                    checkoutController.coupon.text = '';
+                                    setState(() {});
+                                  },
+                                  child: Icon(Icons.close_outlined,color: Colors.red,)),
                           border: InputBorder.none,
                         ),
                       ),
@@ -169,9 +197,7 @@ class _Checkout_screenState extends State<Checkout_screen> {
                                 fontWeight: FontWeight.w500,
                                 color: hintText)),
                         Text(
-                          "AED " +
-                              translatorProfileController.totalAmount
-                                  .toString(),
+                          "AED " + widget.totalAmount.toString(),
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w600),
                         )
