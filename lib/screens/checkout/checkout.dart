@@ -7,6 +7,7 @@ import 'package:translation/models/coupon.dart';
 import 'package:translation/models/order.dart';
 import 'package:translation/screens/checkout/checkout_controller.dart';
 import 'package:translation/screens/enter_amount/ppaymentmethod.dart';
+import 'package:translation/screens/main_screen/homecontroller.dart';
 import 'package:translation/screens/translator/translator_profile_controller.dart';
 import 'package:translation/screens/translator_screens/translator_screen.dart';
 import 'package:translation/screens/order_confirm.dart/cardAdded.dart';
@@ -67,210 +68,218 @@ class _Checkout_screenState extends State<Checkout_screen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-      child: GetBuilder<TranslatorProfileController>(
-        builder: (translatorController) => GetBuilder<CheckOutController>(
-          builder: (controller) => SingleChildScrollView(
-              child: Column(
-            children: [
-              TitleTopbar(text: 'Checkout'),
-              Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16),
-                child: Column(children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 12, bottom: 10),
-                    child: Text(
-                      "Service detail",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(8),
-                    width: 98,
-                    height: 98,
-                    // padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 2, color: Color(0xFF34607B)),
-                      borderRadius: BorderRadius.circular(70),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(70),
-                      child: SvgPicture.asset(
-                        "assets/images/splash_3.svg",
-                        width: 98,
-                        height: 98,
-                        fit: BoxFit.cover,
+      child: GetBuilder<HomeController>(
+         builder: (homeController) => 
+         GetBuilder<TranslatorProfileController>(
+          builder: (translatorController) => GetBuilder<CheckOutController>(
+            builder: (controller) => SingleChildScrollView(
+                child: Column(
+              children: [
+                TitleTopbar(text: 'Checkout'),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16),
+                  child: Column(children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 12, bottom: 10),
+                      child: Text(
+                        "Service detail",
+                        style:
+                            TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
                       ),
                     ),
-                  ),
-                  Center(
-                    child: Text(
-                      translatorProfileController.scheduleType.name,
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                    Container(
+                      margin: EdgeInsets.all(8),
+                      width: 98,
+                      height: 98,
+                      // padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        border: Border.all(width: 2, color: Color(0xFF34607B)),
+                        borderRadius: BorderRadius.circular(70),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(70),
+                    //  child: Image.network(
+                    //             // homeController.onlineVendor!.profilePic,
+                    //             // fit: BoxFit.cover,
+                    //           ),
+                   
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
-                            "Time:   " +
-                                translatorController.duration.toString() +
-                                ' min',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400, color: hintText)),
-                        Text(" |",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400, color: hintText)),
-                        Text(
-                            "   Date:    " +
-                                DateFormat('dd/MM/yyyy').format(
-                                    translatorController.selectedDay.value),
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400, color: hintText)),
-                      ],
+                    Center(
+                      child: Text(
+                        translatorProfileController.scheduleType.name,
+                        style:
+                            TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16, bottom: 16),
-                    child: Card(
-                      color: Color.fromRGBO(255, 255, 255, 1),
-                      shape: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            color: greenish,
-                          )),
-                      child: TextField(
-                        controller: checkoutController.coupon,
-                        readOnly: readonly,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.only(left: 12, top: 14),
-                          hintText: 'Promo Code',
-                          // suffixIcon:Text('dfd');
-                          suffixIcon: readonly != true
-                              ? InkWell(
-                                  onTap: () {
-                                    setState(() {});
-                                    if (checkoutController.coupon.text != '') {
-                                      checkoutController.getcoupon((success) {
-                                        readonly = true;
-                                        if (success) {
-                                          checkoutController
-                                              .discount(widget.totalAmount);
-                                        }
-                                      });
-                                    } else {
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text(
+                              "Time:   " +
+                                  translatorController.duration.toString() +
+                                  ' min',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400, color: hintText)),
+                          Text(" |",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400, color: hintText)),
+                          Text(
+                              "   Date:    " +
+                                  DateFormat('dd/MM/yyyy').format(
+                                      translatorController.selectedDay.value),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400, color: hintText)),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16, bottom: 16),
+                      child: Card(
+                        color: Color.fromRGBO(255, 255, 255, 1),
+                        shape: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                              color: greenish,
+                            )),
+                        child: TextField(
+                          controller: checkoutController.coupon,
+                          readOnly: readonly,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(left: 12, top: 14),
+                            hintText: 'Promo Code',
+                            // suffixIcon:Text('dfd');
+                            suffixIcon: readonly != true
+                                ? InkWell(
+                                    onTap: () {
+                                      setState(() {});
+                                      if (checkoutController.coupon.text != '') {
+                                        checkoutController.getcoupon((success) {
+                                          readonly = true;
+                                          if (success) {
+                                            checkoutController
+                                                .discount(widget.totalAmount);
+                                          }
+                                        });
+                                      } else {
+                                        readonly = false;
+                                        Get.snackbar('Error!',
+                                            "Coupon doesn't apply on empty field.",
+                                            snackPosition: SnackPosition.BOTTOM,
+                                            backgroundColor: Colors.red,
+                                            colorText: white);
+                                      }
+                                    },
+                                    child: Icon(Icons.check))
+                                : InkWell(
+                                    onTap: () {
                                       readonly = false;
-                                      Get.snackbar('Error!',
-                                          "Coupon doesn't apply on empty field.",
-                                          snackPosition: SnackPosition.BOTTOM,
-                                          backgroundColor: Colors.red,
-                                          colorText: white);
-                                    }
-                                  },
-                                  child: Icon(Icons.check))
-                              : InkWell(
-                                  onTap: () {
-                                    readonly = false;
-                                    translatorProfileController.totalAmount =
-                                        int.parse(widget.totalAmount);
-                                    checkoutController.coupon.text = '';
-                                    setState(() {});
-                                  },
-                                  child: Icon(Icons.close_outlined,color: Colors.red,)),
-                          border: InputBorder.none,
+                                      translatorProfileController.totalAmount =
+                                          int.parse(widget.totalAmount);
+                                      checkoutController.coupon.text = '';
+                                      setState(() {});
+                                    },
+                                    child: Icon(Icons.close_outlined,color: Colors.red,)),
+                            border: InputBorder.none,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 10),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 4, right: 4),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("SubTotal ",
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 4, right: 4),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("SubTotal ",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: hintText)),
+                          Text(
+                            "AED " + widget.totalAmount.toString(),
                             style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: hintText)),
+                                fontSize: 16, fontWeight: FontWeight.w600),
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 4, right: 4, top: 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Total ",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: greenish)),
+                          Text(
+                            "AED " +
+                                translatorProfileController.totalAmount
+                                    .toString(),
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w600),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Row(
+                      children: [
                         Text(
-                          "AED " + widget.totalAmount.toString(),
+                          "Payment Method",
                           style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w600),
+                              fontSize: 20, fontWeight: FontWeight.bold),
                         )
                       ],
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 4, right: 4, top: 16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Total ",
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: greenish)),
-                        Text(
-                          "AED " +
-                              translatorProfileController.totalAmount
-                                  .toString(),
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w600),
-                        )
-                      ],
+                    PPaymentMethod(
+                      title: 'Credit/Debit card',
+                      image: "assets/icons/visapay.png",
+                      groupvalue: _site,
+                      value: payMethod.materCard,
+                      onchaged: () {
+                        toggleplan(payMethod.materCard);
+                      },
                     ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        "Payment Method",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                  PPaymentMethod(
-                    title: 'Credit/Debit card',
-                    image: "assets/icons/visapay.png",
-                    groupvalue: _site,
-                    value: payMethod.materCard,
-                    onchaged: () {
-                      toggleplan(payMethod.materCard);
-                    },
-                  ),
-                  PPaymentMethod(
-                    title: 'Form Wallet',
-                    image: "assets/icons/walletpay.png",
-                    groupvalue: _site,
-                    value: payMethod.walletpay,
-                    onchaged: () {
-                      toggleplan(payMethod.walletpay);
-                    },
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Center(
-                      child: LargeButton(
-                    title: 'Next',
-                    sreenRatio: 0.9,
-                    onPressed: () {
-                      if (translatorProfileController.scheduleType ==
-                          ScheduleType.InPerson) {
-                        if (translatorProfileController.selectedLocation ==
-                            null) {
-                          Get.snackbar('Error!',
-                              'You may need to select location to get translator inperson service.',
-                              backgroundColor: Colors.red,
-                              colorText: white,
-                              snackPosition: SnackPosition.BOTTOM);
+                    PPaymentMethod(
+                      title: 'Form Wallet',
+                      image: "assets/icons/walletpay.png",
+                      groupvalue: _site,
+                      value: payMethod.walletpay,
+                      onchaged: () {
+                        toggleplan(payMethod.walletpay);
+                      },
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Center(
+                        child: LargeButton(
+                      title: 'Next',
+                      sreenRatio: 0.9,
+                      onPressed: () {
+                        if (translatorProfileController.scheduleType ==
+                            ScheduleType.InPerson) {
+                          if (translatorProfileController.selectedLocation ==
+                              null) {
+                            Get.snackbar('Error!',
+                                'You may need to select location to get translator inperson service.',
+                                backgroundColor: Colors.red,
+                                colorText: white,
+                                snackPosition: SnackPosition.BOTTOM);
+                          } else {
+                            if (_site == payMethod.walletpay) {
+                              walletpayment();
+                            } else {
+                              checkoutController.confirmPayment();
+                            }
+                          }
                         } else {
                           if (_site == payMethod.walletpay) {
                             walletpayment();
@@ -278,29 +287,23 @@ class _Checkout_screenState extends State<Checkout_screen> {
                             checkoutController.confirmPayment();
                           }
                         }
-                      } else {
-                        if (_site == payMethod.walletpay) {
-                          walletpayment();
-                        } else {
-                          checkoutController.confirmPayment();
-                        }
-                      }
-                      // authController.signIn();
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //       builder: (context) => CardAdded_Screen(),
-                      //     ));
-                    },
-                    color: greenish,
-                    textcolor: Colors.white,
-                    buttonWidth: 0.95,
-                  )),
-                  SizedBox(height: 30)
-                ]),
-              ),
-            ],
-          )),
+                        // authController.signIn();
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => CardAdded_Screen(),
+                        //     ));
+                      },
+                      color: greenish,
+                      textcolor: Colors.white,
+                      buttonWidth: 0.95,
+                    )),
+                    SizedBox(height: 30)
+                  ]),
+                ),
+              ],
+            )),
+          ),
         ),
       ),
     ));

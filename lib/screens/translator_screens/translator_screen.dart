@@ -30,8 +30,9 @@ class _Translator_State extends State<Translator_> {
             SearchTopBar(),
             Padding(
               padding: const EdgeInsets.only(
-                  left: 20, right: 20, top: 30, bottom: 12),
-              child: Row(
+                  left: 20, right: 20, top: 0, bottom: 12),
+                  
+              child: homeController.onlineVendor.length != 0? Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
@@ -58,7 +59,7 @@ class _Translator_State extends State<Translator_> {
                     ),
                   ),
                 ],
-              ),
+              ):Text(''),
             ),
             homeController.onlineVendor.length != 0
                 ? Container(
@@ -81,25 +82,16 @@ class _Translator_State extends State<Translator_> {
                                   .onlineaudiovideoPrice,
                             )),
                   )
-                : Container(
-                    height: MediaQuery.of(context).size.height * 0.22,
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text("No Online Translator Found!"),
-                      ],
-                    ),
-                  ),
+                : Text(''),
+
             Padding(
               padding:
                   EdgeInsets.only(left: 20, right: 20, top: 16, bottom: 10),
-              child: Row(
+              child:  Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Offline People",
+                    "Schedule",
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,

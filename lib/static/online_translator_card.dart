@@ -66,6 +66,7 @@ class OnlineTranslatorCard extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                     fontFamily: 'NunitoSans'),
               ),
+                 rating!=null ?
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -82,7 +83,7 @@ class OnlineTranslatorCard extends StatelessWidget {
                             fontFamily: 'NunitoSans')),
                   ),
                 ],
-              ),
+              ):Text(''),
               Padding(
                 padding: const EdgeInsets.only(right: 4, left: 4),
                 child: Row(

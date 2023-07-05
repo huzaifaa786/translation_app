@@ -93,6 +93,7 @@ class OfflineTranslattorCard extends StatelessWidget {
                             ],
                           ),
                         ),
+                        rating!=null ?
                         Padding(
                           padding: const EdgeInsets.only(bottom: 4),
                           child: Row(
@@ -114,7 +115,7 @@ class OfflineTranslattorCard extends StatelessWidget {
                               ),
                             ],
                           ),
-                        ),
+                        ):Text(''),
                         Row(
                           children: [
                             for (var i = 0; i < 3; i++)

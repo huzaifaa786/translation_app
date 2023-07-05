@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
 import 'package:translation/screens/chat/chatcontroller.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/screens/chat/chats.dart';
@@ -11,6 +10,7 @@ import 'package:translation/static/chattopbar.dart';
 import 'package:translation/static/rplycharcard.dart';
 import 'package:translation/values/controllers.dart';
 import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
+import 'package:translation/models/msg.dart';
 
 class Chatdetails_screen extends StatefulWidget {
   const Chatdetails_screen({super.key, this.id});
@@ -25,7 +25,7 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
   @override
   void initState() {
     chatController.initPusher(widget.id);
-    
+    chatController.fetchmassage(widget.id);
     super.initState();
   }
 
@@ -35,6 +35,13 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
     pusher.unsubscribe(channelName: "private-chatify.${widget.id}");
     super.dispose();
   }
+  String getTime(DateTime? dateTime) {
+  if (dateTime != null) {
+    return TimeOfDay.fromDateTime(dateTime.toLocal()).format(context);
+  } else {
+    return '';
+  }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -78,100 +85,21 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
                   ],
                 ),
               ),
+              
               Expanded(
                   child: ListView.builder(
                       reverse: false,
+                      itemCount: controller.massages.length,
                       // controller: _controllerrr,
                       scrollDirection: Axis.vertical,
-                      itemCount: 2,
-                      itemBuilder: (context, index) {
-                        {
-                          if (index == 2) {
-                            return Container(height: 70);
-                          }
-                          if (index == 1) {
-                            return ChatMessageCard(
-                              id: '1',
-                              user_id: 2,
-                              msg:
-                                  'Lorem ipsum dolor sit amet, consect adipiscing elit. Volutpat lacus pretium enim lacus sit amet at lectus amet.',
-                              name: "3:03 PM",
-                            );
-                          } else {
-                            return ReplyMessageCard(
-                              msg:
-                                  'Lorem ipsum dolor sit amet, consect adipiscing elit. Volutpat lacus pretium enim lacus sit amet at lectus amet.',
-                            );
-                          }
-                        }
-                      })),
-              // Stack(
-              //   children: <Widget>[
-              //     Align(
-              //       alignment: Alignment.bottomLeft,
-              //       child: Container(
-              //         padding: EdgeInsets.only(left: 10, bottom: 10, top: 10),
-              //         height: 60,
-              //         width: double.infinity,
-              //         color: Colors.white,
-              //         child: Row(
-              //           children: <Widget>[
-              //             GestureDetector(
-              //               onTap: () {},
-              //               child: Container(
-              //                 height: 30,
-              //                 width: 30,
-              //                 decoration: BoxDecoration(
-              //                   color: Colors.lightBlue,
-              //                   borderRadius: BorderRadius.circular(30),
-              //                 ),
-              //                 child: Icon(
-              //                   Icons.add,
-              //                   color: Colors.white,
-              //                   size: 20,
-              //                 ),
-              //               ),
-              //             ),
-              //             SizedBox(
-              //               width: 15,
-              //             ),
-              //             Expanded(
-              //               child: TextField(
-              //                 // controller: _controller,
-              //                 decoration: InputDecoration(
-              //                     hintText: "Write message...",
-              //                     hintStyle: TextStyle(color: Colors.black54),
-              //                     border: InputBorder.none),
-              //               ),
-              //             ),
-              //             SizedBox(
-              //               width: 15,
-              //             ),
-              //             FloatingActionButton(
-              //               onPressed: () {
-              //                 // log(id.toString());
-              //                 // messagestore(id.toString());
-              //                 // _controllerrr.animateTo(
-              //                 //     _controllerrr.position.maxScrollExtent,
-              //                 //     duration: Duration(milliseconds: 300),
-              //                 //     curve: Curves.easeOut);
-              //                 // _scrollUp();
-              //                 // clearText();
-              //               },
-              //               child: Icon(
-              //                 Icons.send,
-              //                 color: Colors.white,
-              //                 size: 18,
-              //               ),
-              //               backgroundColor: Colors.blue,
-              //               elevation: 0,
-              //             ),
-              //           ],
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // ),
+                      itemBuilder: (context, index) => ReplyMessageCard(
+                            msg: controller.massages[index].body.toString(),
+                              Time: getTime(controller.massages[index].dateTime),
+                            sender:
+                                controller.massages[index].to_id == widget.id
+                                    ? false
+                                    : true,
+                          ))),
               Stack(
                 children: [
                   Container(
@@ -185,8 +113,9 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
                     child: TextField(
                       onSubmitted: (value) {
                         chatController.sendmassage();
+                        setState(() {});
                       },
-                      controller: chatController.massage,
+                      controller: chatController.massagecontroller,
                       decoration: InputDecoration(
                         suffixIcon:
                             Icon(Icons.attach_file, color: Colors.black),

@@ -6,12 +6,15 @@ import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
 import 'package:translation/api/api.dart';
 import 'package:translation/helper/loading.dart';
 import 'package:translation/models/contact.dart';
+import 'package:translation/models/msg.dart';
 import 'package:translation/values/string.dart';
 import 'package:get_storage/get_storage.dart';
 
 class ChatController extends GetxController {
   static ChatController instance = Get.find();
-  TextEditingController massage = TextEditingController();
+  List<Msg> massages = [];
+
+  TextEditingController massagecontroller = TextEditingController();
   String? activeUserId;
   List<Contact> contacts = <Contact>[];
   PusherChannelsFlutter pusher = PusherChannelsFlutter.getInstance();
@@ -34,12 +37,10 @@ class ChatController extends GetxController {
       "socket_id": socketId,
       "channel_name": channelName,
     };
-  
-      var response = await Api.execute(url: url, data: data);
-      LoadingHelper.dismiss();
-      return response;
-    
-    
+
+    var response = await Api.execute(url: url, data: data);
+    LoadingHelper.dismiss();
+    return response;
   }
 
   initPusher(String? id) async {
@@ -58,6 +59,7 @@ class ChatController extends GetxController {
           onAuthorizer: onAuthorizer);
       await pusher.subscribe(channelName: "private-chatify.${id}");
       await pusher.connect();
+      activeUserId = id;
     } catch (e) {
       print("error in initialization: $e");
     }
@@ -112,30 +114,52 @@ class ChatController extends GetxController {
   void onDecryptionFailure(String event, String reason) {
     print("onDecryptionFailure: $event reason: $reason");
   }
+ ClearVariable() {
+    massagecontroller.clear();
+  
+    update();
+  }
+  sendmassage() async {
+    var url = BASE_URL + 'sendMessage';
+    var data;
+    GetStorage box = GetStorage();
+    data = {
+      'api_token': box.read('api_token')!,
+      'message': massagecontroller.text.toString(),
+      'type': 'user',
+      'temporaryMsgId': main(),
+      'id': activeUserId,
+      'file': ''
+    };
+    var response = await Api.execute(url: url, data: data);
 
-  subscribeActiveUserChannel(id) {
-    activeUserId = id;
-    var channelName = "private-chatify." + id;
-    print(channelName);
-    pusher.subscribe(channelName: channelName);
+    if (response["status"] == 200) {
+      massages.add(Msg(response['message']));
+      ClearVariable();
+    } else {}
+    
   }
 
-  sendmassage() async {
+  fetchmassage(id) async {
     LoadingHelper.show();
-    var url = BASE_URL + 'sendMessage';
+    var url = BASE_URL + 'fetchMessages';
     var data;
     GetStorage box = GetStorage();
     print(box.read('api_token'));
     data = {
       'api_token': box.read('api_token')!,
-      'message': massage.text.toString(),
-      'type': 'user',
-      'temporaryMsgId': main(),
-      'id': '3',
-      'file': ''
+      'id': id,
     };
     var response = await Api.execute(url: url, data: data);
 
-    LoadingHelper.dismiss();
+    massages = [];
+    for (var van in response['messages']) {
+      massages.add(Msg(van));
+
+      print('ddddddddddddddddddddddddddddddddddd');
+      print(massages);
+      LoadingHelper.dismiss();
+      update();
+    }
   }
 }

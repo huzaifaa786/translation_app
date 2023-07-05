@@ -78,11 +78,7 @@ class _Setting_screenState extends State<Setting_screen> {
                       },
                       imgicon: "assets/icons/warning.svg",
                     ),
-                    SettingCard(
-                      title: 'Vendor Access',
-                      onPressed: () {},
-                      imgicon: "assets/icons/unprofile.svg",
-                    ),
+                   
                     SettingCard(
                       title: 'Company Access',
                       onPressed: () {

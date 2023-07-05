@@ -30,6 +30,8 @@ class TraslatorProfile extends StatefulWidget {
 class _TraslatorProfileState extends State<TraslatorProfile> {
   vendor() async {
     translatorProfileController.vendors = widget.detail;
+    if(widget.detail!.online ==0)
+    translatorProfileController.serviceType = ServiceType.Schedule;
     print(translatorProfileController.vendors);
     setState(() {});
   }
@@ -187,6 +189,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                   style: TextStyle(fontSize: 14),
                                 ),
                               ),
+                              widget.detail!.online! == 1 ?
                         TralingRadioBtn(
                           text: 'Instant',
                           isSelected:
@@ -197,7 +200,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                               controller.resetInstant();
                             });
                           },
-                        ),
+                        ):Text(''),
                         controller.serviceType == ServiceType.Instant
                             ? Column(
                                 children: [
@@ -422,7 +425,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                   ),
                                   IconsButton(
                                     title: 'Choose Date '
-                                        '${controller.selectedDay.value.day}/${controller.selectedDay.value.month}/${controller.selectedDay.value.year}',
+                                       ,
                                     icon: Icons.calendar_month,
                                     onPressed: () {
                                       showModalBottomSheet(
@@ -809,6 +812,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                   return;
                                 }
                                 Get.to(() => Checkout_screen(
+                                  
                                       totalAmount:
                                           controller.totalAmount.toString(),
                                     ));
