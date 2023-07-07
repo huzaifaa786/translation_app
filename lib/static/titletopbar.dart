@@ -33,7 +33,7 @@ class TitleTopbar extends StatelessWidget {
                     ),
                 ),
                 child: Icon(
-                   size: 28,
+                   size: 32,
                   Icons.keyboard_arrow_left_outlined,
                   
                 ),

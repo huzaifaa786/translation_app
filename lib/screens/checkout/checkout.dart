@@ -69,13 +69,18 @@ class _Checkout_screenState extends State<Checkout_screen> {
     return Scaffold(
         body: SafeArea(
       child: GetBuilder<HomeController>(
-         builder: (homeController) => 
-         GetBuilder<TranslatorProfileController>(
-          builder: (translatorController) => GetBuilder<CheckOutController>(
+        builder: (homeController) => GetBuilder<TranslatorProfileController>(
+          builder: (translatorProfileController) =>
+              GetBuilder<CheckOutController>(
             builder: (controller) => SingleChildScrollView(
                 child: Column(
               children: [
-                TitleTopbar(text: 'Checkout'),
+                TitleTopbar(
+                  text: 'Checkout',
+                  ontap: () {
+                    Get.back();
+                  },
+                ),
                 Padding(
                   padding: const EdgeInsets.only(left: 16, right: 16),
                   child: Column(children: [
@@ -83,8 +88,8 @@ class _Checkout_screenState extends State<Checkout_screen> {
                       padding: const EdgeInsets.only(top: 12, bottom: 10),
                       child: Text(
                         "Service detail",
-                        style:
-                            TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w400),
                       ),
                     ),
                     Container(
@@ -98,18 +103,18 @@ class _Checkout_screenState extends State<Checkout_screen> {
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(70),
-                    //  child: Image.network(
-                    //             // homeController.onlineVendor!.profilePic,
-                    //             // fit: BoxFit.cover,
-                    //           ),
-                   
+                        child: Image.network(
+                          translatorProfileController.vendors!.profilePic
+                              .toString(),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     Center(
                       child: Text(
                         translatorProfileController.scheduleType.name,
-                        style:
-                            TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w700),
                       ),
                     ),
                     Padding(
@@ -119,19 +124,24 @@ class _Checkout_screenState extends State<Checkout_screen> {
                         children: [
                           Text(
                               "Time:   " +
-                                  translatorController.duration.toString() +
+                                  translatorProfileController.duration
+                                      .toString() +
                                   ' min',
                               style: TextStyle(
-                                  fontWeight: FontWeight.w400, color: hintText)),
+                                  fontWeight: FontWeight.w400,
+                                  color: hintText)),
                           Text(" |",
                               style: TextStyle(
-                                  fontWeight: FontWeight.w400, color: hintText)),
+                                  fontWeight: FontWeight.w400,
+                                  color: hintText)),
                           Text(
                               "   Date:    " +
                                   DateFormat('dd/MM/yyyy').format(
-                                      translatorController.selectedDay.value),
+                                      translatorProfileController
+                                          .selectedDay.value),
                               style: TextStyle(
-                                  fontWeight: FontWeight.w400, color: hintText)),
+                                  fontWeight: FontWeight.w400,
+                                  color: hintText)),
                         ],
                       ),
                     ),
@@ -155,7 +165,8 @@ class _Checkout_screenState extends State<Checkout_screen> {
                                 ? InkWell(
                                     onTap: () {
                                       setState(() {});
-                                      if (checkoutController.coupon.text != '') {
+                                      if (checkoutController.coupon.text !=
+                                          '') {
                                         checkoutController.getcoupon((success) {
                                           readonly = true;
                                           if (success) {
@@ -181,7 +192,10 @@ class _Checkout_screenState extends State<Checkout_screen> {
                                       checkoutController.coupon.text = '';
                                       setState(() {});
                                     },
-                                    child: Icon(Icons.close_outlined,color: Colors.red,)),
+                                    child: Icon(
+                                      Icons.close_outlined,
+                                      color: Colors.red,
+                                    )),
                             border: InputBorder.none,
                           ),
                         ),
@@ -207,7 +221,8 @@ class _Checkout_screenState extends State<Checkout_screen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 4, right: 4, top: 16),
+                      padding:
+                          const EdgeInsets.only(left: 4, right: 4, top: 16),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -277,14 +292,28 @@ class _Checkout_screenState extends State<Checkout_screen> {
                             if (_site == payMethod.walletpay) {
                               walletpayment();
                             } else {
-                              checkoutController.confirmPayment();
+                              translatorProfileController.scheduleType ==
+                                      ScheduleType.InPerson
+                                  ? translatorProfileController
+                                      .InpersonplaceOrder(
+                                          translatorProfileController.vendors)
+                                  : translatorProfileController.placeOrder(
+                                      translatorProfileController.vendors);
+                              ;
                             }
                           }
                         } else {
                           if (_site == payMethod.walletpay) {
                             walletpayment();
                           } else {
-                            checkoutController.confirmPayment();
+                            translatorProfileController.scheduleType ==
+                                    ScheduleType.InPerson
+                                ? translatorProfileController
+                                    .InpersonplaceOrder(
+                                        translatorProfileController.vendors)
+                                : translatorProfileController.placeOrder(
+                                    translatorProfileController.vendors);
+                            // checkoutController.confirmPayment();
                           }
                         }
                         // authController.signIn();

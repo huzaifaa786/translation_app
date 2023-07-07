@@ -11,6 +11,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
 import 'package:translation/api/api.dart';
 import 'package:translation/helper/loading.dart';
+import 'package:translation/models/favourit.dart';
+import 'package:translation/models/unurgent.dart';
+import 'package:translation/models/urgent.dart';
 import 'package:translation/models/vendor.dart';
 import 'package:translation/screens/checkout/checkout.dart';
 import 'package:translation/screens/order_confirm.dart/cardAdded.dart';
@@ -27,6 +30,9 @@ enum ScheduleType { AudioVideo, InPerson }
 enum DocumentType { Urgent, NotUrgent }
 
 enum InstantType { audio, video }
+
+List<Urgent> urgents = [];
+List<Unurgent> unurgents = [];
 
 class TranslatorProfileController extends GetxController {
   static TranslatorProfileController instance = Get.find();
@@ -205,9 +211,19 @@ class TranslatorProfileController extends GetxController {
     update();
   }
 
+  checkDuration() {
+    final starttime = DateFormat.Hm().parse(startTime);
+    final endtime = DateFormat.Hm().parse(endTime);
+
+    final duration = endtime.difference(starttime);
+    final durationInMinutes = duration.inMinutes;
+
+    print('Duration: $durationInMinutes minutes');
+    return durationInMinutes;
+  }
+
   placeOrder(vendor) async {
-    print('dfffffffffffffffffffffffffffff');
-    print(vendor);
+    //  if(serviceType == ServiceType.Schedule)
     LoadingHelper.show();
     var url = BASE_URL + 'user/order';
     var data;
@@ -217,6 +233,7 @@ class TranslatorProfileController extends GetxController {
         : serviceType == ServiceType.Schedule
             ? 'schedule'
             : 'document';
+
     var response;
     if (serviceType == ServiceType.Document) {
       String fileName = file!.path.split('/').last;
@@ -355,6 +372,15 @@ class TranslatorProfileController extends GetxController {
           colorText: Colors.white);
       return;
     }
+    var duration = checkDuration();
+    if (duration != 30) {
+      Get.snackbar("Error!", "Duration must be 30 minutes",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white);
+      return;
+    }
+
     vendors = vendor;
     LoadingHelper.show();
     var url = BASE_URL + 'order/checkAvailability';
@@ -389,7 +415,6 @@ class TranslatorProfileController extends GetxController {
   }
 
   addfavorit(Vendor vendor) async {
-    LoadingHelper.show();
     var url = BASE_URL + 'add/favorities';
     GetStorage box = GetStorage();
 
@@ -398,8 +423,8 @@ class TranslatorProfileController extends GetxController {
       'api_token': box.read('api_token')!,
     };
     var response = await Api.execute(url: url, data: data);
+    favourit = response['favourit'];
     print(response);
-    LoadingHelper.dismiss();
 
     update();
   }
@@ -423,5 +448,40 @@ class TranslatorProfileController extends GetxController {
     focusedDay = DateTime.now().obs;
     pages = 0;
     file = null;
+  }
+
+  bool? favourit;
+
+  getfavrit(id) async {
+    LoadingHelper.show();
+    var url = BASE_URL + 'check/favorities';
+    GetStorage box = GetStorage();
+
+    print(box.read('api_token'));
+    var data = {'id': id, 'api_token': box.read('api_token')};
+    var response = await Api.execute(url: url, data: data);
+    print(response);
+    LoadingHelper.dismiss();
+    favourit = response['favourit'];
+  }
+
+  String? days;
+
+  dayscalculate(Vendor vendor) {
+    if (documentType == DocumentType.Urgent) {
+      for (var van in vendor.service!.urgent!) {
+        urgents.add(Urgent(van));
+      }
+      Urgent totalDay =
+          urgents.firstWhere((element) => int.parse(element.minpage!) <= pages &&  int.parse(element.maxpage!) >= pages  );
+      days = totalDay.day;
+    } else {
+      for (var van in vendor.service!.unurgent!) {
+        unurgents.add(Unurgent(van));
+      }
+       Unurgent totalDay =
+          unurgents.firstWhere((element) => int.parse(element.minpage!) <= pages &&  int.parse(element.maxpage!) >= pages  );
+      days = totalDay.day;
+    }
   }
 }

@@ -1,6 +1,7 @@
-import 'package:date_time_picker/date_time_picker.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:translation/models/vendor.dart';
@@ -14,6 +15,7 @@ import 'package:translation/static/freeitaminput.dart';
 import 'package:translation/static/icon_button.dart';
 import 'package:translation/static/lang_box.dart';
 import 'package:translation/static/profile_detail.dart';
+import 'package:translation/static/schedule.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/screens/checkout/checkout.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -30,12 +32,14 @@ class TraslatorProfile extends StatefulWidget {
 class _TraslatorProfileState extends State<TraslatorProfile> {
   vendor() async {
     translatorProfileController.vendors = widget.detail;
-    if(widget.detail!.online ==0)
-    translatorProfileController.serviceType = ServiceType.Schedule;
+    if (widget.detail!.online == 0)
+      translatorProfileController.serviceType = ServiceType.Schedule;
     print(translatorProfileController.vendors);
     setState(() {});
   }
 
+  final TextEditingController startTimeController = TextEditingController();
+  final TextEditingController endTimeController = TextEditingController();
   DateTime now = DateTime.now();
   DateTime? nextSixMonths;
 
@@ -43,7 +47,14 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
   void initState() {
     nextSixMonths = now.add(Duration(days: 180));
     vendor();
+    getfav();
     super.initState();
+  }
+
+  getfav() async {
+    startTimeController.text = DateFormat.Hm().format(DateTime.now());
+    await translatorProfileController.getfavrit(widget.detail!.id);
+    setState(() {});
   }
 
   @override
@@ -72,12 +83,20 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 21),
                       ),
-                      InkWell(
-                          onTap: () {
-                            translatorProfileController
-                                .addfavorit(widget.detail!);
-                          },
-                          child: SvgPicture.asset("assets/images/heart.svg")),
+                      translatorProfileController.favourit == false
+                          ? InkWell(
+                              onTap: () {
+                                translatorProfileController
+                                    .addfavorit(widget.detail!);
+                              },
+                              child:
+                                  SvgPicture.asset("assets/images/heart.svg"))
+                          : InkWell(
+                              onTap: () {
+                                translatorProfileController
+                                    .addfavorit(widget.detail!);
+                              },
+                              child: SvgPicture.asset("assets/images/fav.svg")),
                     ],
                   ),
                 ),
@@ -189,18 +208,20 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                   style: TextStyle(fontSize: 14),
                                 ),
                               ),
-                              widget.detail!.online! == 1 ?
-                        TralingRadioBtn(
-                          text: 'Instant',
-                          isSelected:
-                              controller.serviceType == ServiceType.Instant,
-                          ontap: () {
-                            setState(() {
-                              controller.serviceType = ServiceType.Instant;
-                              controller.resetInstant();
-                            });
-                          },
-                        ):Text(''),
+                        widget.detail!.online! == 1
+                            ? TralingRadioBtn(
+                                text: 'Instant',
+                                isSelected: controller.serviceType ==
+                                    ServiceType.Instant,
+                                ontap: () {
+                                  setState(() {
+                                    controller.serviceType =
+                                        ServiceType.Instant;
+                                    controller.resetInstant();
+                                  });
+                                },
+                              )
+                            : Text(''),
                         controller.serviceType == ServiceType.Instant
                             ? Column(
                                 children: [
@@ -424,8 +445,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                     height: 10,
                                   ),
                                   IconsButton(
-                                    title: 'Choose Date '
-                                       ,
+                                    title: 'Choose Date ',
                                     icon: Icons.calendar_month,
                                     onPressed: () {
                                       showModalBottomSheet(
@@ -541,62 +561,42 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.38,
-                                        height: 60,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        child: DateTimePicker(
-                                          type: DateTimePickerType.time,
-                                          initialValue: '',
-                                          timeLabelText: "Start time",
-                                          onChanged: (val) {
-                                            controller.startTime = val;
+                                      Scheduleinput(
+                                        controller: startTimeController,
+                                        onpressed: () {
+                                          DatePicker.showTimePicker(context,
+                                              showTitleActions: true,
+                                              showSecondsColumn: false,
+                                              onChanged: (val) {
+                                            var end =
+                                                val.add(Duration(minutes: 30));
+                                            var time =
+                                                DateFormat.Hm().format(val);
+                                            var endTime =
+                                                DateFormat.Hm().format(end);
+                                            startTimeController.text = time;
+                                            endTimeController.text = endTime;
+                                            controller.startTime = time;
+                                            controller.endTime = endTime;
+                                            translatorProfileController
+                                                .calTotalTime(widget.detail!);
                                             setState(() {});
-                                            print(controller.startTime);
-                                          },
-                                          validator: (val) {
-                                            return null;
-                                          },
-                                          onSaved: (val) => print(val),
-                                        ),
+                                          }, currentTime: DateTime.now());
+                                        },
+                                        hint: '9:00',
+                                        fontSize: 18.0,
                                       ),
                                       controller.startTime == ''
                                           ? Container()
                                           : Text("To"),
                                       controller.startTime == ''
                                           ? Container()
-                                          : Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.38,
-                                              height: 60,
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                              ),
-                                              child: DateTimePicker(
-                                                type: DateTimePickerType.time,
-                                                initialValue: '',
-                                                timeLabelText: "End time",
-                                                onChanged: (val) {
-                                                  controller.endTime = val;
-                                                  print(controller.endTime);
-                                                  translatorProfileController
-                                                      .calTotalTime(
-                                                          widget.detail!);
-                                                },
-                                                validator: (val) {
-                                                  return null;
-                                                },
-                                              ),
+                                          : Scheduleinput(
+                                              controller: endTimeController,
+                                              onpressed: () {},
+                                              hint: '9:30',
+                                              fontSize: 18.0,
+                                              enabled: false,
                                             ),
                                     ],
                                   ),
@@ -751,6 +751,9 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                         translatorProfileController
                                                             .documentprice(
                                                                 widget.detail!);
+                                                        translatorProfileController
+                                                            .dayscalculate(
+                                                                widget.detail!);
                                                       }
                                                     });
                                                   },
@@ -762,6 +765,9 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                     controller.pages++;
                                                     translatorProfileController
                                                         .documentprice(
+                                                            widget.detail!);
+                                                    translatorProfileController
+                                                        .dayscalculate(
                                                             widget.detail!);
                                                   });
                                                 },
@@ -781,7 +787,10 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          "Will deliver in: 3 days",
+                                          "Will deliver in :" +
+                                              translatorProfileController.days
+                                                  .toString() +
+                                              " days",
                                           style: TextStyle(fontSize: 14),
                                         ),
                                       ],
@@ -812,7 +821,6 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                   return;
                                 }
                                 Get.to(() => Checkout_screen(
-                                  
                                       totalAmount:
                                           controller.totalAmount.toString(),
                                     ));

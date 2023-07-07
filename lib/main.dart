@@ -78,7 +78,7 @@ class _MyAppState extends State<MyApp> {
       theme: Styles.lightTheme,
       builder: EasyLoading.init(),
       title: "translation",
-      initialRoute: 'splash',
+      initialRoute: 'splash', 
       routes: {
         // 'map': (_) => DeliveryMap(),
         'splash': (_) => SplashScreen(),

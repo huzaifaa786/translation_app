@@ -1,14 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:translation/screens/translator/translator_profile.dart';
+import 'package:translation/values/controllers.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class FavoritesCard extends StatelessWidget {
-  const FavoritesCard({super.key,this.ontap});
-  final ontap;
+  const FavoritesCard(
+      {super.key,
+      required this.name,
+      required this.image,
+      required this.lang,
+      required this.price,
+      required this.rating,
+      required this.vendor});
+  final name;
+  final image;
+  final lang;
+  final price;
+  final rating;
+  final vendor;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ontap,
+      onTap: () {
+        translatorProfileController.clear();
+        Get.to(() => TraslatorProfile(detail: vendor));
+      },
       child: Card(
         color: Color.fromARGB(255, 255, 255, 255),
         child: Container(
@@ -25,14 +44,20 @@ class FavoritesCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(24),
                     ),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(22),
-                      child: Image.asset(
-                        "assets/images/placeholder.png",
-                        width: 64,
-                        height: 64,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                        borderRadius: BorderRadius.circular(22),
+                        child: image == ''
+                            ? Image.asset(
+                                "assets/images/5907.jpg",
+                                width: 64,
+                                height: 64,
+                                fit: BoxFit.cover,
+                              )
+                            : CachedNetworkImage(
+                                imageUrl: image,
+                                fit: BoxFit.cover,
+                                width: 64,
+                                height: 64,
+                              )),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 8),
@@ -40,93 +65,111 @@ class FavoritesCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "Theresea Webb",
+                        Text(
+                          name,
                           style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: 'NunitoSans'),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 2, bottom: 2),
+                          child: Row(
+                            children: [
+                              Text(
+                                "Rate per 30 mins:  ",
+                                style: TextStyle(
+                                    fontSize: 9,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'NunitoSans'),
+                              ),
+                              Text(
+                                price + " AED",
+                                style: TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'NunitoSans'),
+                              )
+                            ],
+                          ),
+                        ),
+                        rating != null
+                            ? Padding(
+                                padding: const EdgeInsets.only(bottom: 4),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        child: SvgPicture.asset(
+                                            'assets/images/star.svg',
+                                            height: 11,
+                                            width: 11)),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 4, left: 2),
+                                      child: Text(
+                                          rating == null
+                                              ? '0.0'
+                                              : rating.toString(),
+                                          style: TextStyle(
+                                              fontSize: 11,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: 'NunitoSans')),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : Text(''),
                         Row(
                           children: [
-                            Text(
-                              "Rate per 30 mins:  ",
-                              style: TextStyle(
-                                  fontSize: 9, fontWeight: FontWeight.w700),
-                            ),
-                            Text(
-                              "100 AED",
-                              style: TextStyle(
-                                  fontSize: 11, fontWeight: FontWeight.w700),
-                            )
-                          ],
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: SvgPicture.asset(
-                                    'assets/images/star.svg',
-                                    height: 11,
-                                    width: 11)),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 4, left: 2),
-                              child: Text('5.0',
-                                  style: TextStyle(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.w400)),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(left: 4),
-                              padding: EdgeInsets.all(4),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(
-                                    color: Color.fromRGBO(0, 0, 0, 0.24),
-                                    width: 1),
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: Text(
-                                'Arabic',
-                                textDirection: TextDirection.rtl,
-                                style: TextStyle(fontSize: 12),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(left: 4),
-                              padding: EdgeInsets.all(4),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(
-                                    color: Color.fromRGBO(0, 0, 0, 0.24),
-                                    width: 1),
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: Text(
-                                'Turkish',
-                                textDirection: TextDirection.rtl,
-                                style: TextStyle(fontSize: 12),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(left: 4),
-                              padding: EdgeInsets.all(4),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(
-                                    color: Color.fromRGBO(0, 0, 0, 0.24),
-                                    width: 1),
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: Text(
-                                'English',
-                                textDirection: TextDirection.rtl,
-                                style: TextStyle(fontSize: 12),
-                              ),
-                            )
+                            for (var i = 0; i < 3; i++)
+                              if (i < lang.length)
+                                Container(
+                                  margin: EdgeInsets.only(left: 4),
+                                  padding: EdgeInsets.all(4),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border.all(
+                                        color: Color.fromRGBO(0, 0, 0, 0.24),
+                                        width: 1),
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Text(
+                                    lang[i],
+                                    style: TextStyle(fontSize: 12),
+                                  ),
+                                ),
+                            // Container(
+                            //   margin: EdgeInsets.only(left: 4),
+                            //   padding: EdgeInsets.all(4),
+                            //   decoration: BoxDecoration(
+                            //     color: Colors.white,
+                            //     border: Border.all(
+                            //         color: Color.fromRGBO(0, 0, 0, 0.24),
+                            //         width: 1),
+                            //     borderRadius: BorderRadius.circular(6),
+                            //   ),
+                            //   child: Text(
+                            //     'Turkish',
+                            //     style: TextStyle(fontSize: 12),
+                            //   ),
+                            // ),
+                            // Container(
+                            //   margin: EdgeInsets.only(left: 4),
+                            //   padding: EdgeInsets.all(4),
+                            //   decoration: BoxDecoration(
+                            //     color: Colors.white,
+                            //     border: Border.all(
+                            //         color: Color.fromRGBO(0, 0, 0, 0.24),
+                            //         width: 1),
+                            //     borderRadius: BorderRadius.circular(6),
+                            //   ),
+                            //   child: Text(
+                            //     'English',
+                            //     style: TextStyle(fontSize: 12),
+                            //   ),
+                            // )
                           ],
                         ),
                       ],
@@ -134,7 +177,9 @@ class FavoritesCard extends StatelessWidget {
                   ),
                 ],
               ),
-              SvgPicture.asset("assets/images/fav.svg"),
+              FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: SvgPicture.asset("assets/images/fav.svg")),
             ],
           ),
         ),

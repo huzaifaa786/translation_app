@@ -1,4 +1,4 @@
-import 'dart:convert';
+
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,7 +12,7 @@ import 'package:get_storage/get_storage.dart';
 
 class ChatController extends GetxController {
   static ChatController instance = Get.find();
-  List<Msg> massages = [];
+  RxList<Msg> massages = <Msg>[].obs;
 
   TextEditingController massagecontroller = TextEditingController();
   String? activeUserId;
@@ -20,8 +20,7 @@ class ChatController extends GetxController {
   PusherChannelsFlutter pusher = PusherChannelsFlutter.getInstance();
   main() {
     var intValue = Random().nextInt(10);
-    print('ffffffffffffffffffffffffffffffffff');
-    print(intValue);
+
     return intValue;
   }
 
@@ -133,10 +132,12 @@ class ChatController extends GetxController {
     };
     var response = await Api.execute(url: url, data: data);
 
-    if (response["status"] == 200) {
+    // if (response["status"] == 200) {
       massages.add(Msg(response['message']));
+      print(massages);
+      update();
       ClearVariable();
-    } else {}
+    // } else {}
     
   }
 
@@ -152,12 +153,11 @@ class ChatController extends GetxController {
     };
     var response = await Api.execute(url: url, data: data);
 
-    massages = [];
+    massages = <Msg>[].obs;
     for (var van in response['messages']) {
       massages.add(Msg(van));
 
-      print('ddddddddddddddddddddddddddddddddddd');
-      print(massages);
+
       LoadingHelper.dismiss();
       update();
     }

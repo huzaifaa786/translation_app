@@ -8,7 +8,7 @@ class Msg {
   Msg(massage) {
     id = massage['id'];
     body = massage['body'];
-    from_id = massage['from_id'];
+    from_id = massage['from_id'].toString();
     to_id = massage['to_id'];
     dateTime = DateTime.parse(massage['created_at']).toLocal();
   }

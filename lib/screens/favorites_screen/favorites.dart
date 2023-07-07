@@ -40,17 +40,23 @@ class _Favorites_screenState extends State<Favorites_screen> {
             SizedBox(
               height: 20,
             ),
-            Expanded(
-              child: ListView.builder(
-                  itemCount: favController.Fav.length,
-                  itemBuilder: (context, index) => FavoritesCard(
-                        ontap: () {
-                          Get.to(() => TraslatorProfile(
-                                detail: favController.Fav[index].vendor,
-                              ));
-                        },
-                      )),
-            ),
+             Expanded(
+                    child: ListView.builder(
+                        itemCount: favController.Fav.length ,
+                         
+                        itemBuilder: (context, index) => FavoritesCard(
+                              name: favController.Fav[index].vendor!.name,
+                              image: favController
+                                  .Fav[index].vendor!.profilePic,
+                              lang:
+                                  favController.Fav[index].vendor!.language,
+                              vendor: favController.Fav[index],
+                              price: favController.Fav[index]
+                                  .vendor!.service!.onlineaudiovideoPrice,
+                              rating:
+                                  favController.Fav[index].vendor!.rating,
+                            )),
+                  )
           ],
         ),
       ),
