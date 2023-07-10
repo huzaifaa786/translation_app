@@ -1,5 +1,10 @@
-
+import 'dart:convert';
 import 'dart:math';
+import 'dart:io';
+
+import 'package:dio/dio.dart' as dio;
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
@@ -56,7 +61,10 @@ class ChatController extends GetxController {
           onMemberAdded: onMemberAdded,
           onMemberRemoved: onMemberRemoved,
           onAuthorizer: onAuthorizer);
-      await pusher.subscribe(channelName: "private-chatify.${id}");
+      GetStorage box = GetStorage();
+      String user_id = box.read('user_id').toString();
+
+      await pusher.subscribe(channelName: "private-chatify.${user_id}");
       await pusher.connect();
       activeUserId = id;
     } catch (e) {
@@ -107,38 +115,63 @@ class ChatController extends GetxController {
   }
 
   void onEvent(PusherEvent event) {
-    print("onEvent: $event");
+    var response = jsonDecode(event.data);
+    response['message']['body'] = response['message']['message'];
+    response['message']['created_at'] = response['message']['created_at'];
+
+    massages.add(Msg(response['message']));
+    update();
   }
 
   void onDecryptionFailure(String event, String reason) {
     print("onDecryptionFailure: $event reason: $reason");
   }
- ClearVariable() {
+
+  ClearVariable() {
     massagecontroller.clear();
-  
+
     update();
   }
+
+  File? file;
+  Future<void> picksinglefile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['zip', 'rar', 'txt', 'pdf','png','jpg','jpeg','gif'],
+    );
+    if (result != null) {
+      file = await File(result.files.single.path!);
+      sendmassage();
+    } else {
+      // User canceled the picker
+    }
+  }
+
   sendmassage() async {
     var url = BASE_URL + 'sendMessage';
     var data;
     GetStorage box = GetStorage();
-    data = {
+    String fileName = file!.path.split('/').last;
+    print(fileName);
+    data = dio.FormData.fromMap({
       'api_token': box.read('api_token')!,
       'message': massagecontroller.text.toString(),
       'type': 'user',
       'temporaryMsgId': main(),
       'id': activeUserId,
-      'file': ''
-    };
+      'file': await dio.MultipartFile.fromFile(file!.path, filename: fileName)
+    });
+
     var response = await Api.execute(url: url, data: data);
 
-    // if (response["status"] == 200) {
-      massages.add(Msg(response['message']));
-      print(massages);
-      update();
-      ClearVariable();
+    response['message']['body'] = response['message']['message'];
+    response['message']['created_at'] = response['message']['created_at'];
+
+    massages.add(Msg(response['message']));
+   
+    update();
+    ClearVariable();
     // } else {}
-    
   }
 
   fetchmassage(id) async {
@@ -155,10 +188,10 @@ class ChatController extends GetxController {
 
     massages = <Msg>[].obs;
     for (var van in response['messages']) {
+      print(van['attachment']);
       massages.add(Msg(van));
-
-
-      LoadingHelper.dismiss();
+      print(massages.last.file_name);
+     
       update();
     }
   }

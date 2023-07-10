@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:translation/screens/orderhistory/ordercontroller.dart';
 import 'package:translation/static/bagee.dart';
 import 'package:translation/static/historycard.dart';
+import 'package:translation/static/topbarr.dart';
 import 'package:translation/static/titletopbar.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/values/controllers.dart';
@@ -35,11 +36,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
           child: GetBuilder<OrderController>(
         builder: (controller) => Column(
           children: [
-            TitleTopbar(
+            TitleTopbarr(
               text: 'History',
-              ontap: () {
-                Navigator.pop(context);
-              },
+           
             ),
             SizedBox(
               height: 23,

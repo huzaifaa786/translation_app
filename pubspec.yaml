@@ -70,6 +70,9 @@ dependencies:
   intl_phone_field: ^3.1.0
   pusher_channels_flutter: ^2.1.2
   flutter_datetime_picker: ^1.5.1
+  full_screen_image: ^2.0.0
+  photo_view: ^0.14.0
+  flutter_file_downloader: ^1.1.2
 
 dev_dependencies:
   flutter_test:

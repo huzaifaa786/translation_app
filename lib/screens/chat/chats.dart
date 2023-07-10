@@ -104,7 +104,7 @@ class _Chats_screenState extends State<Chats_screen> {
                           builder: (context) => Chatdetails_screen(id:chatController.contacts[index].id),
                         ));
                   },
-                  msg: 'ok see you then',
+                  msg: 'message',
                   name: chatController.contacts[index].username,
                   imgicon: "assets/images/splash_3.svg"),
             ),

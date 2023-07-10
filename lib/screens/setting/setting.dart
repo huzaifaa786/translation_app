@@ -14,6 +14,7 @@ import 'package:translation/screens/setting/bug_report_modal.dart';
 import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/static/language.dart';
 import 'package:translation/static/settingcard.dart';
+import 'package:translation/static/topbarr.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/screens/profile/profile.dart';
 import 'package:translation/static/titletopbar.dart';
@@ -44,11 +45,9 @@ class _Setting_screenState extends State<Setting_screen> {
           builder: (controller) => GetBuilder<SettingController>(
                 builder: (controller) => SingleChildScrollView(
                   child: Column(children: [
-                    TitleTopbar(
+                    TitleTopbarr(
                       text: 'Setting',
-                      ontap: () {
-                        Navigator.pop(context);
-                      },
+                    
                     ),
                     BalanceCard(
                       balance: settingController.balance.toString(),
