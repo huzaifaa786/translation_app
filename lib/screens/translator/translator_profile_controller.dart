@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:dio/dio.dart' as dio;
 
@@ -18,6 +19,7 @@ import 'package:translation/models/vendor.dart';
 import 'package:translation/screens/checkout/checkout.dart';
 import 'package:translation/screens/order_confirm.dart/cardAdded.dart';
 import 'package:translation/values/colors.dart';
+import 'package:translation/values/controllers.dart';
 import 'package:translation/values/string.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
@@ -91,6 +93,7 @@ class TranslatorProfileController extends GetxController {
     selectedLocation = null;
     startTime = '';
     endTime = '';
+    days = '0';
     update();
   }
 
@@ -116,11 +119,18 @@ class TranslatorProfileController extends GetxController {
   }
 
   documentprice(Vendor vendor) {
-    if (documentType == DocumentType.Urgent) {
-      totalAmount = pages * int.parse(vendor.service!.urgentprice.toString());
+    print(days);
+    if (days != '0') {
+      if (documentType == DocumentType.Urgent) {
+        totalAmount = pages * int.parse(vendor.service!.urgentprice.toString());
+      } else {
+        totalAmount =
+            pages * int.parse(vendor.service!.unurgentprice.toString());
+      }
     } else {
-      totalAmount = pages * int.parse(vendor.service!.unurgentprice.toString());
+      totalAmount = 0;
     }
+    update();
   }
 
   File? file;
@@ -211,16 +221,18 @@ class TranslatorProfileController extends GetxController {
     update();
   }
 
-  checkDuration() {
-    final starttime = DateFormat.Hm().parse(startTime);
-    final endtime = DateFormat.Hm().parse(endTime);
+  // checkDuration() {
+  //   print(startTime);
+  //   print(endTime);
+  //   final starttime = DateFormat.Hm().parse(startTime);
+  //   final endtime = DateFormat.Hm().parse(endTime);
 
-    final duration = endtime.difference(starttime);
-    final durationInMinutes = duration.inMinutes;
+  //   final duration = endtime.difference(starttime);
+  //   final durationInMinutes = duration.inMinutes;
 
-    print('Duration: $durationInMinutes minutes');
-    return durationInMinutes;
-  }
+  //   print('Duration: $durationInMinutes minutes');
+  //   return durationInMinutes;
+  // }
 
   placeOrder(vendor) async {
     //  if(serviceType == ServiceType.Schedule)
@@ -372,14 +384,14 @@ class TranslatorProfileController extends GetxController {
           colorText: Colors.white);
       return;
     }
-    var duration = checkDuration();
-    if (duration != 30) {
-      Get.snackbar("Error!", "Duration must be 30 minutes",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white);
-      return;
-    }
+    // var duration = checkDuration();
+    // if (duration != 30) {
+    //   Get.snackbar("Error!", "Duration must be 30 minutes",
+    //       snackPosition: SnackPosition.BOTTOM,
+    //       backgroundColor: Colors.red,
+    //       colorText: Colors.white);
+    //   return;
+    // }
 
     vendors = vendor;
     LoadingHelper.show();
@@ -448,6 +460,7 @@ class TranslatorProfileController extends GetxController {
     focusedDay = DateTime.now().obs;
     pages = 0;
     file = null;
+    days = '0';
   }
 
   bool? favourit;
@@ -465,23 +478,53 @@ class TranslatorProfileController extends GetxController {
     favourit = response['favourit'];
   }
 
-  String? days;
+  String? days = '0';
 
   dayscalculate(Vendor vendor) {
     if (documentType == DocumentType.Urgent) {
+      urgents = [];
       for (var van in vendor.service!.urgent!) {
         urgents.add(Urgent(van));
       }
-      Urgent totalDay =
-          urgents.firstWhere((element) => int.parse(element.minpage!) <= pages &&  int.parse(element.maxpage!) >= pages  );
-      days = totalDay.day;
+      print(urgents);
+      try {
+        Urgent totalDay = urgents.firstWhere((element) =>
+            int.parse(element.minpage!) <= pages &&
+            int.parse(element.maxpage!) >= pages);
+        days = totalDay.day;
+        update();
+      } catch (e) {
+        days = '0';
+        update();
+        print('Error: Data is not within the specified range.');
+      }
     } else {
       for (var van in vendor.service!.unurgent!) {
         unurgents.add(Unurgent(van));
       }
-       Unurgent totalDay =
-          unurgents.firstWhere((element) => int.parse(element.minpage!) <= pages &&  int.parse(element.maxpage!) >= pages  );
-      days = totalDay.day;
+      try {
+        Unurgent totalDay = unurgents.firstWhere((element) =>
+            int.parse(element.minpage!) <= pages &&
+            int.parse(element.maxpage!) >= pages);
+        days = totalDay.day;
+        update();
+      } catch (e) {
+        days = '0';
+        update();
+        print('Error: Data is not within the specified range.');
+      }
     }
+  }
+
+  List<dynamic>? mini = [];
+  int? minpage;
+  minVal(Vendor venodr) {
+    mini = [];
+    mini = venodr.service!.urgent;
+    int minimum = mini!.map((item) => (int.parse(item["minpage"]))).reduce(min);
+    pages = minimum;
+    minpage = minimum;
+    print(pages);
+    update();
   }
 }

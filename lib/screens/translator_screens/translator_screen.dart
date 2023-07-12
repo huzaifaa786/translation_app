@@ -30,8 +30,7 @@ class _Translator_State extends State<Translator_> {
             SearchTopBar(),
             Padding(
               padding: const EdgeInsets.only(
-                  left: 20, right: 20, top: 0, bottom: 12),
-                  
+                  left: 20, right: 20, top: 10, bottom: 12),
               child: homeController.onlineVendor.length != 0? Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
