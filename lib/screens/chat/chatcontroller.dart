@@ -141,38 +141,47 @@ class ChatController extends GetxController {
     );
     if (result != null) {
       file = await File(result.files.single.path!);
-      sendmassage();
+      sendMassage();
     } else {
       // User canceled the picker
     }
   }
 
-  sendmassage() async {
-    var url = BASE_URL + 'sendMessage';
-    var data;
-    GetStorage box = GetStorage();
-    String fileName = file!.path.split('/').last;
-    print(fileName);
-    data = dio.FormData.fromMap({
-      'api_token': box.read('api_token')!,
-      'message': massagecontroller.text.toString(),
-      'type': 'user',
-      'temporaryMsgId': main(),
-      'id': activeUserId,
-      'file': await dio.MultipartFile.fromFile(file!.path, filename: fileName)
-    });
+sendMassage() async {
+  var url = BASE_URL + 'sendMessage';
+  var data;
+  GetStorage box = GetStorage();
 
-    var response = await Api.execute(url: url, data: data);
+  String fileName = file?.path.split('/').last ?? ''; // Get the file name if it exists
+  print(fileName);
 
-    response['message']['body'] = response['message']['message'];
-    response['message']['created_at'] = response['message']['created_at'];
+  data = dio.FormData.fromMap({
+    'api_token': box.read('api_token')!,
+    'message': massagecontroller.text.toString(),
+    'type': 'user',
+    'temporaryMsgId': main(),
+    'id': activeUserId,
+  });
 
-    massages.add(Msg(response['message']));
-   
-    update();
-    ClearVariable();
-    // } else {}
+  if (file != null) {
+    data.files.add(
+      MapEntry(
+        'file',
+        await dio.MultipartFile.fromFile(file!.path, filename: fileName),
+      ),
+    );
   }
+
+  var response = await Api.execute(url: url, data: data);
+
+  response['message']['body'] = response['message']['message'];
+  response['message']['created_at'] = response['message']['created_at'];
+
+  massages.add(Msg(response['message']));
+
+  update();
+  ClearVariable();
+}
 
   fetchmassage(id) async {
     LoadingHelper.show();

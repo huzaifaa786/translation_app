@@ -148,7 +148,7 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
                       onSubmitted: (value) {
                         if (value.trim().isNotEmpty) {
                           // Check if the value is not empty or only contains whitespace
-                          chatController.sendmassage();
+                          chatController.sendMassage();
                         }
                         setState(() {});
                       },
