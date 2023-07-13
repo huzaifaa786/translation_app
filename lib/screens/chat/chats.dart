@@ -15,9 +15,10 @@ class Chats_screen extends StatefulWidget {
 class _Chats_screenState extends State<Chats_screen> {
   @override
   void initState() {
-     chatController.getContacts();
+    chatController.getContacts();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,12 +102,17 @@ class _Chats_screenState extends State<Chats_screen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Chatdetails_screen(id:chatController.contacts[index].id),
+                          builder: (context) => Chatdetails_screen(
+                            id: chatController.contacts[index].id,
+                            name: chatController.contacts[index].username,
+                            profilePic:
+                                chatController.contacts[index].profilePic,
+                          ),
                         ));
                   },
                   msg: 'message',
                   name: chatController.contacts[index].username,
-                  imgicon: "assets/images/splash_3.svg"),
+                  imgicon: "assets/images/5907.jpg"),
             ),
           ),
         ],

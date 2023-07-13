@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class ChartCards extends StatelessWidget {
   const ChartCards( {Key? key,
@@ -44,12 +42,20 @@ class ChartCards extends StatelessWidget {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(22),
-                child: SvgPicture.asset(
-                 imgicon,
-                  width: 64,
-                  height: 64,
-                  fit: BoxFit.cover,
-                ),
+                child:  
+                // imgicon == ''
+                //     ? 
+                    
+                    Image(
+                        image: AssetImage(imgicon),
+                        height: 64,
+                        width: 64,
+                      )
+                    // : CachedNetworkImage(
+                    //     imageUrl: imgicon,
+                    //     height: 64,
+                    //     width: 64,
+                    //   ),
               ),
             ),
             Expanded(

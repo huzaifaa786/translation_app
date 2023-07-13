@@ -203,5 +203,6 @@ sendMassage() async {
      
       update();
     }
+    LoadingHelper.dismiss();
   }
 }

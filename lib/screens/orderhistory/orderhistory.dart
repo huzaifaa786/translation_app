@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
+import 'package:translation/screens/chat/chatdetails.dart';
 import 'package:translation/screens/orderhistory/ordercontroller.dart';
 import 'package:translation/static/bagee.dart';
 import 'package:translation/static/historycard.dart';
@@ -38,7 +39,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
           children: [
             TitleTopbarr(
               text: 'History',
-           
             ),
             SizedBox(
               height: 23,
@@ -55,8 +55,26 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                 image:
                                     controller.orders[index].vendor!.profilePic,
                                 price: controller.orders[index].price,
+                                onmsgtap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            Chatdetails_screen(
+                                          id: controller.orders[index].vendor!.id,
+                                          name: controller
+                                              .orders[index].vendor!.username,
+                                          profilePic: controller
+                                              .orders[index].vendor!.profilePic,
+                                        ),
+                                      ));
+                                },
                                 type: controller.orders[index].servicetype,
                                 status: controller.orders[index].status,
+                                time: controller.orders[index].starttime! +
+                                    '-' +
+                                    controller.orders[index].endtime!,
+                                date: controller.orders[index].date,
                               )),
                     ),
                   )

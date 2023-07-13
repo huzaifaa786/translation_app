@@ -1,22 +1,18 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'dart:io' as io;
 import 'package:translation/screens/chat/chatcontroller.dart';
-import 'package:translation/values/colors.dart';
-import 'package:translation/screens/chat/chats.dart';
-import 'package:translation/static/chatcard.dart';
 import 'package:translation/static/chattopbar.dart';
 import 'package:translation/static/rplycharcard.dart';
 import 'package:translation/values/controllers.dart';
 import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
-import 'package:translation/models/msg.dart';
 
 class Chatdetails_screen extends StatefulWidget {
-  const Chatdetails_screen({super.key, this.id});
+  const Chatdetails_screen({super.key, this.id,required this.name, required this.profilePic});
   final String? id;
+  final String? name;
+  final String? profilePic;
+
   @override
   State<Chatdetails_screen> createState() => _Chatdetails_screenState();
 }
@@ -26,6 +22,7 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
 
   @override
   void initState() {
+    chatController.massages = RxList([]);
     chatController.initPusher(widget.id);
     chatController.fetchmassage(widget.id);
     super.initState();
@@ -65,7 +62,9 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
           padding: EdgeInsets.only(top: 12),
           child: Column(
             children: [
-              ChatTopBar(),
+              ChatTopBar(
+                name: widget.name,
+              ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 25, 20, 0),
                 child: Row(

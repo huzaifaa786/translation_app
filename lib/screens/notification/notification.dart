@@ -53,14 +53,14 @@ class _Notification_screenState extends State<Notification_screen> {
               },
             ),
             SizedBox(
-              height: 23,
+              height: 8,
             ),
             controller.notifications.length != 0
                 ? Padding(
                     padding: const EdgeInsets.only(left: 12, right: 12),
                     child: Flexible(
                       child: Container(
-                        height: MediaQuery.of(context).size.height * 0.81,
+                        height: MediaQuery.of(context).size.height * 0.88,
                         child: ListView.builder(
                             itemCount: controller.notifications.length,
                             itemBuilder: (context, index) => NotificationTile(
