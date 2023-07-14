@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:io' as io;
@@ -6,12 +8,19 @@ import 'package:translation/static/chattopbar.dart';
 import 'package:translation/static/rplycharcard.dart';
 import 'package:translation/values/controllers.dart';
 import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
+import 'package:translation/values/string.dart';
 
 class Chatdetails_screen extends StatefulWidget {
-  const Chatdetails_screen({super.key, this.id,required this.name, required this.profilePic});
+  const Chatdetails_screen(
+      {super.key,
+      this.id,
+      required this.name,
+      required this.profilePic,
+      this.screen});
   final String? id;
   final String? name;
   final String? profilePic;
+  final String? screen;
 
   @override
   State<Chatdetails_screen> createState() => _Chatdetails_screenState();
@@ -20,9 +29,15 @@ class Chatdetails_screen extends StatefulWidget {
 class _Chatdetails_screenState extends State<Chatdetails_screen> {
   PusherChannelsFlutter pusher = PusherChannelsFlutter.getInstance();
 
+  msg() async {
+    await chatController.makeseen(widget.id!);
+    await chatController.unseenchat();
+  }
+
   @override
   void initState() {
     chatController.massages = RxList([]);
+    msg();
     chatController.initPusher(widget.id);
     chatController.fetchmassage(widget.id);
     super.initState();
@@ -64,6 +79,9 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
             children: [
               ChatTopBar(
                 name: widget.name,
+                img: widget.screen == 'order'
+                    ? widget.profilePic
+                    : 'https://translation.klickwash.net/' + widget.profilePic!,
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 25, 20, 0),

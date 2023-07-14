@@ -128,7 +128,7 @@ class HistoryCard extends StatelessWidget {
                   ],
                 ),
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
                       'AED ' + price.toString(),
@@ -155,23 +155,15 @@ class HistoryCard extends StatelessWidget {
                     SizedBox(height: 6),
                     Column(
                       children: [
-                        // Padding(
-                        //   padding:
-                        //       const EdgeInsets.only(top: 6, bottom: 6),
-                        //   child: Text(
-                        //     "View Document",
-                        //     style: TextStyle(
-                        //         color: Colors.blue,
-                        //         decoration: TextDecoration.underline,
-                        //         fontSize: 9),
-                        //   ),
-                        // ),
                         InkWell(
                           onTap: onmsgtap,
-                          child: SvgPicture.asset(
-                            'assets/images/msg.svg',
-                            height: 17,
-                            width: 17,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top:6 ,bottom: 6,left: 12,right: 12),
+                            child: SvgPicture.asset(
+                              'assets/images/msg.svg',
+                              height: 17,
+                              width: 17,
+                            ),
                           ),
                         ),
                       ],
@@ -181,7 +173,7 @@ class HistoryCard extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.only(top: 8.0),
               child: Divider(
                 color: Colors.grey, //color of divider
                 height: 5, //height spacing of divider

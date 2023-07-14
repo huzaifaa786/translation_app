@@ -13,6 +13,7 @@ import 'package:translation/static/add_remove.dart';
 import 'package:translation/static/checkout_button.dart';
 import 'package:translation/static/freeitaminput.dart';
 import 'package:translation/static/icon_button.dart';
+import 'package:translation/static/image.dart';
 import 'package:translation/static/lang_box.dart';
 import 'package:translation/static/profile_detail.dart';
 import 'package:translation/static/schedule.dart';
@@ -184,14 +185,22 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                       children: [
                                         SvgPicture.asset(
                                             "assets/images/certificate.svg"),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 12),
-                                          child: Text(
-                                            "lorem ipsum dolor sit",
-                                            style: TextStyle(
-                                              fontSize: 15,
-                                              color: Colors.black,
+                                        InkWell(
+                                          onTap: () {
+                                            Get.to(()=> FullScreenImagePage(
+                                                  imageUrl: widget
+                                                      .detail!.certificate!,
+                                                ),);
+                                          },
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 12),
+                                            child: Text(
+                                              Uri.parse(widget.detail!.certificate!).pathSegments.last,
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.black,
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -629,42 +638,60 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                     .calTotalTime(
                                                         widget.detail!);
                                                 setState(() {});
+                                              }, onConfirm: (val) {
+                                                var end = val
+                                                    .add(Duration(minutes: 30));
+                                                var time =
+                                                    DateFormat.Hm().format(val);
+                                                var endTime =
+                                                    DateFormat.Hm().format(end);
+                                                startTimeController.text = time;
+                                                endTimeController.text =
+                                                    endTime;
+                                                controller.startTime = time;
+                                                controller.endTime = endTime;
+                                                translatorProfileController
+                                                    .calTotalTime(
+                                                        widget.detail!);
+                                                setState(() {});
                                               }, currentTime: DateTime.now());
                                             },
                                             hint: '9:00',
                                             fontSize: 18.0,
                                           ),
-                                          controller.startTime == ''
-                                              ? Container()
-                                              : Text("To"),
-                                          controller.startTime == ''
-                                              ? Container()
-                                              : Scheduleinput(
-                                                  controller: endTimeController,
-                                                  onpressed: () {
-                                                    DatePicker.showTimePicker(
-                                                        context,
-                                                        showTitleActions: true,
-                                                        showSecondsColumn:
-                                                            false,
-                                                        onChanged: (val) {
-                                                      var end = DateFormat.Hm()
-                                                          .format(val);
-                                                      endTimeController.text =
-                                                          end;
-                                                      controller.endTime = end;
-                                                      translatorProfileController
-                                                          .calTotalTime(
-                                                              widget.detail!);
-                                                      setState(() {});
-                                                    },
-                                                        currentTime:
-                                                            DateTime.now());
-                                                  },
-                                                  hint: '9:30',
-                                                  fontSize: 18.0,
-                                                  enabled: true,
-                                                ),
+                                          Text("To"),
+                                          Scheduleinput(
+                                            controller: endTimeController,
+                                            onpressed: () {
+                                              DatePicker.showTimePicker(context,
+                                                  showTitleActions: true,
+                                                  showSecondsColumn: false,
+                                                  onConfirm: (val) {
+                                                var end =
+                                                    DateFormat.Hm().format(val);
+                                                endTimeController.text = end;
+                                                controller.endTime = end;
+                                                translatorProfileController
+                                                    .calTotalTime(
+                                                        widget.detail!);
+                                                setState(() {});
+                                              }, onChanged: (val) {
+                                                var end =
+                                                    DateFormat.Hm().format(val);
+                                                endTimeController.text = end;
+                                                controller.endTime = end;
+                                                translatorProfileController
+                                                    .calTotalTime(
+                                                        widget.detail!);
+                                                setState(() {});
+                                              }, currentTime: DateTime.now());
+                                            },
+                                            hint: '9:30',
+                                            fontSize: 18.0,
+                                            enabled: controller.startTime == ''
+                                                ? false
+                                                : true,
+                                          ),
                                         ],
                                       ),
                                     ],
@@ -795,6 +822,16 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                           ),
                                         ],
                                       ),
+                                      translatorProfileController.file != ''
+                                          ? Padding(
+                                              padding: EdgeInsets.only(
+                                                  top: 8, bottom: 8),
+                                              child: Text(
+                                                  translatorProfileController
+                                                      .file
+                                                      .toString()),
+                                            )
+                                          : Container(),
                                       Padding(
                                         padding: const EdgeInsets.only(top: 10),
                                         child: Row(
@@ -871,11 +908,13 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                               style: TextStyle(fontSize: 14),
                                             ),
                                             Text(
-                                              translatorProfileController
-                                                      .days
+                                              translatorProfileController.days
                                                       .toString() +
                                                   " days",
-                                              style: TextStyle(fontSize: 14,color: greenish,fontWeight: FontWeight.bold),
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: greenish,
+                                                  fontWeight: FontWeight.bold),
                                             ),
                                           ],
                                         ),
@@ -900,8 +939,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                       ServiceType.Document) {
                                     if (translatorProfileController.file ==
                                         null) {
-                                      Get.snackbar(
-                                          "Please Attach File.", "",
+                                      Get.snackbar("Please Attach File.", "",
                                           snackPosition: SnackPosition.BOTTOM,
                                           backgroundColor: Colors.red,
                                           colorText: Colors.white);

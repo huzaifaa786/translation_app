@@ -1,3 +1,4 @@
+import 'package:translation/models/order.dart';
 import 'package:translation/models/orderr.dart';
 import 'package:translation/models/vendor.dart';
 
@@ -6,12 +7,12 @@ class Notificationn {
   int? user_id;
   int? vendor_id;
   String? title;
-  Orderr? orderr;
+  Order? orderr;
   Vendor? vendor;
   Notificationn(notification) {
     id = notification['id'];
     title = notification['title'];
-    orderr = Orderr(notification['order']);
+    orderr = notification['order'] != null ? Order(notification['order']) : null;;
     print('dfdfdffffffffdfdfdfdf');
     print(notification['vendor']);
     vendor = Vendor(notification['vendor']) ;

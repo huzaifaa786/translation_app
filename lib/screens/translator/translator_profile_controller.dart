@@ -133,7 +133,7 @@ class TranslatorProfileController extends GetxController {
     update();
   }
 
-  File? file;
+  File? file  = File('');
   Future<void> picksinglefile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
@@ -141,6 +141,7 @@ class TranslatorProfileController extends GetxController {
     );
     if (result != null) {
       file = File(result.files.single.path!);
+      update();
     } else {
       // User canceled the picker
     }

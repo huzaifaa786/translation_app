@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:translation/screens/chat/chatcontroller.dart';
 import 'package:translation/screens/favorites_screen/favorites.dart';
 import 'package:translation/screens/main_screen/homecontroller.dart';
 import 'package:translation/screens/notification/notification.dart';
@@ -16,7 +17,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:translation/static/dropdown.dart';
 import 'package:translation/values/controllers.dart';
 import 'package:translation/values/language.dart';
-
+import 'package:badges/badges.dart' as badges;
 import '../../../static/large_button.dart';
 
 class Home_screen extends StatefulWidget {
@@ -31,15 +32,24 @@ class _Home_screenState extends State<Home_screen> {
       PersistentTabController(initialIndex: 0);
   @override
   Widget build(BuildContext context) {
-    return PersistentTabView(
-      context,
-      controller: _controller,
-      screens: _buildScreens(),
-      items: _navBarItem(),
-      navBarStyle: NavBarStyle.style16,
-      decoration: NavBarDecoration(
-        borderRadius: BorderRadius.circular(1.0),
-        colorBehindNavBar: Colors.white,
+    return GetBuilder<ChatController>(
+        builder: (controller) =>  PersistentTabView(
+        context,
+        controller: _controller,
+        screens: _buildScreens(),
+        items: _navBarItem(),
+        navBarStyle: NavBarStyle.style6,
+        decoration: NavBarDecoration(
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey,
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: Offset(0, 3))
+          ],
+          borderRadius: BorderRadius.circular(1.0),
+          colorBehindNavBar: Colors.white,
+        ),
       ),
     );
   }
@@ -63,7 +73,13 @@ class _Home_screenState extends State<Home_screen> {
         inactiveColorPrimary: kblack,
       ),
       PersistentBottomNavBarItem(
-        icon: FaIcon(FontAwesomeIcons.commentDots),
+        icon: chatController.unseen != null
+            ? badges.Badge(
+                showBadge: chatController.unseen == '0' ? false : true,
+                badgeContent: Text(chatController.unseen!),
+                child: FaIcon(FontAwesomeIcons.commentDots),
+              )
+            : FaIcon(FontAwesomeIcons.commentDots),
         iconSize: 20,
         title: ('Chat'),
         textStyle: TextStyle(
@@ -77,12 +93,12 @@ class _Home_screenState extends State<Home_screen> {
           });
         },
       ),
-      PersistentBottomNavBarItem(
-        icon: Icon(Icons.video_call_sharp),
-        activeColorPrimary: greenish,
-        activeColorSecondary: white,
-        inactiveColorPrimary: kblack,
-      ),
+      // PersistentBottomNavBarItem(
+      //   icon: Icon(Icons.video_call_sharp),
+      //   activeColorPrimary: greenish,
+      //   activeColorSecondary: white,
+      //   inactiveColorPrimary: kblack,
+      // ),
       PersistentBottomNavBarItem(
         icon: FaIcon(FontAwesomeIcons.clipboardList),
         iconSize: 20,
@@ -110,7 +126,7 @@ List<Widget> _buildScreens() {
   return [
     Home(),
     Chats_screen(),
-    Text("Video"),
+    // Text("Video"),
     HistoryScreen(),
     Setting_screen(),
   ];
@@ -141,10 +157,14 @@ class _HomeState extends State<Home> {
     await homeController.getuser();
     setState(() {});
   }
+  msg() async{
+    await chatController.unseenchat();
+  }
 
   @override
   void initState() {
     fetchUser();
+    msg();
     super.initState();
   }
 

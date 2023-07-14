@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:translation/screens/chat/chatdetails.dart';
 
 import 'package:translation/static/chart.dart';
@@ -96,24 +97,43 @@ class _Chats_screenState extends State<Chats_screen> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: chatController.contacts.length,
-              itemBuilder: (context, index) => ChartCards(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Chatdetails_screen(
-                            id: chatController.contacts[index].id,
-                            name: chatController.contacts[index].username,
-                            profilePic:
-                                chatController.contacts[index].profilePic,
-                          ),
-                        ));
-                  },
-                  msg: 'message',
-                  name: chatController.contacts[index].username,
-                  imgicon: "assets/images/5907.jpg"),
-            ),
+                itemCount: chatController.contacts.length,
+                itemBuilder: (context, index) {
+                  DateTime currentTime = DateTime.now();
+                  String specificTimeString =
+                      chatController.contacts[index].lastmessageTime!;
+                  DateTime specificTime = DateFormat('yyyy-MM-dd HH:mm:ss')
+                      .parse(specificTimeString);
+                  Duration difference = currentTime.difference(specificTime);
+                  String date = DateFormat('yyyy-MM-dd').format(specificTime);
+                  print(difference);
+                  return ChartCards(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Chatdetails_screen(
+                                  id: chatController.contacts[index].id,
+                                  name: chatController.contacts[index].username,
+                                  profilePic:
+                                      chatController.contacts[index].profilePic,
+                                  screen: 'chat'),
+                            ));
+                      },
+                      duration: difference.inSeconds < 60
+                          ? difference.inSeconds.toString() + ' sec ago'
+                          : difference.inMinutes < 60
+                              ? difference.inMinutes.toString() + ' min ago'
+                              : difference.inHours < 24
+                                  ? difference.inHours.toString() + ' hour ago'
+                                  : difference.inDays < 8
+                                      ? difference.inDays.toString() +
+                                          ' day ago'
+                                      : date,
+                      msg: 'Tap here to view messages',
+                      name: chatController.contacts[index].username,
+                      imgicon: chatController.contacts[index].profilePic);
+                }),
           ),
         ],
       ),

@@ -96,7 +96,7 @@ class _Checkout_screenState extends State<Checkout_screen> {
                       margin: EdgeInsets.all(8),
                       width: 98,
                       height: 98,
-                      // padding: EdgeInsets.all(8),
+                      padding: EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         border: Border.all(width: 2, color: Color(0xFF34607B)),
                         borderRadius: BorderRadius.circular(70),
@@ -120,20 +120,37 @@ class _Checkout_screenState extends State<Checkout_screen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                              "Time:   " +
-                                  translatorProfileController.duration
-                                      .toString() +
-                                  ' min',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  color: hintText)),
-                          Text(" |",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  color: hintText)),
+                          translatorProfileController.serviceType !=
+                                  ServiceType.Document
+                              ? translatorProfileController.serviceType !=
+                                      ServiceType.Schedule
+                                  ? Text(
+                                      "Time:   " +
+                                          translatorProfileController.duration
+                                              .toString() +
+                                          ' min',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          color: hintText))
+                                  : Text(
+                                      "Time:   " +
+                                          translatorProfileController
+                                              .startTime +
+                                          ' - ' +
+                                          translatorProfileController.endTime,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          color: hintText))
+                              : Container(),
+                          translatorProfileController.serviceType !=
+                                  ServiceType.Document
+                              ? Text(" |",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      color: hintText))
+                              : Container(),
                           Text(
                               "   Date:    " +
                                   DateFormat('dd/MM/yyyy').format(

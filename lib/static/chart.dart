@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class ChartCards extends StatelessWidget {
-  const ChartCards( {Key? key,
-      required this.msg,
-      required this.name,
-      required this.imgicon,
-      this.onPressed,
-      })
-      : super(key: key);
-  final  msg;
-  final  name;
-  final  imgicon;
+  const ChartCards({
+    Key? key,
+    required this.msg,
+    required this.name,
+    required this.imgicon,
+    this.onPressed,
+    this.duration,
+  }) : super(key: key);
+  final msg;
+  final name;
+  final imgicon;
   final onPressed;
-  
+  final duration;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class ChartCards extends StatelessWidget {
         child: Row(
           children: <Widget>[
             // ClipRRect(
-      
+
             // borderRadius: BorderRadius.circular(40.0),
             // child: Image.network('http://10.0.2.2:8000/api/image',
             // height: 100,
@@ -42,20 +43,18 @@ class ChartCards extends StatelessWidget {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(22),
-                child:  
-                // imgicon == ''
-                //     ? 
-                    
-                    Image(
+                child: imgicon == ''
+                    ? Image(
                         image: AssetImage(imgicon),
                         height: 64,
                         width: 64,
                       )
-                    // : CachedNetworkImage(
-                    //     imageUrl: imgicon,
-                    //     height: 64,
-                    //     width: 64,
-                    //   ),
+                    : CachedNetworkImage(
+                        imageUrl:
+                            'https://translation.klickwash.net/' + imgicon,
+                        height: 64,
+                        width: 64,
+                      ),
               ),
             ),
             Expanded(
@@ -73,7 +72,7 @@ class ChartCards extends StatelessWidget {
                               fontWeight: FontWeight.w600, fontSize: 14.0),
                         ),
                         Text(
-                          '23 min',
+                          duration,
                           style: TextStyle(
                             color: Colors.black45,
                             fontSize: 12,

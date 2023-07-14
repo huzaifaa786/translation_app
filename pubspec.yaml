@@ -73,6 +73,7 @@ dependencies:
   full_screen_image: ^2.0.0
   photo_view: ^0.14.0
   flutter_file_downloader: ^1.1.2
+  badges: ^3.1.1
 
 dev_dependencies:
   flutter_test:

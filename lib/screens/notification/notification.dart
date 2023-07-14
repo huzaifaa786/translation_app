@@ -56,45 +56,47 @@ class _Notification_screenState extends State<Notification_screen> {
               height: 8,
             ),
             controller.notifications.length != 0
-                ? Padding(
-                    padding: const EdgeInsets.only(left: 12, right: 12),
-                    child: Flexible(
-                      child: Container(
-                        height: MediaQuery.of(context).size.height * 0.88,
-                        child: ListView.builder(
-                            itemCount: controller.notifications.length,
-                            itemBuilder: (context, index) => NotificationTile(
-                                  ontap: controller.notifications[index].orderr!
-                                              .status ==
-                                          '3'
-                                      ? () {
-                                          showModalBottomSheet(
-                                            context: context,
-                                            isScrollControlled: true,
-                                            shape: const RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.vertical(
-                                                top: Radius.circular(40),
+                ? Flexible(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.88,
+                      padding: EdgeInsets.only(left: 12, right: 12),
+                      child: ListView.builder(
+                          itemCount: controller.notifications.length,
+                          itemBuilder: (context, index) => NotificationTile(
+                                ontap: controller.notifications[index].orderr !=
+                                        null
+                                    ? controller.notifications[index].orderr!
+                                                .status ==
+                                            '3'
+                                        ? () {
+                                            showModalBottomSheet(
+                                              context: context,
+                                              isScrollControlled: true,
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.vertical(
+                                                  top: Radius.circular(40),
+                                                ),
                                               ),
-                                            ),
-                                            builder: (context) => Wrap(
-                                                children: [
-                                                  NotificationModal(
-                                                      notification: controller
-                                                          .notifications[index])
-                                                ]),
-                                          );
-                                        }
-                                      : () {},
-                                  name: controller
-                                      .notifications[index].vendor!.username,
-                                  image: controller
-                                      .notifications[index].vendor!.profilePic,
-                                  title: controller.notifications[index].title,
-                                  status: controller
-                                      .notifications[index].orderr!.status,
-                                )),
-                      ),
+                                              builder: (context) =>
+                                                  Wrap(children: [
+                                                NotificationModal(
+                                                    notification: controller
+                                                        .notifications[index])
+                                              ]),
+                                            );
+                                          }
+                                        : () {}
+                                    : () {},
+                                name: controller
+                                    .notifications[index].vendor!.username,
+                                image: controller
+                                    .notifications[index].vendor!.profilePic,
+                                title: controller.notifications[index].title,
+                                status: controller.notifications[index].orderr != null ? controller
+                                    .notifications[index].orderr!.status : '',
+                              )),
                     ),
                   )
                 : Flexible(

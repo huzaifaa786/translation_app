@@ -137,7 +137,16 @@ class ChatController extends GetxController {
   Future<void> picksinglefile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: ['zip', 'rar', 'txt', 'pdf','png','jpg','jpeg','gif'],
+      allowedExtensions: [
+        'zip',
+        'rar',
+        'txt',
+        'pdf',
+        'png',
+        'jpg',
+        'jpeg',
+        'gif'
+      ],
     );
     if (result != null) {
       file = await File(result.files.single.path!);
@@ -147,41 +156,42 @@ class ChatController extends GetxController {
     }
   }
 
-sendMassage() async {
-  var url = BASE_URL + 'sendMessage';
-  var data;
-  GetStorage box = GetStorage();
+  sendMassage() async {
+    var url = BASE_URL + 'sendMessage';
+    var data;
+    GetStorage box = GetStorage();
 
-  String fileName = file?.path.split('/').last ?? ''; // Get the file name if it exists
-  print(fileName);
+    String fileName =
+        file?.path.split('/').last ?? ''; // Get the file name if it exists
+    print(fileName);
 
-  data = dio.FormData.fromMap({
-    'api_token': box.read('api_token')!,
-    'message': massagecontroller.text.toString(),
-    'type': 'user',
-    'temporaryMsgId': main(),
-    'id': activeUserId,
-  });
+    data = dio.FormData.fromMap({
+      'api_token': box.read('api_token')!,
+      'message': massagecontroller.text.toString(),
+      'type': 'user',
+      'temporaryMsgId': main(),
+      'id': activeUserId,
+    });
 
-  if (file != null) {
-    data.files.add(
-      MapEntry(
-        'file',
-        await dio.MultipartFile.fromFile(file!.path, filename: fileName),
-      ),
-    );
+    if (file != null) {
+      data.files.add(
+        MapEntry(
+          'file',
+          await dio.MultipartFile.fromFile(file!.path, filename: fileName),
+        ),
+      );
+    }
+
+    var response = await Api.execute(url: url, data: data);
+
+    response['message']['body'] = response['message']['message'];
+    response['message']['created_at'] = response['message']['created_at'];
+
+    massages.add(Msg(response['message']));
+
+    update();
+    ClearVariable();
   }
-
-  var response = await Api.execute(url: url, data: data);
-
-  response['message']['body'] = response['message']['message'];
-  response['message']['created_at'] = response['message']['created_at'];
-
-  massages.add(Msg(response['message']));
-
-  update();
-  ClearVariable();
-}
 
   fetchmassage(id) async {
     LoadingHelper.show();
@@ -200,9 +210,40 @@ sendMassage() async {
       print(van['attachment']);
       massages.add(Msg(van));
       print(massages.last.file_name);
-     
+
       update();
     }
+    LoadingHelper.dismiss();
+  }
+
+  makeseen(id) async {
+    LoadingHelper.show();
+    var url = BASE_URL + 'makeSeen';
+    var data;
+    GetStorage box = GetStorage();
+    data = {
+      'api_token': box.read('api_token')!,
+      'id': id,
+    };
+    var response = await Api.execute(url: url, data: data);
+    LoadingHelper.dismiss();
+  }
+
+  String? unseen;
+  unseenchat() async {
+    LoadingHelper.show();
+    var url = BASE_URL + 'unseen/all';
+    var data;
+    GetStorage box = GetStorage();
+    data = {
+      'api_token': box.read('api_token')!,
+    };
+    var response = await Api.execute(url: url, data: data);
+    print("object#######################################################3");
+    unseen = response['unseen'].toString();
+    print('unseen');
+    print(unseen);
+    update();
     LoadingHelper.dismiss();
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:translation/screens/chat/chatdetails.dart';
 import 'package:translation/screens/orderhistory/ordercontroller.dart';
 import 'package:translation/static/bagee.dart';
@@ -49,33 +50,46 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       height: MediaQuery.of(context).size.height * 0.85,
                       child: ListView.builder(
                           itemCount: controller.orders.length,
-                          itemBuilder: (context, index) => HistoryCard(
-                                id: controller.orders[index].id,
-                                name: controller.orders[index].vendor!.name,
-                                image:
-                                    controller.orders[index].vendor!.profilePic,
-                                price: controller.orders[index].price,
-                                onmsgtap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            Chatdetails_screen(
-                                          id: controller.orders[index].vendor!.id,
-                                          name: controller
-                                              .orders[index].vendor!.username,
-                                          profilePic: controller
-                                              .orders[index].vendor!.profilePic,
-                                        ),
-                                      ));
-                                },
-                                type: controller.orders[index].servicetype,
-                                status: controller.orders[index].status,
-                                time: controller.orders[index].starttime! +
-                                    '-' +
-                                    controller.orders[index].endtime!,
-                                date: controller.orders[index].date,
-                              )),
+                          itemBuilder: (context, index) {
+                            String stimeStr =
+                                controller.orders[index].starttime!;
+                            String etimeStr = controller.orders[index].endtime!;
+                            DateTime stime =
+                                DateFormat('H:m:s').parse(stimeStr);
+                            DateTime etime =
+                                DateFormat('H:m:s').parse(etimeStr);
+                            String sformattedTime =
+                                DateFormat('HH:mm').format(stime);
+                            String eformattedTime =
+                                DateFormat('HH:mm').format(etime);
+                            return HistoryCard(
+                              id: controller.orders[index].id,
+                              name: controller.orders[index].vendor!.name,
+                              image:
+                                  controller.orders[index].vendor!.profilePic,
+                              price: controller.orders[index].price,
+                              onmsgtap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Chatdetails_screen(
+                                        id: controller.orders[index].vendor!.id,
+                                        name: controller
+                                            .orders[index].vendor!.username,
+                                        profilePic: controller
+                                            .orders[index].vendor!.profilePic,
+                                        screen: 'order',
+                                      ),
+                                    ));
+                              },
+                              type: controller.orders[index].servicetype,
+                              status: controller.orders[index].status,
+                              time: sformattedTime +
+                                  '-' +
+                                  eformattedTime,
+                              date: controller.orders[index].date,
+                            );
+                          }),
                     ),
                   )
                 : Flexible(

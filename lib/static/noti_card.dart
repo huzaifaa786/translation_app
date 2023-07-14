@@ -87,6 +87,7 @@ class NotificationTile extends StatelessWidget {
                   ),
                 ],
               ),
+              status != ''?
               Badgee(
                       title: status == "3"
                           ? 'Completed'
@@ -98,7 +99,7 @@ class NotificationTile extends StatelessWidget {
                           : status == "2"
                               ? Colors.red
                               : greenish,
-                    ),
+                    ):Container(),
             ],
           ),
         ),
