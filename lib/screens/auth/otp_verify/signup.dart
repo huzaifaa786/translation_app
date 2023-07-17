@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:translation/screens/forgot.dart/resetPassword.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/static/large_button.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';

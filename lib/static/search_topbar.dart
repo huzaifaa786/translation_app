@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:translation/values/colors.dart';
 
 class SearchTopBar extends StatelessWidget {
-  const   SearchTopBar({super.key});
+  const   SearchTopBar({super.key,this.controller,this.onchange});
+  final onchange;
+  final controller;
 
   @override
   Widget build(BuildContext context) {
@@ -11,12 +14,12 @@ class SearchTopBar extends StatelessWidget {
       width: double.infinity,
       height: 80,
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 255, 255, 255),
+        color: white,
         boxShadow: [
           BoxShadow(
-              color: Colors.grey,
+              color: Colors.grey[300]!,
               blurRadius: 15.0,
-              spreadRadius: 5.0,
+              spreadRadius: 6.0,
               offset: Offset(5.0, 5.0))
         ],
       ),
@@ -42,6 +45,7 @@ class SearchTopBar extends StatelessWidget {
                 color: Colors.grey[200],
               ),
               child: TextField(
+                onChanged: onchange,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(width: 1, color: Colors.grey[300]!),

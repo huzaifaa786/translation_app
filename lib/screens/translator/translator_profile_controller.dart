@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'dart:math';
 
@@ -8,18 +7,15 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
 import 'package:translation/api/api.dart';
 import 'package:translation/helper/loading.dart';
-import 'package:translation/models/favourit.dart';
 import 'package:translation/models/unurgent.dart';
 import 'package:translation/models/urgent.dart';
 import 'package:translation/models/vendor.dart';
 import 'package:translation/screens/checkout/checkout.dart';
 import 'package:translation/screens/order_confirm.dart/cardAdded.dart';
 import 'package:translation/values/colors.dart';
-import 'package:translation/values/controllers.dart';
 import 'package:translation/values/string.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
@@ -268,7 +264,7 @@ class TranslatorProfileController extends GetxController {
             : 'inperson',
         'documenttype': documentType,
         'pages': pages,
-        'description': descriptionController
+        'description': descriptionController.text.toString()
       });
       response = await Api.execute(url: url, data: data, image: true);
     } else {

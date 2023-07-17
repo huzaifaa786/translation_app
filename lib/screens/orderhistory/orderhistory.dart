@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:translation/screens/chat/chatdetails.dart';
 import 'package:translation/screens/orderhistory/ordercontroller.dart';
-import 'package:translation/static/bagee.dart';
 import 'package:translation/static/historycard.dart';
 import 'package:translation/static/topbarr.dart';
-import 'package:translation/static/titletopbar.dart';
-import 'package:translation/values/colors.dart';
 import 'package:translation/values/controllers.dart';
 
 class HistoryScreen extends StatefulWidget {
@@ -21,6 +16,7 @@ class HistoryScreen extends StatefulWidget {
 
 class _HistoryScreenState extends State<HistoryScreen> {
   fetchOrder() async {
+    orderController.orders = [];
     await orderController.getorder();
     setState(() {});
   }

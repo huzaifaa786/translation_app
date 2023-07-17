@@ -122,7 +122,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                           children: [
                             ProfileDetail(
                               name: widget.detail!.name,
-                              rating: widget.detail!.rating,
+                              rating: widget.detail!.rating == null ? null : double.parse(widget.detail!.rating!),
                               image: widget.detail!.profilePic,
                             ),
                             Padding(
@@ -617,6 +617,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Scheduleinput(
+                                            text: 'Start Time',
                                             controller: startTimeController,
                                             onpressed: () {
                                               DatePicker.showTimePicker(context,
@@ -624,7 +625,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                   showSecondsColumn: false,
                                                   onChanged: (val) {
                                                 var end = val
-                                                    .add(Duration(minutes: 30));
+                                                    .add(Duration(minutes: 1));
                                                 var time =
                                                     DateFormat.Hm().format(val);
                                                 var endTime =
@@ -640,7 +641,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                 setState(() {});
                                               }, onConfirm: (val) {
                                                 var end = val
-                                                    .add(Duration(minutes: 30));
+                                                    .add(Duration(minutes: 1));
                                                 var time =
                                                     DateFormat.Hm().format(val);
                                                 var endTime =
@@ -661,6 +662,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                           ),
                                           Text("To"),
                                           Scheduleinput(
+                                            text: 'End Time',
                                             controller: endTimeController,
                                             onpressed: () {
                                               DatePicker.showTimePicker(context,
@@ -822,7 +824,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                           ),
                                         ],
                                       ),
-                                      translatorProfileController.file != ''
+                                      translatorProfileController.file != null
                                           ? Padding(
                                               padding: EdgeInsets.only(
                                                   top: 8, bottom: 8),

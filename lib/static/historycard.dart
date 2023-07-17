@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:translation/screens/translator/translator_profile_controller.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/static/bagee.dart';
 import 'package:cached_network_image/cached_network_image.dart';

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:translation/models/notification.dart';
-import 'package:translation/screens/translator_screens/offline_translator/offline_people.dart';
 import 'package:translation/static/large_button.dart';
 import 'package:translation/values/colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';

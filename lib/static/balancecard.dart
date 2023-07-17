@@ -1,11 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:translation/screens/enter_amount/enteramount.dart';
 import 'package:translation/values/colors.dart';
-import 'package:translation/static/bagee.dart';
 import 'package:translation/values/controllers.dart';
 
 class BalanceCard extends StatelessWidget {
@@ -129,11 +127,8 @@ class BalanceCard extends StatelessWidget {
                                       fontFamily: 'Lato'),
                                 ),
                                 style: ElevatedButton.styleFrom(
-                                  minimumSize: Size(78, 26),
-                                  padding: EdgeInsets.zero,
-                                  primary:
-                                      Colors.white, // Button background color
-                                  onPrimary: greenish, // Button text color
+                                  foregroundColor: greenish, minimumSize: Size(78, 26), backgroundColor: Colors.white,
+                                  padding: EdgeInsets.zero, // Button text color
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(
                                         8.0), // Button border radius

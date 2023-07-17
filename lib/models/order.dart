@@ -1,4 +1,3 @@
-import 'package:translation/models/document.dart';
 import 'package:translation/models/user.dart';
 import 'package:translation/models/vendor.dart';
 

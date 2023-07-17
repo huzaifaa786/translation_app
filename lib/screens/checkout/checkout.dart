@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:translation/helper/loading.dart';
-import 'package:translation/models/coupon.dart';
-import 'package:translation/models/order.dart';
 import 'package:translation/screens/checkout/checkout_controller.dart';
 import 'package:translation/screens/enter_amount/ppaymentmethod.dart';
 import 'package:translation/screens/main_screen/homecontroller.dart';
 import 'package:translation/screens/translator/translator_profile_controller.dart';
-import 'package:translation/screens/translator_screens/translator_screen.dart';
-import 'package:translation/screens/order_confirm.dart/cardAdded.dart';
 import 'package:translation/static/titletopbar.dart';
 import 'package:translation/values/controllers.dart';
 

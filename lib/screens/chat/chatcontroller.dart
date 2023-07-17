@@ -22,6 +22,7 @@ class ChatController extends GetxController {
   TextEditingController massagecontroller = TextEditingController();
   String? activeUserId;
   List<Contact> contacts = <Contact>[];
+  List<Contact> scontacts = <Contact>[];
   PusherChannelsFlutter pusher = PusherChannelsFlutter.getInstance();
   main() {
     var intValue = Random().nextInt(10);
@@ -86,8 +87,22 @@ class ChatController extends GetxController {
     for (var contact in response['contacts']) {
       contacts.add(Contact(contact));
     }
-
+    scontacts = contacts;
+    update();
     LoadingHelper.dismiss();
+  }
+
+  void searchContact(String query) {
+    if (query == '') {
+      scontacts = contacts;
+      update();
+    } else {
+      scontacts = contacts
+          .where((o) =>
+              o.username!.toString().toLowerCase().contains(query.toLowerCase()))
+          .toList();
+      update();
+    }
   }
 
   void onError(String message, int? code, dynamic e) {

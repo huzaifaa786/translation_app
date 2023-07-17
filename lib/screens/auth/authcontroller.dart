@@ -8,7 +8,6 @@ import 'package:translation/models/user.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:translation/screens/main_screen/home.dart';
 import 'package:translation/services/auth_services/google_services.dart';
-import 'package:translation/services/auth_services/mobileotp_services.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/values/controllers.dart';
 import 'package:translation/values/string.dart';

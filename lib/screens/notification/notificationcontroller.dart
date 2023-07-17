@@ -33,6 +33,7 @@ class NotificationController extends GetxController {
         notifications.add(Notificationn(van));
       }
       print(response);
+      update();
       LoadingHelper.dismiss();
     } else {
       print(response['error']);
@@ -58,9 +59,13 @@ class NotificationController extends GetxController {
     print(data);
     var response = await Api.execute(url: url, data: data);
     if (!response['error']) {
+      Get.snackbar("Thanks For your feedback.", '',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.white);
       LoadingHelper.dismiss();
     } else {
-      Get.snackbar("Invalid Password.", 'You give rating time on signal order',
+      Get.snackbar("Invalid Data.", 'You only gave a rating one time for one order.',
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.red,
           colorText: Colors.white);

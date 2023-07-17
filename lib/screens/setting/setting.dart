@@ -1,15 +1,11 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:translation/screens/company_login/company_login_screen.dart';
-import 'package:translation/screens/enter_amount/amountcontroller.dart';
-import 'package:translation/screens/auth/authcontroller.dart';
 import 'package:translation/screens/auth/login_screen.dart';
 import 'package:translation/screens/main_screen/homecontroller.dart';
-import 'package:translation/screens/profile/profilecontroller.dart';
 import 'package:translation/screens/setting/bug_report_modal.dart';
 import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/static/language.dart';
@@ -17,7 +13,6 @@ import 'package:translation/static/settingcard.dart';
 import 'package:translation/static/topbarr.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/screens/profile/profile.dart';
-import 'package:translation/static/titletopbar.dart';
 import 'package:translation/static/balancecard.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation/values/controllers.dart';

@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation/screens/enter_amount/amountcontroller.dart';
 import 'package:translation/screens/enter_amount/ppaymentmethod.dart';
-import 'package:translation/screens/main_screen/home.dart';
 import 'package:translation/static/box.dart';
 import 'package:translation/static/input_field.dart';
 import 'package:translation/static/large_button.dart';

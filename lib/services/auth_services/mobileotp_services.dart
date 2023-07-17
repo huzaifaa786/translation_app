@@ -1,20 +1,15 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:translation/api/api.dart';
 import 'package:translation/helper/loading.dart';
 import 'package:translation/screens/auth/otp_signup.dart';
 import 'package:translation/screens/auth/otp_verify/loginOtp.dart';
 import 'package:translation/screens/auth/otp_verify/signup.dart';
 import 'package:translation/screens/main_screen/home.dart';
 import 'package:translation/values/colors.dart';
-import 'package:translation/values/controllers.dart';
-import 'package:translation/values/string.dart';
-import 'package:translation/values/validator.dart';
 
 class OTPServices extends GetxController {
   static OTPServices instance = Get.find();

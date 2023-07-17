@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:translation/screens/translator/translator_profile.dart';
-import 'package:translation/screens/translator_screens/translator_screen.dart';
 import 'package:translation/static/favorites_card.dart';
 import 'package:translation/static/titletopbar.dart';
 import 'package:translation/values/controllers.dart';

@@ -1,17 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:translation/models/notification.dart';
 import 'package:translation/screens/notification/notification_card.dart';
 import 'package:translation/screens/notification/notificationcontroller.dart';
-import 'package:translation/screens/translator_screens/offline_translator/offline_modal.dart';
-import 'package:translation/screens/translator_screens/offline_translator/offline_people.dart';
 import 'package:translation/static/noti_card.dart';
 import 'package:translation/static/titletopbar.dart';
-import 'package:translation/values/colors.dart';
-import 'package:translation/screens/main_screen/home.dart';
-import 'package:translation/static/large_button.dart';
 import 'package:translation/values/controllers.dart';
 
 class Notification_screen extends StatefulWidget {
@@ -24,7 +16,7 @@ class Notification_screen extends StatefulWidget {
 class _Notification_screenState extends State<Notification_screen> {
   fetchNoti() async {
     await notificationController.getnoti();
-    setState(() {});
+    // setState(() {});
   }
 
   readnotification() async {

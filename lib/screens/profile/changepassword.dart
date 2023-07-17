@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:translation/screens/main_screen/home.dart';
 import 'package:translation/screens/profile/profilecontroller.dart';
 import 'package:translation/static/large_button.dart';
 import 'package:translation/static/stack_input.dart';

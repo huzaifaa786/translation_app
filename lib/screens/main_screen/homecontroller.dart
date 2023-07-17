@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:translation/api/api.dart';
 import 'package:translation/helper/loading.dart';
+import 'package:translation/models/filter.dart';
 import 'package:translation/models/user.dart';
 import 'package:translation/models/vendor.dart';
 import 'package:translation/screens/auth/login_screen.dart';
@@ -19,6 +20,8 @@ class HomeController extends GetxController {
   List<Vendor> searchVendor = [];
   List<Vendor> onlineVendor = [];
   List<Vendor> offlineVendor = [];
+  List<Vendor> sonlineVendor = [];
+  List<Vendor> sofflineVendor = [];
   User? user;
 
 /////////////////////////////////// Clear Variables /////////////////////////////////////////////////////////
@@ -28,6 +31,8 @@ class HomeController extends GetxController {
     searchVendor = [];
     onlineVendor = [];
     offlineVendor = [];
+    sonlineVendor = [];
+    sofflineVendor = [];
     fromSelectedLanguage = null;
     toSelectedLanguage = null;
   }
@@ -91,7 +96,8 @@ class HomeController extends GetxController {
       searchVendor = vendor;
       onlineVendor = vendor.where((i) => i.online == 1).toList();
       offlineVendor = vendor.where((i) => i.online == 0).toList();
-
+      sonlineVendor = onlineVendor;
+      sofflineVendor = offlineVendor;
       update();
 
       if (vendor.isNotEmpty) {
@@ -107,6 +113,125 @@ class HomeController extends GetxController {
           backgroundColor: Colors.red,
           colorText: Colors.white);
     }
+  }
+
+//////////////////////////////////// Search Both Vendors ////////////////////////////////////////////////////////////
+
+  void searchVendors(String query) {
+    if (query == '') {
+      sonlineVendor = onlineVendor;
+      sofflineVendor = offlineVendor;
+      update();
+    } else {
+      sonlineVendor = onlineVendor
+          .where((o) =>
+              o.name!.toString().toLowerCase().contains(query.toLowerCase()))
+          .toList();
+      sofflineVendor = offlineVendor
+          .where((o) =>
+              o.name!.toString().toLowerCase().contains(query.toLowerCase()))
+          .toList();
+      update();
+    }
+  }
+
+//////////////////////////////////// Search Online Vendors ////////////////////////////////////////////////////////////
+
+  void searchOnlineOrders(String query) {
+    if (query == '') {
+      sonlineVendor = onlineVendor;
+    } else {
+      sonlineVendor = onlineVendor
+          .where((o) =>
+              o.name!.toString().toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    }
+    update();
+  }
+
+//////////////////////////////////// Search Offile Vendors ////////////////////////////////////////////////////////////
+
+  void searchOfflineOrders(String query) {
+    if (query == '') {
+      sofflineVendor = offlineVendor;
+      update();
+    } else {
+      sofflineVendor = offlineVendor
+          .where((o) =>
+              o.name!.toString().toLowerCase().contains(query.toLowerCase()))
+          .toList();
+      update();
+    }
+  }
+
+//////////////////////////////////// Update Vendors on return Back ////////////////////////////////////////////////////////////
+
+  offlineVendorUpdate() {
+    sofflineVendor = offlineVendor;
+    update();
+  }
+
+  onlineVendorUpdate() {
+    sonlineVendor = onlineVendor;
+    update();
+  }
+
+//////////////////////////////////// filter offline vendors/////////////////////////////////////////////////
+
+  void filterOfflineOrder(String? rating, String? price) {
+    if (rating == "Highest to lowest rating") {
+      sofflineVendor = offlineVendor;
+      sofflineVendor.sort((a, b) => double.parse(b.rating!).compareTo(double.parse(a.rating!)));
+      if (price == "Highest price to lowest price") {
+        sofflineVendor.sort((a, b) => double.parse(b.service!.onlineaudiovideoPrice!).compareTo(double.parse(a.service!.onlineaudiovideoPrice!)));
+      } else if (price == "lowest price to Highest price") {
+        sofflineVendor.sort((a, b) => double.parse(a.service!.onlineaudiovideoPrice!).compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
+      }
+    } else if (rating == "lowest to Highest rating") {
+      sofflineVendor = offlineVendor;
+      sofflineVendor.sort((a, b) => double.parse(a.rating!).compareTo(double.parse(b.rating!)));
+      if (price == "Highest price to lowest price") {
+        sofflineVendor.sort((a, b) => double.parse(b.service!.onlineaudiovideoPrice!).compareTo(double.parse(a.service!.onlineaudiovideoPrice!)));
+      } else if (price == "lowest price to Highest price") {
+        sofflineVendor.sort((a, b) => double.parse(a.service!.onlineaudiovideoPrice!).compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
+      }
+    } else {
+      if (price == "Highest price to lowest price") {
+        sofflineVendor.sort((a, b) => double.parse(b.service!.onlineaudiovideoPrice!).compareTo(double.parse(a.service!.onlineaudiovideoPrice!))); 
+      } else if (price == "lowest price to Highest price") {
+        sofflineVendor.sort((a, b) => double.parse(a.service!.onlineaudiovideoPrice!).compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
+      }
+    }
+    update();
+  }
+
+//////////////////////////////////// filter Online Vendors /////////////////////////////////////////////////
+
+  filterOnlineOrder(String? rating, String? price) {
+    if (rating == "Highest to lowest rating") {
+      sonlineVendor = onlineVendor;
+      sonlineVendor.sort((a, b) => double.parse(b.rating!).compareTo(double.parse(a.rating!)));
+      if (price == "Highest price to lowest price") {
+        sonlineVendor.sort((a, b) => double.parse(b.service!.onlineaudiovideoPrice!).compareTo(double.parse(a.service!.onlineaudiovideoPrice!)));
+      } else if (price == "lowest price to Highest price") {
+        sonlineVendor.sort((a, b) => double.parse(a.service!.onlineaudiovideoPrice!).compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
+      }
+    } else if (rating == "lowest to Highest rating") {
+      sonlineVendor = onlineVendor;
+      sonlineVendor.sort((a, b) => double.parse(a.rating!).compareTo(double.parse(b.rating!)));
+      if (price == "Highest price to lowest price") {
+        sonlineVendor.sort((a, b) => double.parse(b.service!.onlineaudiovideoPrice!).compareTo(double.parse(a.service!.onlineaudiovideoPrice!)));
+      } else if (price == "lowest price to Highest price") {
+        sonlineVendor.sort((a, b) => double.parse(a.service!.onlineaudiovideoPrice!).compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
+      }
+    } else {
+      if (price == "Highest price to lowest price") {
+        sonlineVendor.sort((a, b) => double.parse(b.service!.onlineaudiovideoPrice!).compareTo(double.parse(a.service!.onlineaudiovideoPrice!)));
+      } else if (price == "lowest price to Highest price") {
+        sonlineVendor.sort((a, b) => double.parse(a.service!.onlineaudiovideoPrice!).compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
+      }
+    }
+    update();
   }
 
 /////////////////////////////////// Check Notifications /////////////////////////////////////////////////////////

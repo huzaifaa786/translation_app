@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:translation/values/colors.dart';
-
 
 class Scheduleinput extends StatelessWidget {
   const Scheduleinput(
@@ -44,10 +42,18 @@ class Scheduleinput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 12),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      padding: const EdgeInsets.only(top: 2),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 4),
+            child: Text(
+              text,
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            ),
+          ),
           SizedBox(
             height: 60,
             width: MediaQuery.of(context).size.width * 0.3,
@@ -62,9 +68,11 @@ class Scheduleinput extends StatelessWidget {
               validator: validator,
               decoration: InputDecoration(
                 filled: true,
-                fillColor: enabled ? Colors.white :Colors.grey.withOpacity(0.5),
+                fillColor:
+                    enabled ? Colors.white : Colors.grey.withOpacity(0.5),
                 hintText: hint,
-                contentPadding: const EdgeInsets.only(left: 12.0, right: 12,top: 12,bottom:16 ),
+                contentPadding: const EdgeInsets.only(
+                    left: 12.0, right: 12, top: 12, bottom: 16),
                 hintStyle: TextStyle(color: primaryLightcolor),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(width: 1, color: Colors.grey[500]!),

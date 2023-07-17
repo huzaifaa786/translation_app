@@ -1,12 +1,22 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:translation/models/filter.dart';
 import 'package:translation/static/large_button.dart';
 import 'package:translation/values/colors.dart';
 
-class FilterModal extends StatelessWidget {
+class FilterModal extends StatefulWidget {
   const FilterModal({super.key, this.rating, this.price});
   final rating;
   final price;
+
+  @override
+  State<FilterModal> createState() => _FilterModalState();
+}
+
+class _FilterModalState extends State<FilterModal> {
+  String? selectedPrice;
+  String? selectedRating;
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +32,11 @@ class FilterModal extends StatelessWidget {
                 "Filters",
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
               ),
-              Text("Clear",
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: greenish))
+              // Text("Clear",
+              //     style: TextStyle(
+              //         fontSize: 16,
+              //         fontWeight: FontWeight.w700,
+              //         color: greenish))
             ],
           ),
           Padding(
@@ -35,32 +45,30 @@ class FilterModal extends StatelessWidget {
               decoration: InputDecoration(
                 labelText: "Filter By",
                 labelStyle: TextStyle(),
-                contentPadding: EdgeInsets.only(left: 20),
+                contentPadding: EdgeInsets.only(left: 8),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
               isExpanded: true,
               hint: const Text(
-                'by price',
+                'Select Option',
                 style: TextStyle(fontSize: 14),
               ),
-              items: price,
+              items: widget.price,
               validator: (value) {
                 if (value == null) {
-                  return 'Please select gender.';
+                  return 'Please select option.';
                 }
                 return null;
               },
               onChanged: (value) {
-                //Do something when changing the item if you want.
+                selectedPrice = value.toString();
               },
-              onSaved: (value) {
-                // selectedValue = value.toString();
-              },
+              onSaved: (value) {},
               buttonStyleData: const ButtonStyleData(
                 height: 60,
-                padding: EdgeInsets.only(left: 20, right: 10),
+                padding: EdgeInsets.only(right: 10),
               ),
               iconStyleData: const IconStyleData(
                 icon: Icon(
@@ -81,32 +89,30 @@ class FilterModal extends StatelessWidget {
             child: DropdownButtonFormField2(
               decoration: InputDecoration(
                 labelText: "Filter By",
-                contentPadding: EdgeInsets.only(left: 20),
+                contentPadding: EdgeInsets.only(left: 8),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
               isExpanded: true,
               hint: const Text(
-                'Highest price to lowest price',
+                'Select Option',
                 style: TextStyle(fontSize: 14),
               ),
-              items: rating,
+              items: widget.rating,
               validator: (value) {
                 if (value == null) {
-                  return 'Please select gender.';
+                  return 'Please select option.';
                 }
                 return null;
               },
               onChanged: (value) {
-                //Do something when changing the item if you want.
+                selectedRating = value.toString();
               },
-              onSaved: (value) {
-                // selectedValue = value.toString();
-              },
+              onSaved: (value) {},
               buttonStyleData: const ButtonStyleData(
                 height: 60,
-                padding: EdgeInsets.only(left: 20, right: 10),
+                padding: EdgeInsets.only(right: 10),
               ),
               iconStyleData: const IconStyleData(
                 icon: Icon(
@@ -125,7 +131,12 @@ class FilterModal extends StatelessWidget {
           LargeButton(
             title: 'Filter',
             sreenRatio: 0.9,
-            onPressed: () {},
+            onPressed: () {
+              FilterModalResult query = FilterModalResult(
+                  selectedPrice == null ? '' : selectedPrice!,
+                  selectedRating == null ? '' : selectedRating!);
+              Get.back(result: query);
+            },
             color: greenish,
             textcolor: Colors.white,
             buttonWidth: 0.95,

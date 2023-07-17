@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,7 +7,6 @@ import 'package:translation/static/chattopbar.dart';
 import 'package:translation/static/rplycharcard.dart';
 import 'package:translation/values/controllers.dart';
 import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
-import 'package:translation/values/string.dart';
 
 class Chatdetails_screen extends StatefulWidget {
   const Chatdetails_screen(

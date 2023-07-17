@@ -76,7 +76,7 @@ class OnlineTranslatorCard extends StatelessWidget {
                           height: 11, width: 11)),
                   Padding(
                     padding: const EdgeInsets.only(top: 4, left: 4),
-                    child: Text(rating == null ? '0.0' : rating.toString(),
+                    child: Text(rating == null ? '0.0' : rating.toStringAsFixed(1),
                         style: TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w400,

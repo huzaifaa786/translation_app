@@ -1,10 +1,8 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:translation/screens/main_screen/home.dart';
-import 'package:translation/screens/notification/notification.dart';
 import 'package:translation/static/large_button.dart';
 
 import '../../../../values/colors.dart';

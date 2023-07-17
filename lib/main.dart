@@ -1,7 +1,3 @@
-
-
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -13,7 +9,6 @@ import 'package:translation/screens/checkout/checkout_controller.dart';
 import 'package:translation/screens/enter_amount/amountcontroller.dart';
 import 'package:translation/screens/auth/authcontroller.dart';
 import 'package:translation/screens/auth/login_screen.dart';
-import 'package:translation/screens/Otp/verifyphoneno.dart';
 import 'package:translation/screens/main_screen/homecontroller.dart';
 import 'package:translation/screens/notification/notificationcontroller.dart';
 import 'package:translation/screens/orderhistory/ordercontroller.dart';
@@ -28,7 +23,6 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:translation/screens/translator/translator_profile_controller.dart';
-import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
