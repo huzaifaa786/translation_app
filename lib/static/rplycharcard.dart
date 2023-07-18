@@ -204,6 +204,10 @@ class _ReplyMessageCardState extends State<ReplyMessageCard> {
                                                 colorText: Colors.white);
                                           },
                                           onDownloadCompleted: (path) async {
+                                            notificationsPlugin
+                                                .resolvePlatformSpecificImplementation<
+                                                    AndroidFlutterLocalNotificationsPlugin>()!
+                                                .requestPermission();
                                             var android =
                                                 AndroidNotificationDetails(
                                               'channel_id', // Replace with your desired channel ID
