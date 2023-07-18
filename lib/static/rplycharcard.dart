@@ -6,6 +6,7 @@ import 'package:translation/values/string.dart';
 import 'package:full_screen_image/full_screen_image.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:flutter_file_downloader/flutter_file_downloader.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class ReplyMessageCard extends StatefulWidget {
   const ReplyMessageCard({
@@ -31,6 +32,8 @@ class ReplyMessageCard extends StatefulWidget {
 }
 
 class _ReplyMessageCardState extends State<ReplyMessageCard> {
+  final FlutterLocalNotificationsPlugin notificationsPlugin =
+      FlutterLocalNotificationsPlugin();
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -200,7 +203,27 @@ class _ReplyMessageCardState extends State<ReplyMessageCard> {
                                                 backgroundColor: Colors.green,
                                                 colorText: Colors.white);
                                           },
-                                          onDownloadCompleted: (path) async { Get.snackbar(
+                                          onDownloadCompleted: (path) async {
+                                            var android =
+                                                AndroidNotificationDetails(
+                                              'channel_id', // Replace with your desired channel ID
+                                              'channel_name', // Replace with your desired channel name
+                                              channelDescription:
+                                                  'channel_description', // Replace with your desired channel description
+                                              importance: Importance.max,
+                                              priority: Priority.high,
+                                            );
+
+                                            var platform = NotificationDetails(
+                                                android: android);
+                                            await notificationsPlugin.show(
+                                              0, // Notification ID, should be unique for each notification
+                                              'Download Complete', // Notification title
+                                              'File downloaded successfully!', // Notification body
+                                              platform,
+                                              payload: path,
+                                            );
+                                            Get.snackbar(
                                                 'Downloading Successfully.',
                                                 'Downloaded at device path ' +
                                                     path.toString(),
