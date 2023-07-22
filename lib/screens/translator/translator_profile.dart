@@ -122,7 +122,9 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                           children: [
                             ProfileDetail(
                               name: widget.detail!.name,
-                              rating: widget.detail!.rating == null ? null : double.parse(widget.detail!.rating!),
+                              rating: widget.detail!.rating == null
+                                  ? null
+                                  : double.parse(widget.detail!.rating!),
                               image: widget.detail!.profilePic,
                             ),
                             Padding(
@@ -187,16 +189,18 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                             "assets/images/certificate.svg"),
                                         InkWell(
                                           onTap: () {
-                                            Get.to(()=> FullScreenImagePage(
-                                                  imageUrl: widget
-                                                      .detail!.certificate!,
-                                                ),);
+                                            Get.to(
+                                              () => FullScreenImagePage(
+                                                imageUrl:
+                                                    widget.detail!.certificate!,
+                                              ),
+                                            );
                                           },
                                           child: Padding(
                                             padding:
                                                 const EdgeInsets.only(left: 12),
                                             child: Text(
-                                              Uri.parse(widget.detail!.certificate!).pathSegments.last,
+                                              widget.detail!.certificate_name!,
                                               style: TextStyle(
                                                 fontSize: 15,
                                                 color: Colors.black,
@@ -876,12 +880,15 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                         });
                                                       },
                                                       icon: '-'),
-                                                  Text(controller.pages
-                                                      .toString()),
+                                                  Text(
+                                                      translatorProfileController
+                                                          .pages
+                                                          .toString()),
                                                   AddRemoveBtn(
                                                     ontap: () {
                                                       setState(() {
-                                                        controller.pages++;
+                                                        translatorProfileController
+                                                            .pages++;
                                                         translatorProfileController
                                                             .dayscalculate(
                                                                 widget.detail!);
@@ -942,6 +949,20 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                     if (translatorProfileController.file ==
                                         null) {
                                       Get.snackbar("Please Attach File.", "",
+                                          snackPosition: SnackPosition.BOTTOM,
+                                          backgroundColor: Colors.red,
+                                          colorText: Colors.white);
+                                      return;
+                                    }
+                                    Get.to(() => Checkout_screen(
+                                          totalAmount:
+                                              controller.totalAmount.toString(),
+                                        ));
+                                  } else if (controller.serviceType ==
+                                      ServiceType.Instant) {
+                                    if (controller.totalAmount <= 0) {
+                                      Get.snackbar("Error!",
+                                          "Please fill all required details.",
                                           snackPosition: SnackPosition.BOTTOM,
                                           backgroundColor: Colors.red,
                                           colorText: Colors.white);

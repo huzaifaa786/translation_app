@@ -161,7 +161,7 @@ class TranslatorProfileController extends GetxController {
       if (amount <= 0) {
         totalAmount = 0;
         Get.snackbar('Invalid Time Format!',
-            'End time must be greater then Start time, And less then 00:00',
+            'End time can not be less than the starting time.',
             snackPosition: SnackPosition.BOTTOM,
             colorText: white,
             backgroundColor: Colors.red);
@@ -375,7 +375,7 @@ class TranslatorProfileController extends GetxController {
 
   checkavailability(Vendor vendor) async {
     if (totalAmount <= 0) {
-      Get.snackbar("Error!", "Order amount can't be zero",
+      Get.snackbar("Error!", "Please fill all required details.",
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.red,
           colorText: Colors.white);
@@ -396,6 +396,8 @@ class TranslatorProfileController extends GetxController {
     // GetStorage box = GetStorage();
     // DateTime a =selectedDay.value;
     String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDay.value);
+    print('formattedDate');
+
     print(formattedDate);
     var data = {
       'vendor_id': vendor.id.toString(),
@@ -406,7 +408,6 @@ class TranslatorProfileController extends GetxController {
     var response = await Api.execute(url: url, data: data);
     print(response);
     if (!response["error"]) {
-      // placeOrder(vendor);
       Get.to(() => Checkout_screen(
             totalAmount: totalAmount.toString(),
           ));

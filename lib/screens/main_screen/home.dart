@@ -31,7 +31,7 @@ class _Home_screenState extends State<Home_screen> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ChatController>(
-        builder: (controller) =>  PersistentTabView(
+      builder: (controller) => PersistentTabView(
         context,
         controller: _controller,
         screens: _buildScreens(),
@@ -98,14 +98,20 @@ class _Home_screenState extends State<Home_screen> {
       //   inactiveColorPrimary: kblack,
       // ),
       PersistentBottomNavBarItem(
-        icon: FaIcon(FontAwesomeIcons.clipboardList),
-        iconSize: 20,
-        title: ('Orders'),
-        textStyle: TextStyle(
-            fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
-        activeColorSecondary: greenish,
-        inactiveColorPrimary: kblack,
-      ),
+          icon: FaIcon(FontAwesomeIcons.clipboardList),
+          iconSize: 20,
+          title: ('Orders'),
+          textStyle: TextStyle(
+              fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
+          activeColorSecondary: greenish,
+          inactiveColorPrimary: kblack,
+          onPressed: (BuildContext? context) async {
+            orderController.orders = [];
+            await orderController.getorder();
+            setState(() {
+              _controller.index = 2;
+            });
+          }),
       PersistentBottomNavBarItem(
         icon: FaIcon(FontAwesomeIcons.gear),
         iconSize: 20,
@@ -155,7 +161,8 @@ class _HomeState extends State<Home> {
     await homeController.getuser();
     setState(() {});
   }
-  msg() async{
+
+  msg() async {
     await chatController.unseenchat();
   }
 

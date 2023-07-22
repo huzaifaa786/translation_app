@@ -106,46 +106,60 @@ class _Checkout_screenState extends State<Checkout_screen> {
                     ),
                     Center(
                       child: Text(
-                        translatorProfileController.scheduleType.name,
+                        translatorProfileController.serviceType.name,
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w700),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          translatorProfileController.serviceType !=
-                                  ServiceType.Document
-                              ? translatorProfileController.serviceType !=
-                                      ServiceType.Schedule
-                                  ? Text(
-                                      "Time:   " +
-                                          translatorProfileController.duration
-                                              .toString() +
-                                          ' min',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          color: hintText))
-                                  : Text(
-                                      "Time:   " +
-                                          translatorProfileController
-                                              .startTime +
-                                          ' - ' +
-                                          translatorProfileController.endTime,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          color: hintText))
-                              : Container(),
-                          translatorProfileController.serviceType !=
-                                  ServiceType.Document
-                              ? Text(" |",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      color: hintText))
-                              : Container(),
-                          Text(
+                      child: translatorProfileController.serviceType !=
+                              ServiceType.Document
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                translatorProfileController.serviceType !=
+                                        ServiceType.Document
+                                    ? translatorProfileController.serviceType !=
+                                            ServiceType.Schedule
+                                        ? Text(
+                                            "Time:   " +
+                                                translatorProfileController
+                                                    .duration
+                                                    .toString() +
+                                                ' min',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w400,
+                                                color: hintText))
+                                        : Text(
+                                            "Time:   " +
+                                                translatorProfileController
+                                                    .startTime +
+                                                ' - ' +
+                                                translatorProfileController
+                                                    .endTime,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w400,
+                                                color: hintText))
+                                    : Container(),
+                                translatorProfileController.serviceType !=
+                                        ServiceType.Document
+                                    ? Text(" |",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            color: hintText))
+                                    : Container(),
+                                Text(
+                                    "   Date:    " +
+                                        DateFormat('dd/MM/yyyy').format(
+                                            translatorProfileController
+                                                .selectedDay.value),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        color: hintText)),
+                              ],
+                            )
+                          : Text(
                               "   Date:    " +
                                   DateFormat('dd/MM/yyyy').format(
                                       translatorProfileController
@@ -153,8 +167,6 @@ class _Checkout_screenState extends State<Checkout_screen> {
                               style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   color: hintText)),
-                        ],
-                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 16, bottom: 16),

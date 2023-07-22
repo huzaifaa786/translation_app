@@ -5,6 +5,7 @@ class Order {
   int? id;
   int? user_id;
   int? price;
+  int? duration;
   String? servicetype;
   String? documenttype;
   String? status;
@@ -21,6 +22,7 @@ class Order {
     price = order['price'];
     servicetype = order['servicetype'];
     documenttype = order['documenttype'];
+    duration = order['duration'];
     status = order['status'];
     vendor_id = order['vendor_id'];
     starttime = order['starttime'];

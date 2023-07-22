@@ -19,9 +19,9 @@ class HomeController extends GetxController {
   List<Vendor> vendors = [];
   List<Vendor> searchVendor = [];
   List<Vendor> onlineVendor = [];
-  List<Vendor> offlineVendor = [];
+  List<Vendor> schedule = [];
   List<Vendor> sonlineVendor = [];
-  List<Vendor> sofflineVendor = [];
+  List<Vendor> sschedule = [];
   User? user;
 
 /////////////////////////////////// Clear Variables /////////////////////////////////////////////////////////
@@ -30,9 +30,9 @@ class HomeController extends GetxController {
     vendors = [];
     searchVendor = [];
     onlineVendor = [];
-    offlineVendor = [];
+    schedule = [];
     sonlineVendor = [];
-    sofflineVendor = [];
+    sschedule = [];
     fromSelectedLanguage = null;
     toSelectedLanguage = null;
   }
@@ -95,9 +95,9 @@ class HomeController extends GetxController {
       // print(vendor.first.service!.schedual!.first.day);
       searchVendor = vendor;
       onlineVendor = vendor.where((i) => i.online == 1).toList();
-      offlineVendor = vendor.where((i) => i.online == 0).toList();
+      schedule = vendor;
       sonlineVendor = onlineVendor;
-      sofflineVendor = offlineVendor;
+      sschedule = schedule;
       update();
 
       if (vendor.isNotEmpty) {
@@ -120,14 +120,14 @@ class HomeController extends GetxController {
   void searchVendors(String query) {
     if (query == '') {
       sonlineVendor = onlineVendor;
-      sofflineVendor = offlineVendor;
+      sschedule = schedule;
       update();
     } else {
       sonlineVendor = onlineVendor
           .where((o) =>
               o.name!.toString().toLowerCase().contains(query.toLowerCase()))
           .toList();
-      sofflineVendor = offlineVendor
+      sschedule = schedule
           .where((o) =>
               o.name!.toString().toLowerCase().contains(query.toLowerCase()))
           .toList();
@@ -153,10 +153,10 @@ class HomeController extends GetxController {
 
   void searchOfflineOrders(String query) {
     if (query == '') {
-      sofflineVendor = offlineVendor;
+      sschedule = schedule;
       update();
     } else {
-      sofflineVendor = offlineVendor
+      sschedule = schedule
           .where((o) =>
               o.name!.toString().toLowerCase().contains(query.toLowerCase()))
           .toList();
@@ -167,7 +167,7 @@ class HomeController extends GetxController {
 //////////////////////////////////// Update Vendors on return Back ////////////////////////////////////////////////////////////
 
   offlineVendorUpdate() {
-    sofflineVendor = offlineVendor;
+    sschedule = schedule;
     update();
   }
 
@@ -180,26 +180,26 @@ class HomeController extends GetxController {
 
   void filterOfflineOrder(String? rating, String? price) {
     if (rating == "Highest to lowest rating") {
-      sofflineVendor = offlineVendor;
-      sofflineVendor.sort((a, b) => double.parse(b.rating!).compareTo(double.parse(a.rating!)));
+      sschedule = schedule;
+      sschedule.sort((a, b) => double.parse(b.rating!).compareTo(double.parse(a.rating!)));
       if (price == "Highest price to lowest price") {
-        sofflineVendor.sort((a, b) => double.parse(b.service!.onlineaudiovideoPrice!).compareTo(double.parse(a.service!.onlineaudiovideoPrice!)));
+        sschedule.sort((a, b) => double.parse(b.service!.onlineaudiovideoPrice!).compareTo(double.parse(a.service!.onlineaudiovideoPrice!)));
       } else if (price == "lowest price to Highest price") {
-        sofflineVendor.sort((a, b) => double.parse(a.service!.onlineaudiovideoPrice!).compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
+        sschedule.sort((a, b) => double.parse(a.service!.onlineaudiovideoPrice!).compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
       }
     } else if (rating == "lowest to Highest rating") {
-      sofflineVendor = offlineVendor;
-      sofflineVendor.sort((a, b) => double.parse(a.rating!).compareTo(double.parse(b.rating!)));
+      sschedule = schedule;
+      sschedule.sort((a, b) => double.parse(a.rating!).compareTo(double.parse(b.rating!)));
       if (price == "Highest price to lowest price") {
-        sofflineVendor.sort((a, b) => double.parse(b.service!.onlineaudiovideoPrice!).compareTo(double.parse(a.service!.onlineaudiovideoPrice!)));
+        sschedule.sort((a, b) => double.parse(b.service!.onlineaudiovideoPrice!).compareTo(double.parse(a.service!.onlineaudiovideoPrice!)));
       } else if (price == "lowest price to Highest price") {
-        sofflineVendor.sort((a, b) => double.parse(a.service!.onlineaudiovideoPrice!).compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
+        sschedule.sort((a, b) => double.parse(a.service!.onlineaudiovideoPrice!).compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
       }
     } else {
       if (price == "Highest price to lowest price") {
-        sofflineVendor.sort((a, b) => double.parse(b.service!.onlineaudiovideoPrice!).compareTo(double.parse(a.service!.onlineaudiovideoPrice!))); 
+        sschedule.sort((a, b) => double.parse(b.service!.onlineaudiovideoPrice!).compareTo(double.parse(a.service!.onlineaudiovideoPrice!))); 
       } else if (price == "lowest price to Highest price") {
-        sofflineVendor.sort((a, b) => double.parse(a.service!.onlineaudiovideoPrice!).compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
+        sschedule.sort((a, b) => double.parse(a.service!.onlineaudiovideoPrice!).compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
       }
     }
     update();

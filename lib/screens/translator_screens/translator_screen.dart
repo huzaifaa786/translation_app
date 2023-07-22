@@ -37,7 +37,7 @@ class _Translator_State extends State<Translator_> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Online People",
+                          "Online translators / Interpreters",
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -94,7 +94,7 @@ class _Translator_State extends State<Translator_> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Schedule",
+                    "Schedule translators / interpreters",
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -117,27 +117,27 @@ class _Translator_State extends State<Translator_> {
                 ],
               ),
             ),
-            homeController.sofflineVendor.length != 0
+            homeController.sschedule.length != 0
                 ? Expanded(
                     child: ListView.builder(
-                        itemCount: homeController.sofflineVendor.length > 6
+                        itemCount: homeController.sschedule.length > 6
                             ? 6
-                            : homeController.sofflineVendor.length,
+                            : homeController.sschedule.length,
                         itemBuilder: (context, index) => OfflineTranslattorCard(
-                              name: homeController.sofflineVendor[index].name,
+                              name: homeController.sschedule[index].name,
                               image: homeController
-                                  .sofflineVendor[index].profilePic,
+                                  .sschedule[index].profilePic,
                               lang:
-                                  homeController.sofflineVendor[index].language,
-                              vendor: homeController.sofflineVendor[index],
-                              price: homeController.sofflineVendor[index]
+                                  homeController.sschedule[index].language,
+                              vendor: homeController.sschedule[index],
+                              price: homeController.sschedule[index]
                                   .service!.onlineaudiovideoPrice,
                               rating:
-                                  homeController.sofflineVendor[index].rating ==
+                                  homeController.sschedule[index].rating ==
                                           null
                                       ? null
                                       : double.parse(homeController
-                                          .sofflineVendor[index].rating!),
+                                          .sschedule[index].rating!),
                             )),
                   )
                 : Container(

@@ -11,6 +11,7 @@ class Vendor {
   String? number;
   String? profilePic;
   String? certificate;
+  String? certificate_name;
   String? status;
   String? rating;
   int? online;
@@ -28,6 +29,7 @@ class Vendor {
     passport = vendor['passport'];
     number = vendor['number'] ?? '';
     certificate = vendor['certificate'] ?? '';
+    certificate_name = vendor['certifcate_name'] ?? '';
     profilePic = vendor['profilepic'] ?? '';
     status = vendor['status'];
     rating = vendor['rating_avg_rating'];

@@ -35,25 +35,28 @@ class _Favorites_screenState extends State<Favorites_screen> {
                 Get.back();
               },
             ),
-            SizedBox(
-              height: 20,
-            ),
+            // SizedBox(
+            //   height: 20,
+            // ),
              Expanded(
-                    child: ListView.builder(
-                        itemCount: favController.Fav.length ,
-                         
-                        itemBuilder: (context, index) => FavoritesCard(
-                              name: favController.Fav[index].vendor!.name,
-                              image: favController
-                                  .Fav[index].vendor!.profilePic,
-                              lang:
-                                  favController.Fav[index].vendor!.language,
-                              vendor: favController.Fav[index].vendor,
-                              price: favController.Fav[index]
-                                  .vendor!.service!.onlineaudiovideoPrice,
-                              rating:
-                                  favController.Fav[index].vendor!.rating,
-                            )),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height*0.94,
+                      child: ListView.builder(
+                          itemCount: favController.Fav.length ,
+                           
+                          itemBuilder: (context, index) => FavoritesCard(
+                                name: favController.Fav[index].vendor!.name,
+                                image: favController
+                                    .Fav[index].vendor!.profilePic,
+                                lang:
+                                    favController.Fav[index].vendor!.language,
+                                vendor: favController.Fav[index].vendor,
+                                price: favController.Fav[index]
+                                    .vendor!.service!.onlineaudiovideoPrice,
+                                rating:
+                                    favController.Fav[index].vendor!.rating,
+                              )),
+                    ),
                   )
           ],
         ),

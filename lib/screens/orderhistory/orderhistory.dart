@@ -80,9 +80,13 @@ class _HistoryScreenState extends State<HistoryScreen> {
                               },
                               type: controller.orders[index].servicetype,
                               status: controller.orders[index].status,
-                              time: sformattedTime +
-                                  '-' +
-                                  eformattedTime,
+                              time: controller.orders[index].servicetype! ==
+                                        'instant'
+                                    ? controller.orders[index].duration.toString() + ' min'
+                                    : controller.orders[index].servicetype! ==
+                                            'document'
+                                        ? sformattedTime
+                                        : sformattedTime + '-' + eformattedTime,
                               date: controller.orders[index].date,
                             );
                           }),

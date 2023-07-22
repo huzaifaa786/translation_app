@@ -41,7 +41,7 @@ class _OnlinePeople_screenState extends State<OnlinePeople_screen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Online People",
+                      "Online translators / interpreters",
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                     ),

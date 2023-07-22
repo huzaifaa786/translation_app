@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:translation/screens/chat/pdfView.dart';
 import 'package:translation/values/colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:translation/values/string.dart';
@@ -168,75 +169,71 @@ class _ReplyMessageCardState extends State<ReplyMessageCard> {
                                 color: widget.sender == true
                                     ? Colors.white
                                     : greenish,
-                                child: ListTile(
-                                  title: Text(
-                                    widget.fileTitle,
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w400,
+                                child: InkWell(
+                                  onTap: () {
+                                    String ext =
+                                        widget.fileName.split('.').last;
+                                    print(widget.fileName);
+                                    print(ext);
+                                    if (ext == 'pdf') {
+                                      Get.to(() => PdfView(
+                                          file: Msg_Storage_Url +
+                                              widget.fileName));
+                                    } else {
+                                      Get.snackbar('Invalid File fromat!',
+                                          "Download this and view from your device download folder.",
+                                          snackPosition: SnackPosition.BOTTOM,
+                                          backgroundColor: Colors.red,
+                                          colorText: white);
+                                    }
+                                  },
+                                  child: ListTile(
+                                    title: Text(
+                                      widget.fileTitle,
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w400,
+                                          color: widget.sender == true
+                                              ? Colors.black
+                                              : white),
+                                    ),
+                                    trailing: IconButton(
+                                      icon: Icon(
+                                        widget.fileExist
+                                            ? Icons.download_done
+                                            : Icons.download,
                                         color: widget.sender == true
                                             ? Colors.black
-                                            : white),
-                                  ),
-                                  trailing: IconButton(
-                                    icon: Icon(
-                                      widget.fileExist
-                                          ? Icons.download_done
-                                          : Icons.download,
-                                      color: widget.sender == true
-                                          ? Colors.black
-                                          : white,
+                                            : white,
+                                      ),
+                                      onPressed: () async {
+                                        FileDownloader.downloadFile(
+                                            url: Msg_Storage_Url +
+                                                widget.fileName,
+                                            name: widget.fileTitle,
+                                            onProgress: (fileName, progress) {
+                                              Get.snackbar(
+                                                  'Downloading ' + fileName!,
+                                                  'Downloaded ' +
+                                                      progress.toString() +
+                                                      '%',
+                                                  snackPosition:
+                                                      SnackPosition.BOTTOM,
+                                                  backgroundColor: Colors.green,
+                                                  colorText: Colors.white);
+                                            },
+                                            onDownloadCompleted: (path) async {
+                                              Get.snackbar(
+                                                  'Downloading Successfully.',
+                                                  'Downloaded at device path ' +
+                                                      path.toString(),
+                                                  snackPosition:
+                                                      SnackPosition.BOTTOM,
+                                                  backgroundColor: Colors.green,
+                                                  colorText: Colors.white);
+                                            });
+                                      },
                                     ),
-                                    onPressed: () async {
-                                      FileDownloader.downloadFile(
-                                          url:
-                                              Msg_Storage_Url + widget.fileName,
-                                          name: widget.fileTitle,
-                                          onProgress: (fileName, progress) {
-                                            Get.snackbar(
-                                                'Downloading ' + fileName!,
-                                                'Downloaded ' +
-                                                    progress.toString() +
-                                                    '%',
-                                                snackPosition:
-                                                    SnackPosition.BOTTOM,
-                                                backgroundColor: Colors.green,
-                                                colorText: Colors.white);
-                                          },
-                                          onDownloadCompleted: (path) async {
-                                            notificationsPlugin
-                                                .resolvePlatformSpecificImplementation<
-                                                    AndroidFlutterLocalNotificationsPlugin>()!
-                                                .requestPermission();
-                                            var android =
-                                                AndroidNotificationDetails(
-                                              'channel_id', // Replace with your desired channel ID
-                                              'channel_name', // Replace with your desired channel name
-                                              channelDescription:
-                                                  'channel_description', // Replace with your desired channel description
-                                              importance: Importance.max,
-                                              priority: Priority.high,
-                                            );
-
-                                            var platform = NotificationDetails(
-                                                android: android);
-                                            await notificationsPlugin.show(
-                                              0, // Notification ID, should be unique for each notification
-                                              'Download Complete', // Notification title
-                                              'File downloaded successfully!', // Notification body
-                                              platform,
-                                              payload: path,
-                                            );
-                                            Get.snackbar(
-                                                'Downloading Successfully.',
-                                                'Downloaded at device path ' +
-                                                    path.toString(),
-                                                snackPosition:
-                                                    SnackPosition.BOTTOM,
-                                                backgroundColor: Colors.green,
-                                                colorText: Colors.white);
-                                          });
-                                    },
                                   ),
                                 ),
                               ),

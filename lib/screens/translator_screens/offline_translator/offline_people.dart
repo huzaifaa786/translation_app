@@ -41,7 +41,7 @@ class _OfflinePeople_screenState extends State<OfflinePeople_screen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Offline People",
+                      "Offline translators / interpreters",
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                     ),
@@ -110,24 +110,24 @@ class _OfflinePeople_screenState extends State<OfflinePeople_screen> {
                   ],
                 ),
               ),
-              controller.sofflineVendor.length != 0
+              controller.sschedule.length != 0
                   ? Expanded(
                       child: ListView.builder(
-                          itemCount: controller.sofflineVendor.length,
+                          itemCount: controller.sschedule.length,
                           itemBuilder: (context, index) {
                             return OfflineTranslattorCard(
-                              name: controller.sofflineVendor[index].name,
+                              name: controller.sschedule[index].name,
                               image:
-                                  controller.sofflineVendor[index].profilePic,
-                              lang: controller.sofflineVendor[index].language,
-                              vendor: controller.sofflineVendor[index],
-                              price: controller.sofflineVendor[index].service!
+                                  controller.sschedule[index].profilePic,
+                              lang: controller.sschedule[index].language,
+                              vendor: controller.sschedule[index],
+                              price: controller.sschedule[index].service!
                                   .onlineaudiovideoPrice,
-                              rating: controller.sofflineVendor[index].rating ==
+                              rating: controller.sschedule[index].rating ==
                                       null
                                   ? null
                                   : double.parse(
-                                      controller.sofflineVendor[index].rating!),
+                                      controller.sschedule[index].rating!),
                             );
                           }),
                     )
