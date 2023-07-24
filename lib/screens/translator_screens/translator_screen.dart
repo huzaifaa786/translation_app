@@ -32,7 +32,7 @@ class _Translator_State extends State<Translator_> {
             homeController.sonlineVendor.length != 0
                   ? Padding(
               padding: const EdgeInsets.only(
-                  left: 20, right: 20, top: 16, bottom: 12),
+                  left: 12, right: 12, top: 16, bottom: 12),
               child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -89,7 +89,7 @@ class _Translator_State extends State<Translator_> {
                 : Container(),
             Padding(
               padding:
-                  EdgeInsets.only(left: 20, right: 20, top: 16, bottom: 10),
+                  EdgeInsets.only(left: 12, right: 12, top: 16, bottom: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -147,7 +147,7 @@ class _Translator_State extends State<Translator_> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text("No Offline Translator Found!"),
+                        Text("No Schedule Translator Found!"),
                       ],
                     ),
                   )

@@ -36,12 +36,12 @@ class _OfflinePeople_screenState extends State<OfflinePeople_screen> {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    left: 20, right: 20, top: 30, bottom: 12),
+                    left: 12, right: 12, top: 30, bottom: 12),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Offline translators / interpreters",
+                      "Schedule translators / interpreters",
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                     ),
