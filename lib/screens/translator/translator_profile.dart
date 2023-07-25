@@ -946,6 +946,15 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                 onPressed: () {
                                   if (controller.serviceType ==
                                       ServiceType.Document) {
+                                    if (controller.totalAmount <= 0) {
+                                      Get.snackbar(
+                                          "Please fill all required details.",
+                                          "Make sure the page selected by you is within the range of the translator. You may check by ensuring that your selected pages are deliverable in at least one day.",
+                                          snackPosition: SnackPosition.BOTTOM,
+                                          backgroundColor: Colors.red,
+                                          colorText: Colors.white);
+                                      return;
+                                    }
                                     if (translatorProfileController.file ==
                                         null) {
                                       Get.snackbar("Please Attach File.", "",
