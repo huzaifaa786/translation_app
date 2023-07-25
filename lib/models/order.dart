@@ -15,6 +15,7 @@ class Order {
   String? vendor_id;
   User? user;
   Vendor? vendor;
+  bool? has_rating;
   //  Orderdoc? document;
 
   Order(order) {
@@ -29,7 +30,8 @@ class Order {
     endtime = order['endtime'];
     date = order['date'];
     user_id = order['user_id'];
-    user = User(order['user']);
+    has_rating = order['has_rating'] ?? false;
+    user = User(order['user']) ;
     vendor = Vendor(order['vendor']);
     // document =  Orderdoc(order['document']) ;
   }

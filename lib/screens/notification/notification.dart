@@ -73,9 +73,9 @@ class _Notification_screenState extends State<Notification_screen> {
                                               ),
                                               builder: (context) =>
                                                   Wrap(children: [
-                                                NotificationModal(
-                                                    notification: controller
-                                                        .notifications[index])
+                                                // NotificationModal(
+                                                //     notification: controller
+                                                //         .notifications[index])
                                               ]),
                                             );
                                           }

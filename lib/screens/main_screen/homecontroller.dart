@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:translation/api/api.dart';
 import 'package:translation/helper/loading.dart';
 import 'package:translation/models/filter.dart';
+import 'package:translation/models/order.dart';
 import 'package:translation/models/user.dart';
 import 'package:translation/models/vendor.dart';
 import 'package:translation/screens/auth/login_screen.dart';
@@ -181,25 +182,33 @@ class HomeController extends GetxController {
   void filterOfflineOrder(String? rating, String? price) {
     if (rating == "Highest to lowest rating") {
       sschedule = schedule;
-      sschedule.sort((a, b) => double.parse(b.rating!).compareTo(double.parse(a.rating!)));
+      sschedule.sort(
+          (a, b) => double.parse(b.rating!).compareTo(double.parse(a.rating!)));
       if (price == "Highest price to lowest price") {
-        sschedule.sort((a, b) => double.parse(b.service!.onlineaudiovideoPrice!).compareTo(double.parse(a.service!.onlineaudiovideoPrice!)));
+        sschedule.sort((a, b) => double.parse(b.service!.onlineaudiovideoPrice!)
+            .compareTo(double.parse(a.service!.onlineaudiovideoPrice!)));
       } else if (price == "lowest price to Highest price") {
-        sschedule.sort((a, b) => double.parse(a.service!.onlineaudiovideoPrice!).compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
+        sschedule.sort((a, b) => double.parse(a.service!.onlineaudiovideoPrice!)
+            .compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
       }
     } else if (rating == "lowest to Highest rating") {
       sschedule = schedule;
-      sschedule.sort((a, b) => double.parse(a.rating!).compareTo(double.parse(b.rating!)));
+      sschedule.sort(
+          (a, b) => double.parse(a.rating!).compareTo(double.parse(b.rating!)));
       if (price == "Highest price to lowest price") {
-        sschedule.sort((a, b) => double.parse(b.service!.onlineaudiovideoPrice!).compareTo(double.parse(a.service!.onlineaudiovideoPrice!)));
+        sschedule.sort((a, b) => double.parse(b.service!.onlineaudiovideoPrice!)
+            .compareTo(double.parse(a.service!.onlineaudiovideoPrice!)));
       } else if (price == "lowest price to Highest price") {
-        sschedule.sort((a, b) => double.parse(a.service!.onlineaudiovideoPrice!).compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
+        sschedule.sort((a, b) => double.parse(a.service!.onlineaudiovideoPrice!)
+            .compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
       }
     } else {
       if (price == "Highest price to lowest price") {
-        sschedule.sort((a, b) => double.parse(b.service!.onlineaudiovideoPrice!).compareTo(double.parse(a.service!.onlineaudiovideoPrice!))); 
+        sschedule.sort((a, b) => double.parse(b.service!.onlineaudiovideoPrice!)
+            .compareTo(double.parse(a.service!.onlineaudiovideoPrice!)));
       } else if (price == "lowest price to Highest price") {
-        sschedule.sort((a, b) => double.parse(a.service!.onlineaudiovideoPrice!).compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
+        sschedule.sort((a, b) => double.parse(a.service!.onlineaudiovideoPrice!)
+            .compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
       }
     }
     update();
@@ -210,25 +219,39 @@ class HomeController extends GetxController {
   filterOnlineOrder(String? rating, String? price) {
     if (rating == "Highest to lowest rating") {
       sonlineVendor = onlineVendor;
-      sonlineVendor.sort((a, b) => double.parse(b.rating!).compareTo(double.parse(a.rating!)));
+      sonlineVendor.sort(
+          (a, b) => double.parse(b.rating!).compareTo(double.parse(a.rating!)));
       if (price == "Highest price to lowest price") {
-        sonlineVendor.sort((a, b) => double.parse(b.service!.onlineaudiovideoPrice!).compareTo(double.parse(a.service!.onlineaudiovideoPrice!)));
+        sonlineVendor.sort((a, b) =>
+            double.parse(b.service!.onlineaudiovideoPrice!)
+                .compareTo(double.parse(a.service!.onlineaudiovideoPrice!)));
       } else if (price == "lowest price to Highest price") {
-        sonlineVendor.sort((a, b) => double.parse(a.service!.onlineaudiovideoPrice!).compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
+        sonlineVendor.sort((a, b) =>
+            double.parse(a.service!.onlineaudiovideoPrice!)
+                .compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
       }
     } else if (rating == "lowest to Highest rating") {
       sonlineVendor = onlineVendor;
-      sonlineVendor.sort((a, b) => double.parse(a.rating!).compareTo(double.parse(b.rating!)));
+      sonlineVendor.sort(
+          (a, b) => double.parse(a.rating!).compareTo(double.parse(b.rating!)));
       if (price == "Highest price to lowest price") {
-        sonlineVendor.sort((a, b) => double.parse(b.service!.onlineaudiovideoPrice!).compareTo(double.parse(a.service!.onlineaudiovideoPrice!)));
+        sonlineVendor.sort((a, b) =>
+            double.parse(b.service!.onlineaudiovideoPrice!)
+                .compareTo(double.parse(a.service!.onlineaudiovideoPrice!)));
       } else if (price == "lowest price to Highest price") {
-        sonlineVendor.sort((a, b) => double.parse(a.service!.onlineaudiovideoPrice!).compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
+        sonlineVendor.sort((a, b) =>
+            double.parse(a.service!.onlineaudiovideoPrice!)
+                .compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
       }
     } else {
       if (price == "Highest price to lowest price") {
-        sonlineVendor.sort((a, b) => double.parse(b.service!.onlineaudiovideoPrice!).compareTo(double.parse(a.service!.onlineaudiovideoPrice!)));
+        sonlineVendor.sort((a, b) =>
+            double.parse(b.service!.onlineaudiovideoPrice!)
+                .compareTo(double.parse(a.service!.onlineaudiovideoPrice!)));
       } else if (price == "lowest price to Highest price") {
-        sonlineVendor.sort((a, b) => double.parse(a.service!.onlineaudiovideoPrice!).compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
+        sonlineVendor.sort((a, b) =>
+            double.parse(a.service!.onlineaudiovideoPrice!)
+                .compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
       }
     }
     update();
@@ -252,4 +275,25 @@ class HomeController extends GetxController {
       return false;
     }
   }
+
+ getgatting() async {
+  LoadingHelper.show();
+  var url = BASE_URL + 'ratting/get';
+
+  GetStorage box = GetStorage();
+  int user_id = box.read('user_id');
+
+  var data = {'user_id': user_id};
+  var response = await Api.execute(url: url, data: data);
+  print(response);
+  LoadingHelper.dismiss();
+
+  // Check if the 'has_rating' field is present in the response and its value is true
+  if (response['order'] != null) {
+    return Order(response['order']);
+  } else {
+    return [];
+  }
+}
+
 }

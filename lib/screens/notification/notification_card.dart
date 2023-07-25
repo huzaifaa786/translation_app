@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:translation/models/notification.dart';
+import 'package:translation/models/order.dart';
 import 'package:translation/static/large_button.dart';
 import 'package:translation/values/colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -8,8 +9,8 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:translation/values/controllers.dart';
 
 class NotificationModal extends StatelessWidget {
-  const NotificationModal({super.key, this.notification});
-  final Notificationn? notification;
+  const NotificationModal({super.key, this.order});
+  final Order? order;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,14 +30,14 @@ class NotificationModal extends StatelessWidget {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(45),
-                  child: notification!.vendor!.profilePic! == ''
+                  child: order!.vendor!.profilePic! == ''
                       ? Image(
                           image: AssetImage('assets/images/5907.jpg'),
                           height: 65,
                           width: 65,
                         )
                       : CachedNetworkImage(
-                          imageUrl: notification!.vendor!.profilePic!,
+                          imageUrl: order!.vendor!.profilePic!,
                           height: 65,
                           width: 65,
                         ),
@@ -45,7 +46,7 @@ class NotificationModal extends StatelessWidget {
             ),
             Center(
               child: Text(
-                notification!.vendor!.name!,
+                order!.vendor!.name!,
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
             ),
@@ -97,8 +98,8 @@ class NotificationModal extends StatelessWidget {
                 onPressed: () {
                   notificationController.addrating(
                       notificationController.rating,
-                      notification!.orderr!.id!,
-                      notification!.vendor!.id!);
+                      order!.id!,
+                      order!.vendor!.id!);
                       Get.back();
                 },
                 color: greenish,

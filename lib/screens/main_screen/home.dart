@@ -3,8 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:translation/models/order.dart';
 import 'package:translation/screens/chat/chatcontroller.dart';
 import 'package:translation/screens/main_screen/homecontroller.dart';
+import 'package:translation/screens/notification/notification_card.dart';
 import 'package:translation/screens/profile/profile.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/screens/chat/chats.dart';
@@ -28,6 +30,28 @@ class Home_screen extends StatefulWidget {
 class _Home_screenState extends State<Home_screen> {
   PersistentTabController _controller =
       PersistentTabController(initialIndex: 0);
+
+readrating() async {
+  Order order = await homeController.getgatting();
+
+
+if (order.has_rating == false) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => NotificationModal(order : order),
+    );
+  } else {
+ 
+  }
+}
+
+
+  @override
+  void initState() {
+    readrating();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ChatController>(

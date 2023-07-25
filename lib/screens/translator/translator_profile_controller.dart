@@ -192,8 +192,8 @@ class TranslatorProfileController extends GetxController {
       double amount = numberOfSlots * int.parse(vendor.service!.audiovideo!);
       if (amount <= 0) {
         totalAmount = 0;
-        Get.snackbar('Invalid Time Format!',
-            'End time must be greater then Start time, And less then 00:00',
+        Get.snackbar('',
+            'End time must be greater than  starting time.',
             snackPosition: SnackPosition.BOTTOM,
             colorText: white,
             backgroundColor: Colors.red);
@@ -419,7 +419,7 @@ class TranslatorProfileController extends GetxController {
       LoadingHelper.dismiss();
     } else {
       LoadingHelper.dismiss();
-      Get.snackbar("Error!", response['error_data'],
+      Get.snackbar(response['error_data'],"",
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.red,
           colorText: Colors.white);
