@@ -16,6 +16,7 @@ import 'package:translation/models/vendor.dart';
 import 'package:translation/screens/checkout/checkout.dart';
 import 'package:translation/screens/order_confirm.dart/cardAdded.dart';
 import 'package:translation/values/colors.dart';
+import 'package:translation/values/controllers.dart';
 import 'package:translation/values/string.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
@@ -129,7 +130,7 @@ class TranslatorProfileController extends GetxController {
     update();
   }
 
-  File? file  = File('');
+  File? file = File('');
   Future<void> picksinglefile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
@@ -274,7 +275,10 @@ class TranslatorProfileController extends GetxController {
         'vendor_id': vendor.id.toString(),
         'price': totalAmount.toString(),
         'duration': duration,
-        'date': DateTime.now().toString(),
+        'date': serviceType == ServiceType.Schedule
+            ? translatorProfileController.selectedDay.value
+                .toString()
+            : DateTime.now().toString(),
         'starttime': startTime,
         'endtime': endTime,
         'meetingtype': instantType == InstantType.audio ? 'audio' : 'video',
@@ -316,7 +320,8 @@ class TranslatorProfileController extends GetxController {
       'vendor_id': vendor.id.toString(),
       'price': totalAmount.toString(),
       'duration': duration,
-      'date': DateTime.now().toString(),
+      'date':translatorProfileController.selectedDay.value
+          .toString(),
       'starttime': startTime,
       'endtime': endTime,
       'scheduletype':

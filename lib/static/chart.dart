@@ -45,7 +45,7 @@ class ChartCards extends StatelessWidget {
                 borderRadius: BorderRadius.circular(22),
                 child: imgicon == ''
                     ? Image(
-                        image: AssetImage(imgicon),
+                        image: AssetImage('assets/images/5907.jpg'),
                         height: 64,
                         width: 64,
                       )

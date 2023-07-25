@@ -97,11 +97,13 @@ class _Checkout_screenState extends State<Checkout_screen> {
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(70),
-                        child: Image.network(
+                        child: 
+                        translatorProfileController.vendors!.profilePic != ''?
+                        Image.network(
                           translatorProfileController.vendors!.profilePic
                               .toString(),
                           fit: BoxFit.cover,
-                        ),
+                        ):Image.asset('assets/images/5907.jpg')
                       ),
                     ),
                     Center(

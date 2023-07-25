@@ -44,6 +44,8 @@ class ChatController extends GetxController {
     };
 
     var response = await Api.execute(url: url, data: data);
+    print('AAAAAAAAAAAAAAAAaa');
+    print(response);
     LoadingHelper.dismiss();
     return response;
   }
@@ -66,6 +68,8 @@ class ChatController extends GetxController {
       String user_id = box.read('user_id').toString();
 
       await pusher.subscribe(channelName: "private-chatify.${user_id}");
+      
+      print(pusher.connectionState);
       await pusher.connect();
       activeUserId = id;
     } catch (e) {
