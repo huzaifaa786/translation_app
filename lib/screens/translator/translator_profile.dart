@@ -4,6 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:translation/models/unurgent.dart';
+import 'package:translation/models/urgent.dart';
 import 'package:translation/models/vendor.dart';
 import 'package:translation/screens/translator/map.dart';
 import 'package:translation/screens/translator/radio_btn.dart';
@@ -49,7 +51,19 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
     nextSixMonths = now.add(Duration(days: 180));
     vendor();
     getfav();
+    urgentMaxcount();
+    unurgentMaxCount();
     super.initState();
+  }
+
+  urgentMaxcount() async {
+    await translatorProfileController.urgentMaxCount(widget.detail!);
+    setState(() {});
+  }
+
+  unurgentMaxCount() async {
+    await translatorProfileController.unurgentMaxCount(widget.detail!);
+    setState(() {});
   }
 
   getfav() async {
@@ -846,9 +860,16 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(
-                                              "How many pages are there in the document",
-                                              style: TextStyle(fontSize: 14),
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.5,
+                                              child: Text(
+                                                "How many pages are there in the document",
+                                                maxLines: 2,
+                                                style: TextStyle(fontSize: 14),
+                                              ),
                                             ),
                                             SizedBox(
                                               width: MediaQuery.of(context)
@@ -889,14 +910,46 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                   AddRemoveBtn(
                                                     ontap: () {
                                                       setState(() {
-                                                        translatorProfileController
-                                                            .pages++;
-                                                        translatorProfileController
-                                                            .dayscalculate(
-                                                                widget.detail!);
-                                                        translatorProfileController
-                                                            .documentprice(
-                                                                widget.detail!);
+                                                        if (translatorProfileController
+                                                                .documentType ==
+                                                            DocumentType
+                                                                .Urgent) {
+                                                          if (controller
+                                                                  .pages ==
+                                                              translatorProfileController.maxPage) {
+                                                            print(controller
+                                                                .pages);
+                                                          } else {
+                                                            translatorProfileController
+                                                                .pages++;
+                                                            translatorProfileController
+                                                                .dayscalculate(
+                                                                    widget
+                                                                        .detail!);
+                                                            translatorProfileController
+                                                                .documentprice(
+                                                                    widget
+                                                                        .detail!);
+                                                          }
+                                                        } else {
+                                                          if (controller
+                                                                  .pages ==
+                                                             translatorProfileController.umaxpage) {
+                                                            print(controller
+                                                                .pages);
+                                                          } else {
+                                                            translatorProfileController
+                                                                .pages++;
+                                                            translatorProfileController
+                                                                .dayscalculate(
+                                                                    widget
+                                                                        .detail!);
+                                                            translatorProfileController
+                                                                .documentprice(
+                                                                    widget
+                                                                        .detail!);
+                                                          }
+                                                        }
                                                       });
                                                     },
                                                     icon: '+',

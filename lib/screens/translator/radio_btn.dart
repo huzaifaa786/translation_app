@@ -22,7 +22,7 @@ class _RadioBtnState extends State<RadioBtn> {
         offset: Offset(-30, 0),
         child: Row(
           children: [
-            Image.asset(widget.image,height: 18,width: 18,),
+            // Image.asset(widget.image,height: 18,width: 18,),
             Padding(
               padding: const EdgeInsets.only(left:8.0),
               child: Text(widget.text),

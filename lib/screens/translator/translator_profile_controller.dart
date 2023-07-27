@@ -192,8 +192,7 @@ class TranslatorProfileController extends GetxController {
       double amount = numberOfSlots * int.parse(vendor.service!.audiovideo!);
       if (amount <= 0) {
         totalAmount = 0;
-        Get.snackbar('',
-            'End time must be greater than  starting time.',
+        Get.snackbar('', 'End time must be greater than  starting time.',
             snackPosition: SnackPosition.BOTTOM,
             colorText: white,
             backgroundColor: Colors.red);
@@ -276,8 +275,7 @@ class TranslatorProfileController extends GetxController {
         'price': totalAmount.toString(),
         'duration': duration,
         'date': serviceType == ServiceType.Schedule
-            ? translatorProfileController.selectedDay.value
-                .toString()
+            ? translatorProfileController.selectedDay.value.toString()
             : DateTime.now().toString(),
         'starttime': startTime,
         'endtime': endTime,
@@ -320,8 +318,7 @@ class TranslatorProfileController extends GetxController {
       'vendor_id': vendor.id.toString(),
       'price': totalAmount.toString(),
       'duration': duration,
-      'date':translatorProfileController.selectedDay.value
-          .toString(),
+      'date': translatorProfileController.selectedDay.value.toString(),
       'starttime': startTime,
       'endtime': endTime,
       'scheduletype':
@@ -398,8 +395,6 @@ class TranslatorProfileController extends GetxController {
     vendors = vendor;
     LoadingHelper.show();
     var url = BASE_URL + 'order/checkAvailability';
-    // GetStorage box = GetStorage();
-    // DateTime a =selectedDay.value;
     String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDay.value);
     print('formattedDate');
 
@@ -419,7 +414,7 @@ class TranslatorProfileController extends GetxController {
       LoadingHelper.dismiss();
     } else {
       LoadingHelper.dismiss();
-      Get.snackbar(response['error_data'],"",
+      Get.snackbar(response['error_data'], "",
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.red,
           colorText: Colors.white);
@@ -483,6 +478,29 @@ class TranslatorProfileController extends GetxController {
 
   String? days = '0';
 
+  int maxPage = 0;
+  int umaxpage = 0;
+  urgentMaxCount(Vendor vendor) {
+    urgents = [];
+    for (var van in vendor.service!.urgent!) {
+      urgents.add(Urgent(van));
+    }
+    maxPage = urgents.map((van) => int.parse(van.maxpage!)).reduce(
+        (maxPage, currentMax) => maxPage > currentMax ? maxPage : currentMax);
+    update();
+  }
+
+  unurgentMaxCount(Vendor vendor) {
+    unurgents = [];
+    for (var van in vendor.service!.unurgent!) {
+      unurgents.add(Unurgent(van));
+    }
+    umaxpage = unurgents.map((van) => int.parse(van.maxpage!)).reduce(
+        (umaxpage, currentMax) =>
+            umaxpage > currentMax ? umaxpage : currentMax);
+    update();
+  }
+
   dayscalculate(Vendor vendor) {
     if (documentType == DocumentType.Urgent) {
       urgents = [];
@@ -490,6 +508,7 @@ class TranslatorProfileController extends GetxController {
         urgents.add(Urgent(van));
       }
       print(urgents);
+
       try {
         Urgent totalDay = urgents.firstWhere((element) =>
             int.parse(element.minpage!) <= pages &&
