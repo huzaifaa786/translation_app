@@ -7,6 +7,7 @@ class Order {
   int? price;
   int? duration;
   String? servicetype;
+  String? scheduletype;
   String? documenttype;
   String? status;
   String? starttime;
@@ -22,6 +23,7 @@ class Order {
     id = order['id'];
     price = order['price'];
     servicetype = order['servicetype'];
+    scheduletype = order['scheduletype'];
     documenttype = order['documenttype'];
     duration = order['duration'];
     status = order['status'];

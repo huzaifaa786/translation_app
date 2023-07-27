@@ -36,7 +36,7 @@ class _DeliveryMapState extends State<DeliveryMap> {
     ]);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Select Metting Location'),
+        title: Text('Choose location'),
       ),
       floatingActionButton: FloatingActionButton(
         heroTag: "btn2",

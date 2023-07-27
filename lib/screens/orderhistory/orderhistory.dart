@@ -6,6 +6,7 @@ import 'package:translation/screens/orderhistory/ordercontroller.dart';
 import 'package:translation/static/historycard.dart';
 import 'package:translation/static/topbarr.dart';
 import 'package:translation/values/controllers.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
@@ -78,15 +79,26 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                       ),
                                     ));
                               },
-                              type: controller.orders[index].servicetype,
+                              type: controller.orders[index].servicetype ==
+                                      'instant'
+                                  ? 'Instant video / audio meeting'
+                                  : controller.orders[index].servicetype ==
+                                          'document'
+                                      ? 'Documents translation'
+                                      : controller.orders[index].servicetype ==
+                                              'audio/video'
+                                          ? 'Audio/Video'
+                                          : 'In person meeting',
                               status: controller.orders[index].status,
                               time: controller.orders[index].servicetype! ==
-                                        'instant'
-                                    ? controller.orders[index].duration.toString() + ' min'
-                                    : controller.orders[index].servicetype! ==
-                                            'document'
-                                        ? sformattedTime
-                                        : sformattedTime + '-' + eformattedTime,
+                                      'instant'
+                                  ? controller.orders[index].duration
+                                          .toString() +
+                                      ' min'
+                                  : controller.orders[index].servicetype! ==
+                                          'document'
+                                      ? sformattedTime
+                                      : sformattedTime + '-' + eformattedTime,
                               date: controller.orders[index].date,
                             );
                           }),
@@ -97,10 +109,23 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       height: MediaQuery.of(context).size.height * 0.85,
                       width: MediaQuery.of(context).size.width,
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text("No Order Found!"),
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.75,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset("assets/images/smiley.svg"),
+                                SizedBox(height: 20),
+                                Text(
+                                  'No Order history Found',
+                                  style: TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),

@@ -25,6 +25,7 @@ class NotificationTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(status);
     return InkWell(
       onTap: ontap,
       child: Card(
@@ -77,7 +78,7 @@ class NotificationTile extends StatelessWidget {
                                     fontSize: 13,
                                     fontWeight: FontWeight.w400,
                                     color: hintText),
-                                maxLines: 2,
+                                maxLines: 3,
                               ),
                             ),
                           ],

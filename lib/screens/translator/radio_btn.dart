@@ -3,11 +3,12 @@ import 'package:translation/values/colors.dart';
 
 class RadioBtn extends StatefulWidget {
   const RadioBtn(
-      {super.key, this.text, this.value, this.groupvalue, this.onChanged});
+      {super.key, this.text, this.value, this.groupvalue, this.onChanged,this.image});
   final text;
   final value;
   final onChanged;
   final groupvalue;
+  final image;
 
   @override
   State<RadioBtn> createState() => _RadioBtnState();
@@ -18,8 +19,16 @@ class _RadioBtnState extends State<RadioBtn> {
   Widget build(BuildContext context) {
     return ListTile(
       title: Transform.translate(
-        offset: Offset(-25, 0),
-        child: Text(widget.text),
+        offset: Offset(-30, 0),
+        child: Row(
+          children: [
+            Image.asset(widget.image,height: 18,width: 18,),
+            Padding(
+              padding: const EdgeInsets.only(left:8.0),
+              child: Text(widget.text),
+            ),
+          ],
+        ),
       ),
       leading: Transform.translate(
         offset: Offset(-25, 0),

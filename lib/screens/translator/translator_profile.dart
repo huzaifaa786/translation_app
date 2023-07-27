@@ -80,7 +80,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                           },
                           child: SvgPicture.asset("assets/icons/back.svg")),
                       Text(
-                        "Detail",
+                        "Details",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 21),
                       ),
@@ -132,7 +132,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                               child: Row(
                                 children: [
                                   Text(
-                                    "Language",
+                                    "Languages",
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold),
@@ -469,6 +469,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                     children: [
                                       RadioBtn(
                                         text: 'Audio/Video',
+                                        image: 'assets/images/inperson (2).jpg',
                                         groupvalue: controller.scheduleType,
                                         value: ScheduleType.AudioVideo,
                                         onChanged: () {
@@ -478,6 +479,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                       ),
                                       RadioBtn(
                                         text: 'In person',
+                                        image: 'assets/images/inperson (1).jpg',
                                         groupvalue: controller.scheduleType,
                                         value: ScheduleType.InPerson,
                                         onChanged: () {
@@ -845,7 +847,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              "How many pages in a doc",
+                                              "How many pages are there in the document",
                                               style: TextStyle(fontSize: 14),
                                             ),
                                             SizedBox(
@@ -928,11 +930,11 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                           ],
                                         ),
                                       ),
-                                      FreeItemInput(
-                                        padding: false,
-                                        controller: translatorProfileController
-                                            .descriptionController,
-                                      ),
+                                      // FreeItemInput(
+                                      //   padding: false,
+                                      //   controller: translatorProfileController
+                                      //       .descriptionController,
+                                      // ),
                                     ],
                                   )
                                 : Container(),

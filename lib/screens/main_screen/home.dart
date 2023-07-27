@@ -139,7 +139,7 @@ if (order.has_rating == false) {
       PersistentBottomNavBarItem(
         icon: FaIcon(FontAwesomeIcons.gear),
         iconSize: 20,
-        title: ('Setting'),
+        title: ('Settings'),
         textStyle: TextStyle(
             fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
         activeColorSecondary: greenish,
@@ -205,13 +205,7 @@ class _HomeState extends State<Home> {
                 child: Column(
                   children: [
                     MainStackCard(
-                      onProfileTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Profile_screen(),
-                            ));
-                      },
+                      onProfileTap: () {},
                       name: homeController.user == null
                           ? ""
                           : homeController.user!.username,
@@ -228,7 +222,7 @@ class _HomeState extends State<Home> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Choose Language',
+                                    'Choose languages',
                                     style: TextStyle(
                                         fontSize: 23,
                                         fontWeight: FontWeight.bold,

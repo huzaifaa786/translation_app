@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:translation/screens/notification/notification_card.dart';
 import 'package:translation/screens/notification/notificationcontroller.dart';
@@ -55,39 +56,44 @@ class _Notification_screenState extends State<Notification_screen> {
                       child: ListView.builder(
                           itemCount: controller.notifications.length,
                           itemBuilder: (context, index) => NotificationTile(
-                                ontap: controller.notifications[index].orderr !=
-                                        null
-                                    ? controller.notifications[index].orderr!
-                                                .status ==
-                                            '3'
-                                        ? () {
-                                            showModalBottomSheet(
-                                              context: context,
-                                              isScrollControlled: true,
-                                              shape:
-                                                  const RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.vertical(
-                                                  top: Radius.circular(40),
-                                                ),
-                                              ),
-                                              builder: (context) =>
-                                                  Wrap(children: [
-                                                // NotificationModal(
-                                                //     notification: controller
-                                                //         .notifications[index])
-                                              ]),
-                                            );
-                                          }
-                                        : () {}
-                                    : () {},
+                                ontap: () {},
+                                // ontap: controller.notifications[index].orderr !=
+                                //         null
+                                //     ? controller.notifications[index].orderr!
+                                //                 .status ==
+                                //             '3'
+                                //         ? () {
+                                //             showModalBottomSheet(
+                                //               context: context,
+                                //               isScrollControlled: true,
+                                //               shape:
+                                //                   const RoundedRectangleBorder(
+                                //                 borderRadius:
+                                //                     BorderRadius.vertical(
+                                //                   top: Radius.circular(40),
+                                //                 ),
+                                //               ),
+                                //               builder: (context) =>
+                                //                   Wrap(children: [
+                                //                 // NotificationModal(
+                                //                 //     notification: controller
+                                //                 //         .notifications[index])
+                                //               ]),
+                                //             );
+                                //           }
+                                //         : () {}
+                                //     : () {},
                                 name: controller
                                     .notifications[index].vendor!.username,
                                 image: controller
                                     .notifications[index].vendor!.profilePic,
                                 title: controller.notifications[index].title,
-                                status: controller.notifications[index].orderr != null ? controller
-                                    .notifications[index].orderr!.status : '',
+                                status:
+                                    controller.notifications[index].orderr !=
+                                            null
+                                        ? controller
+                                            .notifications[index].orderr!.status
+                                        : '',
                               )),
                     ),
                   )
@@ -96,10 +102,23 @@ class _Notification_screenState extends State<Notification_screen> {
                       height: MediaQuery.of(context).size.height * 0.81,
                       width: MediaQuery.of(context).size.width,
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text("No Notification Found!"),
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.75,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset("assets/images/smiley.svg"),
+                                SizedBox(height: 20),
+                                Text(
+                                  'No Notification Found',
+                                  style: TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),

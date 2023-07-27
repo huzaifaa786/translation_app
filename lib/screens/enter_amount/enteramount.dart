@@ -136,33 +136,33 @@ class _Topup_screenState extends State<Topup_screen> {
                 Padding(
                   padding: const EdgeInsets.only(left: 15, right: 15),
                   child: Column(children: [
-                    PPaymentMethod(
-                      title: 'Googlepay',
-                      image: "assets/icons/googlepay.png",
-                      groupvalue: _site,
-                      value: payMethod.googlePay,
-                      onchaged: () {
-                        toggleplan(payMethod.googlePay);
-                      },
-                    ),
-                    PPaymentMethod(
-                      title: 'Applepay',
-                      image: "assets/icons/applepay.png",
-                      groupvalue: _site,
-                      value: payMethod.applePay,
-                      onchaged: () {
-                        toggleplan(payMethod.applePay);
-                      },
-                    ),
-                    PPaymentMethod(
-                      title: 'Form Wallet',
-                      image: "assets/icons/walletpay.png",
-                      groupvalue: _site,
-                      value: payMethod.walletpay,
-                      onchaged: () {
-                        toggleplan(payMethod.walletpay);
-                      },
-                    ),
+                    // PPaymentMethod(
+                    //   title: 'Googlepay',
+                    //   image: "assets/icons/googlepay.png",
+                    //   groupvalue: _site,
+                    //   value: payMethod.googlePay,
+                    //   onchaged: () {
+                    //     toggleplan(payMethod.googlePay);
+                    //   },
+                    // ),
+                    // PPaymentMethod(
+                    //   title: 'Applepay',
+                    //   image: "assets/icons/applepay.png",
+                    //   groupvalue: _site,
+                    //   value: payMethod.applePay,
+                    //   onchaged: () {
+                    //     toggleplan(payMethod.applePay);
+                    //   },
+                    // ),
+                    // PPaymentMethod(
+                    //   title: 'Form Wallet',
+                    //   image: "assets/icons/walletpay.png",
+                    //   groupvalue: _site,
+                    //   value: payMethod.walletpay,
+                    //   onchaged: () {
+                    //     toggleplan(payMethod.walletpay);
+                    //   },
+                    // ),
                     PPaymentMethod(
                       title: 'Credit/visa card',
                       image: "assets/icons/visapay.png",

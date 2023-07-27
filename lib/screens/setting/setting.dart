@@ -41,7 +41,7 @@ class _Setting_screenState extends State<Setting_screen> {
                 builder: (controller) => SingleChildScrollView(
                   child: Column(children: [
                     TitleTopbarr(
-                      text: 'Setting',
+                      text: 'Settings',
                     
                     ),
                     BalanceCard(
