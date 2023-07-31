@@ -56,6 +56,7 @@ class TranslatorProfileController extends GetxController {
   String startTime = '';
   String endTime = '';
   int totalAmount = 0.obs.toInt();
+  int CheckoutAmount = 0.obs.toInt();
   int duration = 0.obs.toInt();
 
   //default date for calender
@@ -103,7 +104,7 @@ class TranslatorProfileController extends GetxController {
   setAmountBySlot(
       int hour, int minutes, String time, Vendor vendor, int durattion) {
     totalAmount =
-        ((hour * 2 + (minutes / 30)) * int.parse(vendor.service!.audiovideo!))
+        ((hour * 2 + (minutes / 30)) * int.parse(vendor.service!.onlineaudiovideoPrice!))
             .toInt();
     instantTime = time;
 
@@ -377,12 +378,13 @@ class TranslatorProfileController extends GetxController {
 
   checkavailability(Vendor vendor) async {
     if (totalAmount <= 0) {
-      Get.snackbar("Error!", "Please fill all required details.",
+      Get.snackbar("", "Please fill all required details.",
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.red,
           colorText: Colors.white);
       return;
     }
+    CheckoutAmount = totalAmount;
     // var duration = checkDuration();
     // if (duration != 30) {
     //   Get.snackbar("Error!", "Duration must be 30 minutes",
@@ -409,7 +411,7 @@ class TranslatorProfileController extends GetxController {
     print(response);
     if (!response["error"]) {
       Get.to(() => Checkout_screen(
-            totalAmount: totalAmount.toString(),
+            totalAmount: CheckoutAmount.toString(),
           ));
       LoadingHelper.dismiss();
     } else {

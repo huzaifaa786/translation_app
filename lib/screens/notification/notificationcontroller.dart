@@ -10,7 +10,7 @@ class NotificationController extends GetxController {
   static NotificationController instance = Get.find();
 
   List<Notificationn> notifications = [];
-  double? rating;
+  double? rating = 1.0;
 
 /////////////////////////////////// Get Notifications /////////////////////////////////////////////////////////
 

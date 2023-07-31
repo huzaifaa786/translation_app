@@ -96,19 +96,30 @@ class _Checkout_screenState extends State<Checkout_screen> {
                         borderRadius: BorderRadius.circular(70),
                       ),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(70),
-                        child: 
-                        translatorProfileController.vendors!.profilePic != ''?
-                        Image.network(
-                          translatorProfileController.vendors!.profilePic
-                              .toString(),
-                          fit: BoxFit.cover,
-                        ):Image.asset('assets/images/5907.jpg')
-                      ),
+                          borderRadius: BorderRadius.circular(70),
+                          child:
+                              translatorProfileController.vendors!.profilePic !=
+                                      ''
+                                  ? Image.network(
+                                      translatorProfileController
+                                          .vendors!.profilePic
+                                          .toString(),
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Image.asset('assets/images/5907.jpg')),
                     ),
                     Center(
                       child: Text(
-                        translatorProfileController.serviceType.name,
+                        translatorProfileController.serviceType ==
+                                ServiceType.Instant
+                            ? 'Instant audio/video meeting'
+                            : translatorProfileController.serviceType ==
+                                    ServiceType.Document
+                                ? 'Document translation'
+                                : translatorProfileController.scheduleType ==
+                                        ScheduleType.AudioVideo
+                                    ? 'Audio/video meeting'
+                                    : 'In person meeting',
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w700),
                       ),
@@ -212,7 +223,8 @@ class _Checkout_screenState extends State<Checkout_screen> {
                                 : InkWell(
                                     onTap: () {
                                       readonly = false;
-                                      translatorProfileController.totalAmount =
+                                      translatorProfileController
+                                              .CheckoutAmount =
                                           int.parse(widget.totalAmount);
                                       checkoutController.coupon.text = '';
                                       setState(() {});
@@ -258,7 +270,7 @@ class _Checkout_screenState extends State<Checkout_screen> {
                                   color: greenish)),
                           Text(
                             "AED " +
-                                translatorProfileController.totalAmount
+                                translatorProfileController.CheckoutAmount
                                     .toString(),
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w600),

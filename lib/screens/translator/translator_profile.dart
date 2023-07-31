@@ -4,16 +4,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:translation/models/unurgent.dart';
-import 'package:translation/models/urgent.dart';
 import 'package:translation/models/vendor.dart';
 import 'package:translation/screens/translator/map.dart';
 import 'package:translation/screens/translator/radio_btn.dart';
+import 'package:translation/screens/translator/radio_btn2.dart';
 import 'package:translation/screens/translator/traling_radio.dart';
 import 'package:translation/screens/translator/translator_profile_controller.dart';
 import 'package:translation/static/add_remove.dart';
 import 'package:translation/static/checkout_button.dart';
-import 'package:translation/static/freeitaminput.dart';
 import 'package:translation/static/icon_button.dart';
 import 'package:translation/static/image.dart';
 import 'package:translation/static/lang_box.dart';
@@ -75,6 +73,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: white,
       body: SafeArea(
         child: GetBuilder<TranslatorProfileController>(
           builder: (controller) => Padding(
@@ -520,6 +519,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                         icon: Icons.calendar_month,
                                         onPressed: () {
                                           showModalBottomSheet(
+                                            isScrollControlled: true,
                                             context: context,
                                             builder: (BuildContext context) {
                                               return StatefulBuilder(
@@ -535,79 +535,79 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                     setState(() {});
                                                   }
 
-                                                  return Column(
+                                                  return Wrap(
                                                     children: [
-                                                      Expanded(
-                                                        child: TableCalendar(
-                                                          calendarFormat:
-                                                              CalendarFormat
-                                                                  .month,
-                                                          availableCalendarFormats: const {
+                                                      TableCalendar(
+                                                        calendarFormat:
                                                             CalendarFormat
-                                                                .month: 'Month',
-                                                            // CalendarFormat.week: 'Week',
-                                                          },
-                                                          firstDay: now,
-                                                          lastDay:
-                                                              nextSixMonths!,
-                                                          focusedDay: controller
-                                                              .focusedDay.value,
-                                                          calendarStyle:
-                                                              CalendarStyle(
-                                                            todayDecoration: BoxDecoration(
-                                                                color: greenish
-                                                                    .withOpacity(
-                                                                        0.5),
-                                                                shape: BoxShape
-                                                                    .circle),
-                                                            selectedDecoration:
-                                                                BoxDecoration(
-                                                              color:
-                                                                  greenish, // Customize the background color of the selected day
+                                                                .month,
+                                                        availableCalendarFormats: const {
+                                                          CalendarFormat
+                                                              .month: 'Month',
+                                                          // CalendarFormat.week: 'Week',
+                                                        },
+                                                        firstDay: now,
+                                                        lastDay:
+                                                            nextSixMonths!,
+                                                        focusedDay: controller
+                                                            .focusedDay.value,
+                                                        calendarStyle:
+                                                            CalendarStyle(
+                                                          todayDecoration: BoxDecoration(
+                                                              color: greenish
+                                                                  .withOpacity(
+                                                                      0.5),
                                                               shape: BoxShape
-                                                                  .circle, // Customize the shape of the selected day
-                                                            ),
-                                                            selectedTextStyle:
-                                                                TextStyle(
-                                                              color:
-                                                                  white, // Customize the text color of the selected day
-                                                              fontWeight: FontWeight
-                                                                  .bold, // Customize the font weight of the selected day
-                                                            ),
+                                                                  .circle),
+                                                          selectedDecoration:
+                                                              BoxDecoration(
+                                                            color:
+                                                                greenish, // Customize the background color of the selected day
+                                                            shape: BoxShape
+                                                                .circle, // Customize the shape of the selected day
                                                           ),
-                                                          selectedDayPredicate:
-                                                              (day) {
-                                                            return isSameDay(
-                                                                controller
-                                                                    .selectedDay
-                                                                    .value,
-                                                                day);
-                                                          },
-                                                          onDaySelected:
-                                                              onDateSelected,
+                                                          selectedTextStyle:
+                                                              TextStyle(
+                                                            color:
+                                                                white, // Customize the text color of the selected day
+                                                            fontWeight: FontWeight
+                                                                .bold, // Customize the font weight of the selected day
+                                                          ),
                                                         ),
+                                                        selectedDayPredicate:
+                                                            (day) {
+                                                          return isSameDay(
+                                                              controller
+                                                                  .selectedDay
+                                                                  .value,
+                                                              day);
+                                                        },
+                                                        onDaySelected:
+                                                            onDateSelected,
                                                       ),
-                                                      Container(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                bottom: 16),
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            0.8,
-                                                        child: ElevatedButton(
-                                                          onPressed: () {
-                                                            // Call the callback to update the button text
-                                                            controller
-                                                                .updateButtonText(
-                                                                    controller
-                                                                        .selectedDay);
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop(); // Close the bottom sheet
-                                                          },
-                                                          child: Text('Done'),
+                                                      Center(
+                                                        child: Container(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  bottom: 30,top: 16),
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              0.8,
+                                                          child: ElevatedButton(
+                                                            onPressed: () {
+                                                              // Call the callback to update the button text
+                                                              controller
+                                                                  .updateButtonText(
+                                                                      controller
+                                                                          .selectedDay);
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop(); // Close the bottom sheet
+                                                            },
+                                                            child: Text('Done'),
+                                                          ),
                                                         ),
                                                       ),
                                                     ],
@@ -733,7 +733,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                             controller.serviceType == ServiceType.Document
                                 ? Column(
                                     children: [
-                                      RadioBtn(
+                                      RadioBtn2(
                                         text: 'Urgent Document',
                                         groupvalue: controller.documentType,
                                         value: DocumentType.Urgent,
@@ -744,7 +744,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                               .resetvalue();
                                         },
                                       ),
-                                      RadioBtn(
+                                      RadioBtn2(
                                         text: 'Not Urgent Document',
                                         groupvalue: controller.documentType,
                                         value: DocumentType.NotUrgent,
@@ -866,7 +866,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                       .width *
                                                   0.5,
                                               child: Text(
-                                                "How many pages are there in the document",
+                                                "How many pages are there in the document?",
                                                 maxLines: 2,
                                                 style: TextStyle(fontSize: 14),
                                               ),
@@ -916,7 +916,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                                 .Urgent) {
                                                           if (controller
                                                                   .pages ==
-                                                              translatorProfileController.maxPage) {
+                                                              translatorProfileController
+                                                                  .maxPage) {
                                                             print(controller
                                                                 .pages);
                                                           } else {
@@ -934,7 +935,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                         } else {
                                                           if (controller
                                                                   .pages ==
-                                                             translatorProfileController.umaxpage) {
+                                                              translatorProfileController
+                                                                  .umaxpage) {
                                                             print(controller
                                                                 .pages);
                                                           } else {
@@ -999,6 +1001,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                 price: controller.totalAmount.toString(),
                                 sreenRatio: 0.9,
                                 onPressed: () {
+                                  checkoutController.clear();
                                   if (controller.serviceType ==
                                       ServiceType.Document) {
                                     if (controller.totalAmount <= 0) {
@@ -1010,6 +1013,9 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                           colorText: Colors.white);
                                       return;
                                     }
+                                    translatorProfileController.CheckoutAmount =
+                                        controller.totalAmount;
+                                    setState(() {});
                                     if (translatorProfileController.file ==
                                         null) {
                                       Get.snackbar("Please Attach File.", "",
@@ -1019,22 +1025,26 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                       return;
                                     }
                                     Get.to(() => Checkout_screen(
-                                          totalAmount:
-                                              controller.totalAmount.toString(),
+                                          totalAmount: controller.CheckoutAmount
+                                              .toString(),
                                         ));
                                   } else if (controller.serviceType ==
                                       ServiceType.Instant) {
                                     if (controller.totalAmount <= 0) {
-                                      Get.snackbar("Error!",
+                                      Get.snackbar("",
                                           "Please fill all required details.",
                                           snackPosition: SnackPosition.BOTTOM,
                                           backgroundColor: Colors.red,
                                           colorText: Colors.white);
                                       return;
                                     }
+                                    translatorProfileController.CheckoutAmount =
+                                        controller.totalAmount;
+                                    setState(() {});
+                                    
                                     Get.to(() => Checkout_screen(
-                                          totalAmount:
-                                              controller.totalAmount.toString(),
+                                          totalAmount: controller.CheckoutAmount
+                                              .toString(),
                                         ));
                                   } else {
                                     controller

@@ -32,7 +32,7 @@ class _Home_screenState extends State<Home_screen> {
       PersistentTabController(initialIndex: 0);
 
 readrating() async {
-  Order order = await homeController.getgatting();
+  Order order = await homeController.getratting();
 
 
 if (order.has_rating == false) {

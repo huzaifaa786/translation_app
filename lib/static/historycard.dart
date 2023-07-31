@@ -89,12 +89,16 @@ class HistoryCard extends StatelessWidget {
                           SizedBox(
                             height: 4,
                           ),
-                          Text(
-                            type,
-                            style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                                fontFamily: 'Mazzard'),
+                          Container(
+                            width: MediaQuery.of(context).size.width*0.4,
+                            child: Text(
+                              type,
+                              maxLines: 2,
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: 'Mazzard'),
+                            ),
                           ),
                           SizedBox(
                             height: 4,

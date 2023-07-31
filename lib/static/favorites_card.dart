@@ -104,7 +104,7 @@ class FavoritesCard extends StatelessWidget {
                                         child: SvgPicture.asset(
                                             'assets/images/star.svg',
                                             height: 11,
-                                            width: 11)),
+                                        width: 11)),
                                     Padding(
                                       padding: const EdgeInsets.only(
                                           top: 4, left: 2),
@@ -177,9 +177,7 @@ class FavoritesCard extends StatelessWidget {
                   ),
                 ],
               ),
-              FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: SvgPicture.asset("assets/images/fav.svg")),
+              SvgPicture.asset("assets/images/fav.svg"),
             ],
           ),
         ),

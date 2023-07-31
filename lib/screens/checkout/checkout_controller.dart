@@ -18,6 +18,11 @@ class CheckOutController extends GetxController {
   String? percentage = '0';
   String? amountDeducted = '0';
   TextEditingController coupon = TextEditingController();
+  clear() {
+    coupon.clear();
+    update();
+  }
+
   // List<Coupon> coupons = [];
   paymentIntent() async {
     var url = BASE_URL + 'payment/intent';
@@ -136,21 +141,20 @@ class CheckOutController extends GetxController {
       print(translatorProfileController.totalAmount);
       LoadingHelper.dismiss();
     } else {
-      var per = int.parse(coupons!.maximum!) / totalAmount;
+      var per = int.parse(coupons!.maximum!) / int.parse(totalAmount);
       // percentage = per.toStringAsFixed(3);
       var discount = per * 100;
       percentage = discount.toStringAsFixed(2);
       var perVal = double.parse(percentage.toString()) / 100;
-      var discountval = perVal * totalAmount!;
+      var discountval = perVal * double.parse(totalAmount);
       amountDeducted = discountval.toStringAsFixed(0);
       var amount = int.parse(amountDeducted!);
-      var totalp = totalAmount! - amount;
+      var totalp = int.parse(totalAmount) - amount;
       totalAmount = totalp.toInt();
       update();
-      translatorProfileController.totalAmount = totalAmount;
-
+      translatorProfileController.CheckoutAmount = totalAmount;
       print(translatorProfileController.totalAmount);
-
+      print(translatorProfileController.CheckoutAmount);
       translatorProfileController.refresh();
       LoadingHelper.dismiss();
     }

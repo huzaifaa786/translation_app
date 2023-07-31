@@ -85,7 +85,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                   : controller.orders[index].servicetype ==
                                           'document'
                                       ? 'Documents translation'
-                                      : controller.orders[index].servicetype ==
+                                      : controller.orders[index].scheduletype ==
                                               'audio/video'
                                           ? 'Audio/Video'
                                           : 'In person meeting',

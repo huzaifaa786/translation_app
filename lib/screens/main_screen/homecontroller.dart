@@ -276,7 +276,7 @@ class HomeController extends GetxController {
     }
   }
 
- getgatting() async {
+ getratting() async {
   LoadingHelper.show();
   var url = BASE_URL + 'ratting/get';
 
