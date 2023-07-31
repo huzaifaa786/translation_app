@@ -26,7 +26,7 @@ class CheckOutController extends GetxController {
   // List<Coupon> coupons = [];
   paymentIntent() async {
     var url = BASE_URL + 'payment/intent';
-    var data = {'price': translatorProfileController.totalAmount};
+    var data = {'price': translatorProfileController.CheckoutAmount};
     var response = await Api.execute(url: url, data: data);
     return response['intent'];
   }
@@ -136,9 +136,9 @@ class CheckOutController extends GetxController {
       totalAmount = totalp.toString();
       percentage = coupons!.percentage!;
       update();
-      translatorProfileController.totalAmount = int.parse(totalAmount);
-
+      translatorProfileController.CheckoutAmount = int.parse(totalAmount);
       print(translatorProfileController.totalAmount);
+      print(translatorProfileController.CheckoutAmount);
       LoadingHelper.dismiss();
     } else {
       var per = int.parse(coupons!.maximum!) / int.parse(totalAmount);

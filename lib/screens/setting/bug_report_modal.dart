@@ -86,7 +86,6 @@ class _BugReportModalState extends State<BugReportModal> {
                       child: ElevatedButton(
                         onPressed: () {
                           settingController.addbug();
-                          Navigator.pop(context);
                         },
                         child: Text('Send'),
                         style: ButtonStyle(

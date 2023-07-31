@@ -254,7 +254,7 @@ class TranslatorProfileController extends GetxController {
         'api_token': box.read('api_token')!,
         'servicetype': servicetype,
         'vendor_id': vendor.id.toString(),
-        'price': totalAmount.toString(),
+        'price': CheckoutAmount.toString(),
         'duration': duration,
         'date': DateTime.now().toString(),
         'starttime': startTime,
@@ -273,7 +273,7 @@ class TranslatorProfileController extends GetxController {
         'api_token': box.read('api_token')!,
         'servicetype': servicetype,
         'vendor_id': vendor.id.toString(),
-        'price': totalAmount.toString(),
+        'price': CheckoutAmount.toString(),
         'duration': duration,
         'date': serviceType == ServiceType.Schedule
             ? translatorProfileController.selectedDay.value.toString()
@@ -317,7 +317,7 @@ class TranslatorProfileController extends GetxController {
       'api_token': box.read('api_token')!,
       'servicetype': servicetype,
       'vendor_id': vendor.id.toString(),
-      'price': totalAmount.toString(),
+      'price': CheckoutAmount.toString(),
       'duration': duration,
       'date': translatorProfileController.selectedDay.value.toString(),
       'starttime': startTime,

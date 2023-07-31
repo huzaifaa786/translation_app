@@ -65,6 +65,7 @@ class SettingController extends GetxController {
 
       LoadingHelper.dismiss();
       ClearbugVariables();
+      Get.back();
       update();
       Get.snackbar("Report Submit Successfully.",
           "Thank you for reporting the bug successfully! We appreciate your efforts in helping us improve our system. Our team will review the bug report and work towards resolving the issue. If we require any further information or clarification, we will reach out to you. Thank you for your patience and for being a valued member of our community!",
@@ -72,5 +73,6 @@ class SettingController extends GetxController {
           backgroundColor: Colors.green,
           colorText: Colors.white);
     }
+    LoadingHelper.dismiss();
   }
 }
