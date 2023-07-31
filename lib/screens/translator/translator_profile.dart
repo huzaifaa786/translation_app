@@ -392,11 +392,18 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                         padding: const EdgeInsets.only(top: 10),
                                         child: Row(
                                           children: [
-                                            Text(
-                                              "How many hours do you need translator",
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.bold),
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.9,
+                                              child: Text(
+                                                "How many hours do you need translator / interpreter for?",
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -542,23 +549,23 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                             CalendarFormat
                                                                 .month,
                                                         availableCalendarFormats: const {
-                                                          CalendarFormat
-                                                              .month: 'Month',
+                                                          CalendarFormat.month:
+                                                              'Month',
                                                           // CalendarFormat.week: 'Week',
                                                         },
                                                         firstDay: now,
-                                                        lastDay:
-                                                            nextSixMonths!,
+                                                        lastDay: nextSixMonths!,
                                                         focusedDay: controller
                                                             .focusedDay.value,
                                                         calendarStyle:
                                                             CalendarStyle(
-                                                          todayDecoration: BoxDecoration(
-                                                              color: greenish
-                                                                  .withOpacity(
-                                                                      0.5),
-                                                              shape: BoxShape
-                                                                  .circle),
+                                                          todayDecoration:
+                                                              BoxDecoration(
+                                                                  color: greenish
+                                                                      .withOpacity(
+                                                                          0.5),
+                                                                  shape: BoxShape
+                                                                      .circle),
                                                           selectedDecoration:
                                                               BoxDecoration(
                                                             color:
@@ -589,7 +596,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                         child: Container(
                                                           padding:
                                                               EdgeInsets.only(
-                                                                  bottom: 30,top: 16),
+                                                                  bottom: 30,
+                                                                  top: 16),
                                                           width: MediaQuery.of(
                                                                       context)
                                                                   .size
@@ -1041,7 +1049,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                     translatorProfileController.CheckoutAmount =
                                         controller.totalAmount;
                                     setState(() {});
-                                    
+
                                     Get.to(() => Checkout_screen(
                                           totalAmount: controller.CheckoutAmount
                                               .toString(),
