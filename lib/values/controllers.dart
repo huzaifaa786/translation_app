@@ -1,4 +1,5 @@
 import 'package:translation/screens/checkout/checkout_controller.dart';
+import 'package:translation/screens/company_login/company_controller.dart';
 import 'package:translation/screens/enter_amount/amountcontroller.dart';
 import 'package:translation/screens/auth/authcontroller.dart';
 import 'package:translation/screens/favorites_screen/favorites_controller.dart';
@@ -24,3 +25,4 @@ CheckOutController checkoutController = CheckOutController.instance;
 OTPServices otpServices = OTPServices.instance;
 ChatController chatController = ChatController.instance;
 FavController favController = FavController.instance;
+CompanyController companyController = CompanyController.instance;

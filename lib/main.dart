@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:translation/helper/loading.dart';
+import 'package:translation/screens/company_login/company_controller.dart';
 import 'package:translation/screens/favorites_screen/favorites_controller.dart';
 import 'package:translation/screens/forgot.dart/emailOtp.dart';
 import 'package:translation/screens/checkout/checkout_controller.dart';
@@ -18,6 +19,7 @@ import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/screens/splash_screen/splash_main.dart';
 import 'package:translation/screens/translator_screens/notranslator.dart';
 import 'package:translation/services/auth_services/mobileotp_services.dart';
+import 'package:translation/values/controllers.dart';
 import 'package:translation/values/styles.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -43,6 +45,7 @@ void main() async {
   Get.put(OTPServices());
   Get.put(FavController());
   Get.put(ChatController());
+  Get.put(CompanyController());
   await GetStorage.init();
 
   

@@ -113,7 +113,6 @@ class AuthController extends GetxController {
 
   void SignIn(void Function(bool) callback) async {
     LoadingHelper.show();
-    print('objcvcect');
     print(email.text);
     print(password.text);
     final bool isFormValid =
@@ -258,10 +257,10 @@ class AuthController extends GetxController {
 
       LoadingHelper.dismiss();
       if (await GoogleServices.googlelogin(email1)) {
-        Get.to(() => Home_screen());
+        Get.offAll(() => Home_screen());
       } else {
         if (await GoogleServices.googleSignup(name, email1, 'google')) {
-          Get.to(() => Home_screen());
+          Get.offAll(() => Home_screen());
         }
       }
     } catch (e) {

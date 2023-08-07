@@ -39,9 +39,9 @@ class _LoginScreenState extends State<LoginScreen> {
             builder: (controller) => Stack(
                   children: [
                     Image.asset(
-                      "assets/images/loginback.png",
-                      fit: BoxFit.cover,
-                      height: MediaQuery.of(context).size.height * 0.35,
+                      "assets/images/loginback.jpg",
+                      fit: BoxFit.fill,
+                      height: MediaQuery.of(context).size.height * 0.25,
                       width: double.infinity,
                     ),
                     Column(
@@ -123,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           EdgeInsets.only(left: 20, right: 20),
                                       height:
                                           MediaQuery.of(context).size.height *
-                                              0.65,
+                                              0.69,
                                       child: SingleChildScrollView(
                                         child: Padding(
                                           padding:
@@ -132,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             children: [
                                               Container(
                                                 padding: EdgeInsets.only(
-                                                    top: 20, bottom: 20),
+                                                    top: 14, bottom: 20),
                                                 child: Text(
                                                   'WELCOME BACK',
                                                   style: TextStyle(
@@ -280,7 +280,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               ),
                                               Padding(
                                                 padding: EdgeInsets.only(
-                                                    top: 25, bottom: 20),
+                                                    top: 20, bottom: 20),
                                                 child: Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,
@@ -294,14 +294,54 @@ class _LoginScreenState extends State<LoginScreen> {
                                                           "assets/images/google.png",
                                                           height: 34),
                                                     ),
-                                                    // Padding(
-                                                    //     padding:
-                                                    //         EdgeInsets.only(
-                                                    //             left: 12,
-                                                    //             right: 12)),
-                                                    // Image.asset(
-                                                    //     "assets/images/apple.png",
-                                                    //     height: 34),
+                                                  ],
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Expanded(
+                                                    child: Divider(
+                                                      color: Colors.grey,
+                                                      height: 1,
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 10),
+                                                    child: Text(
+                                                      'Company',
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 18,
+                                                          color:
+                                                              Colors.black54),
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child: Divider(
+                                                      color: Colors.grey,
+                                                      height: 1,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    top: 20, bottom: 20),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    InkWell(
+                                                      onTap: () {},
+                                                      child: Image.asset(
+                                                          "assets/images/splashLogo.png",
+                                                          height: 34),
+                                                    ),
                                                   ],
                                                 ),
                                               ),
@@ -363,9 +403,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   authController
                                                           .completeNumber =
                                                       phone.completeNumber;
-                                                      print('authController.completeNumber');
-                                                      print(phone.completeNumber);
-                                                      print(authController.completeNumber);
+                                                  print(
+                                                      'authController.completeNumber');
+                                                  print(phone.completeNumber);
+                                                  print(authController
+                                                      .completeNumber);
                                                 },
                                                 keyboardType:
                                                     TextInputType.phone,
@@ -451,6 +493,57 @@ class _LoginScreenState extends State<LoginScreen> {
                                             //     ],
                                             //   ),
                                             // ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(top:30.0),
+                                              child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Expanded(
+                                                      child: Divider(
+                                                        color: Colors.grey,
+                                                        height: 1,
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 10),
+                                                      child: Text(
+                                                        'Company',
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize: 18,
+                                                            color:
+                                                                Colors.black54),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Divider(
+                                                        color: Colors.grey,
+                                                        height: 1,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                            ),
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    top: 20, bottom: 20),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    InkWell(
+                                                      onTap: () {},
+                                                      child: Image.asset(
+                                                          "assets/images/splashLogo.png",
+                                                          height: 34),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
                                           ],
                                         ),
                                       ),

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:translation/screens/translator/translator_profile_controller.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/static/bagee.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -20,6 +21,8 @@ class HistoryCard extends StatelessWidget {
     this.status,
     this.date,
     this.time,
+    this.servicetype,
+    this.page,
   });
   final type;
   final name;
@@ -32,6 +35,8 @@ class HistoryCard extends StatelessWidget {
   final status;
   final date;
   final time;
+  final servicetype;
+  final page;
 
   @override
   Widget build(BuildContext context) {
@@ -103,6 +108,21 @@ class HistoryCard extends StatelessWidget {
                           SizedBox(
                             height: 4,
                           ),
+                          servicetype != 'documnet' ?
+                          Container(
+                            width: MediaQuery.of(context).size.width*0.4,
+                            child: Text(
+                              'Amount of pages: ' + page + ' pages',
+                              maxLines: 2,
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: 'Mazzard'),
+                            ),
+                          ):Container(),
+                          SizedBox(
+                            height: 4,
+                          ),
                           Row(
                             children: [
                               Icon(
@@ -112,7 +132,7 @@ class HistoryCard extends StatelessWidget {
                               SizedBox(
                                 width: 4,
                               ),
-                              type == 'document'
+                              servicetype == 'document'
                                   ? Container()
                                   : Text(
                                       time + " | ",

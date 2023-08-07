@@ -25,9 +25,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             builder: (controller) => Stack(
                   children: [
                     Image.asset(
-                      "assets/images/loginback.png",
-                      fit: BoxFit.cover,
-                      height: MediaQuery.of(context).size.height * 0.35,
+                      "assets/images/loginback.jpg",
+                      height: MediaQuery.of(context).size.height * 0.25,
                       width: double.infinity,
                     ),
                     Column(

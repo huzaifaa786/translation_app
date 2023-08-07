@@ -31,20 +31,17 @@ class _Home_screenState extends State<Home_screen> {
   PersistentTabController _controller =
       PersistentTabController(initialIndex: 0);
 
-readrating() async {
-  Order order = await homeController.getratting();
-
-
-if (order.has_rating == false) {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) => NotificationModal(order : order),
-    );
-  } else {
- 
+  readrating() async {
+    var order = await homeController.getratting();
+    if (order != null) {
+      if (order.has_rating == false) {
+        showModalBottomSheet(
+          context: context,
+          builder: (context) => NotificationModal(order: order),
+        );
+      }
+    }
   }
-}
-
 
   @override
   void initState() {

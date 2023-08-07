@@ -6,6 +6,7 @@ class User {
   String? email;
   String? profilePic;
   String? type;
+  int? isCompany;
 
   User(user) {
     id = user['id'];
@@ -15,5 +16,6 @@ class User {
     email = user['email'];
     profilePic = user['profilepic'] ?? '';
     type = user['user_type'];
+    isCompany = user['is_company'];
   }
 }

@@ -292,7 +292,7 @@ class HomeController extends GetxController {
   if (response['order'] != null) {
     return Order(response['order']);
   } else {
-    return [];
+    return;
   }
 }
 

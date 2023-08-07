@@ -396,9 +396,9 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width *
-                                                  0.9,
+                                                  0.88,
                                               child: Text(
-                                                "How many hours do you need translator / interpreter for?",
+                                                "How many hours do you need the translator / interpreter for?",
                                                 style: TextStyle(
                                                     fontSize: 14,
                                                     fontWeight:
@@ -488,8 +488,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                 ? Column(
                                     children: [
                                       RadioBtn(
-                                        text: 'Audio/Video',
-                                        image: 'assets/images/inperson (2).jpg',
+                                        text: 'Audio/Video meeting',
+                                        image: 'assets/images/output-onlinepngtools (11).png',
                                         groupvalue: controller.scheduleType,
                                         value: ScheduleType.AudioVideo,
                                         onChanged: () {
@@ -498,8 +498,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                         },
                                       ),
                                       RadioBtn(
-                                        text: 'In person',
-                                        image: 'assets/images/inperson (1).jpg',
+                                        text: 'In person meeting',
+                                        image: 'assets/images/output-onlinepngtools (10).png',
                                         groupvalue: controller.scheduleType,
                                         value: ScheduleType.InPerson,
                                         onChanged: () {

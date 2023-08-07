@@ -59,12 +59,38 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                 DateFormat('HH:mm').format(stime);
                             String eformattedTime =
                                 DateFormat('HH:mm').format(etime);
+                            String service;
+                            if (controller.orders[index].servicetype ==
+                                'instant') {
+                              service = 'Instant video / audio meeting';
+                              print(service);
+                            } else if (controller.orders[index].servicetype ==
+                                'document') {
+                              if (controller
+                                      .orders[index].document!.documenttype ==
+                                  'DocumentType.NotUrgent') {
+                                service = 'Non urgent Documents translation';
+                              } else {
+                                service = 'Urgent documents translation';
+                              }
+                              print(controller
+                                  .orders[index].document!.documenttype);
+                            } else {
+                              if (controller.orders[index].scheduletype ==
+                                  'audio/video') {
+                                service = 'Audio/Video meeting';
+                              } else {
+                                service = 'In person meeting';
+                              }
+                            }
                             return HistoryCard(
                               id: controller.orders[index].id,
                               name: controller.orders[index].vendor!.name,
                               image:
                                   controller.orders[index].vendor!.profilePic,
                               price: controller.orders[index].price,
+                              servicetype: controller.orders[index].servicetype,
+                              page: controller.orders[index].document != null? controller.orders[index].document!.pages:'',
                               onmsgtap: () {
                                 Navigator.push(
                                     context,
@@ -79,16 +105,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                       ),
                                     ));
                               },
-                              type: controller.orders[index].servicetype ==
-                                      'instant'
-                                  ? 'Instant video / audio meeting'
-                                  : controller.orders[index].servicetype ==
-                                          'document'
-                                      ? 'Documents translation'
-                                      : controller.orders[index].scheduletype ==
-                                              'audio/video'
-                                          ? 'Audio/Video'
-                                          : 'In person meeting',
+                              type: service,
                               status: controller.orders[index].status,
                               time: controller.orders[index].servicetype! ==
                                       'instant'
@@ -100,6 +117,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                       ? sformattedTime
                                       : sformattedTime + '-' + eformattedTime,
                               date: controller.orders[index].date,
+
                             );
                           }),
                     ),

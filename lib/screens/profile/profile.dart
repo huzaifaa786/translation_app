@@ -184,9 +184,6 @@ class _Profile_screenState extends State<Profile_screen> {
                             lable: 'Phone Number',
                             controller: profileController.phoneController,
                           ),
-                    SizedBox(
-                      height: 20,
-                    ),
                     profileController.user!.type == 'Email'
                         ? ChangePassword(
                             onPressed: () {
@@ -202,6 +199,7 @@ class _Profile_screenState extends State<Profile_screen> {
                         : Container(),
                     // profileController.user!.type == 'Email'
                     // ?
+                    profileController.user!.type != 'Email'?SizedBox(height: 25):Container(),
                     LargeButtons(
                       onPressed: () {
                         profileController.EditProfile((success) {

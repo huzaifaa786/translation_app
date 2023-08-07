@@ -1,3 +1,4 @@
+import 'package:translation/models/document.dart';
 import 'package:translation/models/user.dart';
 import 'package:translation/models/vendor.dart';
 
@@ -8,7 +9,7 @@ class Order {
   int? duration;
   String? servicetype;
   String? scheduletype;
-  String? documenttype;
+  OrderDocument? document;
   String? status;
   String? starttime;
   String? endtime;
@@ -24,7 +25,7 @@ class Order {
     price = order['price'];
     servicetype = order['servicetype'];
     scheduletype = order['scheduletype'];
-    documenttype = order['documenttype'];
+    // documenttype = order['documenttype'];
     duration = order['duration'];
     status = order['status'];
     vendor_id = order['vendor_id'];
@@ -33,8 +34,11 @@ class Order {
     date = order['date'];
     user_id = order['user_id'];
     has_rating = order['has_rating'] ?? false;
-    user = User(order['user']) ;
+    user = User(order['user']);
     vendor = Vendor(order['vendor']);
-    // document =  Orderdoc(order['document']) ;
+    order['servicetype'] == 'document'
+        ? document = OrderDocument(order['document'])
+        : '';
+        print(document);
   }
 }

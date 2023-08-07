@@ -1,13 +1,15 @@
-
-class Orderdoc {
+class OrderDocument {
   int? id;
-  int? order_id;
+  String? documenttype;
+  String? discription;
+  String? file;
+  String? pages;
 
-  String? document;
-
-  Orderdoc(document) {
-    id = document['id'];
-    order_id = document['order_id'];
-    document = document['document'];
+  OrderDocument(orderdocument) {
+    id = orderdocument['id'];
+    documenttype = orderdocument['documenttype'];
+    file = orderdocument['file'];
+    discription = orderdocument['description'] ?? '';
+    pages = orderdocument['pages'];
   }
 }
