@@ -24,8 +24,9 @@ class _LoginCompanyScreenState extends State<LoginCompanyScreen> {
             children: [
               Image.asset(
                 "assets/images/loginback.jpg",
+                fit: BoxFit.cover,
                 height: MediaQuery.of(context).size.height * 0.25,
-                width: double.infinity,
+                width: MediaQuery.of(context).size.width,
               ),
               Column(
                 children: [

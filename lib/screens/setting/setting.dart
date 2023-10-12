@@ -73,17 +73,17 @@ class _Setting_screenState extends State<Setting_screen> {
                       imgicon: "assets/icons/warning.svg",
                     ),
                    
-                    SettingCard(
-                      title: 'Company Access',
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LoginCompanyScreen()),
-                        );
-                      },
-                      imgicon: "assets/icons/home.svg",
-                    ),
+                    // SettingCard(
+                    //   title: 'Company Access',
+                    //   onPressed: () {
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //           builder: (context) => LoginCompanyScreen()),
+                    //     );
+                    //   },
+                    //   imgicon: "assets/icons/home.svg",
+                    // ),
                     SizedBox(
                       height: 20,
                     ),

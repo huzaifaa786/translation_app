@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:translation/values/colors.dart';
 
-class SettingCard extends StatelessWidget {
-  const SettingCard(
+class CompanyAccessCard extends StatelessWidget {
+  const CompanyAccessCard(
       {Key? key,
       @required this.title,
       @required this.onPressed,
@@ -35,7 +35,7 @@ class SettingCard extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Padding(
-        padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
+        padding: const EdgeInsets.only(top: 15),
         child: Column(
           children: [
             Row(

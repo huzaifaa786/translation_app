@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:translation/screens/company_login/company_login_screen.dart';
 import 'package:translation/screens/forgot.dart/forgotAccount.dart';
 import 'package:translation/screens/auth/authcontroller.dart';
 import 'package:translation/screens/main_screen/home.dart';
 import 'package:translation/screens/auth/sign_up.dart';
+import 'package:translation/static/company_access_card.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/static/input_field1.dart';
 import 'package:translation/static/large_button.dart';
@@ -312,7 +314,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                         EdgeInsets.symmetric(
                                                             horizontal: 10),
                                                     child: Text(
-                                                      'Company',
+                                                      'Company Access',
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.w500,
@@ -330,19 +332,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 ],
                                               ),
                                               Padding(
-                                                padding: EdgeInsets.only(
-                                                    top: 20, bottom: 20),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    InkWell(
-                                                      onTap: () {},
-                                                      child: Image.asset(
-                                                          "assets/images/splashLogo.png",
-                                                          height: 34),
-                                                    ),
-                                                  ],
+                                                padding:
+                                                    EdgeInsets.only(bottom: 20),
+                                                child: CompanyAccessCard(
+                                                  title: 'Company Access',
+                                                  onPressed: () {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              LoginCompanyScreen()),
+                                                    );
+                                                  },
+                                                  imgicon:
+                                                      "assets/icons/home.svg",
                                                 ),
                                               ),
                                             ],
@@ -494,56 +497,58 @@ class _LoginScreenState extends State<LoginScreen> {
                                             //   ),
                                             // ),
                                             Padding(
-                                              padding: const EdgeInsets.only(top:30.0),
+                                              padding: const EdgeInsets.only(
+                                                  top: 30.0),
                                               child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Expanded(
-                                                      child: Divider(
-                                                        color: Colors.grey,
-                                                        height: 1,
-                                                      ),
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Expanded(
+                                                    child: Divider(
+                                                      color: Colors.grey,
+                                                      height: 1,
                                                     ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 10),
-                                                      child: Text(
-                                                        'Company',
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontSize: 18,
-                                                            color:
-                                                                Colors.black54),
-                                                      ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 10),
+                                                    child: Text(
+                                                      'Company Access',
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 18,
+                                                          color:
+                                                              Colors.black54),
                                                     ),
-                                                    Expanded(
-                                                      child: Divider(
-                                                        color: Colors.grey,
-                                                        height: 1,
-                                                      ),
+                                                  ),
+                                                  Expanded(
+                                                    child: Divider(
+                                                      color: Colors.grey,
+                                                      height: 1,
                                                     ),
-                                                  ],
-                                                ),
-                                            ),
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                    top: 20, bottom: 20),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    InkWell(
-                                                      onTap: () {},
-                                                      child: Image.asset(
-                                                          "assets/images/splashLogo.png",
-                                                          height: 34),
-                                                    ),
-                                                  ],
-                                                ),
+                                                  ),
+                                                ],
                                               ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(bottom: 20),
+                                              child: CompanyAccessCard(
+                                                title: 'Company Access',
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            LoginCompanyScreen()),
+                                                  );
+                                                },
+                                                imgicon:
+                                                    "assets/icons/home.svg",
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ),
