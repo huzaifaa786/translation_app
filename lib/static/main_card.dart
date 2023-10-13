@@ -15,7 +15,7 @@ class MainStackCard extends StatelessWidget {
       fit: StackFit.loose,
       children: [
         Container(
-          margin: EdgeInsets.only(bottom: 30),
+          // margin: EdgeInsets.only(bottom: 30),
           width: double.infinity,
           height: MediaQuery.of(context).size.height * 0.25,
           decoration: BoxDecoration(
@@ -57,55 +57,55 @@ class MainStackCard extends StatelessWidget {
             ],
           ),
         ),
-        Positioned.fill(
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => FreeItem_screen(),
-                    ));
-              },
-              child: Container(
-                width: 280,
-                height: 59,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.0824137),
-                      blurRadius: 15,
-                      offset: Offset(0, 4),
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Center(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 85,
-                      ),
-                      Image.asset("assets/icons/free.png"),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Text(
-                          "Free Item",
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        )
+        // Positioned.fill(
+        //   child: Align(
+        //     alignment: Alignment.bottomCenter,
+        //     child: GestureDetector(
+        //       onTap: () {
+        //         Navigator.push(
+        //             context,
+        //             MaterialPageRoute(
+        //               builder: (context) => FreeItem_screen(),
+        //             ));
+        //       },
+        //       child: Container(
+        //         width: 280,
+        //         height: 59,
+        //         decoration: BoxDecoration(
+        //           color: Colors.white,
+        //           boxShadow: [
+        //             BoxShadow(
+        //               color: Colors.black.withOpacity(0.0824137),
+        //               blurRadius: 15,
+        //               offset: Offset(0, 4),
+        //             ),
+        //           ],
+        //           borderRadius: BorderRadius.circular(10),
+        //         ),
+        //         child: Center(
+        //           child: Row(
+        //             children: [
+        //               SizedBox(
+        //                 width: 85,
+        //               ),
+        //               Image.asset("assets/icons/free.png"),
+        //               Padding(
+        //                 padding: const EdgeInsets.only(left: 20),
+        //                 child: Text(
+        //                   "Free Item",
+        //                   style: TextStyle(
+        //                     fontSize: 15,
+        //                     color: Colors.black,
+        //                   ),
+        //                 ),
+        //               ),
+        //             ],
+        //           ),
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // )
       ],
     );
   }
