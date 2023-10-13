@@ -16,6 +16,9 @@ class VendorService {
   String? radius;
   String? lat;
   String? lng;
+  bool? isInperson;
+  bool? isAudioVideo;
+  bool? isdocument;
 
   VendorService(service) {
     id = service['id'];
@@ -30,6 +33,9 @@ class VendorService {
     lng = service['longitude'];
     urgent = jsonDecode(service['urgent']);
     unurgent = jsonDecode(service['unurgent']);
+    isAudioVideo = service['isAudioVideo'];
+    isInperson = service['isInperson'];
+    isdocument = service['isdocument'];
     schedual = schedulelist(jsonDecode(service['schedual']));
   }
 

@@ -299,55 +299,55 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   ],
                                                 ),
                                               ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Expanded(
-                                                    child: Divider(
-                                                      color: Colors.grey,
-                                                      height: 1,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 10),
-                                                    child: Text(
-                                                      'Company Access',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 18,
-                                                          color:
-                                                              Colors.black54),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Divider(
-                                                      color: Colors.grey,
-                                                      height: 1,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    EdgeInsets.only(bottom: 20),
-                                                child: CompanyAccessCard(
-                                                  title: 'Company Access',
-                                                  onPressed: () {
-                                                    Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              LoginCompanyScreen()),
-                                                    );
-                                                  },
-                                                  imgicon:
-                                                      "assets/icons/home.svg",
-                                                ),
-                                              ),
+                                              // Row(
+                                              //   mainAxisAlignment:
+                                              //       MainAxisAlignment.center,
+                                              //   children: [
+                                              //     Expanded(
+                                              //       child: Divider(
+                                              //         color: Colors.grey,
+                                              //         height: 1,
+                                              //       ),
+                                              //     ),
+                                              //     Padding(
+                                              //       padding:
+                                              //           EdgeInsets.symmetric(
+                                              //               horizontal: 10),
+                                              //       child: Text(
+                                              //         'Company Access',
+                                              //         style: TextStyle(
+                                              //             fontWeight:
+                                              //                 FontWeight.w500,
+                                              //             fontSize: 18,
+                                              //             color:
+                                              //                 Colors.black54),
+                                              //       ),
+                                              //     ),
+                                              //     Expanded(
+                                              //       child: Divider(
+                                              //         color: Colors.grey,
+                                              //         height: 1,
+                                              //       ),
+                                              //     ),
+                                              //   ],
+                                              // ),
+                                              // Padding(
+                                              //   padding:
+                                              //       EdgeInsets.only(bottom: 20),
+                                              //   child: CompanyAccessCard(
+                                              //     title: 'Company Access',
+                                              //     onPressed: () {
+                                              //       Navigator.push(
+                                              //         context,
+                                              //         MaterialPageRoute(
+                                              //             builder: (context) =>
+                                              //                 LoginCompanyScreen()),
+                                              //       );
+                                              //     },
+                                              //     imgicon:
+                                              //         "assets/icons/home.svg",
+                                              //   ),
+                                              // ),
                                             ],
                                           ),
                                         ),
@@ -496,59 +496,59 @@ class _LoginScreenState extends State<LoginScreen> {
                                             //     ],
                                             //   ),
                                             // ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 30.0),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Expanded(
-                                                    child: Divider(
-                                                      color: Colors.grey,
-                                                      height: 1,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 10),
-                                                    child: Text(
-                                                      'Company Access',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 18,
-                                                          color:
-                                                              Colors.black54),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Divider(
-                                                      color: Colors.grey,
-                                                      height: 1,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(bottom: 20),
-                                              child: CompanyAccessCard(
-                                                title: 'Company Access',
-                                                onPressed: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            LoginCompanyScreen()),
-                                                  );
-                                                },
-                                                imgicon:
-                                                    "assets/icons/home.svg",
-                                              ),
-                                            ),
+                                            // Padding(
+                                            //   padding: const EdgeInsets.only(
+                                            //       top: 30.0),
+                                            //   child: Row(
+                                            //     mainAxisAlignment:
+                                            //         MainAxisAlignment.center,
+                                            //     children: [
+                                            //       Expanded(
+                                            //         child: Divider(
+                                            //           color: Colors.grey,
+                                            //           height: 1,
+                                            //         ),
+                                            //       ),
+                                            //       Padding(
+                                            //         padding:
+                                            //             EdgeInsets.symmetric(
+                                            //                 horizontal: 10),
+                                            //         child: Text(
+                                            //           'Company Access',
+                                            //           style: TextStyle(
+                                            //               fontWeight:
+                                            //                   FontWeight.w500,
+                                            //               fontSize: 18,
+                                            //               color:
+                                            //                   Colors.black54),
+                                            //         ),
+                                            //       ),
+                                            //       Expanded(
+                                            //         child: Divider(
+                                            //           color: Colors.grey,
+                                            //           height: 1,
+                                            //         ),
+                                            //       ),
+                                            //     ],
+                                            //   ),
+                                            // ),
+                                            // Padding(
+                                            //   padding:
+                                            //       EdgeInsets.only(bottom: 20),
+                                            //   child: CompanyAccessCard(
+                                            //     title: 'Company Access',
+                                            //     onPressed: () {
+                                            //       Navigator.push(
+                                            //         context,
+                                            //         MaterialPageRoute(
+                                            //             builder: (context) =>
+                                            //                 LoginCompanyScreen()),
+                                            //       );
+                                            //     },
+                                            //     imgicon:
+                                            //         "assets/icons/home.svg",
+                                            //   ),
+                                            // ),
                                           ],
                                         ),
                                       ),

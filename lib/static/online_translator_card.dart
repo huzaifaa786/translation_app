@@ -11,7 +11,8 @@ class OnlineTranslatorCard extends StatelessWidget {
       required this.name,
       required this.image,
       this.vendor,
-      this.rating,this.price});
+      this.rating,
+      this.price});
   final name;
   final image;
   final vendor;
@@ -66,46 +67,52 @@ class OnlineTranslatorCard extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                     fontFamily: 'NunitoSans'),
               ),
-                 rating!=null ?
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: SvgPicture.asset('assets/images/star.svg',
-                          height: 11, width: 11)),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 4, left: 4),
-                    child: Text(rating == null ? '0.0' : rating.toStringAsFixed(1),
-                        style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'NunitoSans')),
-                  ),
-                ],
-              ):Text(''),
-              Padding(
-                padding: const EdgeInsets.only(right: 4, left: 4),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Rate per 30 mins:  ",
-                      style: TextStyle(
-                          fontSize: 9,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: 'NunitoSans'),
-                    ),
-                    Text(
-                      price +" AED",
-                      style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: 'NunitoSans'),
+              rating != null
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: SvgPicture.asset('assets/images/star.svg',
+                                height: 11, width: 11)),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4, left: 4),
+                          child: Text(
+                              rating == null
+                                  ? '0.0'
+                                  : rating.toStringAsFixed(1),
+                              style: TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: 'NunitoSans')),
+                        ),
+                      ],
                     )
-                  ],
-                ),
-              ),
+                  : Text(''),
+              price != null
+                  ? Padding(
+                      padding: const EdgeInsets.only(right: 4, left: 4),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Rate per 30 mins:  ",
+                            style: TextStyle(
+                                fontSize: 9,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: 'NunitoSans'),
+                          ),
+                          Text(
+                            price + " AED",
+                            style: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: 'NunitoSans'),
+                          )
+                        ],
+                      ),
+                    )
+                  : Container(),
             ],
           ),
         ),

@@ -81,15 +81,17 @@ class _OfflinePeople_screenState extends State<OfflinePeople_screen> {
                                     .toList())
                           ]),
                         );
-                        if (query!.price != '') {
-                          homeController.filterOfflineOrder(
-                              query!.rating, query!.price);
-                        } else if (query!.rating != '') {
-                          homeController.filterOfflineOrder(
-                              query!.rating, query!.price);
-                        } else {
-                          homeController.filterOfflineOrder(
-                              query!.rating, query!.price);
+                        if (query != null) {
+                          if (query!.price != '') {
+                            homeController.filterOfflineOrder(
+                                query!.rating, query!.price);
+                          } else if (query!.rating != '') {
+                            homeController.filterOfflineOrder(
+                                query!.rating, query!.price);
+                          } else {
+                            homeController.filterOfflineOrder(
+                                query!.rating, query!.price);
+                          }
                         }
                       },
                       child: Row(
@@ -117,14 +119,12 @@ class _OfflinePeople_screenState extends State<OfflinePeople_screen> {
                           itemBuilder: (context, index) {
                             return OfflineTranslattorCard(
                               name: controller.sschedule[index].name,
-                              image:
-                                  controller.sschedule[index].profilePic,
+                              image: controller.sschedule[index].profilePic,
                               lang: controller.sschedule[index].language,
                               vendor: controller.sschedule[index],
                               price: controller.sschedule[index].service!
                                   .onlineaudiovideoPrice,
-                              rating: controller.sschedule[index].rating ==
-                                      null
+                              rating: controller.sschedule[index].rating == null
                                   ? null
                                   : double.parse(
                                       controller.sschedule[index].rating!),

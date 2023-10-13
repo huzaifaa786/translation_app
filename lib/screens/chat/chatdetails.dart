@@ -79,7 +79,7 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
                 name: widget.name,
                 img: widget.screen == 'order'
                     ? widget.profilePic
-                    : 'https://translation.klickwash.net/' + widget.profilePic!,
+                    : 'https://translation.ezmoveportal.com/' + widget.profilePic!,
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 25, 20, 0),

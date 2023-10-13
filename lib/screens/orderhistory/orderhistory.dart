@@ -90,7 +90,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                   controller.orders[index].vendor!.profilePic,
                               price: controller.orders[index].price,
                               servicetype: controller.orders[index].servicetype,
-                              page: controller.orders[index].document != null? controller.orders[index].document!.pages:'',
+                              page: controller.orders[index].document != null
+                                  ? controller.orders[index].document!.pages
+                                  : '',
                               onmsgtap: () {
                                 Navigator.push(
                                     context,
@@ -99,8 +101,12 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                         id: controller.orders[index].vendor!.id,
                                         name: controller
                                             .orders[index].vendor!.username,
-                                        profilePic: controller
-                                            .orders[index].vendor!.profilePic,
+                                        profilePic: controller.orders[index]
+                                                    .vendor!.profilePic ==
+                                                ''
+                                            ? 'https://translation.ezmoveportal.com/'
+                                            : controller.orders[index].vendor!
+                                                .profilePic,
                                         screen: 'order',
                                       ),
                                     ));
@@ -117,7 +123,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                       ? sformattedTime
                                       : sformattedTime + '-' + eformattedTime,
                               date: controller.orders[index].date,
-
                             );
                           }),
                     ),

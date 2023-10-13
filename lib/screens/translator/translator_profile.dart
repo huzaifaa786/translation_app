@@ -32,9 +32,26 @@ class TraslatorProfile extends StatefulWidget {
 
 class _TraslatorProfileState extends State<TraslatorProfile> {
   vendor() async {
+    print('widget.detail!.service!.isAudioVideo');
+    print(widget.detail!.service!.isAudioVideo);
+    print('widget.detail!.service!.isInperson');
+    print(widget.detail!.service!.isInperson);
+    print('widget.detail!.service!.isdocument');
+    print(widget.detail!.service!.isdocument);
     translatorProfileController.vendors = widget.detail;
-    if (widget.detail!.online == 0)
+    if (widget.detail!.service!.isAudioVideo == true) {
+      if (widget.detail!.online == 0) {
+        translatorProfileController.serviceType = ServiceType.Schedule;
+      } else {
+        translatorProfileController.serviceType = ServiceType.Instant;
+      }
+    } else if (widget.detail!.service!.isInperson == true) {
       translatorProfileController.serviceType = ServiceType.Schedule;
+      translatorProfileController.scheduleType = ScheduleType.InPerson;
+      print(translatorProfileController.scheduleType);
+    } else if (widget.detail!.service!.isdocument == true) {
+      translatorProfileController.serviceType = ServiceType.Document;
+    }
     print(translatorProfileController.vendors);
     setState(() {});
   }
@@ -254,20 +271,22 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                       style: TextStyle(fontSize: 14),
                                     ),
                                   ),
-                            widget.detail!.online! == 1
-                                ? TralingRadioBtn(
-                                    text: 'Instant',
-                                    isSelected: controller.serviceType ==
-                                        ServiceType.Instant,
-                                    ontap: () {
-                                      setState(() {
-                                        controller.serviceType =
-                                            ServiceType.Instant;
-                                        controller.resetInstant();
-                                      });
-                                    },
-                                  )
-                                : Text(''),
+                            widget.detail!.service!.isAudioVideo! == true
+                                ? widget.detail!.online! == 1
+                                    ? TralingRadioBtn(
+                                        text: 'Instant',
+                                        isSelected: controller.serviceType ==
+                                            ServiceType.Instant,
+                                        ontap: () {
+                                          setState(() {
+                                            controller.serviceType =
+                                                ServiceType.Instant;
+                                            controller.resetInstant();
+                                          });
+                                        },
+                                      )
+                                    : Text('')
+                                : Container(),
                             controller.serviceType == ServiceType.Instant
                                 ? Column(
                                     children: [
@@ -473,40 +492,59 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                     ],
                                   )
                                 : Container(),
-                            TralingRadioBtn(
-                              text: 'Schedule',
-                              isSelected: controller.serviceType ==
-                                  ServiceType.Schedule,
-                              ontap: () {
-                                setState(() {
-                                  controller.serviceType = ServiceType.Schedule;
-                                  controller.resetInstant();
-                                });
-                              },
-                            ),
+                            widget.detail!.service!.isInperson! ||
+                                    widget.detail!.service!.isAudioVideo!
+                                ? TralingRadioBtn(
+                                    text: 'Schedule',
+                                    isSelected: controller.serviceType ==
+                                        ServiceType.Schedule,
+                                    ontap: () {
+                                      setState(() {
+                                        controller.serviceType =
+                                            ServiceType.Schedule;
+                                        if (widget
+                                                .detail!.service!.isInperson! &&
+                                            widget.detail!.service!
+                                                .isAudioVideo!) {
+                                          controller.resetInstant();
+                                        }
+                                      });
+                                    },
+                                  )
+                                : SizedBox(),
                             controller.serviceType == ServiceType.Schedule
                                 ? Column(
                                     children: [
-                                      RadioBtn(
-                                        text: 'Audio/Video meeting',
-                                        image: 'assets/images/output-onlinepngtools (11).png',
-                                        groupvalue: controller.scheduleType,
-                                        value: ScheduleType.AudioVideo,
-                                        onChanged: () {
-                                          controller.toggleplan(
-                                              ScheduleType.AudioVideo);
-                                        },
-                                      ),
-                                      RadioBtn(
-                                        text: 'In person meeting',
-                                        image: 'assets/images/output-onlinepngtools (10).png',
-                                        groupvalue: controller.scheduleType,
-                                        value: ScheduleType.InPerson,
-                                        onChanged: () {
-                                          controller.toggleplan(
-                                              ScheduleType.InPerson);
-                                        },
-                                      ),
+                                      widget.detail!.service!.isAudioVideo ==
+                                              true
+                                          ? RadioBtn(
+                                              text: 'Audio/Video meeting',
+                                              image:
+                                                  'assets/images/output-onlinepngtools (11).png',
+                                              groupvalue:
+                                                  controller.scheduleType,
+                                              value: ScheduleType.AudioVideo,
+                                              onChanged: () {
+                                                controller.toggleplan(
+                                                    ScheduleType.AudioVideo);
+                                              },
+                                            )
+                                          : Container(),
+                                      widget.detail!.service!.isInperson! ==
+                                              true
+                                          ? RadioBtn(
+                                              text: 'In person meeting',
+                                              image:
+                                                  'assets/images/output-onlinepngtools (10).png',
+                                              groupvalue:
+                                                  controller.scheduleType,
+                                              value: ScheduleType.InPerson,
+                                              onChanged: () {
+                                                controller.toggleplan(
+                                                    ScheduleType.InPerson);
+                                              },
+                                            )
+                                          : Container(),
                                       controller.scheduleType ==
                                               ScheduleType.InPerson
                                           ? IconsButton(
@@ -727,17 +765,20 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                     ],
                                   )
                                 : Container(),
-                            TralingRadioBtn(
-                              text: 'Document Type',
-                              isSelected: controller.serviceType ==
-                                  ServiceType.Document,
-                              ontap: () {
-                                setState(() {
-                                  controller.serviceType = ServiceType.Document;
-                                  controller.resetInstant();
-                                });
-                              },
-                            ),
+                            widget.detail!.service!.isdocument == true
+                                ? TralingRadioBtn(
+                                    text: 'Document Type',
+                                    isSelected: controller.serviceType ==
+                                        ServiceType.Document,
+                                    ontap: () {
+                                      setState(() {
+                                        controller.serviceType =
+                                            ServiceType.Document;
+                                        controller.resetInstant();
+                                      });
+                                    },
+                                  )
+                                : Container(),
                             controller.serviceType == ServiceType.Document
                                 ? Column(
                                     children: [

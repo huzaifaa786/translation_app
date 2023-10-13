@@ -103,9 +103,9 @@ class TranslatorProfileController extends GetxController {
   // get amount by slot type
   setAmountBySlot(
       int hour, int minutes, String time, Vendor vendor, int durattion) {
-    totalAmount =
-        ((hour * 2 + (minutes / 30)) * int.parse(vendor.service!.onlineaudiovideoPrice!))
-            .toInt();
+    totalAmount = ((hour * 2 + (minutes / 30)) *
+            int.parse(vendor.service!.onlineaudiovideoPrice!))
+        .toInt();
     instantTime = time;
 
     duration = durattion;
@@ -484,23 +484,28 @@ class TranslatorProfileController extends GetxController {
   int umaxpage = 0;
   urgentMaxCount(Vendor vendor) {
     urgents = [];
-    for (var van in vendor.service!.urgent!) {
-      urgents.add(Urgent(van));
+    print(vendor.service!.urgent);
+    if (vendor.service!.urgent!.isNotEmpty) {
+      for (var van in vendor.service!.urgent!) {
+        urgents.add(Urgent(van));
+      }
+      maxPage = urgents.map((van) => int.parse(van.maxpage!)).reduce(
+          (maxPage, currentMax) => maxPage > currentMax ? maxPage : currentMax);
+      update();
     }
-    maxPage = urgents.map((van) => int.parse(van.maxpage!)).reduce(
-        (maxPage, currentMax) => maxPage > currentMax ? maxPage : currentMax);
-    update();
   }
 
   unurgentMaxCount(Vendor vendor) {
     unurgents = [];
-    for (var van in vendor.service!.unurgent!) {
-      unurgents.add(Unurgent(van));
+    if (vendor.service!.unurgent!.isNotEmpty) {
+      for (var van in vendor.service!.unurgent!) {
+        unurgents.add(Unurgent(van));
+      }
+      umaxpage = unurgents.map((van) => int.parse(van.maxpage!)).reduce(
+          (umaxpage, currentMax) =>
+              umaxpage > currentMax ? umaxpage : currentMax);
+      update();
     }
-    umaxpage = unurgents.map((van) => int.parse(van.maxpage!)).reduce(
-        (umaxpage, currentMax) =>
-            umaxpage > currentMax ? umaxpage : currentMax);
-    update();
   }
 
   dayscalculate(Vendor vendor) {

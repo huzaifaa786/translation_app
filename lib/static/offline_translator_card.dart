@@ -72,50 +72,58 @@ class OfflineTranslattorCard extends StatelessWidget {
                               fontWeight: FontWeight.w700,
                               fontFamily: 'NunitoSans'),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 2, bottom: 2),
-                          child: Row(
-                            children: [
-                              Text(
-                                "Rate per 30 mins:  ",
-                                style: TextStyle(
-                                    fontSize: 9,
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: 'NunitoSans'),
-                              ),
-                              Text(
-                                price + " AED",
-                                style: TextStyle(
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: 'NunitoSans'),
+                        price != null
+                            ? Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 2, bottom: 2),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "Rate per 30 mins:  ",
+                                      style: TextStyle(
+                                          fontSize: 9,
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: 'NunitoSans'),
+                                    ),
+                                    Text(
+                                      price + " AED",
+                                      style: TextStyle(
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: 'NunitoSans'),
+                                    )
+                                  ],
+                                ),
                               )
-                            ],
-                          ),
-                        ),
-                        rating!=null ?
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 4),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              FittedBox(
-                                  fit: BoxFit.scaleDown,
-                                  child: SvgPicture.asset(
-                                      'assets/images/star.svg',
-                                      height: 11,
-                                      width: 11)),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 4, left: 2),
-                                child: Text(rating == null ? '0.0' : rating.toStringAsFixed(1),
-                                    style: TextStyle(
-                                        fontSize: 11,
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: 'NunitoSans')),
-                              ),
-                            ],
-                          ),
-                        ):Text(''),
+                            : Container(),
+                        rating != null
+                            ? Padding(
+                                padding: const EdgeInsets.only(bottom: 4),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        child: SvgPicture.asset(
+                                            'assets/images/star.svg',
+                                            height: 11,
+                                            width: 11)),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 4, left: 2),
+                                      child: Text(
+                                          rating == null
+                                              ? '0.0'
+                                              : rating.toStringAsFixed(1),
+                                          style: TextStyle(
+                                              fontSize: 11,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: 'NunitoSans')),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : Text(''),
                         Row(
                           children: [
                             for (var i = 0; i < 3; i++)
