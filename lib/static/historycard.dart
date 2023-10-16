@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/utils.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:translation/screens/translator/translator_profile_controller.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/static/bagee.dart';
@@ -40,6 +42,9 @@ class HistoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    GetStorage box = GetStorage();
+    print('servicetype');
+    print(servicetype);
     return InkWell(
       onTap: ontap,
       child: Padding(
@@ -74,12 +79,17 @@ class HistoryCard extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'Order id # ' + id.toString(),
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                                fontFamily: 'Mazzard'),
+                          Directionality(
+                            textDirection: box.read('locale') != 'ar'
+                                ? TextDirection.ltr
+                                : TextDirection.rtl,
+                            child: Text(
+                              "Order id#".tr + ' ' + id.toString(),
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: 'Mazzard'),
+                            ),
                           ),
                           SizedBox(
                             height: 4,
@@ -95,7 +105,7 @@ class HistoryCard extends StatelessWidget {
                             height: 4,
                           ),
                           Container(
-                            width: MediaQuery.of(context).size.width*0.4,
+                            width: MediaQuery.of(context).size.width * 0.4,
                             child: Text(
                               type,
                               maxLines: 2,
@@ -108,18 +118,23 @@ class HistoryCard extends StatelessWidget {
                           SizedBox(
                             height: 4,
                           ),
-                          servicetype != 'documnet' ?
-                          Container(
-                            width: MediaQuery.of(context).size.width*0.4,
-                            child: Text(
-                              'Amount of pages: ' + page + ' pages',
-                              maxLines: 2,
-                              style: TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w600,
-                                  fontFamily: 'Mazzard'),
-                            ),
-                          ):Container(),
+                          servicetype == 'document'
+                              ? Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.4,
+                                  child: Text(
+                                    'Amount of pages:'.tr +
+                                        ' ' +
+                                        page +
+                                        ' pages'.tr,
+                                    maxLines: 2,
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w600,
+                                        fontFamily: 'Mazzard'),
+                                  ),
+                                )
+                              : Container(),
                           SizedBox(
                             height: 4,
                           ),
@@ -154,7 +169,7 @@ class HistoryCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      'AED ' + price.toString(),
+                      'AED' + ' ' + price.toString(),
                       style: TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.w600,
@@ -165,10 +180,10 @@ class HistoryCard extends StatelessWidget {
                     ),
                     Badgee(
                       title: status == "3"
-                          ? 'Completed'
+                          ? 'Completed'.tr
                           : status == "2"
-                              ? "Rejected"
-                              : "In progress",
+                              ? "Rejected".tr
+                              : "In progress".tr,
                       color: status == "3"
                           ? Colors.green
                           : status == "2"
@@ -181,7 +196,8 @@ class HistoryCard extends StatelessWidget {
                         InkWell(
                           onTap: onmsgtap,
                           child: Padding(
-                            padding: const EdgeInsets.only(top:6 ,bottom: 6,left: 12,right: 12),
+                            padding: const EdgeInsets.only(
+                                top: 6, bottom: 6, left: 12, right: 12),
                             child: SvgPicture.asset(
                               'assets/images/msg.svg',
                               height: 17,

@@ -55,7 +55,7 @@ class SearchTopBar extends StatelessWidget {
                     borderSide: BorderSide(width: 1, color: Colors.grey[300]!),
                     borderRadius: BorderRadius.all(Radius.circular(6)),
                   ),
-                  hintText: 'Search People',
+                  hintText: 'Search People'.tr,
                   contentPadding: EdgeInsets.only(left: 12),
                   fillColor: Colors.white,
                   filled: true,

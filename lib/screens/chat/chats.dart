@@ -35,7 +35,7 @@ class _Chats_screenState extends State<Chats_screen> {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(38, 68, 0, 0),
             child: Text(
-              "Chats",
+              "Chats".tr,
               style: TextStyle(
                 fontFamily: 'Mazzard',
                 fontWeight: FontWeight.w600,
@@ -68,7 +68,7 @@ class _Chats_screenState extends State<Chats_screen> {
                   onChanged: chatController.searchContact,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.search),
-                    hintText: "Search ",
+                    hintText: "Search".tr,
                     border: InputBorder.none,
                     contentPadding:
                         EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -90,7 +90,7 @@ class _Chats_screenState extends State<Chats_screen> {
           child: Row(
             children: [
               Text(
-                "Messages",
+                "Messages".tr,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ],
@@ -155,7 +155,7 @@ class _Chats_screenState extends State<Chats_screen> {
                       Padding(
                         padding: const EdgeInsets.only(top: 20.0),
                         child: Text(
-                          "No Chat Found",
+                          "No Chat Found".tr,
                           style: TextStyle(
                               fontSize: 22, fontWeight: FontWeight.w500),
                         ),

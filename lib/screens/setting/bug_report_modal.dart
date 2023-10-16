@@ -62,7 +62,7 @@ class _BugReportModalState extends State<BugReportModal> {
                   Padding(
                     padding: const EdgeInsets.only(top: 16),
                     child: Text(
-                      'Please attach screenshot of the issue',
+                      'Please Attach screenshot of the issue'.tr,
                       style: TextStyle(fontSize: 11),
                       textAlign: TextAlign.center,
                     ),
@@ -87,7 +87,7 @@ class _BugReportModalState extends State<BugReportModal> {
                         onPressed: () {
                           settingController.addbug();
                         },
-                        child: Text('Send'),
+                        child: Text('Send'.tr),
                         style: ButtonStyle(
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(

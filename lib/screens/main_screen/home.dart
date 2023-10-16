@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:translation/models/order.dart';
 import 'package:translation/screens/chat/chatcontroller.dart';
@@ -52,22 +53,25 @@ class _Home_screenState extends State<Home_screen> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ChatController>(
-      builder: (controller) => PersistentTabView(
-        context,
-        controller: _controller,
-        screens: _buildScreens(),
-        items: _navBarItem(),
-        navBarStyle: NavBarStyle.style6,
-        decoration: NavBarDecoration(
-          boxShadow: [
-            BoxShadow(
-                color: Colors.grey,
-                spreadRadius: 2,
-                blurRadius: 5,
-                offset: Offset(0, 3))
-          ],
-          borderRadius: BorderRadius.circular(1.0),
-          colorBehindNavBar: Colors.white,
+      builder: (controller) => Directionality(
+        textDirection: TextDirection.ltr,
+        child: PersistentTabView(
+          context,
+          controller: _controller,
+          screens: _buildScreens(),
+          items: _navBarItem(),
+          navBarStyle: NavBarStyle.style6,
+          decoration: NavBarDecoration(
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey,
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 3))
+            ],
+            borderRadius: BorderRadius.circular(1.0),
+            colorBehindNavBar: Colors.white,
+          ),
         ),
       ),
     );
@@ -196,6 +200,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    GetStorage box = GetStorage();
+
     return GetBuilder<HomeController>(
         builder: (controller) => Scaffold(
               body: SafeArea(
@@ -219,7 +225,7 @@ class _HomeState extends State<Home> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Choose languages',
+                                    'Choose languages'.tr,
                                     style: TextStyle(
                                         fontSize: 23,
                                         fontWeight: FontWeight.bold,
@@ -227,46 +233,77 @@ class _HomeState extends State<Home> {
                                   ),
                                 ],
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 16),
-                                child: Text(
-                                  'From:',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: kblack),
-                                ),
+                              Row(
+                                mainAxisAlignment: box.read('locale') != 'ar'
+                                    ? MainAxisAlignment.start
+                                    : MainAxisAlignment.end,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 16),
+                                    child: Directionality(
+                                      textDirection: box.read('locale') != 'ar'
+                                          ? TextDirection.ltr
+                                          : TextDirection.rtl,
+                                      child: Text(
+                                        'From:'.tr,
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            color: kblack),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              DropdownField(
-                                  items: Languages(),
-                                  text: 'Select Language',
-                                  selectedvalue:
-                                      homeController.fromSelectedLanguage,
-                                  icon: ImageIcon(AssetImage(
-                                      'assets/images/drop_arrow.png')),
-                                  onChange: switchfromlang),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 12),
-                                child: Text(
-                                  'To:',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: kblack),
-                                ),
+                              Directionality(
+                                textDirection:  TextDirection.ltr,
+                                child: DropdownField(
+                                    items: Languages(),
+                                    text: 'Select Language'.tr,
+                                    selectedvalue:
+                                        homeController.fromSelectedLanguage,
+                                    icon: ImageIcon(AssetImage(
+                                        'assets/images/drop_arrow.png')),
+                                    onChange: switchfromlang),
                               ),
-                              DropdownField(
-                                  items: Languages(),
-                                  text: 'Select Language',
-                                  selectedvalue:
-                                      homeController.toSelectedLanguage,
-                                  icon: ImageIcon(AssetImage(
-                                      'assets/images/drop_arrow.png')),
-                                  onChange: switchtoLang),
+                              Row(
+                                mainAxisAlignment: box.read('locale') != 'ar'
+                                    ? MainAxisAlignment.start
+                                    : MainAxisAlignment.end,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 12),
+                                    child: Directionality(
+                                      textDirection: box.read('locale') != 'ar'
+                                          ? TextDirection.ltr
+                                          : TextDirection.rtl,
+                                      child: Text(
+                                        'To:'.tr,
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            color: kblack),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Directionality(
+                                textDirection:
+                                          TextDirection.ltr,
+                                child: DropdownField(
+                                    items: Languages(),
+                                    text: 'Select Language'.tr,
+                                    selectedvalue:
+                                        homeController.toSelectedLanguage,
+                                    icon: ImageIcon(AssetImage(
+                                        'assets/images/drop_arrow.png')),
+                                    onChange: switchtoLang),
+                              ),
                               Padding(
                                 padding: EdgeInsets.only(top: 35, bottom: 20),
                                 child: LargeButton(
-                                  title: 'Translate',
+                                  title: 'Translate'.tr,
                                   sreenRatio: 0.9,
                                   onPressed: () {
                                     homeController.fetchVendors();

@@ -66,135 +66,138 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SafeArea(
-      child: GetBuilder<ChatController>(
-        builder: (controller) => Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.only(top: 12),
-          child: Column(
-            children: [
-              ChatTopBar(
-                name: widget.name,
-                img: widget.screen == 'order'
-                    ? widget.profilePic
-                    : 'https://translation.ezmoveportal.com/' + widget.profilePic!,
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 25, 20, 0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Divider(
-                        color: Colors.grey,
-                        height: 1,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: Text(
-                        'Today',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Scaffold(
+          body: SafeArea(
+        child: GetBuilder<ChatController>(
+          builder: (controller) => Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.only(top: 12),
+            child: Column(
+              children: [
+                ChatTopBar(
+                  name: widget.name,
+                  img: widget.screen == 'order'
+                      ? widget.profilePic
+                      : 'https://translation.ezmoveportal.com/' + widget.profilePic!,
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 25, 20, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Divider(
                           color: Colors.grey,
+                          height: 1,
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: Divider(
-                        color: Colors.grey,
-                        height: 1,
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: Text(
+                          'Today',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Divider(
+                          color: Colors.grey,
+                          height: 1,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                    child: ListView.builder(
+                        reverse: true, // Set reverse to true
+                        itemCount: controller.massages.length,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) {
+                          bool fileExist = false;
+                          checkFileExistance(index)
+                              .then((value) => fileExist = value);
+                          print(fileExist);
+                          return ReplyMessageCard(
+                            msg: controller
+                                .massages[controller.massages.length - 1 - index]
+                                .body
+                                .toString(), // Reverse the index
+                            Time: getTime(controller
+                                .massages[controller.massages.length - 1 - index]
+                                .dateTime), // Reverse the index
+                            sender: controller
+                                        .massages[controller.massages.length -
+                                            1 -
+                                            index]
+                                        .to_id ==
+                                    widget.id
+                                ? false
+                                : true,
+                            fileName: controller
+                                .massages[controller.massages.length - 1 - index]
+                                .file_name,
+                            fileType: controller
+                                .massages[controller.massages.length - 1 - index]
+                                .file_type,
+                            fileTitle: controller
+                                .massages[controller.massages.length - 1 - index]
+                                .file_title,
+                            fileExist: fileExist,
+                          );
+                        })),
+                Stack(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      // height: 58,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: Colors.black),
+                        color: Color.fromARGB(255, 255, 255, 255),
+                      ),
+                      child: TextField(
+                        onSubmitted: (value) {
+                          if (value.trim().isNotEmpty) {
+                            // Check if the value is not empty or only contains whitespace
+                            chatController.sendMassage();
+                          }
+                          setState(() {});
+                        },
+                        controller: chatController.massagecontroller,
+                        decoration: InputDecoration(
+                          suffixIcon: InkWell(
+                              onTap: () {
+                                controller.picksinglefile();
+                              },
+                              child:
+                                  Icon(Icons.attach_file, color: Colors.black)),
+                          hintText: 'You message'.tr,
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.only(left: 8, top: 18),
+                        ),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14,
+                          color: Color.fromARGB(255, 51, 50, 50),
+                        ),
                       ),
                     ),
                   ],
                 ),
-              ),
-              Expanded(
-                  child: ListView.builder(
-                      reverse: true, // Set reverse to true
-                      itemCount: controller.massages.length,
-                      scrollDirection: Axis.vertical,
-                      itemBuilder: (context, index) {
-                        bool fileExist = false;
-                        checkFileExistance(index)
-                            .then((value) => fileExist = value);
-                        print(fileExist);
-                        return ReplyMessageCard(
-                          msg: controller
-                              .massages[controller.massages.length - 1 - index]
-                              .body
-                              .toString(), // Reverse the index
-                          Time: getTime(controller
-                              .massages[controller.massages.length - 1 - index]
-                              .dateTime), // Reverse the index
-                          sender: controller
-                                      .massages[controller.massages.length -
-                                          1 -
-                                          index]
-                                      .to_id ==
-                                  widget.id
-                              ? false
-                              : true,
-                          fileName: controller
-                              .massages[controller.massages.length - 1 - index]
-                              .file_name,
-                          fileType: controller
-                              .massages[controller.massages.length - 1 - index]
-                              .file_type,
-                          fileTitle: controller
-                              .massages[controller.massages.length - 1 - index]
-                              .file_title,
-                          fileExist: fileExist,
-                        );
-                      })),
-              Stack(
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    // height: 58,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: Colors.black),
-                      color: Color.fromARGB(255, 255, 255, 255),
-                    ),
-                    child: TextField(
-                      onSubmitted: (value) {
-                        if (value.trim().isNotEmpty) {
-                          // Check if the value is not empty or only contains whitespace
-                          chatController.sendMassage();
-                        }
-                        setState(() {});
-                      },
-                      controller: chatController.massagecontroller,
-                      decoration: InputDecoration(
-                        suffixIcon: InkWell(
-                            onTap: () {
-                              controller.picksinglefile();
-                            },
-                            child:
-                                Icon(Icons.attach_file, color: Colors.black)),
-                        hintText: 'You message',
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.only(left: 8, top: 18),
-                      ),
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
-                        color: Color.fromARGB(255, 51, 50, 50),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 30,
-              ),
-            ],
+                SizedBox(
+                  height: 30,
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-    ));
+      )),
+    );
   }
 }

@@ -31,7 +31,7 @@ class _Favorites_screenState extends State<Favorites_screen> {
         child: Column(
           children: [
             TitleTopbar(
-              text: 'Favorites',
+              text: 'Favorites'.tr,
               ontap: () {
                 Get.back();
               },
@@ -71,7 +71,7 @@ class _Favorites_screenState extends State<Favorites_screen> {
                                 SvgPicture.asset("assets/images/smiley.svg"),
                                 SizedBox(height: 20),
                                 Text(
-                                  'No Favorites Found',
+                                  'No Favorites Found'.tr,
                                   style: TextStyle(
                                       fontSize: 22,
                                       fontWeight: FontWeight.w600),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/utils.dart';
 import 'package:translation/static/bagee.dart';
 import 'package:translation/values/colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -91,10 +92,10 @@ class NotificationTile extends StatelessWidget {
               status != ''?
               Badgee(
                       title: status == "3"
-                          ? 'Completed'
+                          ? 'Completed'.tr
                           : status == "2"
-                              ? "Rejected"
-                              : "In progress",
+                              ? "Rejected".tr
+                              : "In progress".tr,
                       color: status == "3"
                           ? Colors.green
                           : status == "2"

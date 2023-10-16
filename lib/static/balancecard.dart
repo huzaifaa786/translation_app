@@ -50,7 +50,7 @@ class BalanceCard extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(8, 8, 8, 5),
                           child: Text(
-                            "Your Balance",
+                            "Your Balance".tr,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 15,
@@ -119,12 +119,15 @@ class BalanceCard extends StatelessWidget {
                                   Get.to(() => Topup_screen());
                                   // );
                                 },
-                                child: Text(
-                                  'Top Up',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                      fontFamily: 'Lato'),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Text(
+                                    'Top Up'.tr,
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        fontFamily: 'Lato'),
+                                  ),
                                 ),
                                 style: ElevatedButton.styleFrom(
                                   foregroundColor: greenish, minimumSize: Size(78, 26), backgroundColor: Colors.white,

@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/utils.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/static/topBar.dart';
 import 'package:translation/screens/freeitem.dart/freeitem.dart';
 
 class MainStackCard extends StatelessWidget {
-  const MainStackCard(
-      {super.key,this.onProfileTap, this.name});
+  const MainStackCard({super.key, this.onProfileTap, this.name});
   final onProfileTap;
   final name;
 
   @override
   Widget build(BuildContext context) {
+    GetStorage box = GetStorage();
     return Stack(
       fit: StackFit.loose,
       children: [
@@ -42,13 +44,18 @@ class MainStackCard extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.85,
-                      child: Text(
-                        'Hello, ' + name,
-                        maxLines: 2,
-                        style: TextStyle(
-                            fontSize: 23,
-                            fontWeight: FontWeight.w600,
-                            color: white),
+                      child: Directionality(
+                        textDirection: box.read('locale') != 'ar'
+                            ? TextDirection.ltr
+                            : TextDirection.rtl,
+                        child: Text(
+                          'Hello'.tr + ', ' + name,
+                          maxLines: 2,
+                          style: TextStyle(
+                              fontSize: 23,
+                              fontWeight: FontWeight.w600,
+                              color: white),
+                        ),
                       ),
                     ),
                   ],

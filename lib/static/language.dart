@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:translation/values/colors.dart';
 
 class LanguageCard extends StatelessWidget {
@@ -32,10 +33,12 @@ class LanguageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  GetStorage box = GetStorage();
+
     return GestureDetector(
       onTap: onPressed,
       child: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 30,top: 15),
+        padding: const EdgeInsets.only(left: 20, right: 30, top: 15),
         child: Column(
           children: [
             Row(
@@ -61,7 +64,10 @@ class LanguageCard extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 25),
                       child: Text(
                         title,
-                        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17,fontFamily: 'Lato'),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 17,
+                            fontFamily: 'Lato'),
                       ),
                     ),
                   ],
@@ -69,9 +75,12 @@ class LanguageCard extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      "AR",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w600, fontSize: 17,fontFamily: 'Lato'),
+                      // "AR",
+                      box.read('locale') != 'ar' ? 'EN' : 'AR',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 17,
+                          fontFamily: 'Lato'),
                     )
                   ],
                 ),

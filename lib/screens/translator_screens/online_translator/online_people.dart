@@ -26,114 +26,120 @@ class _OnlinePeople_screenState extends State<OnlinePeople_screen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: GetBuilder<HomeController>(
-          builder: (controller) => Column(
-            children: [
-              SearchTopBar(
-                onchange: homeController.searchOnlineOrders,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 12, right: 12, top: 30, bottom: 12),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Online translators / interpreters",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                    ),
-                    GestureDetector(
-                      onTap: () async {
-                        query = await showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(40),
-                            ),
-                          ),
-                          builder: (context) => Wrap(children: [
-                            FilterModal(
-                                rating: rating
-                                    .map((item) => DropdownMenuItem<String>(
-                                          value: item,
-                                          child: Text(
-                                            item,
-                                            style: const TextStyle(
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                        ))
-                                    .toList(),
-                                price: price
-                                    .map((item) => DropdownMenuItem<String>(
-                                          value: item,
-                                          child: Text(
-                                            item,
-                                            style: const TextStyle(
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                        ))
-                                    .toList())
-                          ]),
-                        );
-                        if (query!.price != '') {
-                          homeController.filterOnlineOrder(
-                              query!.rating, query!.price);
-                        } else if (query!.rating != '') {
-                          homeController.filterOnlineOrder(
-                              query!.rating, query!.price);
-                        } else {
-                          homeController.filterOnlineOrder(
-                              query!.rating, query!.price);
-                        }
-                      },
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 4),
-                            child: SvgPicture.asset(
-                                'assets/images/filterIcon.svg'),
-                          ),
-                          Text(
-                            "Filter",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w600),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Scaffold(
+        body: SafeArea(
+          child: GetBuilder<HomeController>(
+            builder: (controller) => Column(
+              children: [
+                SearchTopBar(
+                  onchange: homeController.searchOnlineOrders,
                 ),
-              ),
-              homeController.sonlineVendor.length != 0
-                  ? Expanded(
-                      child: ListView.builder(
-                          itemCount: homeController.sonlineVendor.length,
-                          itemBuilder: (context, index) =>
-                              OfflineTranslattorCard(
-                                name: homeController.sonlineVendor[index].name,
-                                image: homeController
-                                    .sonlineVendor[index].profilePic,
-                                lang: homeController
-                                    .sonlineVendor[index].language,
-                                vendor: homeController.sonlineVendor[index],
-                                price: homeController.sonlineVendor[index]
-                                    .service!.onlineaudiovideoPrice,
-                                rating: homeController
-                                            .sonlineVendor[index].rating ==
-                                        null
-                                    ? null
-                                    : double.parse(homeController
-                                        .sonlineVendor[index].rating!),
-                              )),
-                    )
-                  : Container(),
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 12, right: 12, top: 30, bottom: 12),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Online Translators/interpreters".tr,
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w600),
+                      ),
+                      GestureDetector(
+                        onTap: () async {
+                          query = await showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(40),
+                              ),
+                            ),
+                            builder: (context) => Wrap(children: [
+                              FilterModal(
+                                  rating: rating
+                                      .map((item) => DropdownMenuItem<String>(
+                                            value: item,
+                                            child: Text(
+                                              item,
+                                              style: const TextStyle(
+                                                fontSize: 14,
+                                              ),
+                                            ),
+                                          ))
+                                      .toList(),
+                                  price: price
+                                      .map((item) => DropdownMenuItem<String>(
+                                            value: item,
+                                            child: Text(
+                                              item,
+                                              style: const TextStyle(
+                                                fontSize: 14,
+                                              ),
+                                            ),
+                                          ))
+                                      .toList())
+                            ]),
+                          );
+                          if (query != null) {
+                            if (query!.price != '') {
+                              homeController.filterOnlineOrder(
+                                  query!.rating, query!.price);
+                            } else if (query!.rating != '') {
+                              homeController.filterOnlineOrder(
+                                  query!.rating, query!.price);
+                            } else {
+                              homeController.filterOnlineOrder(
+                                  query!.rating, query!.price);
+                            }
+                          }
+                        },
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 4),
+                              child: SvgPicture.asset(
+                                  'assets/images/filterIcon.svg'),
+                            ),
+                            Text(
+                              "Filter".tr,
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                homeController.sonlineVendor.length != 0
+                    ? Expanded(
+                        child: ListView.builder(
+                            itemCount: homeController.sonlineVendor.length,
+                            itemBuilder: (context, index) =>
+                                OfflineTranslattorCard(
+                                  name:
+                                      homeController.sonlineVendor[index].name,
+                                  image: homeController
+                                      .sonlineVendor[index].profilePic,
+                                  lang: homeController
+                                      .sonlineVendor[index].language,
+                                  vendor: homeController.sonlineVendor[index],
+                                  price: homeController.sonlineVendor[index]
+                                      .service!.onlineaudiovideoPrice,
+                                  rating: homeController
+                                              .sonlineVendor[index].rating ==
+                                          null
+                                      ? null
+                                      : double.parse(homeController
+                                          .sonlineVendor[index].rating!),
+                                )),
+                      )
+                    : Container(),
+              ],
+            ),
           ),
         ),
       ),
@@ -143,10 +149,10 @@ class _OnlinePeople_screenState extends State<OnlinePeople_screen> {
 
 final List<String> price = [
   'Highest price to lowest price',
-  'lowest price to Highest price',
+  'lowest to Highest price',
 ];
 
 final List<String> rating = [
   'Highest to lowest rating',
-  'lowest to Highest rating',
+  'lowest to highest rating',
 ];

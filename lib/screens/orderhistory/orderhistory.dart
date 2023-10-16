@@ -36,7 +36,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
         builder: (controller) => Column(
           children: [
             TitleTopbarr(
-              text: 'History',
+              text: 'history'.tr,
             ),
             SizedBox(
               height: 23,
@@ -71,16 +71,16 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                   'DocumentType.NotUrgent') {
                                 service = 'Non urgent Documents translation';
                               } else {
-                                service = 'Urgent documents translation';
+                                service = 'Urgent documents translation'.tr;
                               }
                               print(controller
                                   .orders[index].document!.documenttype);
                             } else {
                               if (controller.orders[index].scheduletype ==
                                   'audio/video') {
-                                service = 'Audio/Video meeting';
+                                service = 'Audio/Video meeting'.tr;
                               } else {
-                                service = 'In person meeting';
+                                service = 'In person meeting'.tr;
                               }
                             }
                             return HistoryCard(

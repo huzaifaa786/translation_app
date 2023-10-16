@@ -19,7 +19,7 @@ import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/screens/splash_screen/splash_main.dart';
 import 'package:translation/screens/translator_screens/notranslator.dart';
 import 'package:translation/services/auth_services/mobileotp_services.dart';
-import 'package:translation/values/controllers.dart';
+import 'package:translation/translation.dart';
 import 'package:translation/values/styles.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -48,7 +48,6 @@ void main() async {
   Get.put(CompanyController());
   await GetStorage.init();
 
-  
   Stripe.publishableKey =
       'pk_test_51MlTmPAN8zi2vyFswyWqxxJKbe8NnGRtoOo55Z2P65V8EykUYWk034zKSkXkh2THsQZ6OYZzdoQOUxXmSmPiPz9G00dQnMo69A';
   Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
@@ -67,15 +66,30 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  GetStorage box = GetStorage();
+  String? localeStr;
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      localeStr = await box.read('locale');
+      print(localeStr);
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      translations: LocaleString(),
+      locale:
+          box.read('locale') != 'ar' ? Locale('en', 'US') : Locale('ar', 'AE'),
+      fallbackLocale:
+          box.read('locale') != 'ar' ? Locale('en', 'US') : Locale('ar', 'AE'),
       debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
       theme: Styles.lightTheme,
       builder: EasyLoading.init(),
       title: "translation",
-      initialRoute: 'splash', 
+      initialRoute: 'splash',
       routes: {
         // 'map': (_) => DeliveryMap(),
         'splash': (_) => SplashScreen(),

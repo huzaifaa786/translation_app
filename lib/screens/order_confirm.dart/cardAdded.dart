@@ -39,7 +39,7 @@ class _CardAdded_ScreenState extends State<CardAdded_Screen> {
           alignment: Alignment.center,
           decoration: BoxDecoration(),
           child: Text(
-            'You have successfully placed your order.',
+            'You have successfully placed your order.'.tr,
             style: TextStyle(
               fontFamily: 'Mazzard',
               fontWeight: FontWeight.w500,
@@ -57,7 +57,7 @@ class _CardAdded_ScreenState extends State<CardAdded_Screen> {
           padding: const EdgeInsets.only(top: 50),
           child: Center(
               child: LargeButton(
-            title: 'Go back',
+            title: 'Go Back'.tr,
             sreenRatio: 0.8,
             onPressed: () {
               setState(() {});

@@ -40,7 +40,7 @@ class _Notification_screenState extends State<Notification_screen> {
         builder: (controller) => Column(
           children: [
             TitleTopbar(
-              text: 'Notifications',
+              text: 'Notifications'.tr,
               ontap: () {
                 Navigator.pop(context);
               },
@@ -111,7 +111,7 @@ class _Notification_screenState extends State<Notification_screen> {
                                 SvgPicture.asset("assets/images/smiley.svg"),
                                 SizedBox(height: 20),
                                 Text(
-                                  'No Notification Found',
+                                  'No Notification Found'.tr,
                                   style: TextStyle(
                                       fontSize: 22,
                                       fontWeight: FontWeight.w600),

@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:translation/screens/app_translate/translate.dart';
 import 'package:translation/screens/company_login/company_login_screen.dart';
 import 'package:translation/screens/auth/login_screen.dart';
 import 'package:translation/screens/main_screen/homecontroller.dart';
@@ -41,8 +41,7 @@ class _Setting_screenState extends State<Setting_screen> {
                 builder: (controller) => SingleChildScrollView(
                   child: Column(children: [
                     TitleTopbarr(
-                      text: 'Settings',
-                    
+                      text: 'Settings'.tr,
                     ),
                     BalanceCard(
                       balance: settingController.balance.toString(),
@@ -51,7 +50,7 @@ class _Setting_screenState extends State<Setting_screen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 16.0),
                       child: SettingCard(
-                        title: 'Profile',
+                        title: 'Profile'.tr,
                         onPressed: () {
                           profileController.clearField();
                           Get.to(() => Profile_screen());
@@ -60,19 +59,21 @@ class _Setting_screenState extends State<Setting_screen> {
                       ),
                     ),
                     LanguageCard(
-                      title: 'Language',
-                      onPressed: () {},
+                      title: 'language'.tr,
+                      onPressed: () {
+                        Get.to(() => TranslateScreen());
+                      },
                       imgicon: "assets/icons/msgss.svg",
                     ),
                     SettingCard(
-                      title: 'Report bug/issues',
+                      title: 'Report bug/issues'.tr,
                       onPressed: () {
                         settingController.ClearbugVariables();
                         onBugTAp(context);
                       },
                       imgicon: "assets/icons/warning.svg",
                     ),
-                   
+
                     // SettingCard(
                     //   title: 'Company Access',
                     //   onPressed: () {
@@ -99,7 +100,7 @@ class _Setting_screenState extends State<Setting_screen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "Log Out",
+                                "Log Out".tr,
                                 style: TextStyle(
                                     color: Colors.red,
                                     fontWeight: FontWeight.w600,
@@ -151,21 +152,24 @@ class _Setting_screenState extends State<Setting_screen> {
         padding: const EdgeInsets.only(bottom: 8),
         child: SvgPicture.asset('assets/images/logout.svg'),
       ),
-      title: "Are you sure you want to logout?",
+      title: "Are you sure you want to logout?".tr,
       buttons: [
         DialogButton(
           height: 55,
           radius: BorderRadius.circular(13),
           child: Text(
-            "Yes",
+            "Yes".tr,
             style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w600),
           ),
-          onPressed: () {
+          onPressed: () async {
             GetStorage box = GetStorage();
+            Get.updateLocale(const Locale('en', 'US'));
+            await box.write('locale', 'en');
+            box.read('locale');
             box.remove('api_token');
             Get.offAll(() => LoginScreen());
           },
@@ -178,7 +182,7 @@ class _Setting_screenState extends State<Setting_screen> {
             color: Colors.black54,
           ),
           child: Text(
-            "No",
+            "No".tr,
             style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,
