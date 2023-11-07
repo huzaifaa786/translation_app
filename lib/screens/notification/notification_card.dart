@@ -68,7 +68,7 @@ class NotificationModal extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 RatingBar.builder(
-                  initialRating: 1,
+                  initialRating: 5,
                   minRating: 1,
                   glow: false,
                   direction: Axis.horizontal,

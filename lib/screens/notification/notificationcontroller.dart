@@ -10,7 +10,7 @@ class NotificationController extends GetxController {
   static NotificationController instance = Get.find();
 
   List<Notificationn> notifications = [];
-  double? rating = 1.0;
+  double? rating = 5.0;
 
 /////////////////////////////////// Get Notifications /////////////////////////////////////////////////////////
 
@@ -65,7 +65,8 @@ class NotificationController extends GetxController {
           colorText: Colors.white);
       LoadingHelper.dismiss();
     } else {
-      Get.snackbar("Invalid Data.", 'You only gave a rating one time for one order.',
+      Get.snackbar(
+          "Invalid Data.", 'You only gave a rating one time for one order.',
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.red,
           colorText: Colors.white);
