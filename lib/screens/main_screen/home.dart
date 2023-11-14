@@ -256,15 +256,51 @@ class _HomeState extends State<Home> {
                                 ],
                               ),
                               Directionality(
-                                textDirection:  TextDirection.ltr,
+                                textDirection: TextDirection.ltr,
                                 child: DropdownField(
-                                    items: Languages(),
-                                    text: 'Select Language'.tr,
-                                    selectedvalue:
-                                        homeController.fromSelectedLanguage,
-                                    icon: ImageIcon(AssetImage(
-                                        'assets/images/drop_arrow.png')),
-                                    onChange: switchfromlang),
+                                  selectedvalue:
+                                      homeController.fromSelectedLanguage,
+                                  text: 'Select an item',
+                                  items: Languages(),
+                                  onChange: (value) {
+                                    setState(() {
+                                      homeController.fromSelectedLanguage =
+                                          value;
+                                    });
+                                  },
+                                  searchController:
+                                      homeController.searchController,
+                                  searchInnerWidget: Container(
+                                    padding: const EdgeInsets.all(12),
+                                    child: TextFormField(
+                                      controller:
+                                          homeController.searchController,
+                                      decoration: InputDecoration(
+                                        isDense: true,
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                          horizontal: 10,
+                                          vertical: 14,
+                                        ),
+                                        hintText: 'Search items',
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  searchMatchFn: (item, searchValue) {
+                                    return (item.value
+                                        .toLowerCase()
+                                        .contains(searchValue.toLowerCase()));
+                                  },
+                                  onMenuStateChange: (isOpen) {
+                                    if (!isOpen) {
+                                      homeController.searchController.clear();
+                                    }
+                                  },
+                                ),
                               ),
                               Row(
                                 mainAxisAlignment: box.read('locale') != 'ar'
@@ -289,16 +325,50 @@ class _HomeState extends State<Home> {
                                 ],
                               ),
                               Directionality(
-                                textDirection:
-                                          TextDirection.ltr,
+                                textDirection: TextDirection.ltr,
                                 child: DropdownField(
-                                    items: Languages(),
-                                    text: 'Select Language'.tr,
-                                    selectedvalue:
-                                        homeController.toSelectedLanguage,
-                                    icon: ImageIcon(AssetImage(
-                                        'assets/images/drop_arrow.png')),
-                                    onChange: switchtoLang),
+                                  selectedvalue:
+                                      homeController.toSelectedLanguage,
+                                  text: 'Select an item',
+                                  items: Languages(),
+                                  onChange: (value) {
+                                    setState(() {
+                                      homeController.toSelectedLanguage = value;
+                                    });
+                                  },
+                                  searchController:
+                                      homeController.toSearchController,
+                                  searchInnerWidget: Container(
+                                    padding: const EdgeInsets.all(12),
+                                    child: TextFormField(
+                                      controller:
+                                          homeController.toSearchController,
+                                      decoration: InputDecoration(
+                                        isDense: true,
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                          horizontal: 10,
+                                          vertical: 14,
+                                        ),
+                                        hintText: 'Search items',
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  searchMatchFn: (item, searchValue) {
+                                    return (item.value
+                                        .toLowerCase()
+                                        .contains(searchValue.toLowerCase()));
+                                  },
+                                  onMenuStateChange: (isOpen) {
+                                    if (!isOpen) {
+                                      homeController.toSearchController.clear();
+                                    }
+                                  },
+                                ),
                               ),
                               Padding(
                                 padding: EdgeInsets.only(top: 35, bottom: 20),

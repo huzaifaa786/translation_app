@@ -20,10 +20,7 @@ class ChatTopBar extends StatelessWidget {
             children: [
               GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Chats_screen()));
+                    Navigator.pop(context);
                   },
                   child: SvgPicture.asset("assets/icons/back.svg")),
               Container(
