@@ -81,22 +81,19 @@ class DropdownField extends StatelessWidget {
             ),
           ),
           dropdownStyleData: DropdownStyleData(
+            
+            maxHeight: MediaQuery.of(context).size.height * 0.4,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
             ),
           ),
           iconStyleData:
               IconStyleData(icon: Image.asset('assets/images/drop_arrow.png')),
-          // Searchable dropdown specific properties
           dropdownSearchData: DropdownSearchData(
-            searchController: searchController,
-            searchInnerWidget: searchInnerWidget,
-            searchMatchFn: searchMatchFn,
-            searchInnerWidgetHeight: 70
-          ),
-          // searchController: searchController,
-          // searchInnerWidget: searchInnerWidget,
-          // searchMatchFn: searchMatchFn,
+              searchController: searchController,
+              searchInnerWidget: searchInnerWidget,
+              searchMatchFn: searchMatchFn,
+              searchInnerWidgetHeight: 70),
           onMenuStateChange: onMenuStateChange,
         ),
       ),
