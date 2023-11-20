@@ -14,6 +14,7 @@ import 'package:translation/static/add_remove.dart';
 import 'package:translation/static/checkout_button.dart';
 import 'package:translation/static/icon_button.dart';
 import 'package:translation/static/image.dart';
+import 'package:auto_size_text_field/auto_size_text_field.dart';
 import 'package:translation/static/lang_box.dart';
 import 'package:translation/static/profile_detail.dart';
 import 'package:translation/static/schedule.dart';
@@ -44,7 +45,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
       if (widget.detail!.online == 0) {
         translatorProfileController.serviceType = ServiceType.Schedule;
       } else {
-        translatorProfileController.serviceType = ServiceType.Instant;
+        translatorProfileController.serviceType = ServiceType.Schedule;
       }
     } else if (widget.detail!.service!.isInperson == true) {
       translatorProfileController.serviceType = ServiceType.Schedule;
@@ -59,6 +60,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
 
   final TextEditingController startTimeController = TextEditingController();
   final TextEditingController endTimeController = TextEditingController();
+  TextEditingController pagecontoller = TextEditingController();
   DateTime now = DateTime.now();
   DateTime? nextSixMonths;
 
@@ -93,6 +95,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
     return Directionality(
       textDirection: ui.TextDirection.ltr,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: white,
         body: SafeArea(
           child: GetBuilder<TranslatorProfileController>(
@@ -224,16 +227,17 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                             onTap: () {
                                               Get.to(
                                                 () => FullScreenImagePage(
-                                                  imageUrl:
-                                                      widget.detail!.certificate!,
+                                                  imageUrl: widget
+                                                      .detail!.certificate!,
                                                 ),
                                               );
                                             },
                                             child: Padding(
-                                              padding:
-                                                  const EdgeInsets.only(left: 12),
+                                              padding: const EdgeInsets.only(
+                                                  left: 12),
                                               child: Text(
-                                                widget.detail!.certificate_name!,
+                                                widget
+                                                    .detail!.certificate_name!,
                                                 style: TextStyle(
                                                   fontSize: 15,
                                                   color: Colors.black,
@@ -269,235 +273,251 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                   : Padding(
                                       padding: const EdgeInsets.only(
                                           top: 15.0, bottom: 15),
-                                      child: Text(
-                                        widget.detail!.aboutEnglish!,
-                                        style: TextStyle(fontSize: 14),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.85,
+                                            child: Text(
+                                              widget.detail!.aboutEnglish!,
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(fontSize: 14),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                              widget.detail!.service!.isAudioVideo! == true
-                                  ? widget.detail!.online! == 1
-                                      ? TralingRadioBtn(
-                                          text: 'instant'.tr,
-                                          isSelected: controller.serviceType ==
-                                              ServiceType.Instant,
-                                          ontap: () {
-                                            setState(() {
-                                              controller.serviceType =
-                                                  ServiceType.Instant;
-                                              controller.resetInstant();
-                                            });
-                                          },
-                                        )
-                                      : Text('')
-                                  : Container(),
-                              controller.serviceType == ServiceType.Instant
-                                  ? Column(
-                                      children: [
-                                        Container(
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          height: 48,
-                                          margin: EdgeInsets.only(top: 8),
-                                          decoration: BoxDecoration(
-                                              color: Color.fromARGB(
-                                                  255, 255, 255, 255),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              border:
-                                                  Border.all(color: greenish)),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    controller.instantType =
-                                                        InstantType.audio;
-                                                  });
-                                                },
-                                                child: Container(
-                                                  padding:
-                                                      EdgeInsets.only(right: 15),
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                              topLeft: Radius
-                                                                  .circular(7),
-                                                              bottomLeft:
-                                                                  Radius.circular(
-                                                                      7)),
-                                                      color: Colors.white
-                                                      // color: controller
-                                                      //                 .instantType ==
-                                                      //             InstantType.audio
-                                                      //         ? greenish
-                                                      //         : Color.fromARGB(
-                                                      //         255, 255, 255, 255),
-                                                      ),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    children: [
-                                                      SvgPicture.asset(
-                                                          "assets/icons/audio.svg"),
-                                                      Text(
-                                                        "Audio Now".tr,
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 12,
+                              // widget.detail!.service!.isAudioVideo! == true
+                              //     ? widget.detail!.online! == 1
+                              //         ? TralingRadioBtn(
+                              //             text: 'instant'.tr,
+                              //             isSelected: controller.serviceType ==
+                              //                 ServiceType.Instant,
+                              //             ontap: () {
+                              //               setState(() {
+                              //                 controller.serviceType =
+                              //                     ServiceType.Instant;
+                              //                 controller.resetInstant();
+                              //               });
+                              //             },
+                              //           )
+                              //         : Text('')
+                              //     : Container(),
+                              // controller.serviceType == ServiceType.Instant
+                              //     ? Column(
+                              //         children: [
+                              //           Container(
+                              //             width:
+                              //                 MediaQuery.of(context).size.width,
+                              //             height: 48,
+                              //             margin: EdgeInsets.only(top: 8),
+                              //             decoration: BoxDecoration(
+                              //                 color: Color.fromARGB(
+                              //                     255, 255, 255, 255),
+                              //                 borderRadius:
+                              //                     BorderRadius.circular(8),
+                              //                 border:
+                              //                     Border.all(color: greenish)),
+                              //             child: Row(
+                              //               mainAxisAlignment:
+                              //                   MainAxisAlignment.spaceBetween,
+                              //               children: [
+                              //                 InkWell(
+                              //                   onTap: () {
+                              //                     setState(() {
+                              //                       controller.instantType =
+                              //                           InstantType.audio;
+                              //                     });
+                              //                   },
+                              //                   child: Container(
+                              //                     padding: EdgeInsets.only(
+                              //                         right: 15),
+                              //                     decoration: BoxDecoration(
+                              //                         borderRadius:
+                              //                             BorderRadius.only(
+                              //                                 topLeft: Radius
+                              //                                     .circular(7),
+                              //                                 bottomLeft: Radius
+                              //                                     .circular(7)),
+                              //                         color: Colors.white
+                              //                         // color: controller
+                              //                         //                 .instantType ==
+                              //                         //             InstantType.audio
+                              //                         //         ? greenish
+                              //                         //         : Color.fromARGB(
+                              //                         //         255, 255, 255, 255),
+                              //                         ),
+                              //                     child: Row(
+                              //                       mainAxisAlignment:
+                              //                           MainAxisAlignment.start,
+                              //                       children: [
+                              //                         SvgPicture.asset(
+                              //                             "assets/icons/audio.svg"),
+                              //                         Text(
+                              //                           "Audio Now".tr,
+                              //                           style: TextStyle(
+                              //                             color: Colors.black,
+                              //                             fontSize: 12,
 
-                                                            // color: controller
-                                                            //             .instantType ==
-                                                            //         InstantType
-                                                            //             .audio
-                                                            //     ? Colors.white
-                                                            //     : Colors.black,
-                                                            ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                              Text("/"),
-                                              InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    controller.instantType =
-                                                        InstantType.video;
-                                                  });
-                                                },
-                                                child: Container(
-                                                  padding:
-                                                      EdgeInsets.only(right: 15),
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(7),
-                                                              bottomRight:
-                                                                  Radius.circular(
-                                                                      7)),
-                                                      color: Colors.white
-                                                      // color: controller
-                                                      //             .instantType ==
-                                                      //         InstantType.video
-                                                      //     ? greenish
-                                                      //     : Color.fromARGB(
-                                                      //         255, 255, 255, 255),
-                                                      ),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    children: [
-                                                      SvgPicture.asset(
-                                                          "assets/icons/video.svg"),
-                                                      Text(
-                                                        "Video Now".tr,
-                                                        maxLines: 2,
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 12,
-                                                            // color: controller
-                                                            //             .instantType ==
-                                                            //         InstantType
-                                                            //             .video
-                                                            //     ? Colors.white
-                                                            //     : Colors.black,
-                                                            ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 10),
-                                          child: Row(
-                                            children: [
-                                              Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.88,
-                                                child: Text(
-                                                  "How many hours do you need the translator/interpreter for?".tr,
-                                                  style: TextStyle(
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        SingleChildScrollView(
-                                          scrollDirection: Axis.horizontal,
-                                          child: Row(
-                                            children: List.generate(7, (index) {
-                                              // Calculate the time for each slot
-                                              int hour = (index + 1) ~/
-                                                  2; // Divide by 2 to get the hour value
-                                              int minutes = ((index + 1) % 2) *
-                                                  30; // Multiply by 30 to get the minutes value
-    
-                                              int totalMinutes =
-                                                  hour * 60 + minutes;
-                                              // Format the time as a string
-                                              String time =
-                                                  '${hour.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}';
-    
-                                              return GestureDetector(
-                                                onTap: () {
-                                                  controller.setAmountBySlot(
-                                                      hour,
-                                                      minutes,
-                                                      time,
-                                                      widget.detail!,
-                                                      totalMinutes);
-                                                },
-                                                child: Container(
-                                                  margin: EdgeInsets.all(9),
-                                                  width: 125,
-                                                  height: 43,
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                      color: Color.fromRGBO(
-                                                          0, 0, 0, 0.24),
-                                                      width: 1,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(8),
-                                                    color:
-                                                        controller.instantTime ==
-                                                                time
-                                                            ? greenish
-                                                            : Colors.white,
-                                                  ),
-                                                  child: Center(
-                                                    child: Text(
-                                                      '$time' == '00:30'
-                                                          ? '$time' + ' min'
-                                                          : '$time' + ' hr',
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          color: controller
-                                                                      .instantTime ==
-                                                                  time
-                                                              ? Colors.white
-                                                              : Colors.black),
-                                                    ),
-                                                  ),
-                                                ),
-                                              );
-                                            }),
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                  : Container(),
+                              //                             // color: controller
+                              //                             //             .instantType ==
+                              //                             //         InstantType
+                              //                             //             .audio
+                              //                             //     ? Colors.white
+                              //                             //     : Colors.black,
+                              //                           ),
+                              //                         ),
+                              //                       ],
+                              //                     ),
+                              //                   ),
+                              //                 ),
+                              //                 Text("/"),
+                              //                 InkWell(
+                              //                   onTap: () {
+                              //                     setState(() {
+                              //                       controller.instantType =
+                              //                           InstantType.video;
+                              //                     });
+                              //                   },
+                              //                   child: Container(
+                              //                     padding: EdgeInsets.only(
+                              //                         right: 15),
+                              //                     decoration: BoxDecoration(
+                              //                         borderRadius:
+                              //                             BorderRadius.only(
+                              //                                 topRight: Radius
+                              //                                     .circular(7),
+                              //                                 bottomRight:
+                              //                                     Radius
+                              //                                         .circular(
+                              //                                             7)),
+                              //                         color: Colors.white
+                              //                         // color: controller
+                              //                         //             .instantType ==
+                              //                         //         InstantType.video
+                              //                         //     ? greenish
+                              //                         //     : Color.fromARGB(
+                              //                         //         255, 255, 255, 255),
+                              //                         ),
+                              //                     child: Row(
+                              //                       mainAxisAlignment:
+                              //                           MainAxisAlignment.start,
+                              //                       children: [
+                              //                         SvgPicture.asset(
+                              //                             "assets/icons/video.svg"),
+                              //                         Text(
+                              //                           "Video Now".tr,
+                              //                           maxLines: 2,
+                              //                           style: TextStyle(
+                              //                             color: Colors.black,
+                              //                             fontSize: 12,
+                              //                             // color: controller
+                              //                             //             .instantType ==
+                              //                             //         InstantType
+                              //                             //             .video
+                              //                             //     ? Colors.white
+                              //                             //     : Colors.black,
+                              //                           ),
+                              //                         ),
+                              //                       ],
+                              //                     ),
+                              //                   ),
+                              //                 )
+                              //               ],
+                              //             ),
+                              //           ),
+                              //           Padding(
+                              //             padding:
+                              //                 const EdgeInsets.only(top: 10),
+                              //             child: Row(
+                              //               children: [
+                              //                 Container(
+                              //                   width: MediaQuery.of(context)
+                              //                           .size
+                              //                           .width *
+                              //                       0.88,
+                              //                   child: Text(
+                              //                     "How many hours do you need the translator/interpreter for?"
+                              //                         .tr,
+                              //                     style: TextStyle(
+                              //                         fontSize: 14,
+                              //                         fontWeight:
+                              //                             FontWeight.bold),
+                              //                   ),
+                              //                 ),
+                              //               ],
+                              //             ),
+                              //           ),
+                              //           SingleChildScrollView(
+                              //             scrollDirection: Axis.horizontal,
+                              //             child: Row(
+                              //               children: List.generate(7, (index) {
+                              //                 // Calculate the time for each slot
+                              //                 int hour = (index + 1) ~/
+                              //                     2; // Divide by 2 to get the hour value
+                              //                 int minutes = ((index + 1) % 2) *
+                              //                     30; // Multiply by 30 to get the minutes value
+
+                              //                 int totalMinutes =
+                              //                     hour * 60 + minutes;
+                              //                 // Format the time as a string
+                              //                 String time =
+                              //                     '${hour.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}';
+
+                              //                 return GestureDetector(
+                              //                   onTap: () {
+                              //                     controller.setAmountBySlot(
+                              //                         hour,
+                              //                         minutes,
+                              //                         time,
+                              //                         widget.detail!,
+                              //                         totalMinutes);
+                              //                   },
+                              //                   child: Container(
+                              //                     margin: EdgeInsets.all(9),
+                              //                     width: 125,
+                              //                     height: 43,
+                              //                     decoration: BoxDecoration(
+                              //                       border: Border.all(
+                              //                         color: Color.fromRGBO(
+                              //                             0, 0, 0, 0.24),
+                              //                         width: 1,
+                              //                       ),
+                              //                       borderRadius:
+                              //                           BorderRadius.circular(
+                              //                               8),
+                              //                       color: controller
+                              //                                   .instantTime ==
+                              //                               time
+                              //                           ? greenish
+                              //                           : Colors.white,
+                              //                     ),
+                              //                     child: Center(
+                              //                       child: Text(
+                              //                         '$time' == '00:30'
+                              //                             ? '$time' + ' min'
+                              //                             : '$time' + ' hr',
+                              //                         style: TextStyle(
+                              //                             fontSize: 12,
+                              //                             color: controller
+                              //                                         .instantTime ==
+                              //                                     time
+                              //                                 ? Colors.white
+                              //                                 : Colors.black),
+                              //                       ),
+                              //                     ),
+                              //                   ),
+                              //                 );
+                              //               }),
+                              //             ),
+                              //           ),
+                              //         ],
+                              //       )
+                              //     : Container(),
                               widget.detail!.service!.isInperson! ||
                                       widget.detail!.service!.isAudioVideo!
                                   ? TralingRadioBtn(
@@ -508,8 +528,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                         setState(() {
                                           controller.serviceType =
                                               ServiceType.Schedule;
-                                          if (widget
-                                                  .detail!.service!.isInperson! &&
+                                          if (widget.detail!.service!
+                                                  .isInperson! &&
                                               widget.detail!.service!
                                                   .isAudioVideo!) {
                                             controller.resetInstant();
@@ -558,8 +578,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                 icon: Icons.my_location_rounded,
                                                 onPressed: () {
                                                   // controller.getlocation();
-                                                  Get.to(() =>
-                                                      DeliveryMap(widget.detail));
+                                                  Get.to(() => DeliveryMap(
+                                                      widget.detail));
                                                 })
                                             : Container(),
                                         SizedBox(
@@ -574,7 +594,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                               context: context,
                                               builder: (BuildContext context) {
                                                 return StatefulBuilder(
-                                                  builder: (BuildContext context,
+                                                  builder: (BuildContext
+                                                          context,
                                                       StateSetter setState) {
                                                     // Define a callback function to update the selected date
                                                     void onDateSelected(
@@ -585,7 +606,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                           focusedDay);
                                                       setState(() {});
                                                     }
-    
+
                                                     return Wrap(
                                                       children: [
                                                         TableCalendar(
@@ -593,23 +614,23 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                               CalendarFormat
                                                                   .month,
                                                           availableCalendarFormats: const {
-                                                            CalendarFormat.month:
-                                                                'Month',
+                                                            CalendarFormat
+                                                                .month: 'Month',
                                                             // CalendarFormat.week: 'Week',
                                                           },
                                                           firstDay: now,
-                                                          lastDay: nextSixMonths!,
+                                                          lastDay:
+                                                              nextSixMonths!,
                                                           focusedDay: controller
                                                               .focusedDay.value,
                                                           calendarStyle:
                                                               CalendarStyle(
-                                                            todayDecoration:
-                                                                BoxDecoration(
-                                                                    color: greenish
-                                                                        .withOpacity(
-                                                                            0.5),
-                                                                    shape: BoxShape
-                                                                        .circle),
+                                                            todayDecoration: BoxDecoration(
+                                                                color: greenish
+                                                                    .withOpacity(
+                                                                        0.5),
+                                                                shape: BoxShape
+                                                                    .circle),
                                                             selectedDecoration:
                                                                 BoxDecoration(
                                                               color:
@@ -647,18 +668,19 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                                     .size
                                                                     .width *
                                                                 0.8,
-                                                            child: ElevatedButton(
+                                                            child:
+                                                                ElevatedButton(
                                                               onPressed: () {
                                                                 // Call the callback to update the button text
-                                                                controller
-                                                                    .updateButtonText(
-                                                                        controller
-                                                                            .selectedDay);
+                                                                controller.updateButtonText(
+                                                                    controller
+                                                                        .selectedDay);
                                                                 Navigator.of(
                                                                         context)
                                                                     .pop(); // Close the bottom sheet
                                                               },
-                                                              child: Text('Done'.tr),
+                                                              child: Text(
+                                                                  'Done'.tr),
                                                             ),
                                                           ),
                                                         ),
@@ -679,7 +701,26 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                 "Set Time".tr,
                                                 style: TextStyle(
                                                     fontSize: 16,
-                                                    fontWeight: FontWeight.bold),
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(bottom: 10),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                '(' +
+                                                    "Gulf Standard Time United Arab Emirates Time"
+                                                        .tr +
+                                                    ')',
+                                                style: TextStyle(
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
                                             ],
                                           ),
@@ -692,17 +733,19 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                               text: 'Start Time'.tr,
                                               controller: startTimeController,
                                               onpressed: () {
-                                                DatePicker.showTimePicker(context,
+                                                DatePicker.showTimePicker(
+                                                    context,
                                                     showTitleActions: true,
                                                     showSecondsColumn: false,
                                                     onChanged: (val) {
-                                                  var end = val
-                                                      .add(Duration(minutes: 1));
-                                                  var time =
-                                                      DateFormat.Hm().format(val);
-                                                  var endTime =
-                                                      DateFormat.Hm().format(end);
-                                                  startTimeController.text = time;
+                                                  var end = val.add(
+                                                      Duration(minutes: 1));
+                                                  var time = DateFormat.Hm()
+                                                      .format(val);
+                                                  var endTime = DateFormat.Hm()
+                                                      .format(end);
+                                                  startTimeController.text =
+                                                      time;
                                                   endTimeController.text =
                                                       endTime;
                                                   controller.startTime = time;
@@ -712,13 +755,14 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                           widget.detail!);
                                                   setState(() {});
                                                 }, onConfirm: (val) {
-                                                  var end = val
-                                                      .add(Duration(minutes: 1));
-                                                  var time =
-                                                      DateFormat.Hm().format(val);
-                                                  var endTime =
-                                                      DateFormat.Hm().format(end);
-                                                  startTimeController.text = time;
+                                                  var end = val.add(
+                                                      Duration(minutes: 1));
+                                                  var time = DateFormat.Hm()
+                                                      .format(val);
+                                                  var endTime = DateFormat.Hm()
+                                                      .format(end);
+                                                  startTimeController.text =
+                                                      time;
                                                   endTimeController.text =
                                                       endTime;
                                                   controller.startTime = time;
@@ -737,12 +781,13 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                               text: 'End Time'.tr,
                                               controller: endTimeController,
                                               onpressed: () {
-                                                DatePicker.showTimePicker(context,
+                                                DatePicker.showTimePicker(
+                                                    context,
                                                     showTitleActions: true,
                                                     showSecondsColumn: false,
                                                     onConfirm: (val) {
-                                                  var end =
-                                                      DateFormat.Hm().format(val);
+                                                  var end = DateFormat.Hm()
+                                                      .format(val);
                                                   endTimeController.text = end;
                                                   controller.endTime = end;
                                                   translatorProfileController
@@ -750,8 +795,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                           widget.detail!);
                                                   setState(() {});
                                                 }, onChanged: (val) {
-                                                  var end =
-                                                      DateFormat.Hm().format(val);
+                                                  var end = DateFormat.Hm()
+                                                      .format(val);
                                                   endTimeController.text = end;
                                                   controller.endTime = end;
                                                   translatorProfileController
@@ -762,9 +807,10 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                               },
                                               hint: '9:30',
                                               fontSize: 18.0,
-                                              enabled: controller.startTime == ''
-                                                  ? false
-                                                  : true,
+                                              enabled:
+                                                  controller.startTime == ''
+                                                      ? false
+                                                      : true,
                                             ),
                                           ],
                                         ),
@@ -822,14 +868,16 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                               child: Row(
                                                 children: [
                                                   Container(
-                                                      padding: EdgeInsets.all(8),
+                                                      padding:
+                                                          EdgeInsets.all(8),
                                                       decoration: BoxDecoration(
                                                           color: greenish
                                                               .withOpacity(0.2),
                                                           borderRadius:
                                                               BorderRadius.all(
-                                                                  Radius.circular(
-                                                                      25))),
+                                                                  Radius
+                                                                      .circular(
+                                                                          25))),
                                                       child: SvgPicture.asset(
                                                         "assets/icons/doc.svg",
                                                         height: 22,
@@ -864,14 +912,16 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                               child: Row(
                                                 children: [
                                                   Container(
-                                                      padding: EdgeInsets.all(8),
+                                                      padding:
+                                                          EdgeInsets.all(8),
                                                       decoration: BoxDecoration(
                                                           border: Border.all(
                                                               color: greenish),
                                                           borderRadius:
                                                               BorderRadius.all(
-                                                                  Radius.circular(
-                                                                      25))),
+                                                                  Radius
+                                                                      .circular(
+                                                                          25))),
                                                       child: InkWell(
                                                         onTap: () {
                                                           translatorProfileController
@@ -910,7 +960,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                               )
                                             : Container(),
                                         Padding(
-                                          padding: const EdgeInsets.only(top: 10),
+                                          padding:
+                                              const EdgeInsets.only(top: 10),
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
@@ -921,101 +972,145 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                         .width *
                                                     0.5,
                                                 child: Text(
-                                                  "How many pages are there in the document?".tr,
+                                                  "How many pages are there in the document?"
+                                                      .tr,
                                                   maxLines: 2,
-                                                  style: TextStyle(fontSize: 14),
+                                                  style:
+                                                      TextStyle(fontSize: 14),
                                                 ),
                                               ),
-                                              SizedBox(
-                                                width: MediaQuery.of(context)
+                                              AutoSizeTextField(
+                                                controller: pagecontoller,
+                                                fullwidth: false,
+                                                style: TextStyle(fontSize: 18),
+                                                maxLines: 1,
+                                                minWidth: MediaQuery.of(context)
                                                         .size
                                                         .width *
-                                                    0.2,
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    AddRemoveBtn(
-                                                        ontap: () async {
-                                                          setState(() {
-                                                            if (controller
-                                                                    .pages ==
-                                                                0) {
-                                                              print(controller
-                                                                  .pages);
-                                                            } else {
-                                                              controller.pages--;
-                                                              translatorProfileController
-                                                                  .dayscalculate(
-                                                                      widget
-                                                                          .detail!);
-                                                              translatorProfileController
-                                                                  .documentprice(
-                                                                      widget
-                                                                          .detail!);
-                                                            }
-                                                          });
-                                                        },
-                                                        icon: '-'),
-                                                    Text(
-                                                        translatorProfileController
-                                                            .pages
-                                                            .toString()),
-                                                    AddRemoveBtn(
-                                                      ontap: () {
-                                                        setState(() {
-                                                          if (translatorProfileController
-                                                                  .documentType ==
-                                                              DocumentType
-                                                                  .Urgent) {
-                                                            if (controller
-                                                                    .pages ==
-                                                                translatorProfileController
-                                                                    .maxPage) {
-                                                              print(controller
-                                                                  .pages);
-                                                            } else {
-                                                              translatorProfileController
-                                                                  .pages++;
-                                                              translatorProfileController
-                                                                  .dayscalculate(
-                                                                      widget
-                                                                          .detail!);
-                                                              translatorProfileController
-                                                                  .documentprice(
-                                                                      widget
-                                                                          .detail!);
-                                                            }
-                                                          } else {
-                                                            if (controller
-                                                                    .pages ==
-                                                                translatorProfileController
-                                                                    .umaxpage) {
-                                                              print(controller
-                                                                  .pages);
-                                                            } else {
-                                                              translatorProfileController
-                                                                  .pages++;
-                                                              translatorProfileController
-                                                                  .dayscalculate(
-                                                                      widget
-                                                                          .detail!);
-                                                              translatorProfileController
-                                                                  .documentprice(
-                                                                      widget
-                                                                          .detail!);
-                                                            }
-                                                          }
-                                                        });
-                                                      },
-                                                      icon: '+',
-                                                      color: greenish,
-                                                      iconcolor: white,
-                                                    )
-                                                  ],
+                                                    0.25,
+                                                decoration: InputDecoration(
+                                                  suffixIcon: InkWell(
+                                                    onTap: () {
+                                                      translatorProfileController
+                                                              .pages =
+                                                          int.parse(
+                                                              pagecontoller
+                                                                  .text);
+                                                      translatorProfileController
+                                                          .dayscalculate(
+                                                              widget.detail!);
+                                                      translatorProfileController
+                                                          .documentprice(
+                                                              widget.detail!);
+                                                      FocusManager.instance
+                                                          .primaryFocus!
+                                                          .unfocus();
+                                                      // profileController.EditText();
+                                                    },
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              bottom: 8.0),
+                                                      child: Icon(
+                                                        Icons.check,
+                                                        color: greenish,
+                                                        size: 18,
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ),
-                                              )
+                                              ),
+                                              // SizedBox(
+                                              //   width: MediaQuery.of(context)
+                                              //           .size
+                                              //           .width *
+                                              //       0.2,
+                                              //   child: Row(
+                                              //     mainAxisAlignment:
+                                              //         MainAxisAlignment
+                                              //             .spaceBetween,
+                                              //     children: [
+                                              //       AddRemoveBtn(
+                                              //           ontap: () async {
+                                              //             setState(() {
+                                              //               if (controller
+                                              //                       .pages ==
+                                              //                   0) {
+                                              //                 print(controller
+                                              //                     .pages);
+                                              //               } else {
+                                              //                 controller
+                                              //                     .pages--;
+                                              //                 translatorProfileController
+                                              //                     .dayscalculate(
+                                              //                         widget
+                                              //                             .detail!);
+                                              //                 translatorProfileController
+                                              //                     .documentprice(
+                                              //                         widget
+                                              //                             .detail!);
+                                              //               }
+                                              //             });
+                                              //           },
+                                              //           icon: '-'),
+                                              //       Text(
+                                              //           translatorProfileController
+                                              //               .pages
+                                              //               .toString()),
+                                              //       AddRemoveBtn(
+                                              //         ontap: () {
+                                              //           setState(() {
+                                              //             if (translatorProfileController
+                                              //                     .documentType ==
+                                              //                 DocumentType
+                                              //                     .Urgent) {
+                                              //               if (controller
+                                              //                       .pages ==
+                                              //                   translatorProfileController
+                                              //                       .maxPage) {
+                                              //                 print(controller
+                                              //                     .pages);
+                                              //               } else {
+                                              //                 translatorProfileController
+                                              //                     .pages++;
+                                              //                 translatorProfileController
+                                              //                     .dayscalculate(
+                                              //                         widget
+                                              //                             .detail!);
+                                              //                 translatorProfileController
+                                              //                     .documentprice(
+                                              //                         widget
+                                              //                             .detail!);
+                                              //               }
+                                              //             } else {
+                                              //               if (controller
+                                              //                       .pages ==
+                                              //                   translatorProfileController
+                                              //                       .umaxpage) {
+                                              //                 print(controller
+                                              //                     .pages);
+                                              //               } else {
+                                              //                 translatorProfileController
+                                              //                     .pages++;
+                                              //                 translatorProfileController
+                                              //                     .dayscalculate(
+                                              //                         widget
+                                              //                             .detail!);
+                                              //                 translatorProfileController
+                                              //                     .documentprice(
+                                              //                         widget
+                                              //                             .detail!);
+                                              //               }
+                                              //             }
+                                              //           });
+                                              //         },
+                                              //         icon: '+',
+                                              //         color: greenish,
+                                              //         iconcolor: white,
+                                              //       )
+                                              //     ],
+                                              //   ),
+                                              // )
                                             ],
                                           ),
                                         ),
@@ -1025,7 +1120,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                           child: Row(
                                             children: [
                                               Text(
-                                                "Will deliver in:".tr+  " ",
+                                                "Will deliver in:".tr + " ",
                                                 style: TextStyle(fontSize: 14),
                                               ),
                                               Text(
@@ -1035,7 +1130,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                 style: TextStyle(
                                                     fontSize: 14,
                                                     color: greenish,
-                                                    fontWeight: FontWeight.bold),
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
                                             ],
                                           ),
@@ -1068,7 +1164,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                             colorText: Colors.white);
                                         return;
                                       }
-                                      translatorProfileController.CheckoutAmount =
+                                      translatorProfileController
+                                              .CheckoutAmount =
                                           controller.totalAmount;
                                       setState(() {});
                                       if (translatorProfileController.file ==
@@ -1080,32 +1177,35 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                         return;
                                       }
                                       Get.to(() => Checkout_screen(
-                                            totalAmount: controller.CheckoutAmount
-                                                .toString(),
+                                            totalAmount: controller
+                                                .CheckoutAmount.toString(),
                                           ));
-                                    } else if (controller.serviceType ==
-                                        ServiceType.Instant) {
-                                      if (controller.totalAmount <= 0) {
-                                        Get.snackbar("",
-                                            "Please fill all required details.",
-                                            snackPosition: SnackPosition.BOTTOM,
-                                            backgroundColor: Colors.red,
-                                            colorText: Colors.white);
-                                        return;
-                                      }
-                                      translatorProfileController.CheckoutAmount =
-                                          controller.totalAmount;
-                                      setState(() {});
-    
-                                      Get.to(() => Checkout_screen(
-                                            totalAmount: controller.CheckoutAmount
-                                                .toString(),
-                                          ));
-                                    } else {
+                                    }
+                                    // else if (controller.serviceType ==
+                                    //     ServiceType.Instant) {
+                                    //   if (controller.totalAmount <= 0) {
+                                    //     Get.snackbar("",
+                                    //         "Please fill all required details.",
+                                    //         snackPosition: SnackPosition.BOTTOM,
+                                    //         backgroundColor: Colors.red,
+                                    //         colorText: Colors.white);
+                                    //     return;
+                                    //   }
+                                    //   translatorProfileController
+                                    //           .CheckoutAmount =
+                                    //       controller.totalAmount;
+                                    //   setState(() {});
+
+                                    //   Get.to(() => Checkout_screen(
+                                    //         totalAmount: controller
+                                    //             .CheckoutAmount.toString(),
+                                    //       ));
+                                    // }
+                                    else {
                                       controller
                                           .checkavailability(widget.detail!);
                                     }
-    
+
                                     //  update(context);
                                   },
                                   color: greenish,

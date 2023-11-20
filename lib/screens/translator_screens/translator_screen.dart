@@ -133,7 +133,7 @@ class _Translator_State extends State<Translator_> {
                                     homeController.sschedule[index].language,
                                 vendor: homeController.sschedule[index],
                                 price: homeController.sschedule[index]
-                                    .service!.onlineaudiovideoPrice,
+                                    .service!.audiovideo,
                                 rating:
                                     homeController.sschedule[index].rating ==
                                             null

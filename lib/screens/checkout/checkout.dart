@@ -112,10 +112,11 @@ class _Checkout_screenState extends State<Checkout_screen> {
                       ),
                       Center(
                         child: Text(
-                          translatorProfileController.serviceType ==
-                                  ServiceType.Instant
-                              ? 'Instant audio/video meeting'.tr
-                              : translatorProfileController.serviceType ==
+                          // translatorProfileController.serviceType ==
+                          //         ServiceType.Instant
+                          //     ? 'Instant audio/video meeting'.tr
+                          //     : 
+                              translatorProfileController.serviceType ==
                                       ServiceType.Document
                                   ? 'Document translation'.tr
                                   : translatorProfileController.scheduleType ==

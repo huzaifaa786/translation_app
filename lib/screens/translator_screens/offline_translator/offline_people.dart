@@ -125,7 +125,7 @@ class _OfflinePeople_screenState extends State<OfflinePeople_screen> {
                                 lang: controller.sschedule[index].language,
                                 vendor: controller.sschedule[index],
                                 price: controller.sschedule[index].service!
-                                    .onlineaudiovideoPrice,
+                                    .audiovideo,
                                 rating: controller.sschedule[index].rating == null
                                     ? null
                                     : double.parse(
