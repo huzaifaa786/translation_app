@@ -127,6 +127,12 @@ class TranslatorProfileController extends GetxController {
       }
     } else {
       totalAmount = 0;
+      Get.snackbar(
+          'Pages exceed the maximum amount of pages set by translator', '',
+          duration: Duration(seconds: 2),
+          backgroundColor: Colors.red,
+          colorText: white,
+          snackPosition: SnackPosition.BOTTOM);
     }
     update();
   }
@@ -238,9 +244,8 @@ class TranslatorProfileController extends GetxController {
     var url = BASE_URL + 'user/order';
     var data;
     GetStorage box = GetStorage();
-    var servicetype = serviceType == ServiceType.Schedule
-            ? 'schedule'
-            : 'document';
+    var servicetype =
+        serviceType == ServiceType.Schedule ? 'schedule' : 'document';
 
     var response;
     if (serviceType == ServiceType.Document) {
@@ -257,7 +262,7 @@ class TranslatorProfileController extends GetxController {
         'date': DateTime.now().toString(),
         'starttime': startTime,
         'endtime': endTime,
-        'meetingtype':'audio' ,
+        'meetingtype': 'audio',
         // 'meetingtype': instantType == InstantType.audio ? 'audio' : 'video',
         'scheduletype': scheduleType == ScheduleType.AudioVideo
             ? 'audio/video'
@@ -308,9 +313,8 @@ class TranslatorProfileController extends GetxController {
     var url = BASE_URL + 'user/order';
     var data;
     GetStorage box = GetStorage();
-    var servicetype = serviceType == ServiceType.Schedule
-            ? 'schedule'
-            : 'document';
+    var servicetype =
+        serviceType == ServiceType.Schedule ? 'schedule' : 'document';
     data = {
       'api_token': box.read('api_token')!,
       'servicetype': servicetype,
