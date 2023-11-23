@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:translation/screens/translator/translator_profile.dart';
+import 'package:translation/values/colors.dart';
 import 'package:translation/values/controllers.dart';
 
 class OfflineTranslattorCard extends StatelessWidget {
@@ -23,14 +25,29 @@ class OfflineTranslattorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        translatorProfileController.clear();
-        Get.to(() => TraslatorProfile(detail: vendor));
-      },
-      child: Card(
-        color: Color.fromARGB(255, 255, 255, 255),
+    GetStorage box = GetStorage();
+    return Padding(
+      padding: const EdgeInsets.only(left: 12, right: 12, bottom: 12),
+      child: GestureDetector(
+        onTap: () {
+          translatorProfileController.clear();
+          Get.to(() => TraslatorProfile(detail: vendor));
+        },
         child: Container(
+          decoration: BoxDecoration(
+              color: white,
+              borderRadius: BorderRadius.circular(5),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey[200]!,
+                    blurRadius: 7,
+                    offset: Offset(4, 4)),
+                BoxShadow(
+                  color: Colors.grey[200]!,
+                  blurRadius: 7,
+                  offset: Offset(-4, -4),
+                ),
+              ]),
           padding: const EdgeInsets.all(12.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -60,7 +77,7 @@ class OfflineTranslattorCard extends StatelessWidget {
                               )),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 8),
+                    padding: const EdgeInsets.only(left: 8, right: 8),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,14 +96,14 @@ class OfflineTranslattorCard extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "Rate per 30 mins:  ",
+                                      "Rate per 30 mins".tr + ': ',
                                       style: TextStyle(
                                           fontSize: 9,
                                           fontWeight: FontWeight.w700,
                                           fontFamily: 'NunitoSans'),
                                     ),
                                     Text(
-                                      price + " AED",
+                                      price + "AED".tr,
                                       style: TextStyle(
                                           fontSize: 11,
                                           fontWeight: FontWeight.w700,
@@ -110,7 +127,7 @@ class OfflineTranslattorCard extends StatelessWidget {
                                             width: 11)),
                                     Padding(
                                       padding: const EdgeInsets.only(
-                                          top: 4, left: 2),
+                                          top: 4, left: 2, right: 2),
                                       child: Text(
                                           rating == null
                                               ? '0.0'
@@ -180,17 +197,18 @@ class OfflineTranslattorCard extends StatelessWidget {
                   ),
                 ],
               ),
-              FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: SvgPicture.asset("assets/icons/forward.svg",
-                      height: 30, width: 30)),
+              box.read('locale') != 'ar'
+                  ? FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: SvgPicture.asset("assets/icons/forward.svg",
+                          height: 30, width: 30))
+                  : FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: SvgPicture.asset("assets/icons/back.svg",
+                          height: 30, width: 30)),
             ],
           ),
         ),
-        elevation: 5,
-        shadowColor: Colors.black54,
-        margin: EdgeInsets.fromLTRB(20, 5, 20, 5),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
     );
   }

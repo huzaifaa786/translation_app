@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'dart:io' as io;
 import 'package:translation/screens/chat/chatcontroller.dart';
 import 'package:translation/static/chattopbar.dart';
@@ -25,6 +25,7 @@ class Chatdetails_screen extends StatefulWidget {
 }
 
 class _Chatdetails_screenState extends State<Chatdetails_screen> {
+  GetStorage box = GetStorage();
   PusherChannelsFlutter pusher = PusherChannelsFlutter.getInstance();
 
   msg() async {
@@ -81,10 +82,11 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
                   name: widget.name,
                   img: widget.screen == 'order'
                       ? widget.profilePic
-                      : 'https://translation.ezmoveportal.com/' + widget.profilePic!,
+                      : 'https://translation.ezmoveportal.com/' +
+                          widget.profilePic!,
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 25, 20, 0),
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -94,16 +96,16 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
                           height: 1,
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: Text(
-                          'Today',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: EdgeInsets.symmetric(horizontal: 10),
+                      //   // child: Text(
+                      //   //   'Today',
+                      //   //   style: TextStyle(
+                      //   //     fontWeight: FontWeight.bold,
+                      //   //     color: Colors.grey,
+                      //   //   ),
+                      //   // ),
+                      // ),
                       Expanded(
                         child: Divider(
                           color: Colors.grey,
@@ -125,11 +127,13 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
                           print(fileExist);
                           return ReplyMessageCard(
                             msg: controller
-                                .massages[controller.massages.length - 1 - index]
+                                .massages[
+                                    controller.massages.length - 1 - index]
                                 .body
                                 .toString(), // Reverse the index
                             Time: getTime(controller
-                                .massages[controller.massages.length - 1 - index]
+                                .massages[
+                                    controller.massages.length - 1 - index]
                                 .dateTime), // Reverse the index
                             sender: controller
                                         .massages[controller.massages.length -
@@ -140,51 +144,57 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
                                 ? false
                                 : true,
                             fileName: controller
-                                .massages[controller.massages.length - 1 - index]
+                                .massages[
+                                    controller.massages.length - 1 - index]
                                 .file_name,
                             fileType: controller
-                                .massages[controller.massages.length - 1 - index]
+                                .massages[
+                                    controller.massages.length - 1 - index]
                                 .file_type,
                             fileTitle: controller
-                                .massages[controller.massages.length - 1 - index]
+                                .massages[
+                                    controller.massages.length - 1 - index]
                                 .file_title,
                             fileExist: fileExist,
                           );
                         })),
                 Stack(
                   children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      // height: 58,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.black),
-                        color: Color.fromARGB(255, 255, 255, 255),
-                      ),
-                      child: TextField(
-                        onSubmitted: (value) {
-                          if (value.trim().isNotEmpty) {
-                            // Check if the value is not empty or only contains whitespace
-                            chatController.sendMassage();
-                          }
-                          setState(() {});
-                        },
-                        controller: chatController.massagecontroller,
-                        decoration: InputDecoration(
-                          suffixIcon: InkWell(
-                              onTap: () {
-                                controller.picksinglefile();
-                              },
-                              child:
-                                  Icon(Icons.attach_file, color: Colors.black)),
-                          hintText: 'You message'.tr,
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.only(left: 8, top: 18),
+                    Directionality(
+                      textDirection: box.read('locale') != 'ar' ? TextDirection.ltr:TextDirection.rtl,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        // height: 58,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.black),
+                          color: Color.fromARGB(255, 255, 255, 255),
                         ),
-                        style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
-                          color: Color.fromARGB(255, 51, 50, 50),
+                        child: TextField(
+                          onSubmitted: (value) {
+                            if (value.trim().isNotEmpty) {
+                              // Check if the value is not empty or only contains whitespace
+                              chatController.sendMassage();
+                            }
+                            setState(() {});
+                          },
+                          controller: chatController.massagecontroller,
+                          decoration: InputDecoration(
+                            suffixIcon: InkWell(
+                                onTap: () {
+                                  controller.picksinglefile();
+                                },
+                                child:
+                                    Icon(Icons.attach_file, color: Colors.black)),
+                            hintText: 'You message'.tr,
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.only(left: 8, top: 18,right: 8),
+                          ),
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                            color: Color.fromARGB(255, 51, 50, 50),
+                          ),
                         ),
                       ),
                     ),

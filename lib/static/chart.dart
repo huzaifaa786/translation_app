@@ -35,7 +35,7 @@ class ChartCards extends StatelessWidget {
             Container(
               width: 70,
               height: 70,
-              margin: EdgeInsets.only(left: 15),
+              margin: EdgeInsets.only(left: 15,right: 15),
               padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
                 border: Border.all(width: 2, color: Color(0xFF34607B)),

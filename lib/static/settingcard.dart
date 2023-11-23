@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:translation/values/colors.dart';
 
 class SettingCard extends StatelessWidget {
@@ -32,60 +33,84 @@ class SettingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onPressed,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: greenish.withOpacity(0.2),
-                        shape: BoxShape.circle,
-                      ),
-                      child: Center(
-                        child: SvgPicture.asset(
-                          imgicon,
-                          height: 22,
-                          width: 22,
+    GetStorage box = GetStorage();
+    return Directionality(
+      textDirection:box.read('locale') == 'ar'
+                            ?  TextDirection.rtl:TextDirection.ltr,
+      child: InkWell(
+        onTap: onPressed,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: greenish.withOpacity(0.2),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: SvgPicture.asset(
+                            imgicon,
+                            height: 22,
+                            width: 22,
+                          ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 25),
-                      child: Text(
-                        title,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 17,fontFamily: 'Lato'),
+                      Padding(
+                        padding: box.read('locale') != 'ar'
+                            ? const EdgeInsets.only(left: 25)
+                            : EdgeInsets.only(right: 25),
+                        child: Text(
+                          title,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 17,
+                              fontFamily: 'Lato'),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    SvgPicture.asset(
-                      "assets/icons/forward.svg", // replace with your logo asset path
-                      height: 30,
-                      width: 30,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 18,
-            ),
-            const Divider(
-              thickness: 1,
-              height: 1,
-            ),
-          ],
+                    ],
+                  ),
+                  box.read('locale') == 'ar'
+                      ? Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.black,
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(60),
+                            ),
+                          ),
+                          child: Icon(
+                            size: 27,
+                            Icons.keyboard_arrow_left_sharp,
+                          ),
+                        )
+                      : Row(
+                          children: [
+                            SvgPicture.asset(
+                              "assets/icons/forward.svg", // replace with your logo asset path
+                              height: 30,
+                              width: 30,
+                            ),
+                          ],
+                        ),
+                ],
+              ),
+              SizedBox(
+                height: 18,
+              ),
+              const Divider(
+                thickness: 1,
+                height: 1,
+              ),
+            ],
+          ),
         ),
       ),
     );

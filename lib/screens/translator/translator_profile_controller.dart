@@ -168,8 +168,8 @@ class TranslatorProfileController extends GetxController {
       double amount = numberOfSlots * int.parse(vendor.service!.inperson!);
       if (amount <= 0) {
         totalAmount = 0;
-        Get.snackbar('Invalid Time Format!',
-            'End time can not be less than the starting time.',
+        Get.snackbar('',
+            'End time must be greater than  starting time.'.tr,
             snackPosition: SnackPosition.BOTTOM,
             colorText: white,
             backgroundColor: Colors.red);
@@ -199,7 +199,7 @@ class TranslatorProfileController extends GetxController {
       double amount = numberOfSlots * int.parse(vendor.service!.audiovideo!);
       if (amount <= 0) {
         totalAmount = 0;
-        Get.snackbar('', 'End time must be greater than  starting time.',
+        Get.snackbar('', 'End time must be greater than  starting time.'.tr,
             snackPosition: SnackPosition.BOTTOM,
             colorText: white,
             backgroundColor: Colors.red);
@@ -380,7 +380,7 @@ class TranslatorProfileController extends GetxController {
 
   checkavailability(Vendor vendor) async {
     if (totalAmount <= 0) {
-      Get.snackbar("", "Please fill all required details.",
+      Get.snackbar("", "Please fill all required details".tr,
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.red,
           colorText: Colors.white);
@@ -418,7 +418,7 @@ class TranslatorProfileController extends GetxController {
       LoadingHelper.dismiss();
     } else {
       LoadingHelper.dismiss();
-      Get.snackbar(response['error_data'], "",
+      Get.snackbar("Timings are booked, please try other time".tr, "",
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.red,
           colorText: Colors.white);

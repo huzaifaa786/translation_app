@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:translation/values/colors.dart';
 
 class RadioBtn2 extends StatefulWidget {
@@ -17,13 +18,14 @@ class RadioBtn2 extends StatefulWidget {
 class _RadioBtn2State extends State<RadioBtn2> {
   @override
   Widget build(BuildContext context) {
+    GetStorage box = GetStorage();
     return ListTile(
       title: Transform.translate(
-        offset: Offset(-25, 0),
+        offset: box.read("locale") != "ar"? Offset(-25, 0):Offset(25, 0),
         child: Text(widget.text),
       ),
       leading: Transform.translate(
-        offset: Offset(-25, 0),
+        offset: box.read("locale") != "ar"? Offset(-25, 0):Offset(25, 0),
         child: Radio(
           value: widget.value.toString(),
           groupValue: widget.groupvalue.toString(),

@@ -4,11 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import 'package:translation/models/order.dart';
 import 'package:translation/screens/chat/chatcontroller.dart';
 import 'package:translation/screens/main_screen/homecontroller.dart';
 import 'package:translation/screens/notification/notification_card.dart';
-import 'package:translation/screens/profile/profile.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/screens/chat/chats.dart';
 import 'package:translation/static/main_card.dart';
@@ -53,25 +51,22 @@ class _Home_screenState extends State<Home_screen> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ChatController>(
-      builder: (controller) => Directionality(
-        textDirection: TextDirection.ltr,
-        child: PersistentTabView(
-          context,
-          controller: _controller,
-          screens: _buildScreens(),
-          items: _navBarItem(),
-          navBarStyle: NavBarStyle.style6,
-          decoration: NavBarDecoration(
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.grey,
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: Offset(0, 3))
-            ],
-            borderRadius: BorderRadius.circular(1.0),
-            colorBehindNavBar: Colors.white,
-          ),
+      builder: (controller) => PersistentTabView(
+        context,
+        controller: _controller,
+        screens: _buildScreens(),
+        items: _navBarItem(),
+        navBarStyle: NavBarStyle.style6,
+        decoration: NavBarDecoration(
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey,
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: Offset(0, 3))
+          ],
+          borderRadius: BorderRadius.circular(1.0),
+          colorBehindNavBar: Colors.white,
         ),
       ),
     );
@@ -88,7 +83,7 @@ class _Home_screenState extends State<Home_screen> {
         //   });
         // },
         icon: FaIcon(FontAwesomeIcons.house),
-        title: ('Home'),
+        title: ('Home'.tr),
         textStyle: TextStyle(
             fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
         iconSize: 20,
@@ -104,7 +99,7 @@ class _Home_screenState extends State<Home_screen> {
               )
             : FaIcon(FontAwesomeIcons.commentDots),
         iconSize: 20,
-        title: ('Chat'),
+        title: ('Chat'.tr),
         textStyle: TextStyle(
             fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
         activeColorSecondary: greenish,
@@ -125,7 +120,7 @@ class _Home_screenState extends State<Home_screen> {
       PersistentBottomNavBarItem(
           icon: FaIcon(FontAwesomeIcons.clipboardList),
           iconSize: 20,
-          title: ('Orders'),
+          title: ('Orders'.tr),
           textStyle: TextStyle(
               fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
           activeColorSecondary: greenish,
@@ -140,7 +135,7 @@ class _Home_screenState extends State<Home_screen> {
       PersistentBottomNavBarItem(
         icon: FaIcon(FontAwesomeIcons.gear),
         iconSize: 20,
-        title: ('Settings'),
+        title: ('Settings'.tr),
         textStyle: TextStyle(
             fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
         activeColorSecondary: greenish,
@@ -234,9 +229,9 @@ class _HomeState extends State<Home> {
                                 ],
                               ),
                               Row(
-                                mainAxisAlignment: box.read('locale') != 'ar'
-                                    ? MainAxisAlignment.start
-                                    : MainAxisAlignment.end,
+                                // mainAxisAlignment: box.read('locale') != 'ar'
+                                //     ? MainAxisAlignment.start
+                                //     : MainAxisAlignment.end,
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(top: 16),
@@ -256,11 +251,13 @@ class _HomeState extends State<Home> {
                                 ],
                               ),
                               Directionality(
-                                textDirection: TextDirection.ltr,
+                                textDirection:  box.read('locale') != 'ar'
+                                          ? TextDirection.ltr
+                                          : TextDirection.rtl,
                                 child: DropdownField(
                                   selectedvalue:
                                       homeController.fromSelectedLanguage,
-                                  text: 'Select an item',
+                                  text: 'Select an item'.tr,
                                   items: Languages(),
                                   onChange: (value) {
                                     setState(() {
@@ -303,9 +300,9 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                               Row(
-                                mainAxisAlignment: box.read('locale') != 'ar'
-                                    ? MainAxisAlignment.start
-                                    : MainAxisAlignment.end,
+                                // mainAxisAlignment: box.read('locale') != 'ar'
+                                //     ? MainAxisAlignment.start
+                                //     : MainAxisAlignment.end,
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(top: 12),
@@ -325,11 +322,13 @@ class _HomeState extends State<Home> {
                                 ],
                               ),
                               Directionality(
-                                textDirection: TextDirection.ltr,
+                                textDirection: box.read('locale') != 'ar'
+                                          ? TextDirection.ltr
+                                          : TextDirection.rtl,
                                 child: DropdownField(
                                   selectedvalue:
                                       homeController.toSelectedLanguage,
-                                  text: 'Select an item',
+                                  text: 'Select an item'.tr,
                                   items: Languages(),
                                   onChange: (value) {
                                     setState(() {

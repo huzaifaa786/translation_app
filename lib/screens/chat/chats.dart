@@ -33,7 +33,7 @@ class _Chats_screenState extends State<Chats_screen> {
             borderRadius: BorderRadius.circular(25),
           ),
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(38, 68, 0, 0),
+            padding: const EdgeInsets.fromLTRB(38, 68, 38, 0),
             child: Text(
               "Chats".tr,
               style: TextStyle(
@@ -86,7 +86,7 @@ class _Chats_screenState extends State<Chats_screen> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 38.0),
+          padding: const EdgeInsets.only(left: 38.0,right: 38),
           child: Row(
             children: [
               Text(
@@ -136,7 +136,7 @@ class _Chats_screenState extends State<Chats_screen> {
                                             ? difference.inDays.toString() +
                                                 ' day ago'
                                             : date,
-                            msg: 'Tap here to view messages',
+                            msg: "Tap here to view messages".tr,
                             name: chatController.scontacts[index].username,
                             imgicon:
                                 chatController.scontacts[index].profilePic);
