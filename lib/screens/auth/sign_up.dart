@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:translation/screens/auth/authcontroller.dart';
 import 'package:translation/screens/main_screen/home.dart';
+import 'package:translation/static/password_input.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/static/input_field1.dart';
 import 'package:translation/static/large_button.dart';
@@ -18,6 +19,19 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+    bool _obscureText = true;
+  bool _obscureText1 = true;
+    void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
+
+  void _toggle1() {
+    setState(() {
+      _obscureText1 = !_obscureText1;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,28 +113,55 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       type: TextInputType.number,
                                     ),
                                   ),
-                                  InputField1(
-                                    hint: 'Password',
-                                    icon: 'assets/images/lock.svg',
-                                    obscure: true,
+                                  // InputField1(
+                                  //   hint: 'Password',
+                                  //   icon: 'assets/images/lock.svg',
+                                  //   obscure: true,
+                                  //   controller: authController.password,
+                                  //   validator: (password) =>
+                                  //       Validators.passwordValidator(password),
+                                  // ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.only(
+                                  //       top: 4, bottom: 20),
+                                  //   child: InputField1(
+                                  //     hint: 'Confirm Password',
+                                  //     icon: 'assets/images/lock.svg',
+                                  //     obscure: true,
+                                  //     controller:
+                                  //         authController.confirmPassword,
+                                  //     validator: (password) =>
+                                  //         Validators.passwordValidator(
+                                  //             password),
+                                  //   ),
+                                  // ),
+                                  InputFieldPassword1(
                                     controller: authController.password,
+                                    imageIcon: 'assets/images/lock.svg',
+                                    hint: 'Password',
+                                    borderColor: Colors.black,
+                                    imageColor: Colors.black,
+                                    toggle: _toggle,
+                                    obscure: _obscureText,
+                                    validate: authController.validateSignUpForm,
                                     validator: (password) =>
                                         Validators.passwordValidator(password),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 4, bottom: 20),
-                                    child: InputField1(
-                                      hint: 'Confirm Password',
-                                      icon: 'assets/images/lock.svg',
-                                      obscure: true,
-                                      controller:
-                                          authController.confirmPassword,
-                                      validator: (password) =>
-                                          Validators.passwordValidator(
-                                              password),
-                                    ),
-                                  ),
+                          Padding(
+                            padding: const EdgeInsets.only(top:4,bottom: 20),
+                            child: InputFieldPassword1(
+                              controller: authController.confirmPassword,
+                              imageIcon: 'assets/images/lock.svg',
+                              hint: 'Confirm Password',
+                              borderColor: Colors.black,
+                              imageColor: Colors.black,
+                              toggle: _toggle1,
+                              obscure: _obscureText1,
+                              validate: authController.validateSignUpForm,
+                              validator: (password) =>
+                                  Validators.passwordValidator(password),
+                            ),
+                          ),
                                   LargeButton(
                                     title: 'Sign Up',
                                     sreenRatio: 0.9,

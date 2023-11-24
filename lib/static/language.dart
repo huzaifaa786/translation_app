@@ -33,67 +33,73 @@ class LanguageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  GetStorage box = GetStorage();
+    GetStorage box = GetStorage();
 
-    return GestureDetector(
-      onTap: onPressed,
-      child: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 30, top: 15),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: greenish.withOpacity(0.2),
-                        shape: BoxShape.circle,
-                      ),
-                      child: Center(
-                        child: SvgPicture.asset(
-                          imgicon,
-                          height: 22,
-                          width: 22,
+    return Directionality(
+      textDirection:
+          box.read('locale') == 'ar' ? TextDirection.rtl : TextDirection.ltr,
+      child: InkWell(
+        onTap: onPressed,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: greenish.withOpacity(0.2),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: SvgPicture.asset(
+                            imgicon,
+                            height: 22,
+                            width: 22,
+                          ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 25),
-                      child: Text(
-                        title,
+                      Padding(
+                        padding: box.read('locale') != 'ar'
+                            ? EdgeInsets.only(left: 25)
+                            : EdgeInsets.only(right: 25),
+                        child: Text(
+                          title,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 17,
+                              fontFamily: 'Lato'),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        // "AR",
+                        box.read('locale') != 'ar' ? 'EN' : 'AR',
                         style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 17,
                             fontFamily: 'Lato'),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      // "AR",
-                      box.read('locale') != 'ar' ? 'EN' : 'AR',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 17,
-                          fontFamily: 'Lato'),
-                    )
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 18,
-            ),
-            const Divider(
-              thickness: 1,
-              height: 1,
-            ),
-          ],
+                      )
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 18,
+              ),
+              const Divider(
+                thickness: 1,
+                height: 1,
+              ),
+            ],
+          ),
         ),
       ),
     );

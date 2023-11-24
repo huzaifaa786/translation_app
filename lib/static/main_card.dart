@@ -32,8 +32,13 @@ class MainStackCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TopBar(
-                onProfileTap: onProfileTap,
+              Directionality(
+                textDirection: box.read('locale') != 'ar'
+                    ? TextDirection.ltr
+                    : TextDirection.rtl,
+                child: TopBar(
+                  onProfileTap: onProfileTap,
+                ),
               ),
               SizedBox(
                 // width: MediaQuery.of(context).size.width*0.3,

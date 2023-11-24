@@ -1,5 +1,5 @@
 Languages() {
-  return [
+  return <String>[
     "Acehnese",
     "Acholi",
     "Afar",

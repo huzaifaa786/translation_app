@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:translation/values/colors.dart';
 
 class SearchTopBar extends StatelessWidget {
-  const   SearchTopBar({super.key,this.controller,this.onchange});
+  const SearchTopBar({super.key, this.controller, this.onchange});
   final onchange;
   final controller;
 
   @override
   Widget build(BuildContext context) {
+    GetStorage box = GetStorage();
     return Container(
       width: double.infinity,
       height: 80,
@@ -27,13 +29,22 @@ class SearchTopBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          GestureDetector(
+          box.read('locale') != 'ar' ? GestureDetector(
               onTap: () {
                 Get.back();
               },
               child: FittedBox(
                 fit: BoxFit.scaleDown,
                 child: SvgPicture.asset('assets/icons/back.svg',
+                    height: 40, width: 40),
+              )):
+          GestureDetector(
+              onTap: () {
+                Get.back();
+              },
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: SvgPicture.asset('assets/icons/forward.svg',
                     height: 40, width: 40),
               )),
           Container(
@@ -55,8 +66,8 @@ class SearchTopBar extends StatelessWidget {
                     borderSide: BorderSide(width: 1, color: Colors.grey[300]!),
                     borderRadius: BorderRadius.all(Radius.circular(6)),
                   ),
-                  hintText: 'Search People'.tr,
-                  contentPadding: EdgeInsets.only(left: 12),
+                  hintText: 'Search translators / interpreters'.tr,
+                  contentPadding: EdgeInsets.only(left: 12,right: 12),
                   fillColor: Colors.white,
                   filled: true,
                 ),

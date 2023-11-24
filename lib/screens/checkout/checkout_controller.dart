@@ -110,13 +110,16 @@ class CheckOutController extends GetxController {
       coupons = Coupon(response['coupons']);
 
       LoadingHelper.dismiss();
-
+      Get.snackbar('You have successfully applied the promo code', '',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.white);
       update();
       return callback(true);
     } else {
       LoadingHelper.dismiss();
       print(response['error_data']);
-      Get.snackbar('ERROR!', response['error_data'],
+      Get.snackbar('Invalid Promo Code', '',
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.red,
           colorText: Colors.white);

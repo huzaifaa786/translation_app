@@ -16,6 +16,8 @@ class HomeController extends GetxController {
   static HomeController instance = Get.find();
 
   String? fromSelectedLanguage;
+  TextEditingController searchController = TextEditingController();
+  TextEditingController toSearchController = TextEditingController();
   String? toSelectedLanguage;
   List<Vendor> vendors = [];
   List<Vendor> searchVendor = [];

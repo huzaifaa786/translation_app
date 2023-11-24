@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:translation/screens/translator/translator_profile.dart';
 import 'package:translation/values/controllers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -23,6 +24,7 @@ class FavoritesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    GetStorage box = GetStorage();
     return GestureDetector(
       onTap: () {
         translatorProfileController.clear();
@@ -60,7 +62,9 @@ class FavoritesCard extends StatelessWidget {
                               )),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 8),
+                    padding: box.read('locale') != 'ar'
+                        ? EdgeInsets.only(left: 8)
+                        : EdgeInsets.only(right: 8),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,14 +81,14 @@ class FavoritesCard extends StatelessWidget {
                           child: Row(
                             children: [
                               Text(
-                                "Rate per 30 mins:  ",
+                                "Rate per 30 mins".tr + ': ',
                                 style: TextStyle(
                                     fontSize: 9,
                                     fontWeight: FontWeight.w700,
                                     fontFamily: 'NunitoSans'),
                               ),
                               Text(
-                                price + " AED",
+                                price + ' ' + "AED".tr,
                                 style: TextStyle(
                                     fontSize: 11,
                                     fontWeight: FontWeight.w700,
@@ -104,7 +108,7 @@ class FavoritesCard extends StatelessWidget {
                                         child: SvgPicture.asset(
                                             'assets/images/star.svg',
                                             height: 11,
-                                        width: 11)),
+                                            width: 11)),
                                     Padding(
                                       padding: const EdgeInsets.only(
                                           top: 4, left: 2),

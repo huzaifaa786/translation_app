@@ -36,7 +36,7 @@ class _DeliveryMapState extends State<DeliveryMap> {
     ]);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Choose location'),
+        title: Text('Choose Location'.tr),
       ),
       floatingActionButton: FloatingActionButton(
         heroTag: "btn2",
@@ -69,7 +69,7 @@ class _DeliveryMapState extends State<DeliveryMap> {
           children: [
             Icon(Icons.save, size: 20, color: Colors.white),
             Text(
-              "Save",
+              "Save".tr,
               style: TextStyle(fontSize: 9, color: Colors.white),
             )
           ],
@@ -105,7 +105,7 @@ class _DeliveryMapState extends State<DeliveryMap> {
                     ],
                   ),
                   content: Text(
-                    'Sorry! Interpreter not within your range.',
+                    'Sorry! Interpreter not within your range'.tr+".",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontWeight: FontWeight.w700, fontSize: 19),
                   ),

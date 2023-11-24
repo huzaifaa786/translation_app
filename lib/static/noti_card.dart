@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/utils.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:translation/static/bagee.dart';
 import 'package:translation/values/colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+
 class NotificationTile extends StatelessWidget {
   const NotificationTile({
     super.key,
@@ -26,6 +28,7 @@ class NotificationTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    GetStorage box = GetStorage();
     print(status);
     return InkWell(
       onTap: ontap,
@@ -40,25 +43,27 @@ class NotificationTile extends StatelessWidget {
             children: [
               Row(
                 children: [
-                 ClipRRect(
-                        borderRadius: BorderRadius.circular(45),
-                        child: image == ''
-                            ? Image(
-                                image: AssetImage('assets/images/5907.jpg'),
-                                height: 65,
-                                width: 65,
-                              )
-                            : CachedNetworkImage(
-                                imageUrl: image,
-                                height: 65,
-                                width: 65,
-                              ),
-                      ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(45),
+                    child: image == ''
+                        ? Image(
+                            image: AssetImage('assets/images/5907.jpg'),
+                            height: 65,
+                            width: 65,
+                          )
+                        : CachedNetworkImage(
+                            imageUrl: image,
+                            height: 65,
+                            width: 65,
+                          ),
+                  ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        padding: const EdgeInsets.only(left: 12),
+                        padding: box.read('locale') == 'ar'
+                            ? EdgeInsets.only(right: 12)
+                            : EdgeInsets.only(left: 12),
                         width: MediaQuery.of(context).size.width * 0.45,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +79,17 @@ class NotificationTile extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(top: 4.0),
                               child: Text(
-                                title,
+                                title == 'New order placed'
+                                    ? 'New order placed'.tr
+                                    : title == 'Your order has been accepted'
+                                        ? 'Your order has been accepted'.tr
+                                        : title ==
+                                                'Your order has been rejected and order amount was refunded'
+                                            ? 'Your order has been rejected and order amount was refunded'.tr
+                                            : title ==
+                                                    'Your order has been completed'
+                                                ? 'Your order has been completed'.tr
+                                                : title,
                                 style: TextStyle(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w400,
@@ -89,8 +104,8 @@ class NotificationTile extends StatelessWidget {
                   ),
                 ],
               ),
-              status != ''?
-              Badgee(
+              status != ''
+                  ? Badgee(
                       title: status == "3"
                           ? 'Completed'.tr
                           : status == "2"
@@ -101,7 +116,8 @@ class NotificationTile extends StatelessWidget {
                           : status == "2"
                               ? Colors.red
                               : greenish,
-                    ):Container(),
+                    )
+                  : Container(),
             ],
           ),
         ),

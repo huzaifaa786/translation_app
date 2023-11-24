@@ -17,7 +17,7 @@ class Notification_screen extends StatefulWidget {
 class _Notification_screenState extends State<Notification_screen> {
   fetchNoti() async {
     await notificationController.getnoti();
-    setState(() {});
+    // setState(() {});
   }
 
   readnotification() async {

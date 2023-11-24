@@ -22,13 +22,13 @@ import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 
 //Enums used to ask user for desired service
-enum ServiceType { Instant, Schedule, Document }
+enum ServiceType { Schedule, Document }
 
 enum ScheduleType { AudioVideo, InPerson }
 
 enum DocumentType { Urgent, NotUrgent }
 
-enum InstantType { audio, video }
+// enum InstantType { audio, video }
 
 List<Urgent> urgents = [];
 List<Unurgent> unurgents = [];
@@ -43,10 +43,10 @@ class TranslatorProfileController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   //default types for radio Buttons (change from here)
-  ServiceType serviceType = ServiceType.Instant;
+  ServiceType serviceType = ServiceType.Schedule;
   ScheduleType scheduleType = ScheduleType.AudioVideo;
   DocumentType documentType = DocumentType.Urgent;
-  InstantType instantType = InstantType.audio;
+  // InstantType instantType = InstantType.audio;
 
   // default times for instant
 
@@ -85,7 +85,7 @@ class TranslatorProfileController extends GetxController {
     instantTime = ''.obs.toString();
     totalAmount = 0.obs.toInt();
     pages = 0;
-    instantType = InstantType.audio;
+    // instantType = InstantType.audio;
     scheduleType = ScheduleType.AudioVideo;
     documentType = DocumentType.Urgent;
     selectedLocation = null;
@@ -127,6 +127,12 @@ class TranslatorProfileController extends GetxController {
       }
     } else {
       totalAmount = 0;
+      Get.snackbar(
+          'Pages exceed the maximum amount of pages set by translator', '',
+          duration: Duration(seconds: 2),
+          backgroundColor: Colors.red,
+          colorText: white,
+          snackPosition: SnackPosition.BOTTOM);
     }
     update();
   }
@@ -162,8 +168,8 @@ class TranslatorProfileController extends GetxController {
       double amount = numberOfSlots * int.parse(vendor.service!.inperson!);
       if (amount <= 0) {
         totalAmount = 0;
-        Get.snackbar('Invalid Time Format!',
-            'End time can not be less than the starting time.',
+        Get.snackbar('',
+            'End time must be greater than  starting time.'.tr,
             snackPosition: SnackPosition.BOTTOM,
             colorText: white,
             backgroundColor: Colors.red);
@@ -193,7 +199,7 @@ class TranslatorProfileController extends GetxController {
       double amount = numberOfSlots * int.parse(vendor.service!.audiovideo!);
       if (amount <= 0) {
         totalAmount = 0;
-        Get.snackbar('', 'End time must be greater than  starting time.',
+        Get.snackbar('', 'End time must be greater than  starting time.'.tr,
             snackPosition: SnackPosition.BOTTOM,
             colorText: white,
             backgroundColor: Colors.red);
@@ -238,11 +244,8 @@ class TranslatorProfileController extends GetxController {
     var url = BASE_URL + 'user/order';
     var data;
     GetStorage box = GetStorage();
-    var servicetype = serviceType == ServiceType.Instant
-        ? 'instant'
-        : serviceType == ServiceType.Schedule
-            ? 'schedule'
-            : 'document';
+    var servicetype =
+        serviceType == ServiceType.Schedule ? 'schedule' : 'document';
 
     var response;
     if (serviceType == ServiceType.Document) {
@@ -259,7 +262,8 @@ class TranslatorProfileController extends GetxController {
         'date': DateTime.now().toString(),
         'starttime': startTime,
         'endtime': endTime,
-        'meetingtype': instantType == InstantType.audio ? 'audio' : 'video',
+        'meetingtype': 'audio',
+        // 'meetingtype': instantType == InstantType.audio ? 'audio' : 'video',
         'scheduletype': scheduleType == ScheduleType.AudioVideo
             ? 'audio/video'
             : 'inperson',
@@ -280,7 +284,8 @@ class TranslatorProfileController extends GetxController {
             : DateTime.now().toString(),
         'starttime': startTime,
         'endtime': endTime,
-        'meetingtype': instantType == InstantType.audio ? 'audio' : 'video',
+        'meetingtype': 'audio',
+        // 'meetingtype': instantType == InstantType.audio ? 'audio' : 'video',
         'scheduletype': scheduleType == ScheduleType.AudioVideo
             ? 'audio/video'
             : 'inperson',
@@ -308,11 +313,8 @@ class TranslatorProfileController extends GetxController {
     var url = BASE_URL + 'user/order';
     var data;
     GetStorage box = GetStorage();
-    var servicetype = serviceType == ServiceType.Instant
-        ? 'instant'
-        : serviceType == ServiceType.Schedule
-            ? 'schedule'
-            : 'document';
+    var servicetype =
+        serviceType == ServiceType.Schedule ? 'schedule' : 'document';
     data = {
       'api_token': box.read('api_token')!,
       'servicetype': servicetype,
@@ -378,7 +380,7 @@ class TranslatorProfileController extends GetxController {
 
   checkavailability(Vendor vendor) async {
     if (totalAmount <= 0) {
-      Get.snackbar("", "Please fill all required details.",
+      Get.snackbar("", "Please fill all required details".tr,
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.red,
           colorText: Colors.white);
@@ -416,7 +418,7 @@ class TranslatorProfileController extends GetxController {
       LoadingHelper.dismiss();
     } else {
       LoadingHelper.dismiss();
-      Get.snackbar(response['error_data'], "",
+      Get.snackbar("Timings are booked, please try other time".tr, "",
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.red,
           colorText: Colors.white);
@@ -443,10 +445,10 @@ class TranslatorProfileController extends GetxController {
 
   clear() {
     selectedLocation = null;
-    serviceType = ServiceType.Instant;
+    serviceType = ServiceType.Schedule;
     scheduleType = ScheduleType.AudioVideo;
     documentType = DocumentType.Urgent;
-    instantType = InstantType.audio;
+    // instantType = InstantType.audio;
     nameController.clear();
     phoneController.clear();
     emailController.clear();

@@ -76,6 +76,7 @@ dependencies:
   badges: ^3.1.1
   flutter_local_notifications: ^15.1.0+1
   syncfusion_flutter_pdfviewer: ^21.2.3
+  auto_size_text_field: ^2.2.2
 
 dev_dependencies:
   flutter_test:

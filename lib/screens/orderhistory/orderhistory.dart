@@ -36,7 +36,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
         builder: (controller) => Column(
           children: [
             TitleTopbarr(
-              text: 'history'.tr,
+              text: 'Orders'.tr,
             ),
             SizedBox(
               height: 23,
@@ -78,7 +78,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                             } else {
                               if (controller.orders[index].scheduletype ==
                                   'audio/video') {
-                                service = 'Audio/Video meeting'.tr;
+                                service = 'Audio/video meeting'.tr;
                               } else {
                                 service = 'In person meeting'.tr;
                               }
@@ -141,7 +141,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                 SvgPicture.asset("assets/images/smiley.svg"),
                                 SizedBox(height: 20),
                                 Text(
-                                  'No Order history Found',
+                                  'No Order history Found'.tr,
                                   style: TextStyle(
                                       fontSize: 22,
                                       fontWeight: FontWeight.w600),

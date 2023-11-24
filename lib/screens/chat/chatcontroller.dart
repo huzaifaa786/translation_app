@@ -68,7 +68,7 @@ class ChatController extends GetxController {
       String user_id = box.read('user_id').toString();
 
       await pusher.subscribe(channelName: "private-chatify.${user_id}");
-      
+
       print(pusher.connectionState);
       await pusher.connect();
       activeUserId = id;
@@ -102,8 +102,10 @@ class ChatController extends GetxController {
       update();
     } else {
       scontacts = contacts
-          .where((o) =>
-              o.username!.toString().toLowerCase().contains(query.toLowerCase()))
+          .where((o) => o.username!
+              .toString()
+              .toLowerCase()
+              .contains(query.toLowerCase()))
           .toList();
       update();
     }
@@ -169,7 +171,8 @@ class ChatController extends GetxController {
     );
     if (result != null) {
       file = await File(result.files.single.path!);
-      sendMassage();
+      await sendMassage();
+      file = null;
     } else {
       // User canceled the picker
     }
