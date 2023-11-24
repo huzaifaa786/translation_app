@@ -20,7 +20,7 @@ ProfileController profileController = ProfileController.instance;
 OrderController orderController = OrderController.instance;
 NotificationController notificationController = NotificationController.instance;
 TranslatorProfileController translatorProfileController =
-    TranslatorProfileController.instance;
+TranslatorProfileController.instance;
 CheckOutController checkoutController = CheckOutController.instance;
 OTPServices otpServices = OTPServices.instance;
 ChatController chatController = ChatController.instance;
