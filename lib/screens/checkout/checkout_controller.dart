@@ -110,7 +110,7 @@ class CheckOutController extends GetxController {
       coupons = Coupon(response['coupons']);
 
       LoadingHelper.dismiss();
-      Get.snackbar('You have successfully applied the promo code', '',
+      Get.snackbar('You have successfully applied the promo code'.tr, '',
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.green,
           colorText: Colors.white);

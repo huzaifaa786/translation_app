@@ -31,14 +31,11 @@ class _PPaymentMethodState extends State<PPaymentMethod> {
   Widget build(BuildContext context) {
     GetStorage box = GetStorage();
     return Directionality(
-      textDirection:
-          box.read('locale') != 'ar' ? TextDirection.ltr : TextDirection.rtl,
+      textDirection:TextDirection.ltr,
       child: InkWell(
         onTap: widget.onchaged,
         child: Container(
-          margin: box.read('locale') != 'ar'
-              ? EdgeInsets.only(left: 34)
-              : EdgeInsets.only(right: 34),
+          margin:  EdgeInsets.only(left: 34),
           padding: EdgeInsets.only(top: 7, bottom: 7),
           width: MediaQuery.of(context).size.width,
           child: Column(
@@ -48,9 +45,7 @@ class _PPaymentMethodState extends State<PPaymentMethod> {
                 width: MediaQuery.of(context).size.width,
                 child: ListTile(
                   title: Transform.translate(
-                    offset: box.read('locale') != 'ar'
-                        ? Offset(-25, 0)
-                        : Offset(25, 0),
+                    offset:  Offset(-25, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [

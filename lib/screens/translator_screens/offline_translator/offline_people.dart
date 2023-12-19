@@ -61,7 +61,7 @@ class _OfflinePeople_screenState extends State<OfflinePeople_screen> {
                                     .map((item) => DropdownMenuItem<String>(
                                           value: item,
                                           child: Text(
-                                            item,
+                                            item.tr,
                                             style: const TextStyle(
                                               fontSize: 14,
                                             ),
@@ -72,7 +72,7 @@ class _OfflinePeople_screenState extends State<OfflinePeople_screen> {
                                     .map((item) => DropdownMenuItem<String>(
                                           value: item,
                                           child: Text(
-                                            item,
+                                            item.tr,
                                             style: const TextStyle(
                                               fontSize: 14,
                                             ),
@@ -142,10 +142,10 @@ class _OfflinePeople_screenState extends State<OfflinePeople_screen> {
 
 final List<String> price = [
   'Highest price to lowest price',
-  'lowest price to Highest price',
+  'lowest to Highest price',
 ];
 
 final List<String> rating = [
   'Highest to lowest rating',
-  'lowest to Highest rating',
+  'lowest to highest rating',
 ];

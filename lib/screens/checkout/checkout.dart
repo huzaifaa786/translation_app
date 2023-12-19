@@ -110,6 +110,16 @@ class _Checkout_screenState extends State<Checkout_screen> {
                     ),
                     Center(
                       child: Text(
+                        translatorProfileController.vendors!.name != ''
+                            ? translatorProfileController.vendors!.name
+                                .toString()
+                            : '',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w700),
+                      ),
+                    ),
+                    Center(
+                      child: Text(
                         // translatorProfileController.serviceType ==
                         //         ServiceType.Instant
                         //     ? 'Instant audio/video meeting'.tr
@@ -199,7 +209,8 @@ class _Checkout_screenState extends State<Checkout_screen> {
                           controller: checkoutController.coupon,
                           readOnly: readonly,
                           decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(left: 12, right: 12,top: 14),
+                            contentPadding:
+                                EdgeInsets.only(left: 12, right: 12, top: 14),
                             hintText: 'Promo Code'.tr,
                             // suffixIcon:Text('dfd');
                             suffixIcon: readonly != true
@@ -325,8 +336,8 @@ class _Checkout_screenState extends State<Checkout_screen> {
                             ScheduleType.InPerson) {
                           if (translatorProfileController.selectedLocation ==
                               null) {
-                            Get.snackbar('Error!',
-                                'You may need to select location to get translator inperson service.',
+                            Get.snackbar('',
+                                'You may need to select location to get translator inperson service.'.tr,
                                 backgroundColor: Colors.red,
                                 colorText: white,
                                 snackPosition: SnackPosition.BOTTOM);

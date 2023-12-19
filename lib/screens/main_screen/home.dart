@@ -279,7 +279,7 @@ class _HomeState extends State<Home> {
                                           horizontal: 10,
                                           vertical: 14,
                                         ),
-                                        hintText: 'Search items',
+                                        hintText: 'Search items'.tr,
                                         border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(8),
@@ -349,7 +349,7 @@ class _HomeState extends State<Home> {
                                           horizontal: 10,
                                           vertical: 14,
                                         ),
-                                        hintText: 'Search items',
+                                        hintText: 'Search items'.tr,
                                         border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(8),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:translation/screens/freeitem.dart/free_items.dart';
 import 'package:translation/helper/loading.dart';
 import 'package:translation/screens/company_login/company_controller.dart';
 import 'package:translation/screens/favorites_screen/favorites_controller.dart';
@@ -17,6 +18,7 @@ import 'package:translation/screens/profile/profilecontroller.dart';
 import 'package:translation/screens/chat/chatcontroller.dart';
 import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/screens/splash_screen/splash_main.dart';
+import 'package:translation/screens/splash_screen/splash_screen1.dart';
 import 'package:translation/screens/translator_screens/notranslator.dart';
 import 'package:translation/services/auth_services/mobileotp_services.dart';
 import 'package:translation/translation.dart';
@@ -91,10 +93,10 @@ class _MyAppState extends State<MyApp> {
       title: "translation",
       initialRoute: 'splash',
       routes: {
-        // 'map': (_) => DeliveryMap(),
+        'freeItems': (_) => FreeItems(),
         'splash': (_) => SplashScreen(),
         'login': (_) => LoginScreen(),
-        // 'VerifyPhone': (_) => VerifyPhone(),
+        'onBoardingScreen': (_) => OnBoardingScreen(),
         'NoTranslator': (_) => NoTransFound_screen(),
         'Verify': (_) => EmailOtpVerifyScreen(),
       },

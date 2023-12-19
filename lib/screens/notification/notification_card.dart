@@ -54,8 +54,8 @@ class NotificationModal extends StatelessWidget {
               height: 40,
             ),
             Center(
-              child: const Text(
-                "How do you rate your experience?",
+              child: Text(
+                "How do you rate your experience?".tr,
                 style: TextStyle(
                   fontSize: 18,
                 ),
@@ -93,7 +93,7 @@ class NotificationModal extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 28),
               child: Center(
                   child: LargeButton(
-                title: 'Submit',
+                title: 'Submit'.tr,
                 sreenRatio: 0.8,
                 onPressed: () {
                   notificationController.addrating(

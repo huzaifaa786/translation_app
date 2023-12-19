@@ -241,7 +241,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                           },
                                           child: Padding(
                                             padding:
-                                                const EdgeInsets.only(left: 12),
+                                                const EdgeInsets.only(left: 12,right: 12),
                                             child: Text(
                                               widget.detail!.certificate_name!,
                                               style: TextStyle(
@@ -598,7 +598,10 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                         height: 10,
                                       ),
                                       IconsButton(
-                                        title: 'Choose Date'.tr,
+                                        title: 'Choose Date'.tr +
+                                            ' (' +
+                                            DateFormat('dd-MM-yyyy').format(
+                                                controller.selectedDay.value) + ')',
                                         icon: Icons.calendar_month,
                                         onPressed: () {
                                           showModalBottomSheet(
@@ -1180,7 +1183,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                     setState(() {});
                                     if (translatorProfileController.file ==
                                         null) {
-                                      Get.snackbar("Please Attach File.", "",
+                                      Get.snackbar("Please Attach File.".tr, "",
                                           snackPosition: SnackPosition.BOTTOM,
                                           backgroundColor: Colors.red,
                                           colorText: Colors.white);

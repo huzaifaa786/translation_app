@@ -54,10 +54,10 @@ class OTPServices extends GetxController {
         },
         codeAutoRetrievalTimeout: (String verificationId) {
           verificationid = verificationId;
-          Get.snackbar('TIMEOUT', '',
-              snackPosition: SnackPosition.BOTTOM,
-              backgroundColor: Colors.red,
-              colorText: primaryTextColor);
+          // Get.snackbar('TIMEOUT', '',
+          //     snackPosition: SnackPosition.BOTTOM,
+          //     backgroundColor: Colors.red,
+          //     colorText: primaryTextColor);
         },
       );
     } on FirebaseAuthException catch (e) {
