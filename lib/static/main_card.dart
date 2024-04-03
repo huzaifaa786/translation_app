@@ -18,14 +18,14 @@ class MainStackCard extends StatelessWidget {
       fit: StackFit.loose,
       children: [
         Container(
-          margin: EdgeInsets.only(bottom: 27),
+          // margin: EdgeInsets.only(bottom: 20),
           width: double.infinity,
           height: MediaQuery.of(context).size.height * 0.25,
           decoration: BoxDecoration(
             color: Color.fromARGB(255, 16, 54, 78),
             borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(25),
-                bottomRight: Radius.circular(25)),
+                bottomLeft: Radius.circular(15),
+                bottomRight: Radius.circular(15)),
           ),
         ),
         Padding(
@@ -70,61 +70,61 @@ class MainStackCard extends StatelessWidget {
             ],
           ),
         ),
-        Positioned.fill(
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => FreeItems(),
-                    ));
-              },
-              child: Container(
-                width: 280,
-                height: 59,
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 16, 54, 78),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.0824137),
-                      blurRadius: 15,
-                      offset: Offset(0, 4),
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                          color: greenish.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(20)),
-                      child: SvgPicture.asset(
-                        'assets/images/freeitem1.svg',
-                        color: white,
-                      ),
-                    ),
-                    Padding(
-                      
-                      padding: const EdgeInsets.only(left: 20, right: 20),
-                      child: Text(
-                        "Free item".tr,
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: white,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        )
+        // Positioned.fill(
+        //   child: Align(
+        //     alignment: Alignment.bottomCenter,
+        //     child: GestureDetector(
+        //       onTap: () {
+        //         Navigator.push(
+        //             context,
+        //             MaterialPageRoute(
+        //               builder: (context) => FreeItems(),
+        //             ));
+        //       },
+        //       child: Container(
+        //         width: 280,
+        //         height: 59,
+        //         decoration: BoxDecoration(
+        //           color: Color.fromARGB(255, 16, 54, 78),
+        //           boxShadow: [
+        //             BoxShadow(
+        //               color: Colors.black.withOpacity(0.0824137),
+        //               blurRadius: 15,
+        //               offset: Offset(0, 4),
+        //             ),
+        //           ],
+        //           borderRadius: BorderRadius.circular(10),
+        //         ),
+        //         child: Row(
+        //           mainAxisAlignment: MainAxisAlignment.center,
+        //           children: [
+        //             Container(
+        //               padding: EdgeInsets.all(8),
+        //               decoration: BoxDecoration(
+        //                   color: greenish.withOpacity(0.2),
+        //                   borderRadius: BorderRadius.circular(20)),
+        //               child: SvgPicture.asset(
+        //                 'assets/images/freeitem1.svg',
+        //                 color: white,
+        //               ),
+        //             ),
+        //             Padding(
+
+        //               padding: const EdgeInsets.only(left: 20, right: 20),
+        //               child: Text(
+        //                 "Free item".tr,
+        //                 style: TextStyle(
+        //                   fontSize: 15,
+        //                   color: white,
+        //                 ),
+        //               ),
+        //             ),
+        //           ],
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // )
       ],
     );
   }

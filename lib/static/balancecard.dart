@@ -26,18 +26,12 @@ class BalanceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-              margin: const EdgeInsets.only(left: 15, right: 15,top: 15),
-
-      width: MediaQuery.of(context).size.width  
-,
+      margin: const EdgeInsets.only(left: 15, right: 15, top: 15),
+      width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         image: DecorationImage(
-            image: AssetImage("assets/images/topUp.png"),
-            fit: BoxFit.fill),
-        border: Border.all(
-          width: 1,
-          color: Color.fromRGBO(0, 0, 0, 0.17),
-        ),
+            image: AssetImage("assets/images/topUp.png"), fit: BoxFit.cover),
+        // border: Border.all(width: 1, color: greenish),
         borderRadius: BorderRadius.circular(25),
       ),
       child: Padding(
@@ -108,8 +102,7 @@ class BalanceCard extends StatelessWidget {
                       width: 100,
                       height: 40.0,
                       decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.all(Radius.circular(8.0)),
+                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
                       ),
                       child: Center(
                         child: ElevatedButton(
@@ -129,7 +122,9 @@ class BalanceCard extends StatelessWidget {
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
-                            foregroundColor: greenish, minimumSize: Size(78, 26), backgroundColor: Colors.white,
+                            foregroundColor: greenish,
+                            minimumSize: Size(78, 26),
+                            backgroundColor: Colors.white,
                             padding: EdgeInsets.zero, // Button text color
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(

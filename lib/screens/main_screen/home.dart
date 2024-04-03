@@ -1,6 +1,7 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -18,6 +19,7 @@ import 'package:translation/values/controllers.dart';
 import 'package:translation/values/language.dart';
 import 'package:badges/badges.dart' as badges;
 import '../../../static/large_button.dart';
+import '../freeitem.dart/free_items.dart';
 
 class Home_screen extends StatefulWidget {
   const Home_screen({super.key});
@@ -200,209 +202,272 @@ class _HomeState extends State<Home> {
     return GetBuilder<HomeController>(
         builder: (controller) => Scaffold(
               body: SafeArea(
-                child: Container(
-                  decoration: BoxDecoration(color: white, boxShadow: [
-                    BoxShadow(
-                      color: Colors.red.withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: Offset(0, 3), // changes position of shadow
+                child: Stack(
+                  children: [
+                    MainStackCard(
+                      onProfileTap: () {},
+                      name: homeController.user == null
+                          ? ""
+                          : homeController.user!.username,
                     ),
-                  ]),
-                  child: Column(
-                    children: [
-                      MainStackCard(
-                        onProfileTap: () {},
-                        name: homeController.user == null
-                            ? ""
-                            : homeController.user!.username,
-                      ),
-                      Flexible(
-                        child: Container(
-                          padding:
-                              EdgeInsets.only(left: 20, right: 20, top: 35),
-                          height: MediaQuery.of(context).size.height * 0.60,
-                          child: SingleChildScrollView(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Choose languages'.tr,
-                                      style: TextStyle(
-                                          fontSize: 23,
-                                          fontWeight: FontWeight.bold,
-                                          color: greenish),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  // mainAxisAlignment: box.read('locale') != 'ar'
-                                  //     ? MainAxisAlignment.start
-                                  //     : MainAxisAlignment.end,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 16),
-                                      child: Directionality(
-                                        textDirection:
-                                            box.read('locale') != 'ar'
-                                                ? TextDirection.ltr
-                                                : TextDirection.rtl,
-                                        child: Text(
-                                          'From:'.tr,
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                              color: kblack),
-                                        ),
+                    Positioned(
+                      top: 140,
+                      left: 20,
+                      right: 20,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: white,
+                          boxShadow: [
+                            BoxShadow(color: Colors.black, blurRadius: 12)
+                          ],
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        padding: EdgeInsets.only(
+                          left: 20,
+                          right: 20,
+                        ),
+                        height: MediaQuery.of(context).size.height * 0.65,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 20, bottom: 30),
+                                child: Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => FreeItems(),
+                                          ));
+                                    },
+                                    child: Container(
+                                      width: 280,
+                                      height: 59,
+                                      decoration: BoxDecoration(
+                                        color: Color.fromARGB(255, 16, 54, 78),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black
+                                                .withOpacity(0.0824137),
+                                            blurRadius: 15,
+                                            offset: Offset(0, 4),
+                                          ),
+                                        ],
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.all(8),
+                                            decoration: BoxDecoration(
+                                                color:
+                                                    greenish.withOpacity(0.2),
+                                                borderRadius:
+                                                    BorderRadius.circular(20)),
+                                            child: SvgPicture.asset(
+                                              'assets/images/freeitem1.svg',
+                                              color: white,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 20, right: 20),
+                                            child: Text(
+                                              "Free item".tr,
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                color: white,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                  ],
-                                ),
-                                Directionality(
-                                  textDirection: box.read('locale') != 'ar'
-                                      ? TextDirection.ltr
-                                      : TextDirection.rtl,
-                                  child: DropdownField(
-                                    selectedvalue:
-                                        homeController.fromSelectedLanguage,
-                                    text: 'Select an item'.tr,
-                                    items: Languages(),
-                                    onChange: (value) {
-                                      setState(() {
-                                        homeController.fromSelectedLanguage =
-                                            value;
-                                      });
-                                    },
-                                    searchController:
-                                        homeController.searchController,
-                                    searchInnerWidget: Container(
-                                      padding: const EdgeInsets.all(12),
-                                      child: TextFormField(
-                                        controller:
-                                            homeController.searchController,
-                                        decoration: InputDecoration(
-                                          isDense: true,
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                            horizontal: 10,
-                                            vertical: 14,
-                                          ),
-                                          hintText: 'Search items'.tr,
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    searchMatchFn: (item, searchValue) {
-                                      return (item.value
-                                          .toLowerCase()
-                                          .contains(searchValue.toLowerCase()));
-                                    },
-                                    onMenuStateChange: (isOpen) {
-                                      if (!isOpen) {
-                                        homeController.searchController.clear();
-                                      }
-                                    },
                                   ),
                                 ),
-                                Row(
-                                  // mainAxisAlignment: box.read('locale') != 'ar'
-                                  //     ? MainAxisAlignment.start
-                                  //     : MainAxisAlignment.end,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 12),
-                                      child: Directionality(
-                                        textDirection:
-                                            box.read('locale') != 'ar'
-                                                ? TextDirection.ltr
-                                                : TextDirection.rtl,
-                                        child: Text(
-                                          'To:'.tr,
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                              color: kblack),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Choose languages'.tr,
+                                    style: TextStyle(
+                                        fontSize: 23,
+                                        fontWeight: FontWeight.bold,
+                                        color: greenish),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                // mainAxisAlignment: box.read('locale') != 'ar'
+                                //     ? MainAxisAlignment.start
+                                //     : MainAxisAlignment.end,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 16),
+                                    child: Directionality(
+                                      textDirection: box.read('locale') != 'ar'
+                                          ? TextDirection.ltr
+                                          : TextDirection.rtl,
+                                      child: Text(
+                                        'From:'.tr,
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            color: kblack),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Directionality(
+                                textDirection: box.read('locale') != 'ar'
+                                    ? TextDirection.ltr
+                                    : TextDirection.rtl,
+                                child: DropdownField(
+                                  selectedvalue:
+                                      homeController.fromSelectedLanguage,
+                                  text: 'Select an item'.tr,
+                                  items: Languages(),
+                                  onChange: (value) {
+                                    setState(() {
+                                      homeController.fromSelectedLanguage =
+                                          value;
+                                    });
+                                  },
+                                  searchController:
+                                      homeController.searchController,
+                                  searchInnerWidget: Container(
+                                    padding: const EdgeInsets.all(12),
+                                    child: TextFormField(
+                                      controller:
+                                          homeController.searchController,
+                                      decoration: InputDecoration(
+                                        isDense: true,
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                          horizontal: 10,
+                                          vertical: 14,
+                                        ),
+                                        hintText: 'Search items'.tr,
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                         ),
                                       ),
                                     ),
-                                  ],
+                                  ),
+                                  searchMatchFn: (item, searchValue) {
+                                    return (item.value
+                                        .toLowerCase()
+                                        .contains(searchValue.toLowerCase()));
+                                  },
+                                  onMenuStateChange: (isOpen) {
+                                    if (!isOpen) {
+                                      homeController.searchController.clear();
+                                    }
+                                  },
                                 ),
-                                Directionality(
-                                  textDirection: box.read('locale') != 'ar'
-                                      ? TextDirection.ltr
-                                      : TextDirection.rtl,
-                                  child: DropdownField(
-                                    selectedvalue:
-                                        homeController.toSelectedLanguage,
-                                    text: 'Select an item'.tr,
-                                    items: Languages(),
-                                    onChange: (value) {
-                                      setState(() {
-                                        homeController.toSelectedLanguage =
-                                            value;
-                                      });
-                                    },
-                                    searchController:
-                                        homeController.toSearchController,
-                                    searchInnerWidget: Container(
-                                      padding: const EdgeInsets.all(12),
-                                      child: TextFormField(
-                                        controller:
-                                            homeController.toSearchController,
-                                        decoration: InputDecoration(
-                                          isDense: true,
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                            horizontal: 10,
-                                            vertical: 14,
-                                          ),
-                                          hintText: 'Search items'.tr,
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                          ),
+                              ),
+                              Row(
+                                // mainAxisAlignment: box.read('locale') != 'ar'
+                                //     ? MainAxisAlignment.start
+                                //     : MainAxisAlignment.end,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 12),
+                                    child: Directionality(
+                                      textDirection: box.read('locale') != 'ar'
+                                          ? TextDirection.ltr
+                                          : TextDirection.rtl,
+                                      child: Text(
+                                        'To:'.tr,
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            color: kblack),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Directionality(
+                                textDirection: box.read('locale') != 'ar'
+                                    ? TextDirection.ltr
+                                    : TextDirection.rtl,
+                                child: DropdownField(
+                                  
+                                  
+                                  selectedvalue:
+                                      homeController.toSelectedLanguage,
+                                  text: 'Select an item'.tr,
+                                  items: Languages(),
+                                  onChange: (value) {
+                                    setState(() {
+                                      homeController.toSelectedLanguage = value;
+                                    });
+                                  },
+                                  searchController:
+                                      homeController.toSearchController,
+                                  searchInnerWidget: Container(
+                                    padding: const EdgeInsets.all(12),
+                                    child: TextFormField(
+                                      controller:
+                                          homeController.toSearchController,
+                                      decoration: InputDecoration(
+                                        isDense: true,
+                                        
+                                  
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                          horizontal: 10,
+                                          vertical: 14,
+                                        ),
+                                        hintText: 'Search items'.tr,
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                         ),
                                       ),
                                     ),
-                                    searchMatchFn: (item, searchValue) {
-                                      return (item.value
-                                          .toLowerCase()
-                                          .contains(searchValue.toLowerCase()));
-                                    },
-                                    onMenuStateChange: (isOpen) {
-                                      if (!isOpen) {
-                                        homeController.toSearchController
-                                            .clear();
-                                      }
-                                    },
                                   ),
+                                  searchMatchFn: (item, searchValue) {
+                                    return (item.value
+                                        .toLowerCase()
+                                        .contains(searchValue.toLowerCase()));
+                                  },
+                                  onMenuStateChange: (isOpen) {
+                                    if (!isOpen) {
+                                      homeController.toSearchController.clear();
+                                    }
+                                  },
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.only(top: 35, bottom: 20),
-                                  child: LargeButton(
-                                    title: 'Translate'.tr,
-                                    sreenRatio: 0.9,
-                                    onPressed: () {
-                                      homeController.fetchVendors();
-                                    },
-                                    color: greenish,
-                                    textcolor: Colors.white,
-                                    buttonWidth: 0.95,
-                                  ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 25, bottom: 20),
+                                child: LargeButton(
+                                  title: 'Translate'.tr,
+                                  sreenRatio: 0.9,
+                                  onPressed: () {
+                                    homeController.fetchVendors();
+                                  },
+                                  color: greenish,
+                                  textcolor: Colors.white,
+                                  buttonWidth: 0.95,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ));

@@ -81,7 +81,6 @@ class DropdownField extends StatelessWidget {
             ),
           ),
           dropdownStyleData: DropdownStyleData(
-            
             maxHeight: MediaQuery.of(context).size.height * 0.4,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
