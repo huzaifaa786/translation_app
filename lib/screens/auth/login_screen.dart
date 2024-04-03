@@ -14,6 +14,8 @@ import 'package:translation/values/colors.dart';
 import 'package:translation/static/input_field1.dart';
 import 'package:translation/static/large_button.dart';
 import 'package:translation/values/controllers.dart';
+import 'package:gap/gap.dart';
+import 'package:translation/static/main_button.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
@@ -48,9 +50,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       //   width: double.infinity,
                       // ),
                       Container(
-                        height: 390,
+                        height: Get.height,
                         width: Get.width,
-                        color: greenish,
+                        decoration: BoxDecoration(
+                          gradient: greenishgradient,
+                        ),
                       ),
                       Column(
                         children: [
@@ -81,46 +85,72 @@ class _LoginScreenState extends State<LoginScreen> {
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(40),
                                       ),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.grey.withOpacity(0.2),
-                                            spreadRadius: 5,
-                                            blurRadius: 7,
-                                            offset: Offset(0, 3))
-                                      ],
+                                      // boxShadow: [
+                                      //   BoxShadow(
+                                      //       color: Colors.grey.withOpacity(0.2),
+                                      //       spreadRadius: 5,
+                                      //       blurRadius: 7,
+                                      //       offset: Offset(0, 3))
+                                      // ],
                                     ),
-                                    child: ToggleSwitch(
-                                      initialLabelIndex: index,
-                                      labels: [
-                                        'Email',
-                                        'OTP',
-                                      ],
-                                      totalSwitches: 2,
-                                      onToggle: (index) {
-                                        getindex(index);
-                                      },
-                                      borderWidth: 3,
-                                      radiusStyle: true,
-                                      fontSize: 15,
-                                      minWidth: 110,
-                                      minHeight: 45,
-                                      cornerRadius: 40,
-                                      changeOnTap: true,
-                                      inactiveFgColor:
-                                          Color.fromARGB(255, 9, 9, 9),
-                                      activeFgColor:
-                                          Color.fromARGB(255, 255, 255, 255),
-                                      inactiveBgColor:
-                                          Color.fromARGB(255, 255, 255, 255),
-                                      activeBgColor: [greenish],
-                                      activeBorders: [
-                                        Border.all(
-                                          color: greenish,
-                                          width: 3.0,
+                                    child: Column(
+                                      children: [
+                                        Gap(20),
+                                        Text(
+                                          'WELCOME',
+                                          style: TextStyle(
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.w500,
+                                              color: greenish),
                                         ),
-                                        Border.all(
-                                          color: greenish,
-                                          width: 3.0,
+                                        Gap(20),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            // border: Border.all(),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.2),
+                                                  spreadRadius: 1,
+                                                  blurRadius: 9,
+                                                  offset: Offset(2, 4))
+                                            ],
+                                          ),
+                                          child: ToggleSwitch(
+                                            initialLabelIndex: index,
+                                            labels: [
+                                              'Email',
+                                              'OTP',
+                                            ],
+                                            totalSwitches: 2,
+                                            onToggle: (index) {
+                                              getindex(index);
+                                            },
+                                            borderWidth: 3,
+                                            radiusStyle: true,
+                                            fontSize: 15,
+                                            minWidth: 110,
+                                            minHeight: 45,
+                                            cornerRadius: 40,
+                                            changeOnTap: true,
+                                            inactiveFgColor:
+                                                Color.fromARGB(255, 9, 9, 9),
+                                            activeFgColor: Color.fromARGB(
+                                                255, 255, 255, 255),
+                                            inactiveBgColor: Color.fromARGB(
+                                                255, 255, 255, 255),
+                                            activeBgColor: [greenish],
+                                            activeBorders: [
+                                              Border.all(
+                                                color: greenish,
+                                                width: 3.0,
+                                              ),
+                                              Border.all(
+                                                color: greenish,
+                                                width: 3.0,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -139,32 +169,30 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 .viewInsets,
                                             child: Column(
                                               children: [
-                                                Container(
-                                                  padding: EdgeInsets.only(
-                                                      top: 14, bottom: 20),
-                                                  child: Text(
-                                                    'WELCOME BACK',
-                                                    style: TextStyle(
-                                                        fontSize: 24,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        color: greenish),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      bottom: 4),
-                                                  child: InputField1(
-                                                    icon:
-                                                        'assets/images/email.svg',
-                                                    hint: 'Email Address',
-                                                    controller:
-                                                        authController.email,
-                                                  ),
-                                                ),
+                                                // Container(
+                                                //   padding: EdgeInsets.only(
+                                                //       top: 14, bottom: 20),
+                                                //   child: Text(
+                                                //     'WELCOME BACK',
+                                                //     style: TextStyle(
+                                                //         fontSize: 24,
+                                                //         fontWeight:
+                                                //             FontWeight.w600,
+                                                //         color: greenish),
+                                                //   ),
+                                                // ),
+                                                Gap(40),
                                                 InputField1(
                                                   icon:
-                                                      'assets/images/lock.svg',
+                                                      'assets/images/email1.svg',
+                                                  hint: 'Email Address',
+                                                  controller:
+                                                      authController.email,
+                                                ),
+                                                Gap(20),
+                                                InputField1(
+                                                  icon:
+                                                      'assets/images/lock 01.svg',
                                                   hint: 'Password',
                                                   obscure: true,
                                                   controller:
@@ -172,7 +200,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 ),
                                                 Padding(
                                                   padding: EdgeInsets.only(
-                                                      top: 12, bottom: 16),
+                                                      top: 12,
+                                                      bottom: 16,
+                                                      right: 10),
                                                   child: Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.end,
@@ -185,20 +215,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                                         child: Text(
                                                           "Forgot Password?",
                                                           style: TextStyle(
-                                                              fontSize: 18,
-                                                              color: Colors
-                                                                  .black54,
+                                                              fontSize: 12,
+                                                              color: lightblue,
                                                               fontWeight:
                                                                   FontWeight
-                                                                      .w600),
+                                                                      .w400),
                                                         ),
                                                       )
                                                     ],
                                                   ),
                                                 ),
-                                                LargeButton(
-                                                  title: 'Login',
-                                                  sreenRatio: 0.9,
+                                                MainButton(
+                                                  title: 'Log In',
+                                                  sreenRatio: 0.4,
                                                   onPressed: () {
                                                     setState(() {});
                                                     authController.SignIn(
@@ -215,10 +244,33 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   color: greenish,
                                                   textcolor: Colors.white,
                                                   buttonWidth: 0.95,
+                                                  btnhight: 41.0,
                                                 ),
+                                                // LargeButton(
+                                                //   title: 'Login',
+                                                //   sreenRatio: 0.9,
+                                                //   onPressed: () {
+                                                //     setState(() {});
+                                                //     authController.SignIn(
+                                                //         (success) {
+                                                //       if (success) {
+                                                //         authController
+                                                //                 .validateSignUpForm =
+                                                //             false.obs;
+                                                //         Get.offAll(() =>
+                                                //             Home_screen());
+                                                //       }
+                                                //     });
+                                                //   },
+                                                //   color: greenish,
+                                                //   textcolor: Colors.white,
+                                                //   buttonWidth: 0.95,
+                                                // ),
                                                 Padding(
                                                   padding: EdgeInsets.only(
-                                                      top: 40, bottom: 25),
+                                                      top: 40,
+                                                      bottom: 25,
+                                                      right: 20),
                                                   child: Center(
                                                     child: Row(
                                                       mainAxisAlignment:
@@ -230,8 +282,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                                           style: TextStyle(
                                                               fontWeight:
                                                                   FontWeight
-                                                                      .w500,
-                                                              fontSize: 15),
+                                                                      .w400,
+                                                              color: lightblue,
+                                                              fontSize: 12),
                                                         ),
                                                         InkWell(
                                                           onTap: () {
@@ -248,9 +301,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                                             style: TextStyle(
                                                                 fontWeight:
                                                                     FontWeight
-                                                                        .w600,
-                                                                color: greenish,
-                                                                fontSize: 15),
+                                                                        .w400,
+                                                                color:
+                                                                    lightblue,
+                                                                fontSize: 12),
                                                           ),
                                                         ),
                                                       ],
@@ -275,10 +329,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                                         'Or login with',
                                                         style: TextStyle(
                                                             fontWeight:
-                                                                FontWeight.w500,
+                                                                FontWeight.w400,
                                                             fontSize: 18,
-                                                            color:
-                                                                Colors.black54),
+                                                            color: lightblue),
                                                       ),
                                                     ),
                                                     Expanded(
@@ -304,6 +357,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                                         },
                                                         child: Image.asset(
                                                             "assets/images/google.png",
+                                                            height: 34),
+                                                      ),
+                                                      Gap(50),
+                                                      InkWell(
+                                                        onTap: () {
+                                                          // authController
+                                                          //     .signInwithGoogle();
+                                                        },
+                                                        child: Image.asset(
+                                                            "assets/images/AppleLogo.png",
                                                             height: 34),
                                                       ),
                                                     ],
@@ -372,18 +435,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                         child: SingleChildScrollView(
                                           child: Column(
                                             children: [
-                                              Container(
-                                                padding: EdgeInsets.only(
-                                                    top: 30, bottom: 30),
-                                                child: Text(
-                                                  'WELCOME BACK',
-                                                  style: TextStyle(
-                                                      fontSize: 24,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      color: greenish),
-                                                ),
-                                              ),
+                                              // Container(
+                                              //   padding: EdgeInsets.only(
+                                              //       top: 30, bottom: 30),
+                                              //   child: Text(
+                                              //     'WELCOME BACK',
+                                              //     style: TextStyle(
+                                              //         fontSize: 24,
+                                              //         fontWeight:
+                                              //             FontWeight.w600,
+                                              //         color: greenish),
+                                              //   ),
+                                              // ),
+                                              Gap(40),
                                               Container(
                                                 height: 100,
                                                 child: IntlPhoneField(
@@ -402,17 +466,30 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     border: OutlineInputBorder(
                                                         borderSide:
                                                             BorderSide(),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(30),
                                                         gapPadding: 50),
                                                     enabledBorder:
                                                         OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: greenish),
-                                                    ),
+                                                            borderSide:
+                                                                BorderSide(
+                                                                    color:
+                                                                        lightblue),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        30)),
                                                     focusedBorder:
                                                         OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: greenish),
-                                                    ),
+                                                            borderSide:
+                                                                BorderSide(
+                                                                    color:
+                                                                        lightblue),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        30)),
                                                   ),
                                                   initialCountryCode: 'AE',
                                                   onChanged: (phone) {
@@ -438,9 +515,25 @@ class _LoginScreenState extends State<LoginScreen> {
                                               //     hint: 'Phone Number',
                                               //   ),
                                               // ),
-                                              LargeButton(
+                                              // LargeButton(
+                                              //   title: 'Request OTP',
+                                              //   sreenRatio: 0.9,
+                                              //   onPressed: () {
+                                              //     authController.getuser();
+                                              //     // Navigator.push(
+                                              //     //     context,
+                                              //     //     MaterialPageRoute(
+                                              //     //       builder: (context) =>
+                                              //     //           VerifyPhone(),
+                                              //     //     ));
+                                              //   },
+                                              //   color: greenish,
+                                              //   textcolor: Colors.white,
+                                              //   buttonWidth: 0.95,
+                                              // ),
+                                              MainButton(
                                                 title: 'Request OTP',
-                                                sreenRatio: 0.9,
+                                                sreenRatio: 0.43,
                                                 onPressed: () {
                                                   authController.getuser();
                                                   // Navigator.push(
@@ -452,8 +545,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 },
                                                 color: greenish,
                                                 textcolor: Colors.white,
-                                                buttonWidth: 0.95,
-                                              ),
+                                                buttonWidth: 0.5,
+                                              )
                                               // Padding(
                                               //   padding:   EdgeInsets.only(
                                               //       top: 40),

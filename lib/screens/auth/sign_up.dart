@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:translation/screens/auth/authcontroller.dart';
 import 'package:translation/screens/main_screen/home.dart';
+import 'package:translation/static/main_button.dart';
 import 'package:translation/static/password_input.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/static/input_field1.dart';
@@ -41,10 +42,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
             builder: (controller) => SingleChildScrollView(
                   child: Stack(
                     children: [
-                      Image.asset(
-                        "assets/images/loginback.jpg",
-                        height: MediaQuery.of(context).size.height * 0.25,
-                        width: double.infinity,
+                      // Image.asset(
+                      //   "assets/images/loginback.jpg",
+                      //   height: MediaQuery.of(context).size.height * 0.25,
+                      //   width: double.infinity,
+                      // ),
+                      Container(
+                        height: Get.height * 0.3,
+                        width: Get.width,
+                        decoration: BoxDecoration(
+                          gradient: greenishgradient,
+                        ),
                       ),
                       Column(
                         children: [
@@ -85,7 +93,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     ),
                                     InputField1(
                                       hint: 'Username',
-                                      icon: 'assets/images/user.svg',
+                                      icon: 'assets/images/user-circle.svg',
                                       controller: authController.userName,
                                       validator: (user) =>
                                           Validators.emptyStringValidator(
@@ -95,7 +103,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       padding: const EdgeInsets.only(
                                           bottom: 4, top: 4),
                                       child: InputField1(
-                                        icon: 'assets/images/email.svg',
+                                        icon: 'assets/images/email1.svg',
                                         hint: 'Email Address',
                                         controller: authController.email,
                                         validator: (user) =>
@@ -108,7 +116,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       padding: const EdgeInsets.only(bottom: 4),
                                       child: InputField1(
                                         hint: 'Phone Number',
-                                        icon: 'assets/images/phone.svg',
+                                        icon: 'assets/images/call.svg',
                                         controller: authController.phone,
                                         validator: (user) =>
                                             Validators.emptyStringValidator(
@@ -140,7 +148,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     // ),
                                     InputFieldPassword1(
                                       controller: authController.password,
-                                      imageIcon: 'assets/images/lock.svg',
+                                      imageIcon: 'assets/images/lock 01.svg',
                                       hint: 'Password',
                                       borderColor: Colors.black,
                                       imageColor: Colors.black,
@@ -158,7 +166,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       child: InputFieldPassword1(
                                         controller:
                                             authController.confirmPassword,
-                                        imageIcon: 'assets/images/lock.svg',
+                                        imageIcon: 'assets/images/lock 01.svg',
                                         hint: 'Confirm Password',
                                         borderColor: Colors.black,
                                         imageColor: Colors.black,
@@ -171,9 +179,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                 password),
                                       ),
                                     ),
-                                    LargeButton(
+                                    MainButton(
                                       title: 'Sign Up',
-                                      sreenRatio: 0.9,
+                                      sreenRatio: 0.4,
                                       onPressed: () {
                                         authController.SignUp((success) {
                                           if (success) {
@@ -189,7 +197,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       color: greenish,
                                       textcolor: Colors.white,
                                       buttonWidth: 0.95,
+                                      btnhight: 49.0,
                                     ),
+                                    // LargeButton(
+                                    //   title: 'Sign Up',
+                                    //   sreenRatio: 0.9,
+                                    //   onPressed: () {
+                                    //     authController.SignUp((success) {
+                                    //       if (success) {
+                                    //         authController
+                                    //             .ClearSignupVariables();
+                                    //         authController.validateSignUpForm =
+                                    //             false.obs;
+                                    //         Get.offAll(() => Home_screen());
+                                    //       }
+                                    //     });
+                                    //     setState(() {});
+                                    //   },
+                                    //   color: greenish,
+                                    //   textcolor: Colors.white,
+                                    //   buttonWidth: 0.95,
+                                    // ),
                                   ]),
                                 ),
                               ))
