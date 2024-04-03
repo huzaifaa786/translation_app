@@ -200,194 +200,209 @@ class _HomeState extends State<Home> {
     return GetBuilder<HomeController>(
         builder: (controller) => Scaffold(
               body: SafeArea(
-                child: Column(
-                  children: [
-                    MainStackCard(
-                      onProfileTap: () {},
-                      name: homeController.user == null
-                          ? ""
-                          : homeController.user!.username,
+                child: Container(
+                  decoration: BoxDecoration(color: white, boxShadow: [
+                    BoxShadow(
+                      color: Colors.red.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
                     ),
-                    Flexible(
-                      child: Container(
-                        padding: EdgeInsets.only(left: 20, right: 20, top: 35),
-                        height: MediaQuery.of(context).size.height * 0.60,
-                        child: SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Choose languages'.tr,
-                                    style: TextStyle(
-                                        fontSize: 23,
-                                        fontWeight: FontWeight.bold,
-                                        color: greenish),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                // mainAxisAlignment: box.read('locale') != 'ar'
-                                //     ? MainAxisAlignment.start
-                                //     : MainAxisAlignment.end,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 16),
-                                    child: Directionality(
-                                      textDirection: box.read('locale') != 'ar'
-                                          ? TextDirection.ltr
-                                          : TextDirection.rtl,
-                                      child: Text(
-                                        'From:'.tr,
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                            color: kblack),
-                                      ),
+                  ]),
+                  child: Column(
+                    children: [
+                      MainStackCard(
+                        onProfileTap: () {},
+                        name: homeController.user == null
+                            ? ""
+                            : homeController.user!.username,
+                      ),
+                      Flexible(
+                        child: Container(
+                          padding:
+                              EdgeInsets.only(left: 20, right: 20, top: 35),
+                          height: MediaQuery.of(context).size.height * 0.60,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Choose languages'.tr,
+                                      style: TextStyle(
+                                          fontSize: 23,
+                                          fontWeight: FontWeight.bold,
+                                          color: greenish),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Directionality(
-                                textDirection: box.read('locale') != 'ar'
-                                    ? TextDirection.ltr
-                                    : TextDirection.rtl,
-                                child: DropdownField(
-                                  selectedvalue:
-                                      homeController.fromSelectedLanguage,
-                                  text: 'Select an item'.tr,
-                                  items: Languages(),
-                                  onChange: (value) {
-                                    setState(() {
-                                      homeController.fromSelectedLanguage =
-                                          value;
-                                    });
-                                  },
-                                  searchController:
-                                      homeController.searchController,
-                                  searchInnerWidget: Container(
-                                    padding: const EdgeInsets.all(12),
-                                    child: TextFormField(
-                                      controller:
-                                          homeController.searchController,
-                                      decoration: InputDecoration(
-                                        isDense: true,
-                                        contentPadding:
-                                            const EdgeInsets.symmetric(
-                                          horizontal: 10,
-                                          vertical: 14,
-                                        ),
-                                        hintText: 'Search items'.tr,
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  searchMatchFn: (item, searchValue) {
-                                    return (item.value
-                                        .toLowerCase()
-                                        .contains(searchValue.toLowerCase()));
-                                  },
-                                  onMenuStateChange: (isOpen) {
-                                    if (!isOpen) {
-                                      homeController.searchController.clear();
-                                    }
-                                  },
+                                  ],
                                 ),
-                              ),
-                              Row(
-                                // mainAxisAlignment: box.read('locale') != 'ar'
-                                //     ? MainAxisAlignment.start
-                                //     : MainAxisAlignment.end,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 12),
-                                    child: Directionality(
-                                      textDirection: box.read('locale') != 'ar'
-                                          ? TextDirection.ltr
-                                          : TextDirection.rtl,
-                                      child: Text(
-                                        'To:'.tr,
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                            color: kblack),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Directionality(
-                                textDirection: box.read('locale') != 'ar'
-                                    ? TextDirection.ltr
-                                    : TextDirection.rtl,
-                                child: DropdownField(
-                                  selectedvalue:
-                                      homeController.toSelectedLanguage,
-                                  text: 'Select an item'.tr,
-                                  items: Languages(),
-                                  onChange: (value) {
-                                    setState(() {
-                                      homeController.toSelectedLanguage = value;
-                                    });
-                                  },
-                                  searchController:
-                                      homeController.toSearchController,
-                                  searchInnerWidget: Container(
-                                    padding: const EdgeInsets.all(12),
-                                    child: TextFormField(
-                                      controller:
-                                          homeController.toSearchController,
-                                      decoration: InputDecoration(
-                                        isDense: true,
-                                        contentPadding:
-                                            const EdgeInsets.symmetric(
-                                          horizontal: 10,
-                                          vertical: 14,
-                                        ),
-                                        hintText: 'Search items'.tr,
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
+                                Row(
+                                  // mainAxisAlignment: box.read('locale') != 'ar'
+                                  //     ? MainAxisAlignment.start
+                                  //     : MainAxisAlignment.end,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 16),
+                                      child: Directionality(
+                                        textDirection:
+                                            box.read('locale') != 'ar'
+                                                ? TextDirection.ltr
+                                                : TextDirection.rtl,
+                                        child: Text(
+                                          'From:'.tr,
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: kblack),
                                         ),
                                       ),
                                     ),
+                                  ],
+                                ),
+                                Directionality(
+                                  textDirection: box.read('locale') != 'ar'
+                                      ? TextDirection.ltr
+                                      : TextDirection.rtl,
+                                  child: DropdownField(
+                                    selectedvalue:
+                                        homeController.fromSelectedLanguage,
+                                    text: 'Select an item'.tr,
+                                    items: Languages(),
+                                    onChange: (value) {
+                                      setState(() {
+                                        homeController.fromSelectedLanguage =
+                                            value;
+                                      });
+                                    },
+                                    searchController:
+                                        homeController.searchController,
+                                    searchInnerWidget: Container(
+                                      padding: const EdgeInsets.all(12),
+                                      child: TextFormField(
+                                        controller:
+                                            homeController.searchController,
+                                        decoration: InputDecoration(
+                                          isDense: true,
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                            horizontal: 10,
+                                            vertical: 14,
+                                          ),
+                                          hintText: 'Search items'.tr,
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    searchMatchFn: (item, searchValue) {
+                                      return (item.value
+                                          .toLowerCase()
+                                          .contains(searchValue.toLowerCase()));
+                                    },
+                                    onMenuStateChange: (isOpen) {
+                                      if (!isOpen) {
+                                        homeController.searchController.clear();
+                                      }
+                                    },
                                   ),
-                                  searchMatchFn: (item, searchValue) {
-                                    return (item.value
-                                        .toLowerCase()
-                                        .contains(searchValue.toLowerCase()));
-                                  },
-                                  onMenuStateChange: (isOpen) {
-                                    if (!isOpen) {
-                                      homeController.toSearchController.clear();
-                                    }
-                                  },
                                 ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(top: 35, bottom: 20),
-                                child: LargeButton(
-                                  title: 'Translate'.tr,
-                                  sreenRatio: 0.9,
-                                  onPressed: () {
-                                    homeController.fetchVendors();
-                                  },
-                                  color: greenish,
-                                  textcolor: Colors.white,
-                                  buttonWidth: 0.95,
+                                Row(
+                                  // mainAxisAlignment: box.read('locale') != 'ar'
+                                  //     ? MainAxisAlignment.start
+                                  //     : MainAxisAlignment.end,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 12),
+                                      child: Directionality(
+                                        textDirection:
+                                            box.read('locale') != 'ar'
+                                                ? TextDirection.ltr
+                                                : TextDirection.rtl,
+                                        child: Text(
+                                          'To:'.tr,
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: kblack),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
+                                Directionality(
+                                  textDirection: box.read('locale') != 'ar'
+                                      ? TextDirection.ltr
+                                      : TextDirection.rtl,
+                                  child: DropdownField(
+                                    selectedvalue:
+                                        homeController.toSelectedLanguage,
+                                    text: 'Select an item'.tr,
+                                    items: Languages(),
+                                    onChange: (value) {
+                                      setState(() {
+                                        homeController.toSelectedLanguage =
+                                            value;
+                                      });
+                                    },
+                                    searchController:
+                                        homeController.toSearchController,
+                                    searchInnerWidget: Container(
+                                      padding: const EdgeInsets.all(12),
+                                      child: TextFormField(
+                                        controller:
+                                            homeController.toSearchController,
+                                        decoration: InputDecoration(
+                                          isDense: true,
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                            horizontal: 10,
+                                            vertical: 14,
+                                          ),
+                                          hintText: 'Search items'.tr,
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    searchMatchFn: (item, searchValue) {
+                                      return (item.value
+                                          .toLowerCase()
+                                          .contains(searchValue.toLowerCase()));
+                                    },
+                                    onMenuStateChange: (isOpen) {
+                                      if (!isOpen) {
+                                        homeController.toSearchController
+                                            .clear();
+                                      }
+                                    },
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 35, bottom: 20),
+                                  child: LargeButton(
+                                    title: 'Translate'.tr,
+                                    sreenRatio: 0.9,
+                                    onPressed: () {
+                                      homeController.fetchVendors();
+                                    },
+                                    color: greenish,
+                                    textcolor: Colors.white,
+                                    buttonWidth: 0.95,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ));

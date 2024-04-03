@@ -29,7 +29,7 @@ class _Chats_screenState extends State<Chats_screen> {
           width: double.infinity,
           height: 141,
           decoration: BoxDecoration(
-            color: Color(0xFF34607B),
+            color: Color.fromARGB(255, 16, 54, 78),
             borderRadius: BorderRadius.circular(25),
           ),
           child: Padding(
@@ -86,7 +86,7 @@ class _Chats_screenState extends State<Chats_screen> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 38.0,right: 38),
+          padding: const EdgeInsets.only(left: 38.0, right: 38),
           child: Row(
             children: [
               Text(
@@ -144,7 +144,7 @@ class _Chats_screenState extends State<Chats_screen> {
                 ),
               )
             : Expanded(
-              child: Container(
+                child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * .75,
                   child: Column(
@@ -163,7 +163,7 @@ class _Chats_screenState extends State<Chats_screen> {
                     ],
                   ),
                 ),
-            ),
+              ),
       ],
     ));
   }
