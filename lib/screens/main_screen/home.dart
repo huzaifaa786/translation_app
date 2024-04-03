@@ -56,7 +56,7 @@ class _Home_screenState extends State<Home_screen> {
         controller: _controller,
         screens: _buildScreens(),
         items: _navBarItem(),
-        navBarStyle: NavBarStyle.style6,
+        navBarStyle: NavBarStyle.style12,
         decoration: NavBarDecoration(
           boxShadow: [
             BoxShadow(
