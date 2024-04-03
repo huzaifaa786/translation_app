@@ -56,7 +56,7 @@ class _Home_screenState extends State<Home_screen> {
         controller: _controller,
         screens: _buildScreens(),
         items: _navBarItem(),
-        navBarStyle: NavBarStyle.style6,
+        navBarStyle: NavBarStyle.style12,
         decoration: NavBarDecoration(
           boxShadow: [
             BoxShadow(
@@ -251,9 +251,9 @@ class _HomeState extends State<Home> {
                                 ],
                               ),
                               Directionality(
-                                textDirection:  box.read('locale') != 'ar'
-                                          ? TextDirection.ltr
-                                          : TextDirection.rtl,
+                                textDirection: box.read('locale') != 'ar'
+                                    ? TextDirection.ltr
+                                    : TextDirection.rtl,
                                 child: DropdownField(
                                   selectedvalue:
                                       homeController.fromSelectedLanguage,
@@ -323,8 +323,8 @@ class _HomeState extends State<Home> {
                               ),
                               Directionality(
                                 textDirection: box.read('locale') != 'ar'
-                                          ? TextDirection.ltr
-                                          : TextDirection.rtl,
+                                    ? TextDirection.ltr
+                                    : TextDirection.rtl,
                                 child: DropdownField(
                                   selectedvalue:
                                       homeController.toSelectedLanguage,
