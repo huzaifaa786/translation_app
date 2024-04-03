@@ -47,31 +47,32 @@ class InputField1 extends StatelessWidget {
     return Container(
       height: 70,
       width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30),
+        //      boxShadow: [
+        //   BoxShadow(
+        //     color: Colors.grey.withOpacity(0.2),
+        //     spreadRadius: 2,
+        //     blurRadius: 1,
+        //     offset: Offset(0, 3),
+        //   ),
+        // ]
+      ),
       child: Card(
+        elevation: 1,
         color: Color.fromRGBO(255, 255, 255, 1),
         shape: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(30),
             borderSide: BorderSide(
-              color: Colors.grey[400]!,
-            )),
+                // color: Colors.grey[400]!,
+                color: lightblue,
+                width: 0.5)),
         child: Row(
           children: [
             SizedBox(
               width: 10,
             ),
-            Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: greenish,
-                  width: 1,
-                ),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: SvgPicture.asset(icon, height: 20, width: 20),
-              ),
-            ),
+            SvgPicture.asset(icon, height: 20, width: 20,),
             SizedBox(
               width: 5,
             ),

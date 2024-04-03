@@ -33,3 +33,13 @@ const progressBackgroud = Color(4281084972);
 const unSelectedProgress = Color(4294898357);
 const white = Colors.white;
 const completed = Color(4278236456);
+const lightblue = Color(4285892265);
+
+const LinearGradient greenishgradient = LinearGradient(
+  colors: [
+    Color(4280298564),
+    Color(4281683318),
+  ],
+   begin: Alignment.centerLeft,
+  end: Alignment.centerRight,
+);
