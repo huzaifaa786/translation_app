@@ -22,7 +22,7 @@ class MainStackCard extends StatelessWidget {
           width: double.infinity,
           height: MediaQuery.of(context).size.height * 0.25,
           decoration: BoxDecoration(
-            color: Color(0xFF34607B),
+            color: Color.fromARGB(255, 16, 54, 78),
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(25),
                 bottomRight: Radius.circular(25)),
@@ -85,7 +85,7 @@ class MainStackCard extends StatelessWidget {
                 width: 280,
                 height: 59,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Color.fromARGB(255, 16, 54, 78),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.0824137),
@@ -104,7 +104,8 @@ class MainStackCard extends StatelessWidget {
                           color: greenish.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(20)),
                       child: SvgPicture.asset(
-                        'assets/images/freeItem.svg',
+                        'assets/images/freeitem1.svg',
+                        color: white,
                       ),
                     ),
                     Padding(
@@ -113,7 +114,7 @@ class MainStackCard extends StatelessWidget {
                         "Free item".tr,
                         style: TextStyle(
                           fontSize: 15,
-                          color: Colors.black,
+                          color: white,
                         ),
                       ),
                     ),
