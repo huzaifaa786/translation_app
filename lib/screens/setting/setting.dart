@@ -150,7 +150,11 @@ class _Setting_screenState extends State<Setting_screen> {
       context: context,
       image: Padding(
         padding: const EdgeInsets.only(bottom: 8),
-        child: SvgPicture.asset('assets/images/logout.svg'),
+        child: SvgPicture.asset(
+          "assets/icons/arrow.svg", // replace with your logo asset path
+          height: 12,
+          width: 12,
+        ),
       ),
       title: "Are you sure you want to logout?".tr,
       buttons: [

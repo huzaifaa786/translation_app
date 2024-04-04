@@ -270,10 +270,8 @@ class _HomeState extends State<Home> {
                                                     greenish.withOpacity(0.2),
                                                 borderRadius:
                                                     BorderRadius.circular(20)),
-                                            child: SvgPicture.asset(
-                                              'assets/images/freeitem1.svg',
-                                              color: white,
-                                            ),
+                                            child: Image.asset(
+                                                "assets/images/Google Translate.png"),
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.only(
@@ -402,8 +400,6 @@ class _HomeState extends State<Home> {
                                     ? TextDirection.ltr
                                     : TextDirection.rtl,
                                 child: DropdownField(
-                                  
-                                  
                                   selectedvalue:
                                       homeController.toSelectedLanguage,
                                   text: 'Select an item'.tr,
@@ -422,8 +418,6 @@ class _HomeState extends State<Home> {
                                           homeController.toSearchController,
                                       decoration: InputDecoration(
                                         isDense: true,
-                                        
-                                  
                                         contentPadding:
                                             const EdgeInsets.symmetric(
                                           horizontal: 10,

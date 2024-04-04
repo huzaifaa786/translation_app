@@ -35,8 +35,8 @@ class SettingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     GetStorage box = GetStorage();
     return Directionality(
-      textDirection:box.read('locale') == 'ar'
-                            ?  TextDirection.rtl:TextDirection.ltr,
+      textDirection:
+          box.read('locale') == 'ar' ? TextDirection.rtl : TextDirection.ltr,
       child: InkWell(
         onTap: onPressed,
         child: Padding(
@@ -79,9 +79,10 @@ class SettingCard extends StatelessWidget {
                   box.read('locale') == 'ar'
                       ? Container(
                           decoration: BoxDecoration(
+                            color: greenish,
                             border: Border.all(
-                              color: Colors.black,
-                            ),
+                                 color: Colors.black,
+                                ),
                             borderRadius: BorderRadius.all(
                               Radius.circular(60),
                             ),
@@ -97,6 +98,7 @@ class SettingCard extends StatelessWidget {
                               "assets/icons/forward.svg", // replace with your logo asset path
                               height: 30,
                               width: 30,
+                              color: white,
                             ),
                           ],
                         ),

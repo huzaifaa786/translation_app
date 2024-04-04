@@ -56,120 +56,122 @@ class _Profile_screenState extends State<Profile_screen> {
                         SizedBox(
                           height: 15,
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Stack(
-                              children: [
-                                Container(
-                                  height: 130,
-                                  width: 132,
-                                  padding: EdgeInsets.all(8),
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: Colors.black,
-                                      ),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(70))),
-                                  child: Stack(
-                                    fit: StackFit.expand,
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(55)),
-                                        child: profileController
-                                                    .profileImage!.path !=
-                                                ''
-                                            ? FittedBox(
-                                                fit: BoxFit.scaleDown,
-                                                child: Image.file(
-                                                  File(profileController
-                                                      .profileImage!.path),
-                                                  height: 120,
-                                                  width: 120,
-                                                  fit: BoxFit.fill,
-                                                ),
-                                              )
-                                            : profileController.user == null
-                                                ? FittedBox(
-                                                    fit: BoxFit.scaleDown,
-                                                    child: Image.asset(
-                                                      "assets/images/5907.png",
-                                                      height: 120,
-                                                      width: 120,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  )
-                                                : profileController
-                                                            .user!.profilePic ==
-                                                        ''
-                                                    ? FittedBox(
-                                                        fit: BoxFit.scaleDown,
-                                                        child: Image.asset(
-                                                          "assets/images/5907.png",
-                                                          height: 120,
-                                                          width: 120,
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                      )
-                                                    : FittedBox(
-                                                        fit: BoxFit.scaleDown,
-                                                        child:
-                                                            CachedNetworkImage(
-                                                          imageUrl:
-                                                              profileController
-                                                                  .user!
-                                                                  .profilePic!,
-                                                          height: 120,
-                                                          width: 120,
-                                                          fit: BoxFit.cover,
-                                                        ),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Stack(
+                                children: [
+                                  Container(
+                                    height: 130,
+                                    width: 132,
+                                    padding: EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                        // border: Border.all(
+                                        //   color: Colors.black,
+                                        // ),
+
+                                        // borderRadius: BorderRadius.all(
+                                        //     Radius.circular(70))
+                                        ),
+                                    child: Stack(
+                                      fit: StackFit.expand,
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(55)),
+                                          child: profileController
+                                                      .profileImage!.path !=
+                                                  ''
+                                              ? FittedBox(
+                                                  fit: BoxFit.scaleDown,
+                                                  child: Image.file(
+                                                    File(profileController
+                                                        .profileImage!.path),
+                                                    height: 120,
+                                                    width: 120,
+                                                    fit: BoxFit.fill,
+                                                  ),
+                                                )
+                                              : profileController.user == null
+                                                  ? FittedBox(
+                                                      fit: BoxFit.scaleDown,
+                                                      child: Image.asset(
+                                                        "assets/images/5907.png",
+                                                        height: 120,
+                                                        width: 120,
+                                                        fit: BoxFit.cover,
                                                       ),
-                                      ),
-                                    ],
+                                                    )
+                                                  : profileController.user!
+                                                              .profilePic ==
+                                                          ''
+                                                      ? FittedBox(
+                                                          fit: BoxFit.scaleDown,
+                                                          child: Image.asset(
+                                                            "assets/images/5907.png",
+                                                            height: 120,
+                                                            width: 120,
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                        )
+                                                      : FittedBox(
+                                                          fit: BoxFit.scaleDown,
+                                                          child:
+                                                              CachedNetworkImage(
+                                                            imageUrl:
+                                                                profileController
+                                                                    .user!
+                                                                    .profilePic!,
+                                                            height: 120,
+                                                            width: 120,
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                        ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Positioned(
-                                    bottom: 0,
-                                    right: -25,
-                                    child: RawMaterialButton(
-                                      onPressed: () {
-                                        profileController.selectProfileImage();
-                                      },
-                                      elevation: 1.0,
-                                      fillColor: greenish,
-                                      child: Icon(
-                                        Icons.camera_alt_outlined,
-                                        color: white,
-                                        size: 19,
-                                      ),
-                                      padding: EdgeInsets.all(5.0),
-                                      shape: CircleBorder(),
-                                    )),
-                              ],
-                            )
-                          ],
-                        ),
-                        // profileController.profileImage!.path == ''
-                        //     ? Container()
-                        //     : Text(profileController.profileImage!.path),
-                        SizedBox(
-                          height: 25,
-                        ),
-                        Center(
-                          child: Text(
-                            profileController.user == null
-                                ? ''
-                                : profileController.user!.username!,
-                            style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: 'Mazzard'),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
+                                  Positioned(
+                                      bottom: 0,
+                                      right: -25,
+                                      child: RawMaterialButton(
+                                        onPressed: () {
+                                          profileController
+                                              .selectProfileImage();
+                                        },
+                                        elevation: 1.0,
+                                        fillColor: greenish,
+                                        child: Icon(
+                                          Icons.camera_alt_outlined,
+                                          color: white,
+                                          size: 19,
+                                        ),
+                                        padding: EdgeInsets.all(5.0),
+                                        shape: CircleBorder(),
+                                      )),
+                                ],
+                              ),
+
+                              // profileController.profileImage!.path == ''
+                              //     ? Container()
+                              //     : Text(profileController.profileImage!.path),
+                              SizedBox(
+                                height: 25,
+                              ),
+                              Text(
+                                profileController.user == null
+                                    ? ''
+                                    : profileController.user!.username!,
+                                style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'Mazzard'),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                            ]),
                         StackInputField(
                           hint: 'Enter your name',
                           lable: 'Username'.tr,
