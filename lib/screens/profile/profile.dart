@@ -47,52 +47,59 @@ class _Profile_screenState extends State<Profile_screen> {
                   ? Padding(
                       padding: const EdgeInsets.only(top: 2),
                       child: Stack(children: [
-                        TitleTopbar(
-                          height: 0.2,
-                          text: 'Profile'.tr,
-                          ontap: () {
-                            Navigator.pop(context);
-                          },
+                        Column(
+                          children: [
+                            TitleTopbar(
+                              height: 0.2,
+                              text: 'Profile'.tr,
+                              ontap: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                            Container(
+                              height: Get.height,
+                              width: Get.width,
+                              color: white,
+                            ),
+                          ],
                         ),
-                        
-
                         Positioned(
-                          top: 100,
+                          top: 110,
+                          left: 20,
+                          right: 20,
                           child: Column(
                             children: [
                               Container(
-                                margin: EdgeInsets.all(
-                                  10.0,
-                                ),
+                                // margin: EdgeInsets.all(
+                                //   10.0,
+                                // ),
                                 padding: EdgeInsets.only(
-                                    left: 10,
-                                    right: 10,
-                                    bottom: 30,
-                                    top: 20),
+                                    left: 10, right: 10, bottom: 30, top: 20),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(12),
                                     color: white,
                                     boxShadow: [
                                       BoxShadow(
-                                          color: Colors.black,
-                                          blurRadius: 12)
+                                          color: Colors.black, blurRadius: 12)
                                     ]),
                                 child: Column(children: [
                                   Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                   crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: [
                                         Stack(
                                           children: [
                                             Container(
-                                              height: 130,
-                                              width: 132,
+                                              height: 100,
+                                              width: 100,
                                               padding: EdgeInsets.all(8),
                                               decoration: BoxDecoration(
                                                   // border: Border.all(
                                                   //   color: Colors.black,
                                                   // ),
-                        
+
                                                   // borderRadius: BorderRadius.all(
                                                   //     Radius.circular(70))
                                                   ),
@@ -111,15 +118,13 @@ class _Profile_screenState extends State<Profile_screen> {
                                                         ? FittedBox(
                                                             fit: BoxFit
                                                                 .scaleDown,
-                                                            child:
-                                                                Image.file(
+                                                            child: Image.file(
                                                               File(profileController
                                                                   .profileImage!
                                                                   .path),
                                                               height: 120,
                                                               width: 120,
-                                                              fit: BoxFit
-                                                                  .fill,
+                                                              fit: BoxFit.fill,
                                                             ),
                                                           )
                                                         : profileController
@@ -128,13 +133,11 @@ class _Profile_screenState extends State<Profile_screen> {
                                                             ? FittedBox(
                                                                 fit: BoxFit
                                                                     .scaleDown,
-                                                                child: Image
-                                                                    .asset(
+                                                                child:
+                                                                    Image.asset(
                                                                   "assets/images/5907.png",
-                                                                  height:
-                                                                      120,
-                                                                  width:
-                                                                      120,
+                                                                  height: 120,
+                                                                  width: 120,
                                                                   fit: BoxFit
                                                                       .cover,
                                                                 ),
@@ -188,18 +191,16 @@ class _Profile_screenState extends State<Profile_screen> {
                                                   elevation: 1.0,
                                                   fillColor: greenish,
                                                   child: Icon(
-                                                    Icons
-                                                        .camera_alt_outlined,
+                                                    Icons.camera_alt_outlined,
                                                     color: white,
                                                     size: 19,
                                                   ),
-                                                  padding:
-                                                      EdgeInsets.all(5.0),
+                                                  padding: EdgeInsets.all(5.0),
                                                   shape: CircleBorder(),
                                                 )),
                                           ],
                                         ),
-                        
+
                                         // profileController.profileImage!.path == ''
                                         //     ? Container()
                                         //     : Text(profileController.profileImage!.path),
@@ -242,8 +243,8 @@ class _Profile_screenState extends State<Profile_screen> {
                                           readOnly: true,
                                           hint: 'Enter your phone number',
                                           lable: 'Phone Number'.tr,
-                                          controller: profileController
-                                              .phoneController,
+                                          controller:
+                                              profileController.phoneController,
                                         ),
                                   profileController.user!.type == 'Email'
                                       ? ChangePassword(
@@ -263,24 +264,33 @@ class _Profile_screenState extends State<Profile_screen> {
                                   profileController.user!.type != 'Email'
                                       ? SizedBox(height: 25)
                                       : Container(),
-                                  LargeButtons(
-                                    onPressed: () {
-                                      profileController.EditProfile(
-                                          (success) {
-                                        if (success) {
-                                          update(context);
-                                        }
-                                      });
-                                    },
-                                    title: 'Update'.tr,
-                                    textcolor: white,
+
+                                  SizedBox(
+                                    height: 49,
+                                    width: 150,
+                                    child: ElevatedButton(
+                                        onPressed: () {
+                                          profileController.EditProfile(
+                                              (success) {
+                                            if (success) {
+                                              update(context);
+                                            }
+                                          });
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(35))),
+                                        child: Text(
+                                          'Update'.tr,
+                                          style: TextStyle(color: white),
+                                        )),
                                   )
                                 ]),
                               ),
                             ],
                           ),
                         ),
-                       
                       ]),
                     )
                   : Container();
