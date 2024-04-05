@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class StackInputField extends StatelessWidget {
@@ -45,26 +46,29 @@ class StackInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     // bool isDark = Provider.of<DarkThemeProvider>(context).darkTheme;
 
-    return Padding(
-      padding: const EdgeInsets.only(top: 19, left: 20, right: 20),
-      child: TextFormField(
-        readOnly: readOnly,
-        obscureText: obscure,
-        controller: controller,
-        validator: validator,
-        autovalidateMode: autovalidateMode ??
-            (validator == true.obs
-                ? AutovalidateMode.always
-                : AutovalidateMode.onUserInteraction),
-        decoration: InputDecoration(
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          fillColor: Colors.grey,
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(12))),
-          hoverColor: Colors.grey,
-          focusColor: Colors.grey,
-          labelText: lable,
-          hintText: hint,
+    return SizedBox(
+      width: Get.width * 0.9,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 19, left: 20, right: 20),
+        child: TextFormField(
+          readOnly: readOnly,
+          obscureText: obscure,
+          controller: controller,
+          validator: validator,
+          autovalidateMode: autovalidateMode ??
+              (validator == true.obs
+                  ? AutovalidateMode.always
+                  : AutovalidateMode.onUserInteraction),
+          decoration: InputDecoration(
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            fillColor: Colors.grey,
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(12))),
+            hoverColor: Colors.grey,
+            focusColor: Colors.grey,
+            labelText: lable,
+            hintText: hint,
+          ),
         ),
       ),
     );
