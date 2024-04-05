@@ -52,14 +52,14 @@ class LanguageCard extends StatelessWidget {
                       Container(
                         padding: EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: greenish.withOpacity(0.2),
+                          // color: greenish.withOpacity(0.2),
                           shape: BoxShape.circle,
                         ),
                         child: Center(
                           child: SvgPicture.asset(
                             imgicon,
-                            height: 22,
-                            width: 22,
+                            height: 28,
+                            width: 28,
                           ),
                         ),
                       ),

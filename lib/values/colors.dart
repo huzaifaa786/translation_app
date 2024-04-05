@@ -40,6 +40,6 @@ const LinearGradient greenishgradient = LinearGradient(
     Color(4280298564),
     Color(4281683318),
   ],
-   begin: Alignment.centerLeft,
+  begin: Alignment.centerLeft,
   end: Alignment.centerRight,
 );
