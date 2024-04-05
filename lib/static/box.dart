@@ -20,18 +20,25 @@ class Box extends StatelessWidget {
       child: InkWell(
         onTap: ontap,
         child: Container(
-          height: 40,
-          width: MediaQuery.of(context).size.width * 0.28,
+          height: 37,
+          width: MediaQuery.of(context).size.width * 0.25,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(45),
-            color: selected == false ? Colors.white : greenish,
-            border: Border.all(color: selected == false ? Colors.grey: greenish),
+            color:
+                // selected == false ? Colors.white :
+                greenish,
+            // border:
+            //     Border.all(color: selected == false ? Colors.grey : greenish),
           ),
           child: Center(
               child: Text(
             title,
             style: TextStyle(
-                color:selected == false? Colors.black:white, fontSize: 13, fontWeight: FontWeight.w500),
+                color:
+                    // selected == false ? Colors.black :
+                    white,
+                fontSize: 15,
+                fontWeight: FontWeight.w500),
           )),
         ),
       ),
