@@ -51,14 +51,15 @@ class SettingCard extends StatelessWidget {
                       Container(
                         padding: EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: greenish.withOpacity(0.2),
+                          // color: greenish.withOpacity(0.2),
                           shape: BoxShape.circle,
                         ),
                         child: Center(
                           child: SvgPicture.asset(
                             imgicon,
-                            height: 22,
-                            width: 22,
+                            color: greenish,
+                            height: 28,
+                            width: 28,
                           ),
                         ),
                       ),
@@ -81,8 +82,8 @@ class SettingCard extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: greenish,
                             border: Border.all(
-                                 color: Colors.black,
-                                ),
+                              color: Colors.black,
+                            ),
                             borderRadius: BorderRadius.all(
                               Radius.circular(60),
                             ),
@@ -98,7 +99,7 @@ class SettingCard extends StatelessWidget {
                               "assets/icons/forward.svg", // replace with your logo asset path
                               height: 30,
                               width: 30,
-                              color: white,
+                              color: greenish,
                             ),
                           ],
                         ),
