@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -5,6 +7,7 @@ import 'dart:io' as io;
 import 'package:translation/screens/chat/chatcontroller.dart';
 import 'package:translation/static/chattopbar.dart';
 import 'package:translation/static/rplycharcard.dart';
+import 'package:translation/values/colors.dart';
 import 'package:translation/values/controllers.dart';
 import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
 
@@ -75,7 +78,7 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
           builder: (controller) => Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.only(top: 12),
+            // padding: EdgeInsets.only(top: 12),
             child: Column(
               children: [
                 ChatTopBar(
@@ -85,36 +88,36 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
                       : 'https://translation.ezmoveportal.com/' +
                           widget.profilePic!,
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Divider(
-                          color: Colors.grey,
-                          height: 1,
-                        ),
-                      ),
-                      // Padding(
-                      //   padding: EdgeInsets.symmetric(horizontal: 10),
-                      //   // child: Text(
-                      //   //   'Today',
-                      //   //   style: TextStyle(
-                      //   //     fontWeight: FontWeight.bold,
-                      //   //     color: Colors.grey,
-                      //   //   ),
-                      //   // ),
-                      // ),
-                      Expanded(
-                        child: Divider(
-                          color: Colors.grey,
-                          height: 1,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.center,
+                //     children: [
+                //       Expanded(
+                //         child: Divider(
+                //           color: Colors.grey,
+                //           height: 1,
+                //         ),
+                //       ),
+                //       // Padding(
+                //       //   padding: EdgeInsets.symmetric(horizontal: 10),
+                //       //   // child: Text(
+                //       //   //   'Today',
+                //       //   //   style: TextStyle(
+                //       //   //     fontWeight: FontWeight.bold,
+                //       //   //     color: Colors.grey,
+                //       //   //   ),
+                //       //   // ),
+                //       // ),
+                //       Expanded(
+                //         child: Divider(
+                //           color: Colors.grey,
+                //           height: 1,
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
                 Expanded(
                     child: ListView.builder(
                         reverse: true, // Set reverse to true
@@ -161,13 +164,15 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
                 Stack(
                   children: [
                     Directionality(
-                      textDirection: box.read('locale') != 'ar' ? TextDirection.ltr:TextDirection.rtl,
+                      textDirection: box.read('locale') != 'ar'
+                          ? TextDirection.ltr
+                          : TextDirection.rtl,
                       child: Container(
                         width: MediaQuery.of(context).size.width * 0.9,
                         // height: 58,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: Colors.black),
+                          borderRadius: BorderRadius.circular(50),
+                          border: Border.all(color: lightblue),
                           color: Color.fromARGB(255, 255, 255, 255),
                         ),
                         child: TextField(
@@ -184,11 +189,12 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
                                 onTap: () {
                                   controller.picksinglefile();
                                 },
-                                child:
-                                    Icon(Icons.attach_file, color: Colors.black)),
+                                child: Icon(Icons.attach_file,
+                                    color: Colors.black)),
                             hintText: 'You message'.tr,
                             border: InputBorder.none,
-                            contentPadding: EdgeInsets.only(left: 8, top: 18,right: 8),
+                            contentPadding:
+                                EdgeInsets.only(left: 8, top: 18, right: 8),
                           ),
                           style: TextStyle(
                             fontWeight: FontWeight.w400,

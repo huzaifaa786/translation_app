@@ -30,7 +30,9 @@ class _Chats_screenState extends State<Chats_screen> {
           height: 141,
           decoration: BoxDecoration(
             color: Color.fromARGB(255, 16, 54, 78),
-            borderRadius: BorderRadius.circular(25),
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(25),
+                bottomRight: Radius.circular(25)),
           ),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(38, 68, 38, 0),
@@ -38,8 +40,8 @@ class _Chats_screenState extends State<Chats_screen> {
               "Messages".tr,
               style: TextStyle(
                 fontFamily: 'Mazzard',
-                fontWeight: FontWeight.w600,
-                fontSize: 25,
+                fontWeight: FontWeight.w400,
+                fontSize: 20,
                 height: 1.5,
                 color: Colors.white,
               ),
@@ -85,17 +87,17 @@ class _Chats_screenState extends State<Chats_screen> {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 38.0, right: 38),
-          child: Row(
-            children: [
-              Text(
-                "Messages".tr,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.only(left: 38.0, right: 38),
+        //   child: Row(
+        //     children: [
+        //       Text(
+        //         "Messages".tr,
+        //         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        //       ),
+        //     ],
+        //   ),
+        // ),
         chatController.scontacts.length != 0
             ? Expanded(
                 child: Container(
