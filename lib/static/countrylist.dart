@@ -11,7 +11,7 @@ class CountryList extends StatefulWidget {
     this.groupvalue,
     this.onchaged,
     required this.picture,
-    this.countrycurrency,
+    required this.countrycurrency,
   }) : super(
           key: key,
         );
@@ -19,7 +19,7 @@ class CountryList extends StatefulWidget {
   final groupvalue;
   final onchaged;
   final String picture;
-  final countrycurrency;
+  final String countrycurrency;
 
   @override
   State<CountryList> createState() => _CountryListState();
@@ -50,6 +50,7 @@ class _CountryListState extends State<CountryList> {
                 ),
               ],
             ),
+            activeColor: greenish,
             value: widget.value.toString(),
             groupValue: widget.groupvalue.toString(),
             onChanged: (value) {

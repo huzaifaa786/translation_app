@@ -10,21 +10,25 @@ class SelectCurrencyAlert extends StatefulWidget {
   State<SelectCurrencyAlert> createState() => _SelectCurrencyAlertState();
 }
 
+
+
 class _SelectCurrencyAlertState extends State<SelectCurrencyAlert> {
+ 
+  
+
+   String? selectedCurrency;
+
   final List<Map<String, dynamic>> currency = [
     {
       'title': 'GBP - British Pound',
-      'image': 'assets/images/United Arab Emirates.png'
+      'image': 'assets/images/Great Britain.png'
     },
+    {'title': 'USD - American Dollar', 'image': 'assets/images/Usa.png'},
+    {'title': 'CAD - Canadian Dollar', 'image': 'assets/images/Canada.png'},
     {
-      'title': 'USD - American Dollar',
-      'image': 'assets/images/United Arab Emirates.png'
+      'title': 'EUR - Euro',
+      'image': "assets/images/European Union Circular Flag.png"
     },
-    {
-      'title': 'CAD - Canadian Dollar',
-      'image': 'assets/images/United Arab Emirates.png'
-    },
-    {'title': 'EUR - Euro', 'image': null},
     {
       'title': 'AED - Emirati Dirham',
       'image': 'assets/images/United Arab Emirates.png'
@@ -36,7 +40,7 @@ class _SelectCurrencyAlertState extends State<SelectCurrencyAlert> {
     return Dialog(
       child: Container(
         width: Get.width * 0.6,
-        height: Get.height * 0.8,
+        height: Get.height * 0.6,
         child: Column(
           children: [
             Padding(
@@ -57,9 +61,18 @@ class _SelectCurrencyAlertState extends State<SelectCurrencyAlert> {
                 itemCount: currency.length,
                 itemBuilder: (BuildContext context, int index) {
                   final String? image = currency[index]['image'];
+                  final String countryCurrency = currency[index]['title'];
                   return CountryList(
-                    picture: image ?? 'default_image_url', // Provide a default image URL if null
-                    countrycurrency: Text(currency[index]['title']),
+                    picture: image ?? 'assets/images/Great Britain.png',
+                    countrycurrency: countryCurrency,
+                    groupvalue:selectedCurrency ,
+                    value: countryCurrency,
+                    onchaged: () {
+                      setState(() {
+                         selectedCurrency = countryCurrency;
+                        
+                      });
+                    },
                   );
                 },
               ),

@@ -38,6 +38,7 @@ class _Topup_screenState extends State<Topup_screen> {
               Column(
                 children: [
                   TitleTopbar(
+                    height: 0.2,
                     text: 'Top Up'.tr,
                     ontap: () {
                       Get.back();
@@ -51,13 +52,14 @@ class _Topup_screenState extends State<Topup_screen> {
                 ],
               ),
               Positioned(
-                top: Get.height * 0.08,
-                left: 12,
-                right: 12,
+                top: 100,
+                right: 14,
+                left: 14,
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
                     color: white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [BoxShadow(color: Colors.black, blurRadius: 10)],
                   ),
                   child: Column(
                     children: [
