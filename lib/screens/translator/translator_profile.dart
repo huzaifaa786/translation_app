@@ -240,8 +240,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                             );
                                           },
                                           child: Padding(
-                                            padding:
-                                                const EdgeInsets.only(left: 12,right: 12),
+                                            padding: const EdgeInsets.only(
+                                                left: 12, right: 12),
                                             child: Text(
                                               widget.detail!.certificate_name!,
                                               style: TextStyle(
@@ -601,7 +601,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                         title: 'Choose Date'.tr +
                                             ' (' +
                                             DateFormat('dd-MM-yyyy').format(
-                                                controller.selectedDay.value) + ')',
+                                                controller.selectedDay.value) +
+                                            ')',
                                         icon: Icons.calendar_month,
                                         onPressed: () {
                                           showModalBottomSheet(
@@ -802,6 +803,10 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                               DatePicker.showTimePicker(context,
                                                   showTitleActions: true,
                                                   showSecondsColumn: false,
+                                                  locale:
+                                                      box.read('locale') != 'ar'
+                                                          ? LocaleType.en
+                                                          : LocaleType.ar,
                                                   onConfirm: (val) {
                                                 var end =
                                                     DateFormat.Hm().format(val);

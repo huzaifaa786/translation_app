@@ -8,6 +8,7 @@ class LocaleString extends Translations {
           "Enter your amount": "Enter your amount",
           "Hello": "Hello",
           "From:": "From",
+          "From": "From",
           "To:": "To",
           "Translate": "Translate",
           "Home": "Home",
@@ -191,6 +192,7 @@ class LocaleString extends Translations {
           "Please fill all required details":
               "رجاء إدخال كل البيانات المطلوبة ",
           "Save": "حفظ",
+          "From": "من",
           'To': "إلى",
           "Gulf Standard Time United Arab Emirates Time":
               "بناءً على توقيت دولة الإمارات العربية المتحدة",

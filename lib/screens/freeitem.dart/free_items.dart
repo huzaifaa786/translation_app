@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:translation/static/dropdown.dart';
 import 'package:translation/static/titletopbar.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translator/translator.dart';
@@ -21,6 +22,7 @@ class _FreeItemsState extends State<FreeItems> {
   String selectedvalue = 'English';
   String selectedvalue2 = 'Arabic';
   TextEditingController controller = TextEditingController(text: 'Hello');
+  TextEditingController searchController = TextEditingController();
   final formkey = GlobalKey<FormState>();
   bool isloading = false;
   translate() async {
@@ -59,7 +61,9 @@ class _FreeItemsState extends State<FreeItems> {
       body: SafeArea(
         child: SingleChildScrollView(
             child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.,
+          crossAxisAlignment: CrossAxisAlignment.start,
+
           children: [
             TitleTopbar(
               text: 'Free item'.tr,
@@ -70,40 +74,57 @@ class _FreeItemsState extends State<FreeItems> {
             const SizedBox(
               height: 30,
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 40),
-              decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
-                  borderRadius: BorderRadius.circular(10)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('From:'.tr),
-                  const SizedBox(
-                    width: 100,
+            Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              child: Text(
+                'From'.tr,
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              child: DropdownField(
+                selectedvalue: selectedvalue,
+                text: 'Select a language',
+                items: languages,
+                onChange: (value) {
+                  int index = languages.indexOf(value);
+                  if (index != -1 && index < languagescode.length) {
+                    from = languagescode[index];
+                  }
+                  setState(() {
+                    selectedvalue = value;
+                  });
+                },
+                // Add the following for search functionality
+                searchController: searchController,
+                searchInnerWidget: Container(
+                  padding: const EdgeInsets.all(12),
+                  child: TextFormField(
+                    controller: searchController,
+                    decoration: InputDecoration(
+                      isDense: true,
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 14,
+                      ),
+                      hintText: 'Search items'.tr,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
                   ),
-                  DropdownButton(
-                    value: selectedvalue,
-                    focusColor: Colors.transparent,
-                    underline: Container(color: Colors.grey.shade200),
-                    items: languages.map((lang) {
-                      return DropdownMenuItem(
-                        value: lang,
-                        child: Text(lang),
-                        onTap: () {
-                          int index = languages.indexOf(lang);
-                          if (index != -1 && index < languagescode.length) {
-                            from = languagescode[index];
-                          }
-                          setState(() {});
-                        },
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      selectedvalue = value!;
-                    },
-                  )
-                ],
+                ),
+                searchMatchFn: (item, searchValue) {
+                  return (item.value
+                      .toLowerCase()
+                      .contains(searchValue.toLowerCase()));
+                },
+                onMenuStateChange: (isOpen) {
+                  if (!isOpen) {
+                    searchController.clear();
+                  }
+                },
               ),
             ),
             Container(
@@ -137,40 +158,56 @@ class _FreeItemsState extends State<FreeItems> {
                 ),
               ),
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 40),
-              decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
-                  borderRadius: BorderRadius.circular(10)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('To'.tr),
-                  const SizedBox(
-                    width: 100,
+            Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              child: Text(
+                'To'.tr,
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              child: DropdownField(
+                selectedvalue: selectedvalue2,
+                text: 'Select a language',
+                items: languages, // Replace with your list of languages
+                onChange: (value) {
+                  int index = languages.indexOf(value);
+                  if (index != -1 && index < languagescode.length) {
+                    to = languagescode[index];
+                  }
+                  setState(() {
+                    selectedvalue2 = value;
+                  });
+                },
+                searchController: searchController,
+                searchInnerWidget: Container(
+                  padding: const EdgeInsets.all(12),
+                  child: TextFormField(
+                    controller: searchController,
+                    decoration: InputDecoration(
+                      isDense: true,
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 14,
+                      ),
+                      hintText: 'Search items'.tr,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
                   ),
-                  DropdownButton(
-                    value: selectedvalue2,
-                    focusColor: Colors.transparent,
-                    underline: Container(color: Colors.grey.shade200),
-                    items: languages.map((lang) {
-                      return DropdownMenuItem(
-                        value: lang,
-                        child: Text(lang),
-                        onTap: () {
-                          int index = languages.indexOf(lang);
-                          if (index != -1 && index < languagescode.length) {
-                            to = languagescode[index];
-                          }
-                          setState(() {});
-                        },
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      selectedvalue2 = value!;
-                    },
-                  )
-                ],
+                ),
+                searchMatchFn: (item, searchValue) {
+                  return (item.value
+                      .toLowerCase()
+                      .contains(searchValue.toLowerCase()));
+                },
+                onMenuStateChange: (isOpen) {
+                  if (!isOpen) {
+                    searchController.clear();
+                  }
+                },
               ),
             ),
             Container(
@@ -189,19 +226,22 @@ class _FreeItemsState extends State<FreeItems> {
                 ),
               ),
             ),
-            ElevatedButton(
-                onPressed: translate,
-                style: ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(greenish),
-                    fixedSize: const MaterialStatePropertyAll(Size(300, 45))),
-                child: isloading
-                    ? const SizedBox.square(
-                        dimension: 20,
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                        ),
-                      )
-                    : Text('Translate'.tr)),
+            Align(
+              alignment: Alignment.center,
+              child: ElevatedButton(
+                  onPressed: translate,
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll(greenish),
+                      fixedSize: const MaterialStatePropertyAll(Size(300, 45))),
+                  child: isloading
+                      ? const SizedBox.square(
+                          dimension: 20,
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                        )
+                      : Text('Translate'.tr)),
+            ),
             const SizedBox(
               height: 30,
             )
