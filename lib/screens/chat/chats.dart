@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:translation/screens/chat/chatdetails.dart';
 
 import 'package:translation/static/chart.dart';
+import 'package:translation/static/titletopbar.dart';
 import 'package:translation/values/controllers.dart';
 
 class Chats_screen extends StatefulWidget {
@@ -25,29 +26,37 @@ class _Chats_screenState extends State<Chats_screen> {
     return Scaffold(
         body: Column(
       children: [
-        Container(
-          width: double.infinity,
-          height: 141,
-          decoration: BoxDecoration(
-            color: Color.fromARGB(255, 16, 54, 78),
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(25),
-                bottomRight: Radius.circular(25)),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(38, 68, 38, 0),
-            child: Text(
-              "Messages".tr,
-              style: TextStyle(
-                fontFamily: 'Mazzard',
-                fontWeight: FontWeight.w400,
-                fontSize: 20,
-                height: 1.5,
-                color: Colors.white,
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: double.infinity,
+              height: Get.height * 0.2,
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 16, 54, 78),
+                borderRadius: BorderRadius.only(
+                    // bottomLeft: Radius.circular(25),
+                    // bottomRight: Radius.circular(25)
+                    ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(38, 68, 38, 0),
+                child: Text(
+                  "Messages".tr,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Mazzard',
+                    fontWeight: FontWeight.w400,
+                    fontSize: 20,
+                    height: 1.5,
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ),
-          ),
+          ],
         ),
+
         Container(
           width: double.infinity,
           margin: EdgeInsets.fromLTRB(31, 20, 28, 20),

@@ -92,7 +92,7 @@ class HistoryCard extends StatelessWidget {
                                   ? TextDirection.ltr
                                   : TextDirection.rtl,
                               child: Text(
-                                "Order Id#".tr + '# ' + id.toString(),
+                                "Order No.".tr + id.toString(),
                                 style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w600,

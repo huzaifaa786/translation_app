@@ -7,21 +7,22 @@ import 'package:translation/values/colors.dart';
 import 'package:translation/values/controllers.dart';
 
 class BalanceCard extends StatelessWidget {
-  const BalanceCard({
-    super.key,
-    this.image,
-    this.balance,
-    this.day,
-    this.type,
-    this.ontap,
-    this.name,
-  });
+  const BalanceCard(
+      {super.key,
+      this.image,
+      this.balance,
+      this.day,
+      this.type,
+      this.ontap,
+      this.name,
+      this.currency= "AED",});
   final type;
   final name;
   final image;
   final balance;
   final day;
   final ontap;
+  final   currency;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class BalanceCard extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
             image: AssetImage("assets/images/topUp.png"), fit: BoxFit.cover),
-        // border: Border.all(width: 1, color: greenish),
+        //  border: Border.all(width: 1, color: greenish),
         borderRadius: BorderRadius.circular(25),
       ),
       child: Padding(
@@ -58,7 +59,7 @@ class BalanceCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 8, top: 5),
                     child: Text(
-                      "AED ",
+                      currency,
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 24,

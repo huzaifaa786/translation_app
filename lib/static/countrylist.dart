@@ -38,23 +38,28 @@ class _CountryListState extends State<CountryList> {
   Widget build(BuildContext context) {
     return Container(
         child: RadioListTile(
-            title: Row(
+            title: Column(
               children: [
-                Image.asset(widget.picture),
-                Text(
-                  widget.countrycurrency,
-                  style: TextStyle(
-                      color: greenish,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400),
+                Row(
+                  children: [
+                    Image.asset(widget.picture),
+                    Text(
+                      widget.countrycurrency,
+                      style: TextStyle(
+                          color: greenish,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ],
                 ),
+                Divider()
               ],
             ),
             activeColor: greenish,
             value: widget.value.toString(),
             groupValue: widget.groupvalue.toString(),
             onChanged: (value) {
-              widget.onchaged();
+              widget.onchaged(value);
             }));
   }
 }

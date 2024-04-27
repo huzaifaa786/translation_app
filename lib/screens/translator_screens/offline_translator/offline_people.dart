@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:translation/models/filter.dart';
 import 'package:translation/screens/main_screen/homecontroller.dart';
+import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/screens/translator_screens/offline_translator/offline_modal.dart';
 import 'package:translation/static/offline_translator_card.dart';
 import 'package:translation/static/search_topbar.dart';
+import 'package:translation/static/titletopbar.dart';
 import 'package:translation/values/controllers.dart';
 
 class OfflinePeople_screen extends StatefulWidget {
@@ -16,6 +19,15 @@ class OfflinePeople_screen extends StatefulWidget {
 }
 
 class _OfflinePeople_screenState extends State<OfflinePeople_screen> {
+  SettingController currencycontroller = Get.find();
+  GetStorage box = GetStorage();
+  String? selectedCurrency;
+  @override
+  void initState() {
+    selectedCurrency = box.read('selectedCurrency');
+    super.initState();
+  }
+
   FilterModalResult? query;
   // @override
   // void initState() {
@@ -31,19 +43,47 @@ class _OfflinePeople_screenState extends State<OfflinePeople_screen> {
         child: GetBuilder<HomeController>(
           builder: (controller) => Column(
             children: [
-              SearchTopBar(
-                onchange: controller.searchOfflineOrders,
+              TitleTopbar(
+                text: "Interpreters / Translators",
+                height: 0.1 / 0.9,
               ),
+              // SearchTopBar(
+              //   onchange: controller.searchOfflineOrders,
+              // ),
               Padding(
                 padding: const EdgeInsets.only(
                     left: 12, right: 12, top: 15, bottom: 12),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "Schedule Translators/interpreters".tr,
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                    Container(
+                      margin: EdgeInsets.only(left: 10),
+                      width: Get.width * 0.8,
+                      // height: 70,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: Colors.grey[200],
+                      ),
+                      child: TextField(
+                        onChanged: controller.searchOfflineOrders,
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(width: 1, color: Colors.grey[300]!),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(width: 1, color: Colors.grey[300]!),
+                            borderRadius: BorderRadius.all(Radius.circular(13)),
+                          ),
+                          prefixIcon: Icon(Icons.search),
+                          hintText: 'Search'.tr,
+                          contentPadding: EdgeInsets.only(left: 12, right: 13),
+                          fillColor: Colors.white,
+                          filled: true,
+                        ),
+                      ),
                     ),
                     GestureDetector(
                       onTap: () async {
@@ -99,13 +139,16 @@ class _OfflinePeople_screenState extends State<OfflinePeople_screen> {
                           Padding(
                             padding: const EdgeInsets.only(right: 4),
                             child: SvgPicture.asset(
-                                'assets/images/filterIcon.svg'),
+                              'assets/images/filterIcon.svg',
+                              height: 30,
+                              width: 30,
+                            ),
                           ),
-                          Text(
-                            "Filter".tr,
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w600),
-                          ),
+                          // Text(
+                          //   "Filter".tr,
+                          //   style: TextStyle(
+                          //       fontSize: 16, fontWeight: FontWeight.w600),
+                          // ),
                         ],
                       ),
                     ),
@@ -118,17 +161,22 @@ class _OfflinePeople_screenState extends State<OfflinePeople_screen> {
                           itemCount: controller.sschedule.length,
                           itemBuilder: (context, index) {
                             return OfflineTranslattorCard(
-                              name: controller.sschedule[index].name,
-                              image: controller.sschedule[index].profilePic,
-                              lang: controller.sschedule[index].language,
-                              vendor: controller.sschedule[index],
-                              price: controller.sschedule[index].service!
-                                  .audiovideo,
-                              rating: controller.sschedule[index].rating == null
-                                  ? null
-                                  : double.parse(
-                                      controller.sschedule[index].rating!),
-                            );
+                                  currencyname: selectedCurrency != null
+                                      ? currencycontroller
+                                          .selectedCurrency
+                                      : "AED ",
+                                  name: controller.sschedule[index].name,
+                                  image: controller.sschedule[index].profilePic,
+                                  lang: controller.sschedule[index].language,
+                                  vendor: controller.sschedule[index],
+                                  price: controller
+                                      .sschedule[index].service!.audiovideo,
+                                  rating: controller.sschedule[index].rating ==
+                                          null
+                                      ? null
+                                      : double.parse(
+                                          controller.sschedule[index].rating!),
+                                );
                           }),
                     )
                   : Container(),

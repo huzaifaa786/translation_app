@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:translation/screens/freeitem.dart/free_items.dart';
@@ -16,6 +17,8 @@ import 'package:translation/screens/notification/notificationcontroller.dart';
 import 'package:translation/screens/orderhistory/ordercontroller.dart';
 import 'package:translation/screens/profile/profilecontroller.dart';
 import 'package:translation/screens/chat/chatcontroller.dart';
+import 'package:translation/screens/setting/currency/currency_controller.dart';
+import 'package:translation/screens/setting/currency/currencyalert.dart';
 import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/screens/splash_screen/splash_main.dart';
 import 'package:translation/screens/splash_screen/splash_screen1.dart';
@@ -33,6 +36,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  //  ScreenUtil.init( );
   await LoadingHelper.init();
   Get.put(AuthController());
   Get.put(HomeController());
@@ -48,6 +52,8 @@ void main() async {
   Get.put(FavController());
   Get.put(ChatController());
   Get.put(CompanyController());
+  // Get.put(CurrencyController());
+
   await GetStorage.init();
 
   Stripe.publishableKey =
@@ -82,10 +88,12 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       translations: LocaleString(),
-      locale:
-          box.read('locale') != 'ar' ? Locale('en', 'US') : Locale('ar', 'AE'),
-      fallbackLocale:
-          box.read('locale') != 'ar' ? Locale('en', 'US') : Locale('ar', 'AE'),
+      locale: box.read('locale') != 'ar'
+          ? Locale('en', 'US')
+          : Locale('ar', 'AE'),
+      fallbackLocale: box.read('locale') != 'ar'
+          ? Locale('en', 'US')
+          : Locale('ar', 'AE'),
       debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
       theme: Styles.lightTheme,
@@ -99,6 +107,7 @@ class _MyAppState extends State<MyApp> {
         'onBoardingScreen': (_) => OnBoardingScreen(),
         'NoTranslator': (_) => NoTransFound_screen(),
         'Verify': (_) => EmailOtpVerifyScreen(),
+        // 'currency': (_) => Currency()
       },
     );
   }

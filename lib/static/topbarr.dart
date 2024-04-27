@@ -9,14 +9,16 @@ class TitleTopbarr extends StatelessWidget {
     super.key,
     this.text,
     this.ontap,
+    this.height = 0.1,
   });
   final text;
   final ontap;
+  final height;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Get.height * 0.1,
+      height: Get.height * height,
       decoration: BoxDecoration(
           color: greenish,
           borderRadius: BorderRadius.only(

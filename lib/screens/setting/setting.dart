@@ -7,8 +7,9 @@ import 'package:translation/screens/company_login/company_login_screen.dart';
 import 'package:translation/screens/auth/login_screen.dart';
 import 'package:translation/screens/main_screen/homecontroller.dart';
 import 'package:translation/screens/setting/bug_report_modal.dart';
+import 'package:translation/screens/setting/currency/currency_controller.dart';
 import 'package:translation/screens/setting/settingcontroller.dart';
-import 'package:translation/static/currencyalert.dart';
+import 'package:translation/screens/setting/currency/currencyalert.dart';
 import 'package:translation/static/language.dart';
 import 'package:translation/static/settingcard.dart';
 import 'package:translation/static/topbarr.dart';
@@ -26,10 +27,19 @@ class Setting_screen extends StatefulWidget {
 }
 
 class _Setting_screenState extends State<Setting_screen> {
+  final SettingController currencyController = Get.find();
+  GetStorage box = GetStorage();
+  final HomeController homeController = Get.find<HomeController>();
+  var usercontroller = Get.put(SettingController.instance);
+  String? selectedCurrency;
   void initState() {
     super.initState();
+    selectedCurrency = box.read('selectedCurrency');
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       settingController.getbalance();
+      usercontroller.getcurrency();
+      usercontroller.selectedCurrency;
+      
     });
   }
 
@@ -45,6 +55,7 @@ class _Setting_screenState extends State<Setting_screen> {
                       text: 'Settings'.tr,
                     ),
                     BalanceCard(
+                      currency: controller.selectedCurrency,
                       balance: settingController.balance.toString(),
                       name: homeController.user!.username,
                     ),
@@ -70,9 +81,7 @@ class _Setting_screenState extends State<Setting_screen> {
                       title: 'Currency'.tr,
                       onPressed: () {
                         showDialog(
-                                context: context,
-                                builder: (context) => SelectCurrencyAlert());
-                        
+                            context: context, builder: (context) => Currency());
                       },
                       imgicon: "assets/icons/currency.svg",
                     ),
@@ -180,9 +189,8 @@ class _Setting_screenState extends State<Setting_screen> {
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w600),
           ),
-          onPressed: ()  {
+          onPressed: () {
             Get.back();
-            
           },
           color: greenish,
         ),
@@ -202,7 +210,6 @@ class _Setting_screenState extends State<Setting_screen> {
                 fontWeight: FontWeight.w600),
           ),
           onPressed: () async {
-            
             GetStorage box = GetStorage();
             Get.updateLocale(const Locale('en', 'US'));
             await box.write('locale', 'en');

@@ -66,20 +66,36 @@ class _FreeItemsState extends State<FreeItems> {
               ontap: () {
                 Navigator.pop(context);
               },
+              height: 0.2 / 1.4,
             ),
             const SizedBox(
               height: 30,
             ),
+            Padding(
+              padding: const EdgeInsets.only(left: 42),
+              child: Row(
+                children: [
+                  Text(
+                    'From:'.tr,
+                    style: TextStyle(
+                        color: greenish,
+                        fontFamily: "Poppins",
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ],
+              ),
+            ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 40),
               decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
-                  borderRadius: BorderRadius.circular(10)),
+                  color: Colors.grey.shade100,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Color(0xFF7586A9))),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('From:'.tr),
-                  const SizedBox(
+                  SizedBox(
                     width: 100,
                   ),
                   DropdownButton(
@@ -111,6 +127,7 @@ class _FreeItemsState extends State<FreeItems> {
               margin: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
+                  color: Colors.grey.shade200,
                   border: Border.all(color: Colors.grey[400]!)),
               child: Form(
                 key: formkey,
@@ -137,15 +154,30 @@ class _FreeItemsState extends State<FreeItems> {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(left: 42),
+              child: Row(
+                children: [
+                  Text(
+                    'To'.tr,
+                    style: TextStyle(
+                        color: greenish,
+                        fontFamily: "Poppins",
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ],
+              ),
+            ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 40),
               decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
+                  color: Colors.grey.shade100,
+                  border: Border.all(color: Color(0xFF7586A9)),
                   borderRadius: BorderRadius.circular(10)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('To'.tr),
                   const SizedBox(
                     width: 100,
                   ),
@@ -177,6 +209,7 @@ class _FreeItemsState extends State<FreeItems> {
               padding: const EdgeInsets.all(25),
               margin: const EdgeInsets.all(20),
               decoration: BoxDecoration(
+                  color: Colors.grey.shade200,
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.grey[400]!)),
               child: Center(
@@ -196,7 +229,7 @@ class _FreeItemsState extends State<FreeItems> {
                     fixedSize: const MaterialStatePropertyAll(Size(300, 45))),
                 child: isloading
                     ? const SizedBox.square(
-                        dimension: 20,
+                        dimension: 25,
                         child: CircularProgressIndicator(
                           color: Colors.white,
                         ),

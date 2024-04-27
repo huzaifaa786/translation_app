@@ -29,7 +29,7 @@ class MainStackCard extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(left: 20, right: 20, top: 20),
+          padding: EdgeInsets.only(left: 20, right: 20, top: 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

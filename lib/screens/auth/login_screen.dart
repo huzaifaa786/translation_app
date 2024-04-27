@@ -64,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: Image(
                                 image:
                                     AssetImage("assets/images/splashLogo.png"),
-                                height: 100,
+                                height: 130,
                                 color: white,
                               ),
                             ),
@@ -73,9 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
                                 color: Color.fromARGB(255, 250, 250, 250),
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(30),
-                                    topLeft: Radius.circular(30))),
+                                borderRadius: BorderRadius.only()),
                             child: Column(
                               children: [
                                 Padding(
@@ -97,9 +95,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                       children: [
                                         Gap(20),
                                         Text(
-                                          'WELCOME',
+                                          'Welcome',
                                           style: TextStyle(
-                                              fontSize: 24,
+                                              fontFamily: "Poppins",
+                                              fontSize: 26,
                                               fontWeight: FontWeight.w500,
                                               color: greenish),
                                         ),
@@ -215,6 +214,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                                         child: Text(
                                                           "Forgot Password?",
                                                           style: TextStyle(
+                                                              decoration:
+                                                                  TextDecoration
+                                                                      .underline,
+                                                              decorationColor:
+                                                                  Color(
+                                                                      0xFF354E76),
                                                               fontSize: 12,
                                                               color: lightblue,
                                                               fontWeight:
@@ -225,6 +230,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     ],
                                                   ),
                                                 ),
+
                                                 MainButton(
                                                   title: 'Log In',
                                                   sreenRatio: 0.4,
@@ -299,6 +305,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                                           child: Text(
                                                             'Register Now',
                                                             style: TextStyle(
+                                                                decoration:
+                                                                    TextDecoration
+                                                                        .underline,
+                                                                decorationColor:
+                                                                    Color(
+                                                                        0xFF354E76),
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w400,
