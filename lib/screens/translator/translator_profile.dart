@@ -135,6 +135,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                               Padding(
                                 padding: const EdgeInsets.only(top: 8),
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
                                       "Languages".tr,
@@ -146,11 +147,12 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                 ),
                               ),
                               Container(
-                                padding: const EdgeInsets.only(top: 8),
+                                alignment: Alignment.bottomCenter,
+                                padding: EdgeInsets.only(top: 8),
                                 width: double.infinity,
                                 child: Wrap(
                                   direction: Axis.horizontal,
-                                  runAlignment: WrapAlignment.start,
+                                  runAlignment: WrapAlignment.center,
                                   children: [
                                     for (var i = 0;
                                         i < widget.detail!.language!.length;
@@ -163,6 +165,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                               Padding(
                                 padding: const EdgeInsets.only(top: 8),
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
                                       "Certificates".tr,
@@ -174,6 +177,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                 ),
                               ),
                               Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   widget.detail!.certificate == ''
                                       ? Padding(
@@ -181,7 +185,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                               top: 8, bottom: 8),
                                           child: Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                                MainAxisAlignment.center,
                                             children: [
                                               Text("No certificate uploaded!"),
                                             ],
@@ -191,6 +195,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                           padding: const EdgeInsets.only(
                                               top: 15, bottom: 15),
                                           child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               SvgPicture.asset(
                                                   "assets/images/certificate.svg"),
@@ -223,6 +229,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                 ],
                               ),
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     "About".tr,
@@ -238,7 +245,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                           top: 8, bottom: 8),
                                       child: Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                            MainAxisAlignment.center,
                                         children: [
                                           Text("About Empty."),
                                         ],
@@ -249,7 +256,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                           top: 15.0, bottom: 15),
                                       child: Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                            MainAxisAlignment.center,
                                         children: [
                                           SizedBox(
                                             width: MediaQuery.of(context)
@@ -260,7 +267,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                               box.read('locale') != 'ar'
                                                   ? widget.detail!.aboutEnglish!
                                                   : widget.detail!.aboutArabic!,
-                                              textAlign: TextAlign.start,
+                                              textAlign: TextAlign.center,
                                               style: TextStyle(fontSize: 14),
                                             ),
                                           ),
@@ -676,21 +683,24 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                     );
                                   },
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 10, bottom: 10),
-                                  child: Row(
+                                Container(
+                                  child: Column(
                                     children: [
-                                      Text(
-                                        "Set Time".tr,
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 10, bottom: 10),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              "Set Time".tr,
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
+                                     Padding(
                                   padding: const EdgeInsets.only(bottom: 10),
                                   child: Row(
                                     children: [
@@ -705,89 +715,14 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                       ),
                                     ],
                                   ),
+                                )
+                                
+                                
+                                ,],
+                                  ),
                                 ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Scheduleinput(
-                                      text: 'Start Time'.tr,
-                                      controller: startTimeController,
-                                      onpressed: () {
-                                        DatePicker.showTimePicker(context,
-                                            showTitleActions: true,
-                                            showSecondsColumn: false,
-                                            locale: box.read('locale') != 'ar'
-                                                ? LocaleType.en
-                                                : LocaleType.ar,
-                                            onChanged: (val) {
-                                          var end =
-                                              val.add(Duration(minutes: 1));
-                                          var time =
-                                              DateFormat.Hm().format(val);
-                                          var endTime =
-                                              DateFormat.Hm().format(end);
-                                          startTimeController.text = time;
-                                          endTimeController.text = endTime;
-                                          controller.startTime = time;
-                                          controller.endTime = endTime;
-                                          translatorProfileController
-                                              .calTotalTime(widget.detail!);
-                                          setState(() {});
-                                        }, onConfirm: (val) {
-                                          var end =
-                                              val.add(Duration(minutes: 1));
-                                          var time =
-                                              DateFormat.Hm().format(val);
-                                          var endTime =
-                                              DateFormat.Hm().format(end);
-                                          startTimeController.text = time;
-                                          endTimeController.text = endTime;
-                                          controller.startTime = time;
-                                          controller.endTime = endTime;
-                                          translatorProfileController
-                                              .calTotalTime(widget.detail!);
-                                          setState(() {});
-                                        }, currentTime: DateTime.now());
-                                      },
-                                      hint: '9:00',
-                                      fontSize: 18.0,
-                                    ),
-                                    Text("To".tr),
-                                    Scheduleinput(
-                                      text: 'End Time'.tr,
-                                      controller: endTimeController,
-                                      onpressed: () {
-                                        DatePicker.showTimePicker(context,
-                                            showTitleActions: true,
-                                            showSecondsColumn: false,
-                                            onConfirm: (val) {
-                                          var end = DateFormat.Hm().format(val);
-                                          endTimeController.text = end;
-                                          controller.endTime = end;
-                                          translatorProfileController
-                                              .calTotalTime(widget.detail!);
-                                          setState(() {});
-                                        }, onChanged: (val) {
-                                          var end = DateFormat.Hm().format(val);
-                                          endTimeController.text = end;
-                                          controller.endTime = end;
-                                          translatorProfileController
-                                              .calTotalTime(widget.detail!);
-                                          setState(() {});
-                                        }, currentTime: DateTime.now());
-                                      },
-                                      hint: '9:30',
-                                      fontSize: 18.0,
-                                      enabled: controller.startTime == ''
-                                          ? false
-                                          : true,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            )
-                          : Container(),
+                               
+                         
                       widget.detail!.service!.isdocument == true
                           ? Row(
                               children: [
