@@ -1100,9 +1100,9 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                         ),
                       )
                     ],
-                  ),
-                ),
-              ],
+                         ):Container(),
+              ]),
+            )]
             ),
           ),
         ),
