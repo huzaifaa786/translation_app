@@ -35,7 +35,7 @@ class IconsButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          primary: color,
+          backgroundColor: color,
           shadowColor: greenish,
           shape: RoundedRectangleBorder(
             borderRadius: rounded == true
