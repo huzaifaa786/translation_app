@@ -47,8 +47,8 @@ class _DeliveryMapState extends State<DeliveryMap> {
             setState(() {});
             Get.back();
             Get.snackbar(
-              'Selected',
-              'Loaction Selected Successfully.',
+              'Selected'.tr,
+              'Loaction Selected Successfully.'.tr,
               colorText: white,
               snackPosition: SnackPosition.BOTTOM,
               backgroundColor: greenish,
@@ -56,8 +56,8 @@ class _DeliveryMapState extends State<DeliveryMap> {
             return;
           } else {
             Get.snackbar(
-              "Empty!",
-              'Please Select Area first before saving range.',
+              "",
+              'Please Select Area first before saving range.'.tr,
               snackPosition: SnackPosition.BOTTOM,
               backgroundColor: Colors.red,
               colorText: Colors.white,

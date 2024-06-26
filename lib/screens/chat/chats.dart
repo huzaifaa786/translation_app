@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:translation/screens/chat/chatdetails.dart';
 
 import 'package:translation/static/chart.dart';
+import 'package:translation/static/titletopbar.dart';
 import 'package:translation/values/controllers.dart';
 
 class Chats_screen extends StatefulWidget {
@@ -25,27 +26,37 @@ class _Chats_screenState extends State<Chats_screen> {
     return Scaffold(
         body: Column(
       children: [
-        Container(
-          width: double.infinity,
-          height: 141,
-          decoration: BoxDecoration(
-            color: Color(0xFF34607B),
-            borderRadius: BorderRadius.circular(25),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(38, 68, 38, 0),
-            child: Text(
-              "Chats".tr,
-              style: TextStyle(
-                fontFamily: 'Mazzard',
-                fontWeight: FontWeight.w600,
-                fontSize: 25,
-                height: 1.5,
-                color: Colors.white,
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: double.infinity,
+              height: Get.height * 0.2,
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 16, 54, 78),
+                borderRadius: BorderRadius.only(
+                    // bottomLeft: Radius.circular(25),
+                    // bottomRight: Radius.circular(25)
+                    ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(38, 68, 38, 0),
+                child: Text(
+                  "Messages".tr,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Mazzard',
+                    fontWeight: FontWeight.w400,
+                    fontSize: 20,
+                    height: 1.5,
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ),
-          ),
+          ],
         ),
+
         Container(
           width: double.infinity,
           margin: EdgeInsets.fromLTRB(31, 20, 28, 20),
@@ -85,17 +96,17 @@ class _Chats_screenState extends State<Chats_screen> {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 38.0,right: 38),
-          child: Row(
-            children: [
-              Text(
-                "Messages".tr,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.only(left: 38.0, right: 38),
+        //   child: Row(
+        //     children: [
+        //       Text(
+        //         "Messages".tr,
+        //         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        //       ),
+        //     ],
+        //   ),
+        // ),
         chatController.scontacts.length != 0
             ? Expanded(
                 child: Container(
@@ -144,7 +155,7 @@ class _Chats_screenState extends State<Chats_screen> {
                 ),
               )
             : Expanded(
-              child: Container(
+                child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * .75,
                   child: Column(
@@ -155,7 +166,7 @@ class _Chats_screenState extends State<Chats_screen> {
                       Padding(
                         padding: const EdgeInsets.only(top: 20.0),
                         child: Text(
-                          "No Chat Found".tr,
+                          "No Messages Found".tr,
                           style: TextStyle(
                               fontSize: 22, fontWeight: FontWeight.w500),
                         ),
@@ -163,7 +174,7 @@ class _Chats_screenState extends State<Chats_screen> {
                     ],
                   ),
                 ),
-            ),
+              ),
       ],
     ));
   }

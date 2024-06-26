@@ -13,6 +13,7 @@ class CheckOutButton extends StatelessWidget {
       this.text,
       this.textcolor,
       this.icon,
+      this.currencyname,
       this.buttonWidth = 0.8,
       this.sreenRatio = 0.9,
       this.color = secondaryColor})
@@ -27,6 +28,7 @@ class CheckOutButton extends StatelessWidget {
   final textcolor;
   final icon;
   final buttonWidth;
+  final currencyname;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -53,7 +55,7 @@ class CheckOutButton extends StatelessWidget {
               ),
             ),
             Text(
-              price + ' AED',
+              price + currencyname,
               style: const TextStyle(
                 color: Color.fromARGB(255, 255, 255, 255),
                 fontSize: 18,

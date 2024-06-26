@@ -19,26 +19,22 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     OnboardModel(
       img: ("assets/images/splash_1.png"),
       text: "Best solution for your Language barriers.",
-      desc:
-          "Larem ipsum dolor sit amet, consectetur adipis eilt. Metus aenean.",
+      desc: "الحل الأمثل للعائق اللغوي",
     ),
     OnboardModel(
       img: 'assets/images/splash_2.png',
-      text: "Best solution for your Language barriers.",
-      desc:
-          "Larem ipsum dolor sit amet, consectetur adipis eilt. Metus aenean.",
+      text: "Audio / video interpretation service",
+      desc: "خدمات الترجمة بالصوت / الفيديو",
     ),
     OnboardModel(
       img: 'assets/images/splash_3.png',
-      text: "Best solution for your Language barriers.",
-      desc:
-          "Larem ipsum dolor sit amet, consectetur adipis eilt. Metus aenean.",
+      text: "Booking in person interpretation services",
+      desc: "خدمات حجز المترجمين وجه لوجه",
     ),
     OnboardModel(
       img: 'assets/images/splash_4.png',
-      text: "Best solution for your Language barriers.",
-      desc:
-          "Larem ipsum dolor sit amet, consectetur adipis eilt. Metus aenean.",
+      text: "Document translation services",
+      desc: "خدمة ترجمة المستندات",
     ),
   ];
 
@@ -57,6 +53,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 1.0),
         child: PageView.builder(
@@ -126,7 +123,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                       top: 40, bottom: 20),
                                   child: Text(
                                     screens[index].text,
-                                    textAlign: TextAlign.justify,
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontSize: 30,
                                       fontWeight: FontWeight.bold,
@@ -138,7 +135,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                   screens[index].desc,
                                   textAlign: TextAlign.justify,
                                   style: const TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
                                     color: kwhite,
                                   ),
                                 ),

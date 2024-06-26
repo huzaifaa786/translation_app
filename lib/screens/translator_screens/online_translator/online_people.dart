@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:translation/models/filter.dart';
 import 'package:translation/screens/main_screen/homecontroller.dart';
+import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/screens/translator_screens/offline_translator/offline_modal.dart';
 import 'package:translation/static/offline_translator_card.dart';
 import 'package:translation/static/search_topbar.dart';
+import 'package:translation/static/titletopbar.dart';
+import 'package:translation/static/topBar.dart';
 import 'package:translation/values/controllers.dart';
 
 class OnlinePeople_screen extends StatefulWidget {
@@ -16,9 +21,14 @@ class OnlinePeople_screen extends StatefulWidget {
 }
 
 class _OnlinePeople_screenState extends State<OnlinePeople_screen> {
+  SettingController currencycontroller = Get.find();
+  GetStorage box = GetStorage();
+  String? selectedCurrency;
+
   FilterModalResult? query;
   @override
   void initState() {
+    selectedCurrency = box.read('selectedCurrency');
     homeController.sonlineVendor = homeController.onlineVendor;
     setState(() {});
     super.initState();
@@ -33,20 +43,56 @@ class _OnlinePeople_screenState extends State<OnlinePeople_screen> {
           child: GetBuilder<HomeController>(
             builder: (controller) => Column(
               children: [
-                SearchTopBar(
-                  onchange: homeController.searchOnlineOrders,
+                TitleTopbar(
+                  text: "Interpreters / Translators",
+                  height: 0.1 / 0.9,
                 ),
+                // SearchTopBar(
+                //   onchange: homeController.searchOnlineOrders,
+                // ),
                 Padding(
                   padding: const EdgeInsets.only(
                       left: 12, right: 12, top: 30, bottom: 12),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        "Online Translators/interpreters".tr,
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w600),
+                      Container(
+                        margin: EdgeInsets.only(left: 10),
+                        width: 325,
+                        // height: 70,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Colors.grey[200],
+                        ),
+                        child: TextField(
+                          onChanged: homeController.searchOnlineOrders,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1, color: Colors.grey[300]!),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1, color: Colors.grey[300]!),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(13)),
+                            ),
+                            prefixIcon: Icon(Icons.search),
+                            hintText: 'Search'.tr,
+                            contentPadding:
+                                EdgeInsets.only(left: 12, right: 13),
+                            fillColor: Colors.white,
+                            filled: true,
+                          ),
+                        ),
                       ),
+                      // Text(
+                      //   "Online Translators/interpreters".tr,
+                      //   style: TextStyle(
+                      //       fontSize: 16, fontWeight: FontWeight.w600),
+                      // ),
                       GestureDetector(
                         onTap: () async {
                           query = await showModalBottomSheet(
@@ -101,13 +147,16 @@ class _OnlinePeople_screenState extends State<OnlinePeople_screen> {
                             Padding(
                               padding: const EdgeInsets.only(right: 4),
                               child: SvgPicture.asset(
-                                  'assets/images/filterIcon.svg'),
+                                'assets/images/filterIcon.svg',
+                                height: 30,
+                                width: 30,
+                              ),
                             ),
-                            Text(
-                              "Filter".tr,
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w600),
-                            ),
+                            // Text(
+                            //   "Filter".tr,
+                            //   style: TextStyle(
+                            //       fontSize: 16, fontWeight: FontWeight.w600),
+                            // ),
                           ],
                         ),
                       ),
@@ -119,23 +168,29 @@ class _OnlinePeople_screenState extends State<OnlinePeople_screen> {
                         child: ListView.builder(
                             itemCount: homeController.sonlineVendor.length,
                             itemBuilder: (context, index) =>
-                                OfflineTranslattorCard(
-                                  name:
-                                      homeController.sonlineVendor[index].name,
-                                  image: homeController
-                                      .sonlineVendor[index].profilePic,
-                                  lang: homeController
-                                      .sonlineVendor[index].language,
-                                  vendor: homeController.sonlineVendor[index],
-                                  price: homeController.sonlineVendor[index]
-                                      .service!.onlineaudiovideoPrice,
-                                  rating: homeController
-                                              .sonlineVendor[index].rating ==
-                                          null
-                                      ? null
-                                      : double.parse(homeController
-                                          .sonlineVendor[index].rating!),
-                                )),
+                                 OfflineTranslattorCard(
+                                      currencyname: selectedCurrency != null
+                                          ? currencycontroller
+                                              .selectedCurrency
+                                          : "AED ",
+                                      name: homeController
+                                          .sonlineVendor[index].name,
+                                      image: homeController
+                                          .sonlineVendor[index].profilePic,
+                                      lang: homeController
+                                          .sonlineVendor[index].language,
+                                      vendor:
+                                          homeController.sonlineVendor[index],
+                                      price: homeController.sonlineVendor[index]
+                                          .service!.onlineaudiovideoPrice,
+                                      rating: homeController
+                                                  .sonlineVendor[index]
+                                                  .rating ==
+                                              null
+                                          ? null
+                                          : double.parse(homeController
+                                              .sonlineVendor[index].rating!),
+                                    )),
                       )
                     : Container(),
               ],

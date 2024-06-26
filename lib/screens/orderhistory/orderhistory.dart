@@ -69,7 +69,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                               if (controller
                                       .orders[index].document!.documenttype ==
                                   'DocumentType.NotUrgent') {
-                                service = 'Non urgent Documents translation';
+                                service = 'Non urgent Documents translation'.tr;
                               } else {
                                 service = 'Urgent documents translation'.tr;
                               }

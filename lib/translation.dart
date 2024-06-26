@@ -148,17 +148,52 @@ class LocaleString extends Translations {
           "To": "To",
           "Sorry! Interpreter not within your range":
               "Sorry! Interpreter not within your range",
-          "Please fill all required details": "Please fill all required details",
-          "End time must be greater than  starting time.": "End time must be greater than  starting time.",
-          "Timings are booked, please try other time":"Timings are booked, please try other time"
+          "Please fill all required details":
+              "Please fill all required details",
+          "End time must be greater than  starting time.":
+              "End time must be greater than  starting time.",
+          "Timings are booked, please try other time":
+              "Timings are booked, please try other time",
+          "Done": "Done",
+          'You may need to select location to get translator inperson service.':
+              'You may need to select location to get translator inperson service.',
+          "Pages exceed the maximum amount of pages set by translator":
+              "Pages exceed the maximum amount of pages set by translator",
+          "Thanks For your feedback": "Thanks For your feedback",
+          "Loaction Selected Successfully.": "Loaction Selected Successfully.",
+          "Selected": "Selected",
+          'Please Select Area first before saving range.':
+              'Please Select Area first before saving range.',
+          'Search items': 'Search items',
+          "Please Attach File.": "Please Attach File.",
+          "Free item": "Free item",
+          'You have successfully applied the promo code':
+              'You have successfully applied the promo code',
         },
         'ar_AE': {
-          "Timings are booked, please try other time":"هذه الأوقات محجوزة ، رجاء محاولة إختيار أوقات أخرى",
-          "End time must be greater than  starting time.":"وقت الإنتهاء يجب عليه أن يكون أعلى من وقت البداية" ,
-          "Please fill all required details": "رجاء إدخال كل البيانات المطلوبة ",
+          'You have successfully applied the promo code':
+              'تم وضع كود الخصم بنجاح',
+          "Free item": "الأداة المجانية",
+          "Please Attach File.": "رجاء إرفاق الملف",
+          'Search items': "البحث عن العناصر",
+          "Please Select Area first before saving range.":
+              'يرجى تحديد المنطقة أولاً قبل حفظ النطاق',
+          'Selected': 'تم الإختيار',
+          "Loaction Selected Successfully.": 'تم إختيار الموقع بنجاح',
+          "Thanks For your feedback": "شكراً لتقييمك",
+          "Pages exceed the maximum amount of pages set by translator":
+              "عدد الصفحات تتجاوز الحد الأقصى للمترجم",
+          "Done": "إختيار",
+          "Timings are booked, please try other time":
+              "هذه الأوقات محجوزة ، رجاء محاولة إختيار أوقات أخرى",
+          "End time must be greater than  starting time.":
+              "وقت الإنتهاء يجب عليه أن يكون أعلى من وقت البداية",
+          "Please fill all required details":
+              "رجاء إدخال كل البيانات المطلوبة ",
           "Save": "حفظ",
           'To': "إلى",
-          "Gulf Standard Time United Arab Emirates Time":"بناءً على توقيت دولة الإمارات العربية المتحدة",
+          "Gulf Standard Time United Arab Emirates Time":
+              "بناءً على توقيت دولة الإمارات العربية المتحدة",
           "Tap here to view messages": "اضغط هنا لعرض الرسائل",
           "Rate per 30 mins": "السعر لكل ٣٠ دقيقة",
           "ADD": "أضف",
@@ -214,9 +249,9 @@ class LocaleString extends Translations {
           "No Favorites Found": "لا توجد مفضلات",
           "Messages_": "الرسائل",
           'Sorry! Interpreter not within your range.':
-              "عذرًا! المترجم ليس ضمن نطاقك.",
+              "عذرًا! المترجم ليس ضمن نطاقك",
           "Sorry! Session is booked, please try other available timings.":
-              "عذرًا! الموعد محجوز، يُرجى محاولة حجز موعد متاح آخر .",
+              "عذرًا! الموعد محجوز، يُرجى محاولة حجز موعد متاح آخر",
           "Notifications": "الإشعارات",
           "No Notification Found": "لا توجد لديك إشعارات ، رجاء وضع طلب",
           "View All": "عرض الكل",
@@ -228,9 +263,9 @@ class LocaleString extends Translations {
           "Filter By": "تصفية حسب",
           "Select Option": "اختر الخيار",
           "Highest price to lowest price": "من أعلى سعر إلى أدنى سعر",
-          "Lowest to Highest price": "من أدنى سعر إلى أعلى سعر",
+          "lowest to Highest price": "من أدنى سعر إلى أعلى سعر",
           "Highest to lowest rating": "من أعلى تقييم إلى أدنى تقييم",
-          "Lowest to highest rating": "من أدنى تقييم إلى أعلى تقييم",
+          "lowest to highest rating": "من أدنى تقييم إلى أعلى تقييم",
           "Details": "التفاصيل",
           "language": "اللغة",
           "Certificates": "الشهادات",
@@ -268,8 +303,7 @@ class LocaleString extends Translations {
           "Payment Method": "وسيلة الدفع",
           "From Wallet": "من المحفظة",
           "Next": "التالي",
-          "You have successfully placed your order.":
-              "لقد قمت بوضع طلبك بنجاح.",
+          "You have successfully placed your order.": "لقد قمت بوضع طلبك بنجاح",
           "Go Back": "العودة",
           "Order Id#": "رقم الطلب",
           "Amount of pages": "عدد الصفحات",
@@ -289,14 +323,16 @@ class LocaleString extends Translations {
           "Choose languages": "اختر اللغات",
           "pages": "صفحات",
           "Select an item": "إختر اللغة",
-          "Report Submit Successfully.": ".تم الإبلاغ عن المشكلة بنجاح",
+          "Report Submit Successfully.": "تم الإبلاغ عن المشكلة بنجاح",
           "Your order has been completed": "تم إكمال طلبك",
           "New order placed": "تم وضع طلب جديد",
           "Your order has been accepted": "تم قبول طلبك بنجاح",
           "Your order has been rejected and order amount was refunded":
               "تم رفض طلبك و تم استرداد المبلغ المطلوب",
           "Sorry! Interpreter not within your range":
-              "المعذرة ! المترجم ليس في نطاقك"
+              "المعذرة ! المترجم ليس في نطاقك",
+          'You may need to select location to get translator inperson service.':
+              'قد تحتاج إلى تحديد الموقع للحصول على خدمة مترجم شخصيًا'
         }
       };
 }

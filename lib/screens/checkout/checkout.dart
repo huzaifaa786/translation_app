@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:translation/screens/checkout/checkout_controller.dart';
 import 'package:translation/screens/enter_amount/ppaymentmethod.dart';
 import 'package:translation/screens/main_screen/homecontroller.dart';
+import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/screens/translator/translator_profile_controller.dart';
 import 'package:translation/static/titletopbar.dart';
 import 'package:translation/values/controllers.dart';
@@ -21,6 +23,9 @@ class Checkout_screen extends StatefulWidget {
 enum payMethod { materCard, walletpay }
 
 class _Checkout_screenState extends State<Checkout_screen> {
+  SettingController currencycontroller = Get.find();
+  GetStorage box = GetStorage();
+  String? selectedCurrency;
   payMethod _site = payMethod.materCard;
   bool readonly = false;
   void toggleplan(payMethod value) {
@@ -39,6 +44,7 @@ class _Checkout_screenState extends State<Checkout_screen> {
     getbalance();
     print(widget.totalAmount);
     super.initState();
+    selectedCurrency = box.read('selectedCurrency');
   }
 
   substractbalance() {
@@ -107,6 +113,16 @@ class _Checkout_screenState extends State<Checkout_screen> {
                                       fit: BoxFit.cover,
                                     )
                                   : Image.asset('assets/images/5907.jpg')),
+                    ),
+                    Center(
+                      child: Text(
+                        translatorProfileController.vendors!.name != ''
+                            ? translatorProfileController.vendors!.name
+                                .toString()
+                            : '',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w700),
+                      ),
                     ),
                     Center(
                       child: Text(
@@ -199,7 +215,8 @@ class _Checkout_screenState extends State<Checkout_screen> {
                           controller: checkoutController.coupon,
                           readOnly: readonly,
                           decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(left: 12, right: 12,top: 14),
+                            contentPadding:
+                                EdgeInsets.only(left: 12, right: 12, top: 14),
                             hintText: 'Promo Code'.tr,
                             // suffixIcon:Text('dfd');
                             suffixIcon: readonly != true
@@ -254,11 +271,15 @@ class _Checkout_screenState extends State<Checkout_screen> {
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                   color: hintText)),
-                          Text(
-                            "AED " + widget.totalAmount.toString(),
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w600),
-                          )
+                           Text(
+                              "${selectedCurrency != null ? currencycontroller.selectedCurrency: "AED "}"
+                                      ":" +
+                                  translatorProfileController.CheckoutAmount
+                                      .toString(),
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w600),
+                            ),
+                          
                         ],
                       ),
                     ),
@@ -274,12 +295,22 @@ class _Checkout_screenState extends State<Checkout_screen> {
                                   fontWeight: FontWeight.w500,
                                   color: greenish)),
                           Text(
-                            "AED " +
-                                translatorProfileController.CheckoutAmount
-                                    .toString(),
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w600),
-                          )
+                              "${selectedCurrency != null ? currencycontroller.selectedCurrency : "AED "}"
+                                      ":" +
+                                  translatorProfileController.CheckoutAmount
+                                      .toString(),
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w600),
+                            ),
+                        
+
+                          // Text(
+                          //   "selectedCurrency" +
+                          //       translatorProfileController.CheckoutAmount
+                          //           .toString(),
+                          //   style: TextStyle(
+                          //       fontSize: 16, fontWeight: FontWeight.w600),
+                          // )
                         ],
                       ),
                     ),
@@ -325,8 +356,10 @@ class _Checkout_screenState extends State<Checkout_screen> {
                             ScheduleType.InPerson) {
                           if (translatorProfileController.selectedLocation ==
                               null) {
-                            Get.snackbar('Error!',
-                                'You may need to select location to get translator inperson service.',
+                            Get.snackbar(
+                                '',
+                                'You may need to select location to get translator inperson service.'
+                                    .tr,
                                 backgroundColor: Colors.red,
                                 colorText: white,
                                 snackPosition: SnackPosition.BOTTOM);

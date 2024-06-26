@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:translation/values/colors.dart';
 
-
 class IconsButton extends StatelessWidget {
   const IconsButton(
       {Key? key,
@@ -41,7 +40,7 @@ class IconsButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: rounded == true
                 ? BorderRadius.all(Radius.circular(45))
-                : BorderRadius.all(Radius.circular(6)),
+                : BorderRadius.all(Radius.circular(45)),
           ),
         ),
         child: Row(
@@ -49,7 +48,7 @@ class IconsButton extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(right: 8.0),
-              child: Icon(icon,color: white),
+              child: Icon(icon, color: white),
             ),
             Text(
               title,

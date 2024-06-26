@@ -59,7 +59,7 @@ class NotificationController extends GetxController {
     print(data);
     var response = await Api.execute(url: url, data: data);
     if (!response['error']) {
-      Get.snackbar("Thanks For your feedback.", '',
+      Get.snackbar("Thanks For your feedback".tr, '',
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.green,
           colorText: Colors.white);

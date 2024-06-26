@@ -187,30 +187,30 @@ class HomeController extends GetxController {
       sschedule.sort(
           (a, b) => double.parse(b.rating!).compareTo(double.parse(a.rating!)));
       if (price == "Highest price to lowest price") {
-        sschedule.sort((a, b) => double.parse(b.service!.onlineaudiovideoPrice!)
-            .compareTo(double.parse(a.service!.onlineaudiovideoPrice!)));
-      } else if (price == "lowest price to Highest price") {
-        sschedule.sort((a, b) => double.parse(a.service!.onlineaudiovideoPrice!)
-            .compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
+        sschedule.sort((a, b) => double.parse(b.service!.audiovideo!)
+            .compareTo(double.parse(a.service!.audiovideo!)));
+      } else if (price == "lowest to Highest price") {
+        sschedule.sort((a, b) => double.parse(a.service!.audiovideo!)
+            .compareTo(double.parse(b.service!.audiovideo!)));
       }
-    } else if (rating == "lowest to Highest rating") {
+    } else if (rating == "lowest to highest rating") {
       sschedule = schedule;
       sschedule.sort(
           (a, b) => double.parse(a.rating!).compareTo(double.parse(b.rating!)));
       if (price == "Highest price to lowest price") {
-        sschedule.sort((a, b) => double.parse(b.service!.onlineaudiovideoPrice!)
-            .compareTo(double.parse(a.service!.onlineaudiovideoPrice!)));
-      } else if (price == "lowest price to Highest price") {
-        sschedule.sort((a, b) => double.parse(a.service!.onlineaudiovideoPrice!)
-            .compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
+        sschedule.sort((a, b) => double.parse(b.service!.audiovideo!)
+            .compareTo(double.parse(a.service!.audiovideo!)));
+      } else if (price == "lowest to Highest price") {
+        sschedule.sort((a, b) => double.parse(a.service!.audiovideo!)
+            .compareTo(double.parse(b.service!.audiovideo!)));
       }
     } else {
       if (price == "Highest price to lowest price") {
-        sschedule.sort((a, b) => double.parse(b.service!.onlineaudiovideoPrice!)
-            .compareTo(double.parse(a.service!.onlineaudiovideoPrice!)));
-      } else if (price == "lowest price to Highest price") {
-        sschedule.sort((a, b) => double.parse(a.service!.onlineaudiovideoPrice!)
-            .compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
+        sschedule.sort((a, b) => double.parse(b.service!.audiovideo!)
+            .compareTo(double.parse(a.service!.audiovideo!)));
+      } else if (price == "lowest to Highest price") {
+        sschedule.sort((a, b) => double.parse(a.service!.audiovideo!)
+            .compareTo(double.parse(b.service!.audiovideo!)));
       }
     }
     update();
@@ -232,7 +232,7 @@ class HomeController extends GetxController {
             double.parse(a.service!.onlineaudiovideoPrice!)
                 .compareTo(double.parse(b.service!.onlineaudiovideoPrice!)));
       }
-    } else if (rating == "lowest to Highest rating") {
+    } else if (rating == "lowest to highest rating") {
       sonlineVendor = onlineVendor;
       sonlineVendor.sort(
           (a, b) => double.parse(a.rating!).compareTo(double.parse(b.rating!)));
@@ -278,24 +278,23 @@ class HomeController extends GetxController {
     }
   }
 
- getratting() async {
-  LoadingHelper.show();
-  var url = BASE_URL + 'ratting/get';
+  getratting() async {
+    LoadingHelper.show();
+    var url = BASE_URL + 'ratting/get';
 
-  GetStorage box = GetStorage();
-  int user_id = box.read('user_id');
+    GetStorage box = GetStorage();
+    int user_id = box.read('user_id');
 
-  var data = {'user_id': user_id};
-  var response = await Api.execute(url: url, data: data);
-  print(response);
-  LoadingHelper.dismiss();
+    var data = {'user_id': user_id};
+    var response = await Api.execute(url: url, data: data);
+    print(response);
+    LoadingHelper.dismiss();
 
-  // Check if the 'has_rating' field is present in the response and its value is true
-  if (response['order'] != null) {
-    return Order(response['order']);
-  } else {
-    return;
+    // Check if the 'has_rating' field is present in the response and its value is true
+    if (response['order'] != null) {
+      return Order(response['order']);
+    } else {
+      return;
+    }
   }
-}
-
 }

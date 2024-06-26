@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/utils.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/static/topBar.dart';
-import 'package:translation/screens/freeitem.dart/freeitem.dart';
+import 'package:translation/screens/freeitem.dart/free_items.dart';
 
 class MainStackCard extends StatelessWidget {
   const MainStackCard({super.key, this.onProfileTap, this.name});
@@ -17,18 +18,18 @@ class MainStackCard extends StatelessWidget {
       fit: StackFit.loose,
       children: [
         Container(
-          // margin: EdgeInsets.only(bottom: 30),
+          // margin: EdgeInsets.only(bottom: 20),
           width: double.infinity,
           height: MediaQuery.of(context).size.height * 0.25,
           decoration: BoxDecoration(
-            color: Color(0xFF34607B),
+            color: Color.fromARGB(255, 16, 54, 78),
             borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(25),
-                bottomRight: Radius.circular(25)),
+                bottomLeft: Radius.circular(15),
+                bottomRight: Radius.circular(15)),
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(left: 20, right: 20, top: 20),
+          padding: EdgeInsets.only(left: 20, right: 20, top: 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -77,14 +78,14 @@ class MainStackCard extends StatelessWidget {
         //         Navigator.push(
         //             context,
         //             MaterialPageRoute(
-        //               builder: (context) => FreeItem_screen(),
+        //               builder: (context) => FreeItems(),
         //             ));
         //       },
         //       child: Container(
         //         width: 280,
         //         height: 59,
         //         decoration: BoxDecoration(
-        //           color: Colors.white,
+        //           color: Color.fromARGB(255, 16, 54, 78),
         //           boxShadow: [
         //             BoxShadow(
         //               color: Colors.black.withOpacity(0.0824137),
@@ -94,25 +95,31 @@ class MainStackCard extends StatelessWidget {
         //           ],
         //           borderRadius: BorderRadius.circular(10),
         //         ),
-        //         child: Center(
-        //           child: Row(
-        //             children: [
-        //               SizedBox(
-        //                 width: 85,
+        //         child: Row(
+        //           mainAxisAlignment: MainAxisAlignment.center,
+        //           children: [
+        //             Container(
+        //               padding: EdgeInsets.all(8),
+        //               decoration: BoxDecoration(
+        //                   color: greenish.withOpacity(0.2),
+        //                   borderRadius: BorderRadius.circular(20)),
+        //               child: SvgPicture.asset(
+        //                 'assets/images/freeitem1.svg',
+        //                 color: white,
         //               ),
-        //               Image.asset("assets/icons/free.png"),
-        //               Padding(
-        //                 padding: const EdgeInsets.only(left: 20),
-        //                 child: Text(
-        //                   "Free Item",
-        //                   style: TextStyle(
-        //                     fontSize: 15,
-        //                     color: Colors.black,
-        //                   ),
+        //             ),
+        //             Padding(
+
+        //               padding: const EdgeInsets.only(left: 20, right: 20),
+        //               child: Text(
+        //                 "Free item".tr,
+        //                 style: TextStyle(
+        //                   fontSize: 15,
+        //                   color: white,
         //                 ),
         //               ),
-        //             ],
-        //           ),
+        //             ),
+        //           ],
         //         ),
         //       ),
         //     ),

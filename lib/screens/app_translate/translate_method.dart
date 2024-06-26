@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:translation/values/colors.dart';
 
 class TranslateMethod extends StatefulWidget {
@@ -11,6 +14,7 @@ class TranslateMethod extends StatefulWidget {
       this.onpress,
       this.onchaged,
       this.image,
+      required this.picture,
       this.title})
       : super(
           key: key,
@@ -21,6 +25,8 @@ class TranslateMethod extends StatefulWidget {
   final onchaged;
   final image;
   final title;
+  final String 
+  picture;
   @override
   State<TranslateMethod> createState() => _TranslateMethodState();
 }
@@ -33,13 +39,16 @@ class _TranslateMethodState extends State<TranslateMethod> {
       child: Container(
         // margin: EdgeInsets.only(left: 34),
         padding: EdgeInsets.only(top: 7, bottom: 7),
-        width: MediaQuery.of(context).size.width*0.88,
+        width: MediaQuery.of(context).size.width * 0.88,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               width: MediaQuery.of(context).size.width,
               child: ListTile(
+                leading: Image.asset(
+                  widget.picture,
+                ),
                 title: Transform.translate(
                   offset: Offset(0, 0),
                   child: Row(

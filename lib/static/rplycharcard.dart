@@ -52,6 +52,7 @@ class _ReplyMessageCardState extends State<ReplyMessageCard> {
                       Card(
                         elevation: 1,
                         shape: RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xFF7586A9)),
                             borderRadius: BorderRadius.only(
                                 bottomRight: Radius.circular(8),
                                 topLeft: Radius.circular(8),
@@ -91,6 +92,7 @@ class _ReplyMessageCardState extends State<ReplyMessageCard> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Card(
+                               
                                 elevation: 1,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.only(

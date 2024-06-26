@@ -46,14 +46,18 @@ class _TopBarState extends State<TopBar> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image(
-            image: AssetImage("assets/images/splashLogo.png"),
-            color: white,
-            height: 30,
-            width: 30,
+          // Image(
+          //   image: AssetImage("assets/images/splashLogo.png"),
+          //   color: white,
+          //   height: 30,
+          //   width: 30,
+          // ),
+          Text(
+            "..........",
+            style: TextStyle(color: greenish),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               InkWell(
                 onTap: () {

@@ -128,7 +128,7 @@ class TranslatorProfileController extends GetxController {
     } else {
       totalAmount = 0;
       Get.snackbar(
-          'Pages exceed the maximum amount of pages set by translator', '',
+          'Pages exceed the maximum amount of pages set by translator'.tr, '',
           duration: Duration(seconds: 2),
           backgroundColor: Colors.red,
           colorText: white,
