@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:svg="http://www.w3.org/2000/svg" id="svg3039" viewBox="0 0 562.94 350.35" version="1.1">
+  <defs id="defs3043">
+    <linearGradient id="linearGradient4192">
+      <stop id="stop4194" stop-color="#d60021" offset="0"/>
+      <stop id="stop4196" offset="1"/>
+    </linearGradient>
+    <linearGradient id="linearGradient4198" y2="374.72" xlink:href="#linearGradient4192" gradientUnits="userSpaceOnUse" x2="278.47" gradientTransform="translate(-3.6183 .55715)" y1="100.95" x1="484.2"/>
+    <linearGradient id="linearGradient4262" y2="372.96" xlink:href="#linearGradient4192" gradientUnits="userSpaceOnUse" x2="411.88" gradientTransform="translate(-4.2213)" y1="86.713" x1="157.77"/>
+    <linearGradient id="linearGradient4280" y2="-5.5569" xlink:href="#linearGradient4192" gradientUnits="userSpaceOnUse" x2="298.58" gradientTransform="matrix(1 0 0 -1 -425.75 334.39)" y1="115.87" x1="488.1"/>
+    <linearGradient id="linearGradient4322" y2="51.903" gradientUnits="userSpaceOnUse" x2="423.11" y1="301.74" x1="78.522">
+      <stop id="stop4312" stop-color="#b3b3b3" offset="0"/>
+      <stop id="stop4338" stop-color="#ccc" offset=".069397"/>
+      <stop id="stop4336" stop-color="#fff" offset=".16192"/>
+      <stop id="stop4334" stop-color="#fff" offset=".26174"/>
+      <stop id="stop4332" stop-color="#fff" offset=".388"/>
+      <stop id="stop4330" stop-color="#ccc" offset=".52202"/>
+      <stop id="stop4328" stop-color="#fff" offset=".6808"/>
+      <stop id="stop4326" stop-color="#dfdfdf" offset=".78534"/>
+      <stop id="stop4324" stop-color="#ccc" offset=".90089"/>
+      <stop id="stop4298" stop-color="#fff" offset="1"/>
+    </linearGradient>
+  </defs>
+  <g id="g3027" transform="translate(52.282 7.7009)">
+    <path id="path4282" d="m88.905 0.63624c80.495-14.824 104.64-5.2877 140.82 0.64896 36.185 5.9366 74.173 14.78 140.82 0l0.64894 332.26c-44.506 12.372-97.065 8.6473-143.42 0-46.35-8.6473-74.55-12.571-138.22 0z" fill="url(#linearGradient4322)"/>
+    <path id="path4163" d="m369.85 334.76c45.816-8.0252 92.45-10.194 140.81 0v-333.32c-46.936-13.096-93.872-11.239-140.81 0z" fill="url(#linearGradient4198)"/>
+    <path id="path3049" d="m162.76 256.05 8.1527-20.11-65.765-60.873 17.392-9.2397-7.6092-44.568 39.676 4.3481 11.957-16.849 30.98 39.133-17.392-84.788 26.089 8.6962 25.001-45.655 23.371 44.568 27.719-7.6092-17.936 84.244 30.98-38.046 10.87 16.305 39.133-3.8046-5.9786 42.937 17.936 11.414-65.765 60.33 7.0656 21.197-58.699-9.7832 1.6305 72.83h-22.284l3.2611-73.374z" fill="url(#linearGradient4262)"/>
+    <path id="path4278" d="m-52.282 0.1846c45.816 8.0252 92.45 10.194 140.81 0v333.32c-46.936 13.096-93.872 11.239-140.81 0z" fill="url(#linearGradient4280)"/>
+  </g>
+  <metadata>
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <cc:license rdf:resource="http://creativecommons.org/licenses/publicdomain/"/>
+        <dc:publisher>
+          <cc:Agent rdf:about="http://openclipart.org/">
+            <dc:title>Openclipart</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title>Canadian Flag</dc:title>
+        <dc:date>2011-01-25T20:42:15</dc:date>
+        <dc:description>A Canadian Flag drawn with Inkscape. This time the drawing is correct, the previous one the bottom was cut off. Always resize the drawing area using document properties in Inkscape.</dc:description>
+        <dc:source>http://openclipart.org/detail/109975/canadian-flag-by-merlin2525</dc:source>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Merlin2525</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>Canada</rdf:li>
+            <rdf:li>arce</rdf:li>
+            <rdf:li>bandera</rdf:li>
+            <rdf:li>canadian</rdf:li>
+            <rdf:li>canadien</rdf:li>
+            <rdf:li>canadiense</rdf:li>
+            <rdf:li>clip art</rdf:li>
+            <rdf:li>clipart</rdf:li>
+            <rdf:li>country</rdf:li>
+            <rdf:li>drapeau</rdf:li>
+            <rdf:li>emblem</rdf:li>
+            <rdf:li>emblema</rdf:li>
+            <rdf:li>embleme</rdf:li>
+            <rdf:li>erable</rdf:li>
+            <rdf:li>feuille</rdf:li>
+            <rdf:li>flag</rdf:li>
+            <rdf:li>hoja</rdf:li>
+            <rdf:li>leaf</rdf:li>
+            <rdf:li>maple</rdf:li>
+            <rdf:li>monde</rdf:li>
+            <rdf:li>mundo</rdf:li>
+            <rdf:li>pais</rdf:li>
+            <rdf:li>pays</rdf:li>
+            <rdf:li>world</rdf:li>
+            <rdf:li>north</rdf:li>
+            <rdf:li>nord</rdf:li>
+            <rdf:li>norte</rdf:li>
+            <rdf:li>america</rdf:li>
+            <rdf:li>am&#xC3;&#xA9;rica</rdf:li>
+            <rdf:li>del</rdf:li>
+            <rdf:li>du</rdf:li>
+            <rdf:li>norteamerica</rdf:li>
+            <rdf:li>amerique</rdf:li>
+            <rdf:li>am&#xC3;&#xA9;rique</rdf:li>
+            <rdf:li>l'amerique</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/>
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>

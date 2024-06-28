@@ -54,9 +54,9 @@ class InputFieldPassword1 extends StatelessWidget {
       child: Card(
         color: Color.fromRGBO(255, 255, 255, 1),
         shape: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(30),
             borderSide: BorderSide(
-              color: Colors.grey[400]!,
+              color: lightblue,
             )),
         child: TextFormField(
           style: const TextStyle(fontSize: 14),
@@ -64,24 +64,13 @@ class InputFieldPassword1 extends StatelessWidget {
           decoration: InputDecoration(
               prefixIcon: Padding(
                 padding: const EdgeInsets.all(12),
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: greenish,
-                    ),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(30),
-                    ),
-                  ),
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: SvgPicture.asset(
-                      imageIcon,
-                      height: 17,
-                      width: 17,
-                      color: greenish,
-                    ),
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: SvgPicture.asset(
+                    imageIcon,
+                    height: 17,
+                    width: 17,
+                    color: greenish,
                   ),
                 ),
               ),

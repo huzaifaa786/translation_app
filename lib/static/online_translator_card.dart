@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:translation/screens/translator/translator_profile.dart';
+import 'package:translation/values/colors.dart';
 import 'package:translation/values/controllers.dart';
 
 class OnlineTranslatorCard extends StatelessWidget {
@@ -24,7 +25,7 @@ class OnlineTranslatorCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         translatorProfileController.clear();
-        Get.to(() => TraslatorProfile(detail: vendor));
+        // Get.to(() => TraslatorProfile(detail: vendor));
       },
       child: Card(
         shape: RoundedRectangleBorder(
@@ -41,8 +42,8 @@ class OnlineTranslatorCard extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 0.1,
                 padding: EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  border: Border.all(width: 2, color: Color(0xFF34607B)),
-                  borderRadius: BorderRadius.circular(24),
+                  // border: Border.all(width: 2, color: Color(0xFF34607B)),
+                  // borderRadius: BorderRadius.circular(24),
                 ),
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(22),
@@ -63,9 +64,9 @@ class OnlineTranslatorCard extends StatelessWidget {
               Text(
                 name,
                 style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: 'NunitoSans'),
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: 'Poppins'),
               ),
               rating != null
                   ? Row(
@@ -95,19 +96,25 @@ class OnlineTranslatorCard extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                           SvgPicture.asset(
+                                      "assets/images/timetopay.svg",
+                                      color: greenish,
+                                      height: 12,
+                                      width: 12,
+                                    ),
                           Text(
                             "Rate per 30 mins:  ",
-                            style: TextStyle(
-                                fontSize: 9,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: 'NunitoSans'),
+                             style: TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: 'Poppins'),
                           ),
                           Text(
                             price + " AED",
-                            style: TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: 'NunitoSans'),
+                             style: TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: 'Poppins'),
                           )
                         ],
                       ),

@@ -55,6 +55,7 @@ class _TranslateScreenState extends State<TranslateScreen> {
               child: Column(
                 children: [
                   TranslateMethod(
+                    picture: "assets/images/Great Britain.png",
                     title: 'english'.tr,
                     groupvalue: _site,
                     value: translateMethod.English,
@@ -69,6 +70,7 @@ class _TranslateScreenState extends State<TranslateScreen> {
                     },
                   ),
                   TranslateMethod(
+                    picture: "assets/images/United Arab Emirates.png",
                     title: 'arabic'.tr,
                     groupvalue: _site,
                     value: translateMethod.Arabic,

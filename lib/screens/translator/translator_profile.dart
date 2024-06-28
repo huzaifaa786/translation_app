@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
+import 'package:translation/static/titletopbar.dart';
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:translation/models/vendor.dart';
+import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/screens/translator/map.dart';
 import 'package:translation/screens/translator/radio_btn.dart';
 import 'package:translation/screens/translator/radio_btn2.dart';
@@ -34,6 +36,9 @@ class TraslatorProfile extends StatefulWidget {
 }
 
 class _TraslatorProfileState extends State<TraslatorProfile> {
+  SettingController currencycontroller = Get.find();
+  GetStorage box = GetStorage();
+  String? selectedCurrency;
   vendor() async {
     print('widget.detail!.service!.isAudioVideo');
     print(widget.detail!.service!.isAudioVideo);
@@ -72,6 +77,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
     getfav();
     urgentMaxcount();
     unurgentMaxCount();
+    selectedCurrency = box.read('selectedCurrency');
     super.initState();
   }
 
@@ -99,64 +105,19 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
       backgroundColor: white,
       body: SafeArea(
         child: GetBuilder<TranslatorProfileController>(
-          builder: (controller) => Padding(
-            padding: const EdgeInsets.only(top: 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 20, right: 20, bottom: 12),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      box.read('locale') != 'ar'
-                          ? GestureDetector(
-                              onTap: () {
-                                Get.back();
-                              },
-                              child: SvgPicture.asset("assets/icons/back.svg"))
-                          : GestureDetector(
-                              onTap: () {
-                                Get.back();
-                              },
-                              child:
-                                  SvgPicture.asset("assets/icons/forward.svg")),
-                      Text(
-                        "Details".tr,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 21),
-                      ),
-                      translatorProfileController.favourit == false
-                          ? InkWell(
-                              onTap: () {
-                                translatorProfileController
-                                    .addfavorit(widget.detail!);
-                              },
-                              child: FittedBox(
-                                  fit: BoxFit.scaleDown,
-                                  child: SvgPicture.asset(
-                                      "assets/images/heart.svg",
-                                      height: 28,
-                                      width: 28)))
-                          : InkWell(
-                              onTap: () {
-                                translatorProfileController
-                                    .addfavorit(widget.detail!);
-                              },
-                              child: FittedBox(
-                                  fit: BoxFit.scaleDown,
-                                  child: SvgPicture.asset(
-                                      "assets/images/fav.svg",
-                                      height: 26,
-                                      width: 25))),
-                    ],
+          builder: (controller) => SingleChildScrollView(
+            child: Column(children: [
+              Stack(
+                children: [
+                  TitleTopbar(
+                    text: "Details".tr,
+                    height: 0.1 / 0.5,
                   ),
-                ),
-                Flexible(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.89,
+                  Container(
+                    margin: EdgeInsets.only(top: 85, left: 16, right: 16),
+                    // height: MediaQuery.of(context).size.height * 0.89,
                     padding: EdgeInsets.only(right: 20, left: 20),
+                    decoration: BoxDecoration(color: Colors.grey.shade200),
                     child: Padding(
                       padding: EdgeInsets.only(
                           bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -173,6 +134,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                             Padding(
                               padding: const EdgeInsets.only(top: 8),
                               child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     "Languages".tr,
@@ -184,11 +146,12 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                               ),
                             ),
                             Container(
-                              padding: const EdgeInsets.only(top: 8),
+                              alignment: Alignment.bottomCenter,
+                              padding: EdgeInsets.only(top: 8),
                               width: double.infinity,
                               child: Wrap(
                                 direction: Axis.horizontal,
-                                runAlignment: WrapAlignment.start,
+                                runAlignment: WrapAlignment.center,
                                 children: [
                                   for (var i = 0;
                                       i < widget.detail!.language!.length;
@@ -201,6 +164,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                             Padding(
                               padding: const EdgeInsets.only(top: 8),
                               child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     "Certificates".tr,
@@ -211,50 +175,59 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                 ],
                               ),
                             ),
-                            widget.detail!.certificate == ''
-                                ? Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 8, bottom: 8),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Text("No certificate uploaded!"),
-                                      ],
-                                    ),
-                                  )
-                                : Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 15, bottom: 15),
-                                    child: Row(
-                                      children: [
-                                        SvgPicture.asset(
-                                            "assets/images/certificate.svg"),
-                                        InkWell(
-                                          onTap: () {
-                                            Get.to(
-                                              () => FullScreenImagePage(
-                                                imageUrl:
-                                                    widget.detail!.certificate!,
-                                              ),
-                                            );
-                                          },
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 12, right: 12),
-                                            child: Text(
-                                              widget.detail!.certificate_name!,
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                                color: Colors.black,
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                widget.detail!.certificate == ''
+                                    ? Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 8, bottom: 8),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text("No certificate uploaded!"),
+                                          ],
+                                        ),
+                                      )
+                                    : Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 15, bottom: 15),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            SvgPicture.asset(
+                                                "assets/images/certificate.svg"),
+                                            InkWell(
+                                              onTap: () {
+                                                Get.to(
+                                                  () => FullScreenImagePage(
+                                                    imageUrl: widget
+                                                        .detail!.certificate!,
+                                                  ),
+                                                );
+                                              },
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 12, right: 12),
+                                                child: Text(
+                                                  widget.detail!
+                                                      .certificate_name!,
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
                                               ),
                                             ),
-                                          ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                  ),
+                                      ),
+                              ],
+                            ),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
                                   "About".tr,
@@ -270,7 +243,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                         top: 8, bottom: 8),
                                     child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                          MainAxisAlignment.center,
                                       children: [
                                         Text("About Empty."),
                                       ],
@@ -281,18 +254,18 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                         top: 15.0, bottom: 15),
                                     child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                          MainAxisAlignment.center,
                                       children: [
                                         SizedBox(
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              0.85,
+                                              0.80,
                                           child: Text(
                                             box.read('locale') != 'ar'
                                                 ? widget.detail!.aboutEnglish!
                                                 : widget.detail!.aboutArabic!,
-                                            textAlign: TextAlign.start,
+                                            textAlign: TextAlign.center,
                                             style: TextStyle(fontSize: 14),
                                           ),
                                         ),
@@ -526,318 +499,213 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                             //         ],
                             //       )
                             //     : Container(),
-                            widget.detail!.service!.isInperson! ||
-                                    widget.detail!.service!.isAudioVideo!
-                                ? Row(
-                                    children: [
-                                      TralingRadioBtn(
-                                        text: 'Schedule'.tr,
-                                        isSelected: controller.serviceType ==
-                                            ServiceType.Schedule,
-                                        ontap: () {
-                                          setState(() {
-                                            controller.serviceType =
-                                                ServiceType.Schedule;
-                                            if (widget.detail!.service!
-                                                    .isInperson! &&
-                                                widget.detail!.service!
-                                                    .isAudioVideo!) {
-                                              controller.resetInstant();
-                                            }
-                                          });
-                                        },
-                                      ),
-                                    ],
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 16, right: 16),
+                child: Column(children: [
+                  widget.detail!.service!.isInperson! ||
+                          widget.detail!.service!.isAudioVideo!
+                      ? Row(
+                          children: [
+                            TralingRadioBtn(
+                              text: 'Schedule'.tr,
+                              isSelected: controller.serviceType ==
+                                  ServiceType.Schedule,
+                              ontap: () {
+                                setState(() {
+                                  controller.serviceType = ServiceType.Schedule;
+                                  if (widget.detail!.service!.isInperson! &&
+                                      widget.detail!.service!.isAudioVideo!) {
+                                    controller.resetInstant();
+                                  }
+                                });
+                              },
+                            ),
+                          ],
+                        )
+                      : SizedBox(),
+                  controller.serviceType == ServiceType.Schedule
+                      ? Column(
+                          children: [
+                            widget.detail!.service!.isAudioVideo == true
+                                ? RadioBtn(
+                                    text: 'Audio/video meeting'.tr,
+                                    image:
+                                        'assets/images/output-onlinepngtools (11).png',
+                                    groupvalue: controller.scheduleType,
+                                    value: ScheduleType.AudioVideo,
+                                    onChanged: () {
+                                      controller
+                                          .toggleplan(ScheduleType.AudioVideo);
+                                    },
                                   )
-                                : SizedBox(),
-                            controller.serviceType == ServiceType.Schedule
-                                ? Column(
-                                    children: [
-                                      widget.detail!.service!.isAudioVideo ==
-                                              true
-                                          ? RadioBtn(
-                                              text: 'Audio/video meeting'.tr,
-                                              image:
-                                                  'assets/images/output-onlinepngtools (11).png',
-                                              groupvalue:
-                                                  controller.scheduleType,
-                                              value: ScheduleType.AudioVideo,
-                                              onChanged: () {
-                                                controller.toggleplan(
-                                                    ScheduleType.AudioVideo);
-                                              },
-                                            )
-                                          : Container(),
-                                      widget.detail!.service!.isInperson! ==
-                                              true
-                                          ? RadioBtn(
-                                              text: 'In person meeting'.tr,
-                                              image:
-                                                  'assets/images/output-onlinepngtools (10).png',
-                                              groupvalue:
-                                                  controller.scheduleType,
-                                              value: ScheduleType.InPerson,
-                                              onChanged: () {
-                                                controller.toggleplan(
-                                                    ScheduleType.InPerson);
-                                              },
-                                            )
-                                          : Container(),
-                                      controller.scheduleType ==
-                                              ScheduleType.InPerson
-                                          ? IconsButton(
-                                              title: 'Choose Location'.tr,
-                                              icon: Icons.my_location_rounded,
-                                              onPressed: () {
-                                                // controller.getlocation();
-                                                Get.to(() =>
-                                                    DeliveryMap(widget.detail));
-                                              })
-                                          : Container(),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      IconsButton(
-                                        title: 'Choose Date'.tr +
-                                            ' (' +
-                                            DateFormat('dd-MM-yyyy').format(
-                                                controller.selectedDay.value) +
-                                            ')',
-                                        icon: Icons.calendar_month,
-                                        onPressed: () {
-                                          showModalBottomSheet(
-                                            isScrollControlled: true,
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return Directionality(
-                                                textDirection:
-                                                    ui.TextDirection.ltr,
-                                                child: StatefulBuilder(
-                                                  builder: (BuildContext
-                                                          context,
-                                                      StateSetter setState) {
-                                                    // Define a callback function to update the selected date
-                                                    void onDateSelected(
-                                                        DateTime selectedDay,
-                                                        DateTime focusedDay) {
-                                                      controller.setSelectedDay(
-                                                          selectedDay,
-                                                          focusedDay);
-                                                      setState(() {});
-                                                    }
+                                : Container(),
+                            widget.detail!.service!.isInperson! == true
+                                ? RadioBtn(
+                                    text: 'In person meeting'.tr,
+                                    image:
+                                        'assets/images/output-onlinepngtools (10).png',
+                                    groupvalue: controller.scheduleType,
+                                    value: ScheduleType.InPerson,
+                                    onChanged: () {
+                                      controller
+                                          .toggleplan(ScheduleType.InPerson);
+                                    },
+                                  )
+                                : Container(),
+                            controller.scheduleType == ScheduleType.InPerson
+                                ? IconsButton(
+                                    title: 'Choose Location'.tr,
+                                    icon: Icons.my_location_rounded,
+                                    onPressed: () {
+                                      // controller.getlocation();
+                                      Get.to(() => DeliveryMap(widget.detail));
+                                    })
+                                : Container(),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            IconsButton(
+                              title: 'Choose Date'.tr +
+                                  ' (' +
+                                  DateFormat('dd-MM-yyyy')
+                                      .format(controller.selectedDay.value) +
+                                  ')',
+                              icon: Icons.calendar_month,
+                              onPressed: () {
+                                showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return Directionality(
+                                      textDirection: ui.TextDirection.ltr,
+                                      child: StatefulBuilder(
+                                        builder: (BuildContext context,
+                                            StateSetter setState) {
+                                          // Define a callback function to update the selected date
+                                          void onDateSelected(
+                                              DateTime selectedDay,
+                                              DateTime focusedDay) {
+                                            controller.setSelectedDay(
+                                                selectedDay, focusedDay);
+                                            setState(() {});
+                                          }
 
-                                                    return Wrap(
-                                                      children: [
-                                                        TableCalendar(
-                                                          calendarFormat:
-                                                              CalendarFormat
-                                                                  .month,
-                                                          availableCalendarFormats: const {
-                                                            CalendarFormat
-                                                                .month: 'Month',
-                                                            // CalendarFormat.week: 'Week',
-                                                          },
-                                                          firstDay: now,
-                                                          lastDay:
-                                                              nextSixMonths!,
-                                                          focusedDay: controller
-                                                              .focusedDay.value,
-                                                          calendarStyle:
-                                                              CalendarStyle(
-                                                            todayDecoration: BoxDecoration(
-                                                                color: greenish
-                                                                    .withOpacity(
-                                                                        0.5),
-                                                                shape: BoxShape
-                                                                    .circle),
-                                                            selectedDecoration:
-                                                                BoxDecoration(
-                                                              color:
-                                                                  greenish, // Customize the background color of the selected day
-                                                              shape: BoxShape
-                                                                  .circle, // Customize the shape of the selected day
-                                                            ),
-                                                            selectedTextStyle:
-                                                                TextStyle(
-                                                              color:
-                                                                  white, // Customize the text color of the selected day
-                                                              fontWeight: FontWeight
-                                                                  .bold, // Customize the font weight of the selected day
-                                                            ),
-                                                          ),
-                                                          selectedDayPredicate:
-                                                              (day) {
-                                                            return isSameDay(
-                                                                controller
-                                                                    .selectedDay
-                                                                    .value,
-                                                                day);
-                                                          },
-                                                          onDaySelected:
-                                                              onDateSelected,
-                                                        ),
-                                                        Center(
-                                                          child: Container(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    bottom: 30,
-                                                                    top: 16),
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                0.8,
-                                                            child:
-                                                                ElevatedButton(
-                                                              onPressed: () {
-                                                                // Call the callback to update the button text
-                                                                controller.updateButtonText(
-                                                                    controller
-                                                                        .selectedDay);
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop(); // Close the bottom sheet
-                                                              },
-                                                              child: Text(
-                                                                  'Done'.tr),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
+                                          return Wrap(
+                                            children: [
+                                              TableCalendar(
+                                                calendarFormat:
+                                                    CalendarFormat.month,
+                                                availableCalendarFormats: const {
+                                                  CalendarFormat.month: 'Month',
+                                                  // CalendarFormat.week: 'Week',
+                                                },
+                                                firstDay: now,
+                                                lastDay: nextSixMonths!,
+                                                focusedDay:
+                                                    controller.focusedDay.value,
+                                                calendarStyle: CalendarStyle(
+                                                  todayDecoration:
+                                                      BoxDecoration(
+                                                          color: greenish
+                                                              .withOpacity(0.5),
+                                                          shape:
+                                                              BoxShape.circle),
+                                                  selectedDecoration:
+                                                      BoxDecoration(
+                                                    color:
+                                                        greenish, // Customize the background color of the selected day
+                                                    shape: BoxShape
+                                                        .circle, // Customize the shape of the selected day
+                                                  ),
+                                                  selectedTextStyle: TextStyle(
+                                                    color:
+                                                        white, // Customize the text color of the selected day
+                                                    fontWeight: FontWeight
+                                                        .bold, // Customize the font weight of the selected day
+                                                  ),
                                                 ),
-                                              );
-                                            },
+                                                selectedDayPredicate: (day) {
+                                                  return isSameDay(
+                                                      controller
+                                                          .selectedDay.value,
+                                                      day);
+                                                },
+                                                onDaySelected: onDateSelected,
+                                              ),
+                                              Center(
+                                                child: Container(
+                                                  padding: EdgeInsets.only(
+                                                      bottom: 30, top: 16),
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.8,
+                                                  child: ElevatedButton(
+                                                    onPressed: () {
+                                                      // Call the callback to update the button text
+                                                      controller
+                                                          .updateButtonText(
+                                                              controller
+                                                                  .selectedDay);
+                                                      Navigator.of(context)
+                                                          .pop(); // Close the bottom sheet
+                                                    },
+                                                    child: Text('Done'.tr),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           );
                                         },
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 10, bottom: 10),
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              "Set Time".tr,
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                            Container(
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10, bottom: 10),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Set Time".tr,
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 10),
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              '(' +
-                                                  "Gulf Standard Time United Arab Emirates Time"
-                                                      .tr +
-                                                  ')',
-                                              style: TextStyle(
-                                                  fontSize: 10,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 10),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          '(' +
+                                              "Gulf Standard Time United Arab Emirates Time"
+                                                  .tr +
+                                              ')',
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.bold),
                                         ),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Scheduleinput(
-                                            text: 'Start Time'.tr,
-                                            controller: startTimeController,
-                                            onpressed: () {
-                                              DatePicker.showTimePicker(context,
-                                                  showTitleActions: true,
-                                                  showSecondsColumn: false,
-                                                  locale:
-                                                      box.read('locale') != 'ar'
-                                                          ? LocaleType.en
-                                                          : LocaleType.ar,
-                                                  onChanged: (val) {
-                                                var end = val
-                                                    .add(Duration(minutes: 1));
-                                                var time =
-                                                    DateFormat.Hm().format(val);
-                                                var endTime =
-                                                    DateFormat.Hm().format(end);
-                                                startTimeController.text = time;
-                                                endTimeController.text =
-                                                    endTime;
-                                                controller.startTime = time;
-                                                controller.endTime = endTime;
-                                                translatorProfileController
-                                                    .calTotalTime(
-                                                        widget.detail!);
-                                                setState(() {});
-                                              }, onConfirm: (val) {
-                                                var end = val
-                                                    .add(Duration(minutes: 1));
-                                                var time =
-                                                    DateFormat.Hm().format(val);
-                                                var endTime =
-                                                    DateFormat.Hm().format(end);
-                                                startTimeController.text = time;
-                                                endTimeController.text =
-                                                    endTime;
-                                                controller.startTime = time;
-                                                controller.endTime = endTime;
-                                                translatorProfileController
-                                                    .calTotalTime(
-                                                        widget.detail!);
-                                                setState(() {});
-                                              }, currentTime: DateTime.now());
-                                            },
-                                            hint: '9:00',
-                                            fontSize: 18.0,
-                                          ),
-                                          Text("To".tr),
-                                          Scheduleinput(
-                                            text: 'End Time'.tr,
-                                            controller: endTimeController,
-                                            onpressed: () {
-                                              DatePicker.showTimePicker(context,
-                                                  showTitleActions: true,
-                                                  showSecondsColumn: false,
-                                                  locale:
-                                                      box.read('locale') != 'ar'
-                                                          ? LocaleType.en
-                                                          : LocaleType.ar,
-                                                  onConfirm: (val) {
-                                                var end =
-                                                    DateFormat.Hm().format(val);
-                                                endTimeController.text = end;
-                                                controller.endTime = end;
-                                                translatorProfileController
-                                                    .calTotalTime(
-                                                        widget.detail!);
-                                                setState(() {});
-                                              }, onChanged: (val) {
-                                                var end =
-                                                    DateFormat.Hm().format(val);
-                                                endTimeController.text = end;
-                                                controller.endTime = end;
-                                                translatorProfileController
-                                                    .calTotalTime(
-                                                        widget.detail!);
-                                                setState(() {});
-                                              }, currentTime: DateTime.now());
-                                            },
-                                            hint: '9:30',
-                                            fontSize: 18.0,
-                                            enabled: controller.startTime == ''
-                                                ? false
-                                                : true,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  )
-                                : Container(),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                             widget.detail!.service!.isdocument == true
                                 ? Row(
                                     children: [
@@ -1163,12 +1031,14 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                   )
                                 : Container(),
                             Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 16, bottom: 30),
+                              padding: EdgeInsets.only(top: 16, bottom: 30),
                               child: CheckOutButton(
                                 title: 'Checkout'.tr,
                                 price: controller.totalAmount.toString(),
                                 sreenRatio: 0.9,
+                                currencyname: selectedCurrency != null
+                                    ? currencycontroller.selectedCurrency
+                                    : "AED ",
                                 onPressed: () {
                                   checkoutController.clear();
                                   if (controller.serviceType ==
@@ -1232,13 +1102,11 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                               ),
                             )
                           ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+                        )
+                      : Container(),
+                ]),
+              )
+            ]),
           ),
         ),
       ),

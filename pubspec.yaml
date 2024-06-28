@@ -78,6 +78,10 @@ dependencies:
   syncfusion_flutter_pdfviewer: ^21.2.3
   auto_size_text_field: ^2.2.2
   translator: ^0.1.7
+  gap: ^3.0.1
+  country_flags: ^1.1.1
+  flutter_screenutil: ^5.7.0
+ 
 
 dev_dependencies:
   flutter_test:

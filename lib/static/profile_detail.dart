@@ -10,8 +10,9 @@ class ProfileDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
           margin: EdgeInsets.all(8),
@@ -49,7 +50,8 @@ class ProfileDetail extends StatelessWidget {
                           height: 11, width: 11)),
                   Padding(
                     padding: const EdgeInsets.only(top: 4, left: 2),
-                    child: Text(rating == null ? '0.0' : rating.toStringAsFixed(1),
+                    child: Text(
+                        rating == null ? '0.0' : rating.toStringAsFixed(1),
                         style: TextStyle(
                             fontSize: 11, fontWeight: FontWeight.bold)),
                   ),

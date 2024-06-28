@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:translation/screens/forgot.dart/emailOtp.dart';
 import 'package:translation/screens/auth/authcontroller.dart';
+import 'package:translation/static/main_button.dart';
 import 'package:translation/values/colors.dart';
 import 'package:translation/static/input_field1.dart';
 import 'package:translation/static/large_button.dart';
@@ -25,10 +26,17 @@ class _ForgotScreenState extends State<ForgotScreen> {
         child: GetBuilder<AuthController>(
             builder: (controller) => Stack(
                   children: [
-                    Image.asset(
-                      "assets/images/loginback.jpg",
-                      height: MediaQuery.of(context).size.height * 0.25,
-                      width: double.infinity,
+                    // Image.asset(
+                    //   "assets/images/loginback.jpg",
+                    //   height: MediaQuery.of(context).size.height * 0.25,
+                    //   width: double.infinity,
+                    // ),
+                    Container(
+                      height: Get.height * 0.3,
+                      width: Get.width,
+                      decoration: BoxDecoration(
+                        gradient: greenishgradient,
+                      ),
                     ),
                     Column(
                       children: [
@@ -59,10 +67,10 @@ class _ForgotScreenState extends State<ForgotScreen> {
                                     padding: const EdgeInsets.only(
                                         top: 30, bottom: 20),
                                     child: Text(
-                                      'Find Your Account',
+                                      'Forgot Password',
                                       style: TextStyle(
                                           fontSize: 24,
-                                          fontWeight: FontWeight.w600,
+                                          fontWeight: FontWeight.w500,
                                           color: greenish),
                                     ),
                                   ),
@@ -70,18 +78,17 @@ class _ForgotScreenState extends State<ForgotScreen> {
                                     padding: const EdgeInsets.only(
                                         top: 20, bottom: 20),
                                     child: InputField1(
-                                      hint:
-                                          'Enter email linked to your account',
-                                      icon: 'assets/images/email.svg',
+                                      hint: 'Email Address',
+                                      icon: 'assets/images/email1.svg',
                                       controller: authController.forgotemail,
                                       validator: (user) =>
                                           Validators.emptyStringValidator(
                                               user, 'Email'),
                                     ),
                                   ),
-                                  LargeButton(
+                                  MainButton(
                                     title: 'NEXT',
-                                    sreenRatio: 0.9,
+                                    sreenRatio: 0.37,
                                     onPressed: () {
                                       authController
                                           .getOTPusingEmail((success) {
@@ -93,7 +100,23 @@ class _ForgotScreenState extends State<ForgotScreen> {
                                     color: greenish,
                                     textcolor: Colors.white,
                                     buttonWidth: 0.95,
-                                  ),
+                                    btnhight: 49.0,
+                                  )
+                                  // LargeButton(
+                                  //   title: 'NEXT',
+                                  //   sreenRatio: 0.9,
+                                  //   onPressed: () {
+                                  //     authController
+                                  //         .getOTPusingEmail((success) {
+                                  //       if (success) {
+                                  //         Get.to(() => EmailOtpVerifyScreen());
+                                  //       }
+                                  //     });
+                                  //   },
+                                  //   color: greenish,
+                                  //   textcolor: Colors.white,
+                                  //   buttonWidth: 0.95,
+                                  // ),
                                 ]),
                               ),
                             ))

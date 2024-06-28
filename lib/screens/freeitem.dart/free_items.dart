@@ -70,6 +70,7 @@ class _FreeItemsState extends State<FreeItems> {
               ontap: () {
                 Navigator.pop(context);
               },
+              height: 0.2 / 1.4,
             ),
             const SizedBox(
               height: 30,
@@ -132,6 +133,7 @@ class _FreeItemsState extends State<FreeItems> {
               margin: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
+                  color: Colors.grey.shade200,
                   border: Border.all(color: Colors.grey[400]!)),
               child: Form(
                 key: formkey,
@@ -214,6 +216,7 @@ class _FreeItemsState extends State<FreeItems> {
               padding: const EdgeInsets.all(25),
               margin: const EdgeInsets.all(20),
               decoration: BoxDecoration(
+                  color: Colors.grey.shade200,
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.grey[400]!)),
               child: Center(

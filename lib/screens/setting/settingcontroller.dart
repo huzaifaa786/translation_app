@@ -6,15 +6,22 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:translation/api/api.dart';
+import 'package:translation/api/currencyapi.dart';
 import 'package:translation/helper/loading.dart';
 import 'package:translation/models/account.dart';
+import 'package:translation/screens/setting/currency/currencyalert.dart';
 import 'package:translation/values/string.dart';
 
 class SettingController extends GetxController {
   static SettingController instance = Get.find();
+
   int balance = 0;
   XFile? bugImage = XFile('');
   TextEditingController bugcontroller = TextEditingController();
+  String selectedCurrency = Currency().toString();
+  // Bool isLoading = false;
+  var apiService = ApiService();
+  final box = GetStorage();
 
   Future<void> selectbugImage() async {
     final ImagePicker _picker = ImagePicker();
@@ -23,6 +30,21 @@ class SettingController extends GetxController {
       bugImage = image;
       update();
     }
+  }
+
+  late SettingController userController;
+  @override
+  void onInit() async {
+    // userController = Get.put(SettingController.instance);
+    getcurrency();
+    update();
+    super.onInit();
+  }
+
+  void getcurrency() {
+    // updateSelectedCurrency(selectedCurrency);
+    selectedCurrency = box.read("selectedCurrency");
+    update();
   }
 
   ClearbugVariables() {
@@ -47,6 +69,21 @@ class SettingController extends GetxController {
     update();
   }
 
+  Future<void> updateSelectedCurrency(String current) async {
+    selectedCurrency = current;
+    // isLoading.value = true;
+
+    try {
+      final response = await ApiService().storeCurrency(current, box);
+
+      print(response.data);
+      // isLoading.value = false;
+      update(selectedCurrency as List<Object>?);
+    } on Exception catch (error) {
+      // isLoading.value = false;
+    }
+  }
+
   void addbug() async {
     LoadingHelper.show();
     if (bugImage!.path != '') {
@@ -67,7 +104,7 @@ class SettingController extends GetxController {
       ClearbugVariables();
       Get.back();
       update();
-      Get.snackbar("Report Submit Successfully.".tr,"",
+      Get.snackbar("Report Submit Successfully.".tr, "",
           // "Thank you for reporting the bug successfully! We appreciate your efforts in helping us improve our system. Our team will review the bug report and work towards resolving the issue. If we require any further information or clarification, we will reach out to you. Thank you for your patience and for being a valued member of our community!",
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.green,

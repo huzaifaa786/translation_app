@@ -1,6 +1,7 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -18,6 +19,7 @@ import 'package:translation/values/controllers.dart';
 import 'package:translation/values/language.dart';
 import 'package:badges/badges.dart' as badges;
 import '../../../static/large_button.dart';
+import '../freeitem.dart/free_items.dart';
 
 class Home_screen extends StatefulWidget {
   const Home_screen({super.key});
@@ -56,7 +58,7 @@ class _Home_screenState extends State<Home_screen> {
         controller: _controller,
         screens: _buildScreens(),
         items: _navBarItem(),
-        navBarStyle: NavBarStyle.style6,
+        navBarStyle: NavBarStyle.style12,
         decoration: NavBarDecoration(
           boxShadow: [
             BoxShadow(
@@ -200,7 +202,7 @@ class _HomeState extends State<Home> {
     return GetBuilder<HomeController>(
         builder: (controller) => Scaffold(
               body: SafeArea(
-                child: Column(
+                child: Stack(
                   children: [
                     MainStackCard(
                       onProfileTap: () {},
@@ -208,14 +210,86 @@ class _HomeState extends State<Home> {
                           ? ""
                           : homeController.user!.username,
                     ),
-                    Flexible(
+                    Positioned(
+                      top: 140,
+                      left: 20,
+                      right: 20,
                       child: Container(
-                        padding: EdgeInsets.only(left: 20, right: 20, top: 35),
-                        height: MediaQuery.of(context).size.height * 0.60,
+                        decoration: BoxDecoration(
+                          color: white,
+                          boxShadow: [
+                            BoxShadow(color: Colors.black, blurRadius: 12)
+                          ],
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        padding: EdgeInsets.only(
+                          left: 20,
+                          right: 20,
+                        ),
+                        height: MediaQuery.of(context).size.height * 0.65,
                         child: SingleChildScrollView(
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 20, bottom: 30),
+                                child: Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => FreeItems(),
+                                          ));
+                                    },
+                                    child: Container(
+                                      width: 280,
+                                      height: 59,
+                                      decoration: BoxDecoration(
+                                        color: Color.fromARGB(255, 16, 54, 78),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black
+                                                .withOpacity(0.0824137),
+                                            blurRadius: 15,
+                                            offset: Offset(0, 4),
+                                          ),
+                                        ],
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.all(8),
+                                            decoration: BoxDecoration(
+                                                color:
+                                                    greenish.withOpacity(0.2),
+                                                borderRadius:
+                                                    BorderRadius.circular(20)),
+                                            child: Image.asset(
+                                                "assets/images/Google Translate.png"),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 20, right: 20),
+                                            child: Text(
+                                              "Free item".tr,
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                color: white,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -251,9 +325,9 @@ class _HomeState extends State<Home> {
                                 ],
                               ),
                               Directionality(
-                                textDirection:  box.read('locale') != 'ar'
-                                          ? TextDirection.ltr
-                                          : TextDirection.rtl,
+                                textDirection: box.read('locale') != 'ar'
+                                    ? TextDirection.ltr
+                                    : TextDirection.rtl,
                                 child: DropdownField(
                                   selectedvalue:
                                       homeController.fromSelectedLanguage,
@@ -323,8 +397,8 @@ class _HomeState extends State<Home> {
                               ),
                               Directionality(
                                 textDirection: box.read('locale') != 'ar'
-                                          ? TextDirection.ltr
-                                          : TextDirection.rtl,
+                                    ? TextDirection.ltr
+                                    : TextDirection.rtl,
                                 child: DropdownField(
                                   selectedvalue:
                                       homeController.toSelectedLanguage,
@@ -370,7 +444,7 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(top: 35, bottom: 20),
+                                padding: EdgeInsets.only(top: 25, bottom: 20),
                                 child: LargeButton(
                                   title: 'Translate'.tr,
                                   sreenRatio: 0.9,
