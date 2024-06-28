@@ -52,7 +52,7 @@ dependencies:
   flutter_easyloading: ^3.0.5
   get_storage: ^2.1.1
   font_awesome_flutter: ^10.4.0
-  flutter_stripe: ^9.2.0
+  flutter_stripe: ^9.5.0+1
   cached_network_image: ^3.2.3
   image_picker: ^0.8.7+5
   cloud_firestore: ^4.8.0
@@ -85,6 +85,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  stripe_android: "9.5.0+1"
 
 flutter_icons:
   android: true
