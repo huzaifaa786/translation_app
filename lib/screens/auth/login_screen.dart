@@ -2,8 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:toggle_switch/toggle_switch.dart';
+// import 'package:toggle_switch/toggle_switch.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 import 'package:translation/screens/company_login/company_login_screen.dart';
 import 'package:translation/screens/forgot.dart/forgotAccount.dart';
 import 'package:translation/screens/auth/authcontroller.dart';

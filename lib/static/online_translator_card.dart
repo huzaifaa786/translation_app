@@ -25,7 +25,7 @@ class OnlineTranslatorCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         translatorProfileController.clear();
-        Get.to(() => TraslatorProfile(detail: vendor));
+        // Get.to(() => TraslatorProfile(detail: vendor));
       },
       child: Card(
         shape: RoundedRectangleBorder(

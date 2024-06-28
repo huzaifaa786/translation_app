@@ -28,7 +28,7 @@ class FavoritesCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         translatorProfileController.clear();
-        Get.to(() => TraslatorProfile(detail: vendor));
+        // Get.to(() => TraslatorProfile(detail: vendor));
       },
       child: Card(
         color: Color.fromARGB(255, 255, 255, 255),
@@ -76,27 +76,30 @@ class FavoritesCard extends StatelessWidget {
                               fontWeight: FontWeight.w700,
                               fontFamily: 'NunitoSans'),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 2, bottom: 2),
-                          child: Row(
-                            children: [
-                              Text(
-                                "Rate per 30 mins".tr + ': ',
-                                style: TextStyle(
-                                    fontSize: 9,
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: 'NunitoSans'),
-                              ),
-                              Text(
-                                price + ' ' + "AED".tr,
-                                style: TextStyle(
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: 'NunitoSans'),
+                        price != null
+                            ? Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 2, bottom: 2),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "Rate per 30 mins".tr + ': ',
+                                      style: TextStyle(
+                                          fontSize: 9,
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: 'NunitoSans'),
+                                    ),
+                                    Text(
+                                      price + ' ' + "AED".tr,
+                                      style: TextStyle(
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: 'NunitoSans'),
+                                    )
+                                  ],
+                                ),
                               )
-                            ],
-                          ),
-                        ),
+                            : SizedBox(),
                         rating != null
                             ? Padding(
                                 padding: const EdgeInsets.only(bottom: 4),

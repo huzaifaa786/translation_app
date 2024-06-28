@@ -43,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
       if (api_token == null) {
         Get.offAll(() => LoginScreen());
       } else {
-        Get.offAll(() => Home_screen());
+        Get.offAll(() => LoginScreen());
       }
     } else {
       await box.write('seen', true);

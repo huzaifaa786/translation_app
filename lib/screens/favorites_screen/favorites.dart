@@ -52,7 +52,7 @@ class _Favorites_screenState extends State<Favorites_screen> {
                                 lang: favController.Fav[index].vendor!.language,
                                 vendor: favController.Fav[index].vendor,
                                 price: favController.Fav[index].vendor!.service!
-                                    .onlineaudiovideoPrice,
+                                    .audiovideo,
                                 rating: favController.Fav[index].vendor!.rating,
                               )),
                     ),
