@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // import 'package:toggle_switch/toggle_switch.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 import 'package:translation/screens/company_login/company_login_screen.dart';
 import 'package:translation/screens/forgot.dart/forgotAccount.dart';
 import 'package:translation/screens/auth/authcontroller.dart';
@@ -116,41 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   offset: Offset(2, 4))
                                             ],
                                           ),
-                                          child: ToggleSwitch(
-                                            initialLabelIndex: index,
-                                            labels: [
-                                              'Email',
-                                              'OTP',
-                                            ],
-                                            totalSwitches: 2,
-                                            onToggle: (index) {
-                                              getindex(index);
-                                            },
-                                            borderWidth: 3,
-                                            radiusStyle: true,
-                                            fontSize: 15,
-                                            minWidth: 110,
-                                            minHeight: 45,
-                                            cornerRadius: 40,
-                                            changeOnTap: true,
-                                            inactiveFgColor:
-                                                Color.fromARGB(255, 9, 9, 9),
-                                            activeFgColor: Color.fromARGB(
-                                                255, 255, 255, 255),
-                                            inactiveBgColor: Color.fromARGB(
-                                                255, 255, 255, 255),
-                                            activeBgColor: [greenish],
-                                            activeBorders: [
-                                              Border.all(
-                                                color: greenish,
-                                                width: 3.0,
-                                              ),
-                                              Border.all(
-                                                color: greenish,
-                                                width: 3.0,
-                                              ),
-                                            ],
-                                          ),
+                                          child: Container(),
                                         ),
                                       ],
                                     ),

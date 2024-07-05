@@ -34,21 +34,18 @@ class OfflineTranslattorCard extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           translatorProfileController.clear();
-          // Get.to(() => TraslatorProfile(detail: vendor));
+          Get.to(() => TraslatorProfile(detail: vendor));
         },
         child: Container(
           decoration: BoxDecoration(
-              color: white,
+              color: ggrey,
               borderRadius: BorderRadius.circular(5),
               boxShadow: [
+               
                 BoxShadow(
-                    color: Colors.grey[200]!,
-                    blurRadius: 7,
-                    offset: Offset(4, 4)),
-                BoxShadow(
-                  color: Colors.grey[200]!,
-                  blurRadius: 7,
-                  offset: Offset(-4, -4),
+                  color: Colors.grey[500]!,
+                  blurRadius: 2,
+                  offset: Offset(0.00001, 3),
                 ),
               ]),
           padding: const EdgeInsets.all(12.0),
@@ -58,12 +55,6 @@ class OfflineTranslattorCard extends StatelessWidget {
               Row(
                 children: [
                   InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Profile_screen()));
-                    },
                     child: Container(
                       padding: EdgeInsets.all(4),
                       decoration: BoxDecoration(
@@ -113,15 +104,19 @@ class OfflineTranslattorCard extends StatelessWidget {
                                       width: 12,
                                     ),
                                     Text(
-                                      "Rate per 30 mins".tr + ': ',
+                                      " per 30 mins".tr + ': ',
                                       style: TextStyle(
                                           fontSize: 13,
+                                          color: Color.fromARGB(
+                                              255, 141, 136, 136),
                                           fontWeight: FontWeight.w400,
                                           fontFamily: 'Poppins'),
                                     ),
                                     Text(
                                       price + currencyname,
                                       style: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 141, 136, 136),
                                           fontSize: 13,
                                           fontWeight: FontWeight.w400,
                                           fontFamily: 'Poppins'),
@@ -150,6 +145,8 @@ class OfflineTranslattorCard extends StatelessWidget {
                                               ? '0.0'
                                               : rating.toStringAsFixed(1),
                                           style: TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 141, 136, 136),
                                               fontSize: 11,
                                               fontWeight: FontWeight.w400,
                                               fontFamily: 'NunitoSans')),
@@ -164,17 +161,23 @@ class OfflineTranslattorCard extends StatelessWidget {
                             for (var i = 0; i < 3; i++)
                               if (i < lang.length)
                                 Container(
-                                  margin: EdgeInsets.only(left: 4),
+                                  width: MediaQuery.of(context).size.width*0.15,
+                                  margin: EdgeInsets.only(left: 9),
                                   padding: EdgeInsets.all(4),
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    border: Border.all(
-                                        color: Color.fromRGBO(0, 0, 0, 0.24),
-                                        width: 1),
-                                    borderRadius: BorderRadius.circular(13),
-                                  ),
+                                      color: Colors.white,
+                                      border: Border.all(
+                                          width: 1.5, color: Color.fromARGB(255, 145, 138, 138)),
+                                      borderRadius: BorderRadius.circular(13),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Color.fromARGB(255, 195, 181, 181)!,
+                                          blurRadius: 8,
+                                          offset: Offset(0, 3),
+                                        ),
+                                      ]),
                                   child: Text(
-                                    lang[i],
+                                     lang[ i],
                                     style: TextStyle(fontSize: 12),
                                   ),
                                 ),

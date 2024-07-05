@@ -38,7 +38,7 @@ class TitleTopbarr extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: 'Mazzard',
                   fontSize: 20,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: white,
                 ),
               ),

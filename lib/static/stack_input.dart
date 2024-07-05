@@ -48,6 +48,7 @@ class StackInputField extends StatelessWidget {
 
     return SizedBox(
       width: Get.width * 0.9,
+      
       child: Padding(
         padding: const EdgeInsets.only(top: 19, left: 20, right: 20),
         child: TextFormField(
@@ -61,7 +62,7 @@ class StackInputField extends StatelessWidget {
                   : AutovalidateMode.onUserInteraction),
           decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.always,
-            fillColor: Colors.grey,
+            fillColor: Colors.white,
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(12))),
             hoverColor: Colors.grey,

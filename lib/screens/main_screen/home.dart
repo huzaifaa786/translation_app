@@ -77,14 +77,7 @@ class _Home_screenState extends State<Home_screen> {
   List<PersistentBottomNavBarItem> _navBarItem() {
     return [
       PersistentBottomNavBarItem(
-        // onPressed: (BuildContext? context) async {
-        //   homeController.clear();
-        //   await homeController.getuser();
-        //   setState(() {
-        //     _controller.index = 0;
-        //   });
-        // },
-        icon: FaIcon(FontAwesomeIcons.house),
+        icon: FaIcon(FontAwesomeIcons.houseChimneyWindow),
         title: ('Home'.tr),
         textStyle: TextStyle(
             fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
@@ -216,9 +209,9 @@ class _HomeState extends State<Home> {
                       right: 20,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: white,
+                          color: ggrey,
                           boxShadow: [
-                            BoxShadow(color: Colors.black, blurRadius: 12)
+                            BoxShadow(color: Colors.black, blurRadius: 4)
                           ],
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -226,7 +219,7 @@ class _HomeState extends State<Home> {
                           left: 20,
                           right: 20,
                         ),
-                        height: MediaQuery.of(context).size.height * 0.65,
+                        height: MediaQuery.of(context).size.height * 0.6,
                         child: SingleChildScrollView(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -245,7 +238,7 @@ class _HomeState extends State<Home> {
                                           ));
                                     },
                                     child: Container(
-                                      width: 280,
+                                      width: MediaQuery.of(context).size.width,
                                       height: 59,
                                       decoration: BoxDecoration(
                                         color: Color.fromARGB(255, 16, 54, 78),
@@ -296,8 +289,8 @@ class _HomeState extends State<Home> {
                                   Text(
                                     'Choose languages'.tr,
                                     style: TextStyle(
-                                        fontSize: 23,
-                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w700,
                                         color: greenish),
                                   ),
                                 ],
@@ -316,8 +309,8 @@ class _HomeState extends State<Home> {
                                       child: Text(
                                         'From:'.tr,
                                         style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w600,
                                             color: kblack),
                                       ),
                                     ),
@@ -331,7 +324,7 @@ class _HomeState extends State<Home> {
                                 child: DropdownField(
                                   selectedvalue:
                                       homeController.fromSelectedLanguage,
-                                  text: 'Select an item'.tr,
+                                  text: 'select a language'.tr,
                                   items: Languages(),
                                   onChange: (value) {
                                     setState(() {
@@ -387,8 +380,8 @@ class _HomeState extends State<Home> {
                                       child: Text(
                                         'To:'.tr,
                                         style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w600,
                                             color: kblack),
                                       ),
                                     ),
@@ -402,7 +395,7 @@ class _HomeState extends State<Home> {
                                 child: DropdownField(
                                   selectedvalue:
                                       homeController.toSelectedLanguage,
-                                  text: 'Select an item'.tr,
+                                  text: 'select a language'.tr,
                                   items: Languages(),
                                   onChange: (value) {
                                     setState(() {
@@ -444,7 +437,7 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(top: 25, bottom: 20),
+                                padding: EdgeInsets.only(top: 70, bottom: 20),
                                 child: LargeButton(
                                   title: 'Translate'.tr,
                                   sreenRatio: 0.9,

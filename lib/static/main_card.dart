@@ -54,13 +54,27 @@ class MainStackCard extends StatelessWidget {
                         textDirection: box.read('locale') != 'ar'
                             ? TextDirection.ltr
                             : TextDirection.rtl,
-                        child: Text(
-                          'Hello'.tr + ', ' + name,
-                          maxLines: 2,
-                          style: TextStyle(
-                              fontSize: 23,
-                              fontWeight: FontWeight.w600,
-                              color: white),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Hello'.tr+',',
+                              maxLines: 2,
+                              style: TextStyle(
+                                  fontSize: 23,
+                                  fontWeight: FontWeight.w600,
+                                  color: white),
+                            ),
+                            SizedBox(height: 5,),
+                              Text(
+                               name,
+                              maxLines: 2,
+                              style: TextStyle(
+                                  fontSize: 23,
+                                  fontWeight: FontWeight.w600,
+                                  color: white),
+                            ),
+                          ],
                         ),
                       ),
                     ),

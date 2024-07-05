@@ -41,7 +41,7 @@ class _Translator_State extends State<Translator_> {
             Flexible(
               child: TitleTopbar(
                 text: "Interpreters / Translators",
-                height: 0.1 / 0.7,
+                height: 0.11,
               ),
             ),
             // Container(

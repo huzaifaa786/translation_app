@@ -46,9 +46,12 @@ class ChangePassword extends StatelessWidget {
                 Text(
                   title,
                   style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 19,
-                      color: Colors.black),
+                      fontWeight: FontWeight.w700,
+                      fontSize: 13,
+                      color: Colors.black,
+                      fontFamily: 'Poppins'
+                      ),
+                      
                 ),
               ],
             )),

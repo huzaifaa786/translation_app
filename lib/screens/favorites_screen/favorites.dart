@@ -36,9 +36,9 @@ class _Favorites_screenState extends State<Favorites_screen> {
                 Get.back();
               },
             ),
-            // SizedBox(
-            //   height: 20,
-            // ),
+            SizedBox(
+              height: 20,
+            ),
             favController.Fav.length != 0
                 ? Flexible(
                     child: Container(

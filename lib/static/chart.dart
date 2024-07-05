@@ -103,7 +103,7 @@ class ChartCards extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: Divider(
-                thickness: 1,
+                thickness: 2,
               ),
             )
           ],

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:translation/screens/chat/chatdetails.dart';
-
+import 'dart:ui' as ui;
 import 'package:translation/static/chart.dart';
-import 'package:translation/static/titletopbar.dart';
+import 'package:translation/values/colors.dart';
 import 'package:translation/values/controllers.dart';
 
 class Chats_screen extends StatefulWidget {
@@ -26,37 +26,46 @@ class _Chats_screenState extends State<Chats_screen> {
     return Scaffold(
         body: Column(
       children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: double.infinity,
-              height: Get.height * 0.2,
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 16, 54, 78),
-                borderRadius: BorderRadius.only(
-                    // bottomLeft: Radius.circular(25),
-                    // bottomRight: Radius.circular(25)
-                    ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(38, 68, 38, 0),
-                child: Text(
-                  "Messages".tr,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: 'Mazzard',
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20,
-                    height: 1.5,
-                    color: Colors.white,
+        Container(
+          height: Get.height * 0.13,
+          decoration: BoxDecoration(
+              color: greenish,
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10))),
+          child: Directionality(
+            textDirection: ui.TextDirection.ltr,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                  top: 15, right: 16, left: 16, bottom: 10),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [],
                   ),
-                ),
+                  SizedBox(
+                    height: 34,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Messages',
+                        style: TextStyle(
+                          fontFamily: 'Mazzard',
+                          fontSize: 17,
+                          fontWeight: FontWeight.w400,
+                          color: white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-          ],
+          ),
         ),
-
         Container(
           width: double.infinity,
           margin: EdgeInsets.fromLTRB(31, 20, 28, 20),

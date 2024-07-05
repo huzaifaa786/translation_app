@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:translation/values/colors.dart';
 
 class TralingRadioBtn extends StatelessWidget {
-  const TralingRadioBtn(
-      {super.key, this.text, this.isSelected , this.ontap});
+  const TralingRadioBtn({
+    super.key,
+    this.text,
+    this.isSelected,
+    this.ontap,
+    this.image,
+  });
   final text;
   final isSelected;
   final ontap;
+  final image;
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +26,24 @@ class TralingRadioBtn extends StatelessWidget {
               margin: EdgeInsets.only(top: 15, bottom: 15),
               height: 48,
               decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey[500]!,
+                    blurRadius: 5,
+                    offset: Offset(0.00001, 1),
+                  ),
+                ],
                 color: Colors.white,
                 border: Border.all(color: greenish, width: 1),
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(15),
               ),
               child: Row(
                 children: [
+                  // Image.asset(
+                  //   image,
+                  //   height: 26,
+                  //   width: 26,
+                  // ),
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0, right: 24),
                     child: Text(
@@ -45,7 +63,8 @@ class TralingRadioBtn extends StatelessWidget {
                         margin: EdgeInsets.all(2),
                         decoration: BoxDecoration(
                             color: isSelected == true ? greenish : white,
-                            borderRadius: BorderRadius.all(Radius.circular(25))),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(25))),
                       ),
                     ),
                   )

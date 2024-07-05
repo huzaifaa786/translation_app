@@ -14,31 +14,21 @@ class ProfileDetail extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-          margin: EdgeInsets.all(8),
-          width: 98,
-          height: 98,
-          padding: EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            border: Border.all(width: 2, color: Color(0xFF34607B)),
-            borderRadius: BorderRadius.circular(70),
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(45),
-            child: image == ''
-                ? Image.asset(
-                    "assets/images/5907.jpg",
-                    fit: BoxFit.cover,
-                  )
-                : CachedNetworkImage(
-                    imageUrl: image,
-                    fit: BoxFit.cover,
-                  ),
-          ),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(45),
+          child: image == ''
+              ? Image.asset(
+                  "assets/images/5907.jpg",
+                  fit: BoxFit.cover,
+                )
+              : CachedNetworkImage(
+                  imageUrl: image,
+                  fit: BoxFit.cover,
+                ),
         ),
         Text(
           name,
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
         ),
         rating != null
             ? Row(

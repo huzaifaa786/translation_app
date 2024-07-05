@@ -10,7 +10,8 @@ const Color kbrown = Color(0xFF795548);
 const Color kgrey = Color(0xFFC0C0C0);
 const primaryColor = Color(4278190080);
 const primaryLightcolor = Color(4281084972);
-const primaryDarkcolor = Color(4278190080);
+
+const ggrey = Color(4294375158);
 const secondaryColor = Color(4294362624);
 const secondaryLiteColor = Color(4294965583);
 const secondaryDarkColor = Color(4290680320);

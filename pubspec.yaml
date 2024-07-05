@@ -39,7 +39,6 @@ dependencies:
   intro_slider: ^4.2.0
   introduction_screen: ^3.1.6
   shared_preferences: ^2.0.5
-  toggle_switch: ^2.0.1
   flutter_otp_text_field: ^1.1.1
   persistent_bottom_nav_bar: 
   curved_navigation_bar: ^1.0.3
@@ -58,11 +57,11 @@ dependencies:
   cloud_firestore: ^4.8.0
   firebase_core: ^2.14.0
   firebase_messaging: ^14.6.2
-  date_time_picker: ^2.1.0
   table_calendar: ^3.0.8
   google_maps_place_picker_mb: ^3.0.2
   google_maps_flutter: ^2.3.0
   flutter_rating_bar: ^4.0.1
+  flutter_datetime_picker: ^1.5.1
   intl: ^0.17.0
   file_picker: ^5.3.1
   firebase_auth: ^4.6.3

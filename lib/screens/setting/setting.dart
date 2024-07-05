@@ -37,9 +37,8 @@ class _Setting_screenState extends State<Setting_screen> {
     selectedCurrency = box.read('selectedCurrency');
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       settingController.getbalance();
-      usercontroller.getcurrency();
+      // usercontroller.getcurrency();
       usercontroller.selectedCurrency;
-      
     });
   }
 
@@ -67,16 +66,18 @@ class _Setting_screenState extends State<Setting_screen> {
                           profileController.clearField();
                           Get.to(() => Profile_screen());
                         },
-                        imgicon: "assets/images/userprofile.svg",
+                        imgicon: "assets/icons/warning.svg",
                       ),
                     ),
-                    LanguageCard(
-                      title: 'language'.tr,
+                    SettingCard(
+                      title: 'Language'.tr,
                       onPressed: () {
+                        profileController.clearField();
                         Get.to(() => TranslateScreen());
                       },
-                      imgicon: "assets/images/earth.svg",
+                      imgicon: "assets/icons/warning.svg",
                     ),
+
                     SettingCard(
                       title: 'Currency'.tr,
                       onPressed: () {
@@ -109,9 +110,9 @@ class _Setting_screenState extends State<Setting_screen> {
                       height: 20,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 12.0),
+                      padding: const EdgeInsets.only(top: 10.0),
                       child: SizedBox(
-                        width: 130,
+                        width: 120,
                         child: ElevatedButton(
                           onPressed: () {
                             logout(context);
@@ -127,9 +128,9 @@ class _Setting_screenState extends State<Setting_screen> {
                                 "Log Out".tr,
                                 style: TextStyle(
                                     color: white,
-                                    fontWeight: FontWeight.w600,
-                                    fontFamily: 'Lato',
-                                    fontSize: 17),
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'Poppins',
+                                    fontSize: 13),
                               ),
                               SizedBox(
                                 width: 10,

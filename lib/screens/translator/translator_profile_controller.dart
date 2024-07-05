@@ -24,7 +24,7 @@ import 'package:intl/intl.dart';
 //Enums used to ask user for desired service
 enum ServiceType { Schedule, Document }
 
-enum ScheduleType { AudioVideo, InPerson }
+enum ScheduleType { AudioVideo, InPerson, DocumentType }
 
 enum DocumentType { Urgent, NotUrgent }
 
@@ -63,7 +63,6 @@ class TranslatorProfileController extends GetxController {
   var selectedDay = DateTime.now().obs;
   var focusedDay = DateTime.now().obs;
 
-//button text for updated date
   updateButtonText(day) {
     selectedDay = day;
   }
@@ -76,6 +75,13 @@ class TranslatorProfileController extends GetxController {
     scheduleType = value;
     startTime = '';
     endTime = '';
+    totalAmount = 0;
+    update();
+  }
+
+  toggleplan1(DocumentType value) {
+    documentType = value;
+
     totalAmount = 0;
     update();
   }
@@ -168,8 +174,7 @@ class TranslatorProfileController extends GetxController {
       double amount = numberOfSlots * int.parse(vendor.service!.inperson!);
       if (amount <= 0) {
         totalAmount = 0;
-        Get.snackbar('',
-            'End time must be greater than  starting time.'.tr,
+        Get.snackbar('', 'End time must be greater than  starting time.'.tr,
             snackPosition: SnackPosition.BOTTOM,
             colorText: white,
             backgroundColor: Colors.red);
@@ -217,6 +222,8 @@ class TranslatorProfileController extends GetxController {
     selectedDay.value = _selectedDay;
     focusedDay.value = _focusedDay;
     update();
+    print('fffffffffffffffffff');
+    print(selectedDay.value);
   }
 
   // toggle document type (urgent or non urgent)
@@ -353,27 +360,10 @@ class TranslatorProfileController extends GetxController {
   getlocation() async {
     Location location = new Location();
 
-    bool _serviceEnabled;
-    PermissionStatus _permissionGranted;
     LocationData _locationData;
 
-    _serviceEnabled = await location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await location.requestService();
-      if (!_serviceEnabled) {
-        return;
-      }
-    }
-
-    _permissionGranted = await location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await location.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
-        return;
-      }
-    }
-
     _locationData = await location.getLocation();
+    print('gggggggggggggggggggggggggggg');
     print(
         'latitude: ${_locationData.latitude}, longitude: ${_locationData.longitude}');
   }

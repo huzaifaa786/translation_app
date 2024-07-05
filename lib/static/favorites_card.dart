@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:translation/screens/translator/translator_profile.dart';
 import 'package:translation/values/controllers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:translation/values/colors.dart';
 
 class FavoritesCard extends StatelessWidget {
   const FavoritesCard(
@@ -28,123 +29,97 @@ class FavoritesCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         translatorProfileController.clear();
-        // Get.to(() => TraslatorProfile(detail: vendor));
+        Get.to(() => TraslatorProfile(detail: vendor));
       },
       child: Card(
         color: Color.fromARGB(255, 255, 255, 255),
         child: Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey[500]!,
+                blurRadius: 5,
+                offset: Offset(0.00001, 1),
+              ),
+            ],
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+          ),
           padding: const EdgeInsets.all(12.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          height: MediaQuery.of(context).size.height * 0.13,
+          child: Column(
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Container(
-                    padding: EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 2, color: Color(0xFF34607B)),
-                      borderRadius: BorderRadius.circular(24),
-                    ),
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(22),
-                        child: image == ''
-                            ? Image.asset(
-                                "assets/images/5907.jpg",
-                                width: 64,
-                                height: 64,
-                                fit: BoxFit.cover,
-                              )
-                            : CachedNetworkImage(
-                                imageUrl: image,
-                                fit: BoxFit.cover,
-                                width: 64,
-                                height: 64,
-                              )),
+                  SvgPicture.asset("assets/images/fav.svg"),
+                ],
+              ),
+              Row(
+                children: [
+                  Column(
+                    children: [
+                      ClipRRect(
+                          borderRadius: BorderRadius.circular(22),
+                          child: image == ''
+                              ? Image.asset(
+                                  "assets/images/5907.jpg",
+                                  width: 64,
+                                  height: 64,
+                                  fit: BoxFit.cover,
+                                )
+                              : CachedNetworkImage(
+                                  imageUrl: image,
+                                  fit: BoxFit.cover,
+                                  width: 64,
+                                  height: 64,
+                                )),
+                    ],
                   ),
                   Padding(
                     padding: box.read('locale') != 'ar'
-                        ? EdgeInsets.only(left: 8)
+                        ? EdgeInsets.only(left: 8, top: 4)
                         : EdgeInsets.only(right: 8),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           name,
                           style: TextStyle(
                               fontSize: 14,
+                              color: greenish,
                               fontWeight: FontWeight.w700,
                               fontFamily: 'NunitoSans'),
                         ),
-                        price != null
-                            ? Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 2, bottom: 2),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      "Rate per 30 mins".tr + ': ',
-                                      style: TextStyle(
-                                          fontSize: 9,
-                                          fontWeight: FontWeight.w700,
-                                          fontFamily: 'NunitoSans'),
-                                    ),
-                                    Text(
-                                      price + ' ' + "AED".tr,
-                                      style: TextStyle(
-                                          fontSize: 11,
-                                          fontWeight: FontWeight.w700,
-                                          fontFamily: 'NunitoSans'),
-                                    )
-                                  ],
-                                ),
-                              )
-                            : SizedBox(),
-                        rating != null
-                            ? Padding(
-                                padding: const EdgeInsets.only(bottom: 4),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    FittedBox(
-                                        fit: BoxFit.scaleDown,
-                                        child: SvgPicture.asset(
-                                            'assets/images/star.svg',
-                                            height: 11,
-                                            width: 11)),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 4, left: 2),
-                                      child: Text(
-                                          rating == null
-                                              ? '0.0'
-                                              : rating.toString(),
-                                          style: TextStyle(
-                                              fontSize: 11,
-                                              fontWeight: FontWeight.w400,
-                                              fontFamily: 'NunitoSans')),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            : Text(''),
+                        SizedBox(
+                          height: 16,
+                        ),
                         Row(
                           children: [
                             for (var i = 0; i < 3; i++)
                               if (i < lang.length)
                                 Container(
-                                  margin: EdgeInsets.only(left: 4),
-                                  padding: EdgeInsets.all(4),
+                                  margin: EdgeInsets.only(right: 9),
+                                  padding: EdgeInsets.only(left: 10,right: 10,top: 5,bottom:5 ),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
-                                    border: Border.all(
-                                        color: Color.fromRGBO(0, 0, 0, 0.24),
-                                        width: 1),
-                                    borderRadius: BorderRadius.circular(6),
+                                    border:
+                                        Border.all(color: greenish, width: 1),
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey[500]!,
+                                        blurRadius: 5,
+                                        offset: Offset(0.00001, 1),
+                                      ),
+                                    ],
                                   ),
                                   child: Text(
                                     lang[i],
-                                    style: TextStyle(fontSize: 12),
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: greenish,
+                                    ),
                                   ),
                                 ),
                             // Container(
@@ -184,7 +159,6 @@ class FavoritesCard extends StatelessWidget {
                   ),
                 ],
               ),
-              SvgPicture.asset("assets/images/fav.svg"),
             ],
           ),
         ),

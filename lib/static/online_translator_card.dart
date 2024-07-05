@@ -25,13 +25,13 @@ class OnlineTranslatorCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         translatorProfileController.clear();
-        // Get.to(() => TraslatorProfile(detail: vendor));
+        Get.to(() => TraslatorProfile(detail: vendor));
       },
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(13),
         ),
-        color: Color.fromARGB(255, 255, 255, 255),
+        color: ggrey,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -42,6 +42,7 @@ class OnlineTranslatorCard extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 0.1,
                 padding: EdgeInsets.all(8),
                 decoration: BoxDecoration(
+                  color: ggrey
                   // border: Border.all(width: 2, color: Color(0xFF34607B)),
                   // borderRadius: BorderRadius.circular(24),
                 ),

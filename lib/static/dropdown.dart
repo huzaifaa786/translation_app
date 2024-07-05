@@ -73,9 +73,10 @@ class DropdownField extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             padding: const EdgeInsets.only(left: 12, right: 12),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: Colors.black26,
+                width: 0.6,
+                color: greenish,
               ),
               color: white,
             ),

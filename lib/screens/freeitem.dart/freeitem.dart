@@ -20,7 +20,7 @@ class _FreeItem_screenState extends State<FreeItem_screen> {
             children: [
               TitleTopbar(text: 'Free Item',ontap: (){Navigator.pop(context);},),
               SizedBox(
-                height: 30,
+                height: 20,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20),

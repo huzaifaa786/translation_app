@@ -9,6 +9,8 @@ import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/screens/translator/translator_profile_controller.dart';
 import 'package:translation/static/titletopbar.dart';
 import 'package:translation/values/controllers.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 import 'dart:ui' as ui;
 import '../../../../values/colors.dart';
 import '../../../../static/large_button.dart';
@@ -75,133 +77,221 @@ class _Checkout_screenState extends State<Checkout_screen> {
             builder: (controller) => SingleChildScrollView(
                 child: Column(
               children: [
-                TitleTopbar(
-                  text: 'Checkout'.tr,
-                  ontap: () {
-                    Get.back();
-                  },
+                Stack(
+                  children: [
+                    TitleTopbar(
+                      height: 0.12,
+                      text: 'Checkout'.tr,
+                      ontap: () {
+                        Get.back();
+                      },
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.width * 0.59,
+                      margin: EdgeInsets.only(top: 83, left: 16, right: 16),
+                      decoration: BoxDecoration(
+                          color: ggrey,
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey[500]!,
+                              blurRadius: 2,
+                              offset: Offset(0.00001, 3),
+                            ),
+                          ]),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 14,
+                          ),
+                          Text(
+                            "Service Detail".tr,
+                            style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w600,
+                                color: greenish),
+                          ),
+                          SizedBox(
+                            height: 6,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                  'assets/images/Online Support.svg'),
+                              Text(
+                                'Translator:  ',
+                                style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w700,
+                                    color: greenish),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Column(
+                            children: [
+                              ClipRRect(
+                                  borderRadius: BorderRadius.circular(50),
+                                  child: translatorProfileController
+                                              .vendors!.profilePic !=
+                                          ''
+                                      ? Image.network(
+                                          translatorProfileController
+                                              .vendors!.profilePic
+                                              .toString(),
+                                          fit: BoxFit.cover,
+                                        )
+                                      : Image.asset(
+                                          'assets/images/5907.jpg',
+                                          height: 33,
+                                          width: 33,
+                                        )),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Center(
+                                child: Text(
+                                  translatorProfileController.vendors!.name !=
+                                          ''
+                                      ? translatorProfileController
+                                          .vendors!.name
+                                          .toString()
+                                      : '',
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset('assets/icons/Service (2).png'),
+                              Text(
+                                ' Type Of Service:',
+                                style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w700,
+                                    color: greenish),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Center(
+                            child: Text(
+                              // translatorProfileController.serviceType ==
+                              //         ServiceType.Instant
+                              //     ? 'Instant audio/video meeting'.tr
+                              //     :
+                              translatorProfileController.scheduleType ==
+                                      ScheduleType.DocumentType
+                                  ? 'Document translation'.tr
+                                  : translatorProfileController.scheduleType ==
+                                          ScheduleType.AudioVideo
+                                      ? 'Audio/video meeting'.tr
+                                      : 'In person meeting'.tr,
+                              style: TextStyle(
+                                  fontSize: 13, fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 6,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(Icons.calendar_month),
+                                      Text('Date',
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w700)),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                      DateFormat('dd/MM/yyyy').format(
+                                          translatorProfileController
+                                              .selectedDay.value),
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                          color: greenish)),
+                                ],
+                              ),
+                              SizedBox(
+                                width: 13,
+                              ),
+                              translatorProfileController.scheduleType !=
+                                      ScheduleType.DocumentType
+                                  ? Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Icon(Icons.timer_outlined),
+                                            Text('Time',
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.w700)),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        translatorProfileController
+                                                    .serviceType !=
+                                                ServiceType.Document
+                                            ? translatorProfileController
+                                                        .serviceType !=
+                                                    ServiceType.Schedule
+                                                ? Text(
+                                                    translatorProfileController
+                                                            .duration
+                                                            .toString() +
+                                                        ' min',
+                                                    style: TextStyle(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        color: greenish))
+                                                : Text(
+                                                    translatorProfileController
+                                                            .startTime +
+                                                        ' - ' +
+                                                        translatorProfileController
+                                                            .endTime,
+                                                    style: TextStyle(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        color: greenish))
+                                            : Container(),
+                                      ],
+                                    )
+                                  : Container()
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 16, right: 16),
                   child: Column(children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 12, bottom: 10),
-                      child: Text(
-                        "Service Detail".tr,
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.all(8),
-                      width: 98,
-                      height: 98,
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        border: Border.all(width: 2, color: Color(0xFF34607B)),
-                        borderRadius: BorderRadius.circular(70),
-                      ),
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.circular(70),
-                          child:
-                              translatorProfileController.vendors!.profilePic !=
-                                      ''
-                                  ? Image.network(
-                                      translatorProfileController
-                                          .vendors!.profilePic
-                                          .toString(),
-                                      fit: BoxFit.cover,
-                                    )
-                                  : Image.asset('assets/images/5907.jpg')),
-                    ),
-                    Center(
-                      child: Text(
-                        translatorProfileController.vendors!.name != ''
-                            ? translatorProfileController.vendors!.name
-                                .toString()
-                            : '',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w700),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        // translatorProfileController.serviceType ==
-                        //         ServiceType.Instant
-                        //     ? 'Instant audio/video meeting'.tr
-                        //     :
-                        translatorProfileController.serviceType ==
-                                ServiceType.Document
-                            ? 'Document translation'.tr
-                            : translatorProfileController.scheduleType ==
-                                    ScheduleType.AudioVideo
-                                ? 'Audio/video meeting'.tr
-                                : 'In person meeting'.tr,
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w700),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: translatorProfileController.serviceType !=
-                              ServiceType.Document
-                          ? Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                translatorProfileController.serviceType !=
-                                        ServiceType.Document
-                                    ? translatorProfileController.serviceType !=
-                                            ServiceType.Schedule
-                                        ? Text(
-                                            "Time".tr +
-                                                ':   ' +
-                                                translatorProfileController
-                                                    .duration
-                                                    .toString() +
-                                                ' min',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w400,
-                                                color: hintText))
-                                        : Text(
-                                            "Time".tr +
-                                                ":   " +
-                                                translatorProfileController
-                                                    .startTime +
-                                                ' - ' +
-                                                translatorProfileController
-                                                    .endTime,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w400,
-                                                color: hintText))
-                                    : Container(),
-                                translatorProfileController.serviceType !=
-                                        ServiceType.Document
-                                    ? Text(" |",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            color: hintText))
-                                    : Container(),
-                                Text(
-                                    "Date".tr +
-                                        ':    ' +
-                                        DateFormat('dd/MM/yyyy').format(
-                                            translatorProfileController
-                                                .selectedDay.value),
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        color: hintText)),
-                              ],
-                            )
-                          : Text(
-                              "Date".tr +
-                                  ":    " +
-                                  DateFormat('dd/MM/yyyy').format(
-                                      translatorProfileController
-                                          .selectedDay.value),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  color: hintText)),
-                    ),
                     Padding(
                       padding: const EdgeInsets.only(top: 16, bottom: 16),
                       child: Card(
@@ -241,7 +331,10 @@ class _Checkout_screenState extends State<Checkout_screen> {
                                             colorText: white);
                                       }
                                     },
-                                    child: Icon(Icons.check))
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(top: 16),
+                                      child: Text('Apply',style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500),),
+                                    ))
                                 : InkWell(
                                     onTap: () {
                                       readonly = false;
@@ -262,47 +355,43 @@ class _Checkout_screenState extends State<Checkout_screen> {
                     ),
                     SizedBox(height: 10),
                     Padding(
-                      padding: const EdgeInsets.only(left: 4, right: 4),
+                      padding: const EdgeInsets.only(left: 29, right: 29),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text("SubTotal".tr,
                               style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: hintText)),
-                           Text(
-                              "${selectedCurrency != null ? currencycontroller.selectedCurrency: "AED "}"
-                                      ":" +
-                                  translatorProfileController.CheckoutAmount
-                                      .toString(),
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w600),
-                            ),
-                          
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                  color: greenish)),
+                        Text(
+                            translatorProfileController.CheckoutAmount
+                                    .toString() +
+                                "${selectedCurrency != null ? currencycontroller.selectedCurrency : " AED "}",
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w600),
+                          ),
                         ],
                       ),
                     ),
                     Padding(
                       padding:
-                          const EdgeInsets.only(left: 4, right: 4, top: 16),
+                          const EdgeInsets.only(left: 29, right: 29, top: 16),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text("Total".tr,
                               style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
                                   color: greenish)),
                           Text(
-                              "${selectedCurrency != null ? currencycontroller.selectedCurrency : "AED "}"
-                                      ":" +
-                                  translatorProfileController.CheckoutAmount
-                                      .toString(),
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w600),
-                            ),
-                        
+                            translatorProfileController.CheckoutAmount
+                                    .toString() +
+                                "${selectedCurrency != null ? currencycontroller.selectedCurrency : " AED "}",
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w600),
+                          ),
 
                           // Text(
                           //   "selectedCurrency" +
@@ -318,27 +407,36 @@ class _Checkout_screenState extends State<Checkout_screen> {
                       height: 30,
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           "Payment Method".tr,
                           style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                              fontSize: 15, fontWeight: FontWeight.w600),
                         )
                       ],
+                    ),
+                    SizedBox(
+                      height: 6,
                     ),
                     PPaymentMethod(
                       title: 'Credit/visa card'.tr,
                       image: "assets/icons/visapay.png",
                       groupvalue: _site,
                       value: payMethod.materCard,
+                      isSelected: _site == payMethod.materCard,
                       onchaged: () {
                         toggleplan(payMethod.materCard);
                       },
+                    ),
+                    SizedBox(
+                      height: 6,
                     ),
                     PPaymentMethod(
                       title: 'From Wallet'.tr,
                       image: "assets/icons/walletpay.png",
                       groupvalue: _site,
+                      isSelected: _site == payMethod.walletpay,
                       value: payMethod.walletpay,
                       onchaged: () {
                         toggleplan(payMethod.walletpay);

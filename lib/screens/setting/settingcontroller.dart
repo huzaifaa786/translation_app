@@ -36,16 +36,16 @@ class SettingController extends GetxController {
   @override
   void onInit() async {
     // userController = Get.put(SettingController.instance);
-    getcurrency();
+    // getcurrency();
     update();
     super.onInit();
   }
 
-  void getcurrency() {
-    // updateSelectedCurrency(selectedCurrency);
-    selectedCurrency = box.read("selectedCurrency");
-    update();
-  }
+  // void getcurrency() {
+  //   // updateSelectedCurrency(selectedCurrency);
+  //   selectedCurrency = box.read("selectedCurrency");
+  //   update();
+  // }
 
   ClearbugVariables() {
     bugcontroller.clear();

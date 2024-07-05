@@ -45,45 +45,47 @@ class Scheduleinput extends StatelessWidget {
       padding: const EdgeInsets.only(top: 2),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: 4),
-            child: Text(
-              text,
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-            ),
-          ),
+              padding: const EdgeInsets.only(bottom: 4),
+              child: Row(
+                children: [
+                  Image.asset('assets/icons/Sand Watch.png'),
+                  Text(
+                     text,
+                    style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600),
+                  )
+                ],
+              )),
           SizedBox(
-            height: 60,
-            width: MediaQuery.of(context).size.width * 0.3,
+            height: 40,
+            width: MediaQuery.of(context).size.width * 0.25,
             child: TextFormField(
               readOnly: true,
               onTap: onpressed,
               enabled: enabled,
               obscureText: obscure,
               controller: controller,
-              style: TextStyle(fontSize: fontSize, color: primaryColor),
+              style: TextStyle(fontSize: fontSize, color: white),
               keyboardType: type,
               validator: validator,
               decoration: InputDecoration(
                 filled: true,
-                fillColor:
-                    enabled ? Colors.white : Colors.grey.withOpacity(0.5),
+                fillColor: greenish,
                 hintText: hint,
                 contentPadding: const EdgeInsets.only(
-                    left: 12.0, right: 12, top: 12, bottom: 16),
+                    left: 12.0, right: 12, top: 12, bottom: 12),
                 hintStyle: TextStyle(color: primaryLightcolor),
-                enabledBorder: OutlineInputBorder(
+                border: OutlineInputBorder(
                   borderSide: BorderSide(width: 1, color: Colors.grey[500]!),
-                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                  borderRadius: BorderRadius.all(Radius.circular(17)),
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 1, color: Colors.grey[500]!),
-                  borderRadius: BorderRadius.all(Radius.circular(12)),
-                ),
+                // focusedBorder: OutlineInputBorder(
+                //   borderSide: BorderSide(width: 1, color: Colors.grey[500]!),
+                //   borderRadius: BorderRadius.all(Radius.circular(17)),
+                // ),
               ),
-              cursorColor: Colors.black,
+              cursorColor: Colors.white,
               maxLines: maxlines == true ? null : 1,
             ),
           ),

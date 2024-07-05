@@ -50,7 +50,7 @@ class _Profile_screenState extends State<Profile_screen> {
                         Column(
                           children: [
                             TitleTopbar(
-                              height: 0.2,
+                              height: 0.17,
                               text: 'Profile'.tr,
                               ontap: () {
                                 Navigator.pop(context);
@@ -59,14 +59,14 @@ class _Profile_screenState extends State<Profile_screen> {
                             Container(
                               height: Get.height,
                               width: Get.width,
-                              color: white,
+                              color: ggrey,
                             ),
                           ],
                         ),
                         Positioned(
                           top: 110,
-                          left: 20,
-                          right: 20,
+                          left: 14,
+                          right: 14,
                           child: Column(
                             children: [
                               Container(
@@ -77,10 +77,10 @@ class _Profile_screenState extends State<Profile_screen> {
                                     left: 10, right: 10, bottom: 30, top: 20),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(12),
-                                    color: white,
+                                    color: ggrey,
                                     boxShadow: [
                                       BoxShadow(
-                                          color: Colors.black, blurRadius: 12)
+                                          color: Colors.black, blurRadius: 6)
                                     ]),
                                 child: Column(children: [
                                   Row(
@@ -213,9 +213,9 @@ class _Profile_screenState extends State<Profile_screen> {
                                               : profileController
                                                   .user!.username!,
                                           style: TextStyle(
-                                              fontSize: 22,
-                                              fontWeight: FontWeight.w700,
-                                              fontFamily: 'Mazzard'),
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w600,
+                                              fontFamily: 'Poppins'),
                                         ),
                                         SizedBox(
                                           height: 10,
@@ -267,7 +267,7 @@ class _Profile_screenState extends State<Profile_screen> {
 
                                   SizedBox(
                                     height: 49,
-                                    width: 150,
+                                    width: 180,
                                     child: ElevatedButton(
                                         onPressed: () {
                                           profileController.EditProfile(
@@ -283,7 +283,10 @@ class _Profile_screenState extends State<Profile_screen> {
                                                     BorderRadius.circular(35))),
                                         child: Text(
                                           'Update'.tr,
-                                          style: TextStyle(color: white),
+                                          style: TextStyle(
+                                              color: white,
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.w600),
                                         )),
                                   )
                                 ]),
