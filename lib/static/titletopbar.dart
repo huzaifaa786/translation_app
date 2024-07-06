@@ -38,6 +38,7 @@ class TitleTopbar extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
+                      print('ddddddddddddddddddddd');
                       Get.back();
                     },
                     child: Container(
@@ -70,9 +71,9 @@ class TitleTopbar extends StatelessWidget {
                   Text(
                     text,
                     style: TextStyle(
-                      fontFamily: 'Mazzard',
-                      fontSize: 17,
-                      fontWeight: FontWeight.w400,
+                      fontFamily: 'Pop',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
                       color: white,
                     ),
                   ),

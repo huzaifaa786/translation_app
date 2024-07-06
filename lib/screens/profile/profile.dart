@@ -50,7 +50,7 @@ class _Profile_screenState extends State<Profile_screen> {
                         Column(
                           children: [
                             TitleTopbar(
-                              height: 0.17,
+                              height: 0.15,
                               text: 'Profile'.tr,
                               ontap: () {
                                 Navigator.pop(context);
@@ -70,9 +70,6 @@ class _Profile_screenState extends State<Profile_screen> {
                           child: Column(
                             children: [
                               Container(
-                                // margin: EdgeInsets.all(
-                                //   10.0,
-                                // ),
                                 padding: EdgeInsets.only(
                                     left: 10, right: 10, bottom: 30, top: 20),
                                 decoration: BoxDecoration(
