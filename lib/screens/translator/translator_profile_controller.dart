@@ -280,7 +280,8 @@ class TranslatorProfileController extends GetxController {
         'pages': pages,
         'description': descriptionController.text.toString()
       });
-      response = await Api.execute(url: url, data: data, image: true);
+      print(data);
+      // response = await Api.execute(url: url, data: data, image: true);
     } else {
       data = {
         'api_token': box.read('api_token')!,
