@@ -190,8 +190,6 @@ class TranslatorProfileController extends GetxController {
     } else {
       print('vendor.service!.audiovideo!');
       print(vendor.service!.audiovideo!);
-      print('vendor.service!.inperson!');
-      print(vendor.service!.inperson!);
       DateTime start = DateFormat('d-M-yyyy HH:mm').parse(
           '${selectedDay.value.day}-${selectedDay.value.month}-${selectedDay.value.year} $startTime');
       DateTime end = DateFormat('d-M-yyyy HH:mm').parse(
@@ -275,7 +273,7 @@ class TranslatorProfileController extends GetxController {
         'meetingtype': 'audio',
         // 'meetingtype': instantType == InstantType.audio ? 'audio' : 'video',
         'scheduletype': ScheduleType,
-         
+
         'documenttype': documentType,
         'pages': pages,
         'description': descriptionController.text.toString()
@@ -298,7 +296,6 @@ class TranslatorProfileController extends GetxController {
         'scheduletype': scheduleType == ScheduleType.AudioVideo
             ? 'audio/video'
             : 'inperson',
-            
       };
       print('ffffffffffffffffffffffffffffffff');
       print(data);
@@ -396,9 +393,11 @@ class TranslatorProfileController extends GetxController {
     var url = BASE_URL + 'order/checkAvailability';
     String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDay.value);
     print('formattedDate');
+    GetStorage box = GetStorage();
 
     print(formattedDate);
     var data = {
+      'api_token': box.read('api_token')!,
       'vendor_id': vendor.id.toString(),
       'date': formattedDate,
       'starttime': startTime,

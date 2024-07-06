@@ -37,7 +37,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ggrey,
       body: SafeArea(
+        
         child: GetBuilder<AuthController>(
             builder: (controller) => SingleChildScrollView(
                   child: Stack(
@@ -62,7 +64,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               child: Image(
                                 image:
                                     AssetImage("assets/images/splashLogo.png"),
-                                height: 100,
+                                height: 140,
                                 color: white,
                               ),
                             ),
@@ -72,10 +74,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               height: MediaQuery.of(context).size.height * 0.72,
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 250, 250, 250),
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(30),
-                                      topLeft: Radius.circular(30))),
+                                  color: ggrey,
+                                  ),
                               child: SingleChildScrollView(
                                 child: Padding(
                                   padding: MediaQuery.of(context).viewInsets,
@@ -86,8 +86,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       child: Text(
                                         'Register Account',
                                         style: TextStyle(
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.w600,
+                                            fontSize: 25,
+                                            fontFamily: 'Poppins',
+                                            fontWeight: FontWeight.w500,
                                             color: greenish),
                                       ),
                                     ),
