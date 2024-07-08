@@ -104,7 +104,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
     GetStorage box = GetStorage();
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: white,
+      backgroundColor: ggrey,
       body: SafeArea(
         child: GetBuilder<TranslatorProfileController>(
             builder: (controller) => SingleChildScrollView(
@@ -134,8 +134,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  translatorProfileController.favourit ==
-                                          false
+                                  translatorProfileController.favourit == false
                                       ? InkWell(
                                           onTap: () {
                                             translatorProfileController
@@ -212,8 +211,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 12, bottom: 12),
+                                padding:
+                                    const EdgeInsets.only(top: 12, bottom: 12),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -239,7 +238,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                             decoration: BoxDecoration(
                                               color: Colors.white,
                                               border: Border.all(
-                                                  color: greenish, width: 1),
+                                                  color: lightblue, width: 1),
                                               borderRadius:
                                                   BorderRadius.circular(22),
                                             ),
@@ -252,10 +251,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                 InkWell(
                                                   onTap: () {
                                                     Get.to(
-                                                      () =>
-                                                          FullScreenImagePage(
-                                                        imageUrl: widget
-                                                            .detail!
+                                                      () => FullScreenImagePage(
+                                                        imageUrl: widget.detail!
                                                             .certificate!,
                                                       ),
                                                     );
@@ -334,7 +331,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                       widget.detail!.service!.isAudioVideo ==
                                               true
                                           ? RadioBtn(
-                                              text: 'Audio/video meeting'.tr,
+                                              text: ' Audio/video meeting'.tr,
                                               image:
                                                   'assets/images/output-onlinepngtools (11).png',
                                               groupvalue:
@@ -352,7 +349,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                       widget.detail!.service!.isInperson! ==
                                               true
                                           ? RadioBtn(
-                                              text: 'In person meeting'.tr,
+                                              text: ' In person meeting'.tr,
                                               image:
                                                   'assets/images/output-onlinepngtools (10).png',
                                               groupvalue:
@@ -364,8 +361,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                               },
                                             )
                                           : Container(),
-                                      widget.detail!.service!.isInperson! ==
-                                              true
+                                      controller.scheduleType ==
+                                              ScheduleType.InPerson
                                           ? SizedBox(
                                               height: 12,
                                             )
@@ -383,18 +380,16 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                           : Container(),
                                       controller.scheduleType ==
                                                   ScheduleType.AudioVideo ||
-                                              widget.detail!.service!
-                                                      .isInperson! ==
-                                                  true
+                                              controller.scheduleType ==
+                                                  ScheduleType.InPerson
                                           ? SizedBox(
                                               height: 10,
                                             )
                                           : Container(),
                                       controller.scheduleType ==
                                                   ScheduleType.AudioVideo ||
-                                              widget.detail!.service!
-                                                      .isInperson! ==
-                                                  true
+                                              controller.scheduleType ==
+                                                  ScheduleType.InPerson
                                           ? IconsButton(
                                               title: 'Choose Date'.tr,
                                               icon: Icons.calendar_month,
@@ -523,18 +518,16 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                           : SizedBox(),
                                       controller.scheduleType ==
                                                   ScheduleType.AudioVideo ||
-                                              widget.detail!.service!
-                                                      .isInperson! ==
-                                                  true
+                                              controller.scheduleType ==
+                                                  ScheduleType.InPerson
                                           ? SizedBox(
                                               height: 12,
                                             )
                                           : Container(),
                                       controller.scheduleType ==
                                                   ScheduleType.AudioVideo ||
-                                              widget.detail!.service!
-                                                      .isInperson! ==
-                                                  true
+                                              controller.scheduleType ==
+                                                  ScheduleType.InPerson
                                           ? Container(
                                               width: MediaQuery.of(context)
                                                       .size
@@ -556,7 +549,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                 ],
                                                 color: Colors.white,
                                                 border: Border.all(
-                                                    color: greenish, width: 1),
+                                                    color: lightblue,
+                                                    width: 1.2),
                                                 borderRadius:
                                                     BorderRadius.circular(15),
                                               ),
@@ -767,7 +761,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                             ),
                             widget.detail!.service!.isdocument! == true
                                 ? RadioBtn(
-                                    text: 'Document Type'.tr,
+                                    text: ' Document Type'.tr,
                                     image: 'assets/images/Documents.png',
                                     groupvalue: controller.scheduleType,
                                     value: ScheduleType.DocumentType,
@@ -814,57 +808,59 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                         ),
                                       ),
 
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Container(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      0.39,
-                                                  padding: EdgeInsets.only(
-                                                      top: 6, bottom: 6),
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: greenish),
-                                                      color: greenish,
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  20))),
-                                                  child: Row(
-                                                    children: [
-                                                      InkWell(
-                                                          onTap: () {
-                                                            translatorProfileController
-                                                                .picksinglefile();
-                                                          },
-                                                          child: Icon(
-                                                            Icons.attach_file,
-                                                            color: white,
-                                                          )),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 8,
-                                                                right: 8),
-                                                        child: Text(
-                                                          "Attach File".tr,
-                                                          style: TextStyle(
-                                                            fontSize: 14,
-                                                            color: white,
+                                      InkWell(
+                                        onTap: () {
+                                          translatorProfileController
+                                              .picksinglefile();
+                                        },
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Container(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.39,
+                                                    padding: EdgeInsets.only(
+                                                        top: 6, bottom: 6),
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color: greenish),
+                                                        color: greenish,
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    20))),
+                                                    child: Row(
+                                                      children: [
+                                                        Icon(
+                                                          Icons.attach_file,
+                                                          color: white,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 8,
+                                                                  right: 8),
+                                                          child: Text(
+                                                            "Attach File".tr,
+                                                            style: TextStyle(
+                                                              fontSize: 14,
+                                                              color: white,
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ],
-                                                  )),
-                                            ],
-                                          ),
-                                        ],
+                                                      ],
+                                                    )),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       translatorProfileController.file != null
                                           ? Padding(
@@ -908,7 +904,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                             widget.detail!);
                                                     translatorProfileController
                                                         .documentprice(
-                                                            widget.detail!);
+                                                            widget.detail!,
+                                                            context);
                                                     FocusManager
                                                         .instance.primaryFocus!
                                                         .unfocus();
@@ -1003,33 +1000,10 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                           totalAmount: controller.CheckoutAmount
                                               .toString(),
                                         ));
+                                  } else {
+                                    controller.checkavailability(
+                                        widget.detail!, context);
                                   }
-                                  // else if (controller.serviceType ==
-                                  //     ServiceType.Instant) {
-                                  //   if (controller.totalAmount <= 0) {
-                                  //     Get.snackbar("",
-                                  //         "Please fill all required details.",
-                                  //         snackPosition: SnackPosition.BOTTOM,
-                                  //         backgroundColor: Colors.red,
-                                  //         colorText: Colors.white);
-                                  //     return;
-                                  //   }
-                                  //   translatorProfileController
-                                  //           .CheckoutAmount =
-                                  //       controller.totalAmount;
-                                  //   setState(() {});
-
-                                  //   Get.to(() => Checkout_screen(
-                                  //         totalAmount: controller
-                                  //             .CheckoutAmount.toString(),
-                                  //       ));
-                                  // }
-                                  else {
-                                    controller
-                                        .checkavailability(widget.detail!);
-                                  }
-
-                                  //  update(context);
                                 },
                                 color: greenish,
                                 textcolor: Colors.white,

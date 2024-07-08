@@ -69,7 +69,9 @@ class _Checkout_screenState extends State<Checkout_screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ggrey,
         body: SafeArea(
+          
       child: GetBuilder<HomeController>(
         builder: (homeController) => GetBuilder<TranslatorProfileController>(
           builder: (translatorProfileController) =>

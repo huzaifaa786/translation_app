@@ -5,6 +5,7 @@ import 'package:dio/dio.dart' as dio;
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
@@ -20,6 +21,7 @@ import 'package:translation/values/controllers.dart';
 import 'package:translation/values/string.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 //Enums used to ask user for desired service
 enum ServiceType { Schedule, Document }
@@ -122,7 +124,7 @@ class TranslatorProfileController extends GetxController {
     update();
   }
 
-  documentprice(Vendor vendor) {
+  documentprice(Vendor vendor, context) {
     print(days);
     if (days != '0') {
       if (documentType == DocumentType.Urgent) {
@@ -139,6 +141,7 @@ class TranslatorProfileController extends GetxController {
           backgroundColor: Colors.red,
           colorText: white,
           snackPosition: SnackPosition.BOTTOM);
+      pageAlert(context);
     }
     update();
   }
@@ -187,8 +190,6 @@ class TranslatorProfileController extends GetxController {
     } else {
       print('vendor.service!.audiovideo!');
       print(vendor.service!.audiovideo!);
-      print('vendor.service!.inperson!');
-      print(vendor.service!.inperson!);
       DateTime start = DateFormat('d-M-yyyy HH:mm').parse(
           '${selectedDay.value.day}-${selectedDay.value.month}-${selectedDay.value.year} $startTime');
       DateTime end = DateFormat('d-M-yyyy HH:mm').parse(
@@ -262,7 +263,7 @@ class TranslatorProfileController extends GetxController {
         "file":
             await dio.MultipartFile.fromFile(file!.path, filename: fileName),
         'api_token': box.read('api_token')!,
-        'servicetype': servicetype,
+        'servicetype': ScheduleType,
         'vendor_id': vendor.id.toString(),
         'price': CheckoutAmount.toString(),
         'duration': duration,
@@ -271,14 +272,14 @@ class TranslatorProfileController extends GetxController {
         'endtime': endTime,
         'meetingtype': 'audio',
         // 'meetingtype': instantType == InstantType.audio ? 'audio' : 'video',
-        'scheduletype': scheduleType == ScheduleType.AudioVideo
-            ? 'audio/video'
-            : 'inperson',
+        'scheduletype': ScheduleType,
+
         'documenttype': documentType,
         'pages': pages,
         'description': descriptionController.text.toString()
       });
-      response = await Api.execute(url: url, data: data, image: true);
+      print(data);
+      // response = await Api.execute(url: url, data: data, image: true);
     } else {
       data = {
         'api_token': box.read('api_token')!,
@@ -292,12 +293,13 @@ class TranslatorProfileController extends GetxController {
         'starttime': startTime,
         'endtime': endTime,
         'meetingtype': 'audio',
-        // 'meetingtype': instantType == InstantType.audio ? 'audio' : 'video',
         'scheduletype': scheduleType == ScheduleType.AudioVideo
             ? 'audio/video'
             : 'inperson',
       };
-      response = await Api.execute(url: url, data: data);
+      print('ffffffffffffffffffffffffffffffff');
+      print(data);
+      // response = await Api.execute(url: url, data: data);
     }
 
     LoadingHelper.dismiss();
@@ -368,7 +370,7 @@ class TranslatorProfileController extends GetxController {
         'latitude: ${_locationData.latitude}, longitude: ${_locationData.longitude}');
   }
 
-  checkavailability(Vendor vendor) async {
+  checkavailability(Vendor vendor, BuildContext context) async {
     if (totalAmount <= 0) {
       Get.snackbar("", "Please fill all required details".tr,
           snackPosition: SnackPosition.BOTTOM,
@@ -391,9 +393,11 @@ class TranslatorProfileController extends GetxController {
     var url = BASE_URL + 'order/checkAvailability';
     String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDay.value);
     print('formattedDate');
+    GetStorage box = GetStorage();
 
     print(formattedDate);
     var data = {
+      'api_token': box.read('api_token')!,
       'vendor_id': vendor.id.toString(),
       'date': formattedDate,
       'starttime': startTime,
@@ -412,6 +416,7 @@ class TranslatorProfileController extends GetxController {
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.red,
           colorText: Colors.white);
+      errorAlert(context);
     }
     LoadingHelper.dismiss();
 
@@ -548,4 +553,72 @@ class TranslatorProfileController extends GetxController {
     print(pages);
     update();
   }
+}
+
+void errorAlert(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Container(
+          width: 350,
+          height: 150,
+          padding: EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Image.asset(
+                "assets/images/High Importance.png",
+                width: 60,
+                height: 60,
+              ),
+              SizedBox(height: 20),
+              Text(
+                "Timings are booked please find other\n timings",
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
+
+void pageAlert(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Container(
+          width: 350,
+          height: 150,
+          padding: EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Image.asset(
+                "assets/images/High Importance.png",
+                width: 60,
+                height: 60,
+              ),
+              SizedBox(height: 20),
+              Text(
+                "The amount of pages exceeds the\n translator’s limits",
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
 }

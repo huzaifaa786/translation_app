@@ -38,11 +38,11 @@ class FavoritesCard extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Colors.grey[500]!,
-                blurRadius: 5,
+                blurRadius: 3,
                 offset: Offset(0.00001, 1),
               ),
             ],
-            color: Colors.white,
+            color:ggrey,
             borderRadius: BorderRadius.circular(12),
           ),
           padding: const EdgeInsets.all(12.0),
@@ -86,10 +86,10 @@ class FavoritesCard extends StatelessWidget {
                         Text(
                           name,
                           style: TextStyle(
-                              fontSize: 14,
+                              fontSize: 15,
                               color: greenish,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'NunitoSans'),
+                              fontWeight: FontWeight.w600,
+                              fontFamily: 'Poppins'),
                         ),
                         SizedBox(
                           height: 16,
@@ -100,12 +100,12 @@ class FavoritesCard extends StatelessWidget {
                               if (i < lang.length)
                                 Container(
                                   margin: EdgeInsets.only(right: 9),
-                                  padding: EdgeInsets.only(left: 10,right: 10,top: 5,bottom:5 ),
+                                  padding: EdgeInsets.only(left: 13,right: 13,top: 5,bottom:5 ),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     border:
-                                        Border.all(color: greenish, width: 1),
-                                    borderRadius: BorderRadius.circular(8),
+                                        Border.all(color: lightblue, width: 1.2),
+                                    borderRadius: BorderRadius.circular(12),
                                     boxShadow: [
                                       BoxShadow(
                                         color: Colors.grey[500]!,

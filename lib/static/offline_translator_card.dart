@@ -88,6 +88,7 @@ class OfflineTranslattorCard extends StatelessWidget {
                           name,
                           style: TextStyle(
                               fontSize: 15,
+                              color: greenish,
                               fontWeight: FontWeight.w700,
                               fontFamily: 'Poppins'),
                         ),
@@ -97,8 +98,8 @@ class OfflineTranslattorCard extends StatelessWidget {
                                     const EdgeInsets.only(top: 2, bottom: 2),
                                 child: Row(
                                   children: [
-                                    SvgPicture.asset(
-                                      "assets/images/timetopay.svg",
+                                    Image.asset(
+                                      "assets/images/Time to Pay.png",
                                       color: greenish,
                                       height: 12,
                                       width: 12,
@@ -107,16 +108,14 @@ class OfflineTranslattorCard extends StatelessWidget {
                                       " per 30 mins".tr + ': ',
                                       style: TextStyle(
                                           fontSize: 13,
-                                          color: Color.fromARGB(
-                                              255, 141, 136, 136),
+                                          color: lightblue,
                                           fontWeight: FontWeight.w400,
                                           fontFamily: 'Poppins'),
                                     ),
                                     Text(
-                                      price + currencyname,
+                                      price + ' ' +currencyname,
                                       style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 141, 136, 136),
+                                          color: lightblue,
                                           fontSize: 13,
                                           fontWeight: FontWeight.w400,
                                           fontFamily: 'Poppins'),
@@ -145,9 +144,8 @@ class OfflineTranslattorCard extends StatelessWidget {
                                               ? '0.0'
                                               : rating.toStringAsFixed(1),
                                           style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 141, 136, 136),
-                                              fontSize: 11,
+                                              color: lightblue,
+                                              fontSize: 13,
                                               fontWeight: FontWeight.w400,
                                               fontFamily: 'NunitoSans')),
                                     ),
@@ -161,13 +159,13 @@ class OfflineTranslattorCard extends StatelessWidget {
                             for (var i = 0; i < 3; i++)
                               if (i < lang.length)
                                 Container(
-                                  width: MediaQuery.of(context).size.width*0.15,
+                                  width: MediaQuery.of(context).size.width*0.16,
                                   margin: EdgeInsets.only(left: 9),
                                   padding: EdgeInsets.all(4),
                                   decoration: BoxDecoration(
                                       color: Colors.white,
                                       border: Border.all(
-                                          width: 1.5, color: Color.fromARGB(255, 145, 138, 138)),
+                                          width: 1.2, color: lightblue),
                                       borderRadius: BorderRadius.circular(13),
                                       boxShadow: [
                                         BoxShadow(
@@ -178,7 +176,7 @@ class OfflineTranslattorCard extends StatelessWidget {
                                       ]),
                                   child: Text(
                                      lang[ i],
-                                    style: TextStyle(fontSize: 12),
+                                    style: TextStyle(fontSize: 12,color: greenish),
                                   ),
                                 ),
                             // Container(

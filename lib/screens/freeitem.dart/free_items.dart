@@ -67,9 +67,6 @@ class _FreeItemsState extends State<FreeItems> {
           children: [
             TitleTopbar(
               text: 'Free item'.tr,
-              ontap: () {
-                Navigator.pop(context);
-              },
               height: 0.2 / 1.4,
             ),
             const SizedBox(
@@ -235,7 +232,7 @@ class _FreeItemsState extends State<FreeItems> {
                   onPressed: translate,
                   style: ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(greenish),
-                      fixedSize: const MaterialStatePropertyAll(Size(300, 45))),
+                      fixedSize: const MaterialStatePropertyAll(Size(369, 53))),
                   child: isloading
                       ? const SizedBox.square(
                           dimension: 20,

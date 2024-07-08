@@ -230,11 +230,7 @@ class _HomeState extends State<Home> {
                                   alignment: Alignment.bottomCenter,
                                   child: GestureDetector(
                                     onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => FreeItems(),
-                                          ));
+                                      Get.to(() => FreeItems());
                                     },
                                     child: Container(
                                       width: MediaQuery.of(context).size.width,

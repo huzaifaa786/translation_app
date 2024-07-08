@@ -18,7 +18,7 @@ class _FreeItem_screenState extends State<FreeItem_screen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              TitleTopbar(text: 'Free Item',ontap: (){Navigator.pop(context);},),
+              TitleTopbar(text: 'Free Item',),
               SizedBox(
                 height: 20,
               ),

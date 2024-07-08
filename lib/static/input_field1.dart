@@ -49,14 +49,16 @@ class InputField1 extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
-        //      boxShadow: [
-        //   BoxShadow(
-        //     color: Colors.grey.withOpacity(0.2),
-        //     spreadRadius: 2,
-        //     blurRadius: 1,
-        //     offset: Offset(0, 3),
-        //   ),
-        // ]
+        border: Border(),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.25),
+            blurRadius: 1,
+            offset: Offset(0, 2.5,), 
+
+            spreadRadius: 0.1
+          ),
+        ],
       ),
       child: Card(
         elevation: 1,
@@ -66,13 +68,17 @@ class InputField1 extends StatelessWidget {
             borderSide: BorderSide(
                 // color: Colors.grey[400]!,
                 color: lightblue,
-                width: 0.5)),
+                width: 1)),
         child: Row(
           children: [
             SizedBox(
               width: 10,
             ),
-            SvgPicture.asset(icon, height: 20, width: 20,),
+            SvgPicture.asset(
+              icon,
+              height: 20,
+              width: 20,
+            ),
             SizedBox(
               width: 5,
             ),
@@ -95,10 +101,10 @@ class InputField1 extends StatelessWidget {
                         fontWeight: FontWeight.w400),
                     fillColor: color,
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: color, width: 1.0),
+                      borderSide: BorderSide(color: ggrey, width: 1.5),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: color, width: 1.0),
+                      borderSide: BorderSide(color: ggrey, width: 1.5),
                     ),
                   ),
                   cursorColor: Colors.black,

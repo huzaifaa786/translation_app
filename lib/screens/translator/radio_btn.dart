@@ -35,7 +35,7 @@ class _RadioBtnState extends State<RadioBtn> {
           ),
         ],
         color: Colors.white,
-        border: Border.all(color: greenish, width: 1),
+        border: Border.all(color: lightblue, width: 1.2),
         borderRadius: BorderRadius.circular(15),
       ),
       child: ListTile(
@@ -49,7 +49,7 @@ class _RadioBtnState extends State<RadioBtn> {
                 width: 26,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 8.0, right: 8),
+                padding: const EdgeInsets.only(),
                 child: Text(widget.text),
               ),
             ],
