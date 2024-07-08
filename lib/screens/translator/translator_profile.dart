@@ -167,7 +167,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                 image: widget.detail!.profilePic,
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(top: 8),
+                                padding: const EdgeInsets.only(top: 14),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -231,18 +231,15 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                           )
                                         : Container(
                                             padding: const EdgeInsets.all(10),
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.4,
                                             decoration: BoxDecoration(
                                               color: Colors.white,
                                               border: Border.all(
-                                                  color: lightblue, width: 1),
+                                                  color: lightblue, width: 1,),
                                               borderRadius:
                                                   BorderRadius.circular(22),
                                             ),
                                             child: Row(
+                                              mainAxisSize: MainAxisSize.min,
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
@@ -533,12 +530,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                       .size
                                                       .width *
                                                   0.9,
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.15,
                                               padding: EdgeInsets.only(
-                                                  bottom: 7, top: 7),
+                                                  bottom: 12, top: 12),
                                               decoration: BoxDecoration(
                                                 boxShadow: [
                                                   BoxShadow(
@@ -595,6 +588,9 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
                                                               .spaceAround,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
                                                       children: [
                                                         Scheduleinput(
                                                           text: 'Start Time'.tr,
@@ -686,7 +682,13 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                           hint: '9:00',
                                                           fontSize: 18.0,
                                                         ),
-                                                        Text("To".tr),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  bottom: 12),
+                                                          child: Text("To".tr),
+                                                        ),
                                                         Scheduleinput(
                                                           text: 'End Time'.tr,
                                                           controller:

@@ -38,11 +38,9 @@ class _Translator_State extends State<Translator_> {
         builder: (controller) => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Flexible(
-              child: TitleTopbar(
-                text: "Interpreters / Translators",
-                height: 0.11,
-              ),
+            TitleTopbar(
+              text: "Interpreters / Translators",
+              height: 0.13,
             ),
             // Container(
             //   decoration :BoxDecoration(color: greenish),
@@ -52,96 +50,96 @@ class _Translator_State extends State<Translator_> {
             // SearchTopBar(
             //   onchange: homeController.searchVendors,
             // ),
-            homeController.sonlineVendor.length != 0
-                ? Padding(
-                    padding: const EdgeInsets.only(
-                        left: 12, right: 12, top: 16, bottom: 12),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(left: 10, right: 30),
-                          width: Get.width * 0.3,
-                          // height: 70,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: Colors.grey[200],
-                          ),
-                          child: TextField(
-                            onChanged: homeController.searchVendors,
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    width: 1, color: Colors.grey[300]!),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    width: 1, color: Colors.grey[300]!),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(13)),
-                              ),
-                              prefixIcon: Icon(Icons.search),
-                              hintText: 'Search'.tr,
-                              contentPadding:
-                                  EdgeInsets.only(left: 12, right: 13),
-                              fillColor: Colors.white,
-                              filled: true,
-                            ),
-                          ),
-                        ),
-                        // Text(
-                        //   "Online Translators/interpreters".tr,
-                        //   style: TextStyle(
-                        //       fontSize: 16,
-                        //       fontWeight: FontWeight.w600,
-                        //       fontFamily: 'Poppins'),
-                        // ),
-                        GestureDetector(
-                          onTap: () {
-                            Get.to(() => OnlinePeople_screen())!.then((value) {
-                              homeController.onlineVendorUpdate();
-                            });
-                          },
-                          child: Text(
-                            "View All".tr,
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontFamily: 'Poppins',
-                                color: Colors.grey[600]),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                : Container(),
-            homeController.sonlineVendor.length != 0
-                ? Container(
-                    padding: EdgeInsets.only(left: 10),
-                    height: MediaQuery.of(context).size.height * 0.22,
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        itemCount: homeController.sonlineVendor.length > 6
-                            ? 6
-                            : homeController.sonlineVendor.length,
-                        itemBuilder: (context, index) => OnlineTranslatorCard(
-                              name: homeController.sonlineVendor[index].name,
-                              image: homeController
-                                  .sonlineVendor[index].profilePic,
-                              rating:
-                                  homeController.sonlineVendor[index].rating ==
-                                          null
-                                      ? null
-                                      : double.parse(homeController
-                                          .sonlineVendor[index].rating!),
-                              vendor: homeController.sonlineVendor[index],
-                              price: homeController.sonlineVendor[index]
-                                  .service!.onlineaudiovideoPrice,
-                            )),
-                  )
-                : Container(),
+            // homeController.sonlineVendor.length != 0
+            //     ? Padding(
+            //         padding: const EdgeInsets.only(
+            //             left: 12, right: 12, top: 16, bottom: 12),
+            //         child: Row(
+            //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //           children: [
+            //             Container(
+            //               margin: EdgeInsets.only(left: 10, right: 30),
+            //               width: Get.width * 0.3,
+            //               // height: 70,
+            //               decoration: BoxDecoration(
+            //                 borderRadius: BorderRadius.circular(12),
+            //                 color: Colors.grey[200],
+            //               ),
+            //               child: TextField(
+            //                 onChanged: homeController.searchVendors,
+            //                 decoration: InputDecoration(
+            //                   enabledBorder: OutlineInputBorder(
+            //                     borderSide: BorderSide(
+            //                         width: 1, color: Colors.grey[300]!),
+            //                     borderRadius:
+            //                         BorderRadius.all(Radius.circular(10)),
+            //                   ),
+            //                   focusedBorder: OutlineInputBorder(
+            //                     borderSide: BorderSide(
+            //                         width: 1, color: Colors.grey[300]!),
+            //                     borderRadius:
+            //                         BorderRadius.all(Radius.circular(13)),
+            //                   ),
+            //                   prefixIcon: Icon(Icons.search),
+            //                   hintText: 'Search'.tr,
+            //                   contentPadding:
+            //                       EdgeInsets.only(left: 12, right: 13),
+            //                   fillColor: Colors.white,
+            //                   filled: true,
+            //                 ),
+            //               ),
+            //             ),
+            //             // Text(
+            //             //   "Online Translators/interpreters".tr,
+            //             //   style: TextStyle(
+            //             //       fontSize: 16,
+            //             //       fontWeight: FontWeight.w600,
+            //             //       fontFamily: 'Poppins'),
+            //             // ),
+            //             GestureDetector(
+            //               onTap: () {
+            //                 Get.to(() => OnlinePeople_screen())!.then((value) {
+            //                   homeController.onlineVendorUpdate();
+            //                 });
+            //               },
+            //               child: Text(
+            //                 "View All".tr,
+            //                 style: TextStyle(
+            //                     fontSize: 14,
+            //                     fontFamily: 'Poppins',
+            //                     color: Colors.grey[600]),
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //       )
+            //     : Container(),
+            // homeController.sonlineVendor.length != 0
+            //     ? Container(
+            //         padding: EdgeInsets.only(left: 10),
+            //         height: MediaQuery.of(context).size.height * 0.26,
+            //         child: ListView.builder(
+            //             scrollDirection: Axis.horizontal,
+            //             shrinkWrap: true,
+            //             itemCount: homeController.sonlineVendor.length > 6
+            //                 ? 6
+            //                 : homeController.sonlineVendor.length,
+            //             itemBuilder: (context, index) => OnlineTranslatorCard(
+            //                   name: homeController.sonlineVendor[index].name,
+            //                   image: homeController
+            //                       .sonlineVendor[index].profilePic,
+            //                   rating:
+            //                       homeController.sonlineVendor[index].rating ==
+            //                               null
+            //                           ? null
+            //                           : double.parse(homeController
+            //                               .sonlineVendor[index].rating!),
+            //                   vendor: homeController.sonlineVendor[index],
+            //                   price: homeController.sonlineVendor[index]
+            //                       .service!.onlineaudiovideoPrice,
+            //                 )),
+            //       )
+            //     : Container(),
             Padding(
               padding:
                   EdgeInsets.only(left: 12, right: 12, top: 16, bottom: 10),
@@ -150,7 +148,7 @@ class _Translator_State extends State<Translator_> {
                 children: [
                   Container(
                     margin: EdgeInsets.only(left: 10),
-                    width: 310,
+                    width: Get.width * 0.75,
                     // height: 70,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
@@ -203,28 +201,28 @@ class _Translator_State extends State<Translator_> {
               ),
             ),
             homeController.sschedule.length != 0
-                ? Expanded(
-                    child: ListView.builder(
-                        itemCount: homeController.sschedule.length > 6
-                            ? 6
-                            : homeController.sschedule.length,
-                        itemBuilder: (context, index) => OfflineTranslattorCard(
-                              currencyname: selectedCurrency != null
-                                  ? currencycontroller.selectedCurrency
-                                  : "AED ",
-                              name: homeController.sschedule[index].name,
-                              image: homeController.sschedule[index].profilePic,
-                              lang: homeController.sschedule[index].language,
-                              vendor: homeController.sschedule[index],
-                              price: homeController
-                                  .sschedule[index].service!.audiovideo,
-                              rating: homeController.sschedule[index].rating ==
-                                      null
-                                  ? null
-                                  : double.parse(
-                                      homeController.sschedule[index].rating!),
-                            )),
-                  )
+                ? ListView.builder(
+                    itemCount: homeController.sschedule.length > 6
+                        ? 6
+                        : homeController.sschedule.length,
+                        shrinkWrap: true,
+                        physics: BouncingScrollPhysics(),
+                    itemBuilder: (context, index) => OfflineTranslattorCard(
+                          currencyname: selectedCurrency != null
+                              ? currencycontroller.selectedCurrency
+                              : "AED ",
+                          name: homeController.sschedule[index].name,
+                          image: homeController.sschedule[index].profilePic,
+                          lang: homeController.sschedule[index].language,
+                          vendor: homeController.sschedule[index],
+                          price: homeController
+                              .sschedule[index].service!.audiovideo,
+                          rating: homeController.sschedule[index].rating ==
+                                  null
+                              ? null
+                              : double.parse(
+                                  homeController.sschedule[index].rating!),
+                        ))
                 : Container(
                     height: MediaQuery.of(context).size.height * 0.25,
                     width: MediaQuery.of(context).size.width,

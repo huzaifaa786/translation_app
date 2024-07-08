@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:translation/values/colors.dart';
 
 class Scheduleinput extends StatelessWidget {
@@ -47,19 +48,21 @@ class Scheduleinput extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-              padding: const EdgeInsets.only(bottom: 4),
-              child: Row(
-                children: [
-                  Image.asset('assets/icons/Sand Watch.png'),
-                  Text(
-                     text,
-                    style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600),
-                  )
-                ],
-              )),
+            padding: const EdgeInsets.only(bottom: 4,left: 6,right: 6),
+            child: Row(
+              children: [
+                Image.asset('assets/images/sandWatch.png',height: 12,),
+                Gap(2),
+                Text(
+                  text,
+                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600),
+                ),
+              ],
+            ),
+          ),
           SizedBox(
             height: 40,
-            width: MediaQuery.of(context).size.width * 0.25,
+            width: MediaQuery.of(context).size.width * 0.32,
             child: TextFormField(
               readOnly: true,
               onTap: onpressed,
@@ -73,17 +76,12 @@ class Scheduleinput extends StatelessWidget {
                 filled: true,
                 fillColor: greenish,
                 hintText: hint,
-                contentPadding: const EdgeInsets.only(
-                    left: 12.0, right: 12, top: 12, bottom: 12),
+                contentPadding: const EdgeInsets.only(left: 16, right: 16),
                 hintStyle: TextStyle(color: primaryLightcolor),
                 border: OutlineInputBorder(
                   borderSide: BorderSide(width: 1, color: Colors.grey[500]!),
-                  borderRadius: BorderRadius.all(Radius.circular(17)),
+                  borderRadius: BorderRadius.all(Radius.circular(25)),
                 ),
-                // focusedBorder: OutlineInputBorder(
-                //   borderSide: BorderSide(width: 1, color: Colors.grey[500]!),
-                //   borderRadius: BorderRadius.all(Radius.circular(17)),
-                // ),
               ),
               cursorColor: Colors.white,
               maxLines: maxlines == true ? null : 1,

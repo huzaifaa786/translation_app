@@ -64,7 +64,7 @@ class _Profile_screenState extends State<Profile_screen> {
                           ],
                         ),
                         Positioned(
-                          top: 110,
+                          top: 90,
                           left: 14,
                           right: 14,
                           child: Column(

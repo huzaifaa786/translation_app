@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:translation/screens/profile/profile.dart';
@@ -28,9 +29,8 @@ class OfflineTranslattorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GetStorage box = GetStorage();
     return Padding(
-      padding: const EdgeInsets.only(left: 12, right: 12, bottom: 12),
+      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 12),
       child: GestureDetector(
         onTap: () {
           translatorProfileController.clear();
@@ -38,16 +38,21 @@ class OfflineTranslattorCard extends StatelessWidget {
         },
         child: Container(
           decoration: BoxDecoration(
-              color: ggrey,
-              borderRadius: BorderRadius.circular(5),
-              boxShadow: [
-               
-                BoxShadow(
-                  color: Colors.grey[500]!,
-                  blurRadius: 2,
-                  offset: Offset(0.00001, 3),
-                ),
-              ]),
+            color: white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey[400]!,
+                blurRadius: 6,
+                offset: Offset(0.00001, 3),
+              ),
+              BoxShadow(
+                color: Colors.grey[200]!,
+                blurRadius: 12,
+                offset: Offset(-0.00001, -3),
+              ),
+            ],
+          ),
           padding: const EdgeInsets.all(12.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -113,7 +118,7 @@ class OfflineTranslattorCard extends StatelessWidget {
                                           fontFamily: 'Poppins'),
                                     ),
                                     Text(
-                                      price + ' ' +currencyname,
+                                      price + ' ' + currencyname,
                                       style: TextStyle(
                                           color: lightblue,
                                           fontSize: 13,
@@ -124,43 +129,51 @@ class OfflineTranslattorCard extends StatelessWidget {
                                 ),
                               )
                             : Container(),
-                        rating != null
-                            ? Padding(
-                                padding: const EdgeInsets.only(bottom: 4),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    FittedBox(
-                                        fit: BoxFit.scaleDown,
-                                        child: SvgPicture.asset(
-                                            'assets/images/star.svg',
-                                            height: 11,
-                                            width: 11)),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 4, left: 2, right: 2),
-                                      child: Text(
-                                          rating == null
-                                              ? '0.0'
-                                              : rating.toStringAsFixed(1),
-                                          style: TextStyle(
-                                              color: lightblue,
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w400,
-                                              fontFamily: 'NunitoSans')),
-                                    ),
-                                  ],
+                        if (rating != null)
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 4),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: SvgPicture.asset(
+                                    'assets/images/star.svg',
+                                    height: 18,
+                                    width: 18,
+                                    color: secondaryColor,
+                                  ),
                                 ),
-                              )
-                            : Text(''),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 4, left:6, right: 6),
+                                  child: Text(
+                                      rating == null
+                                          ? '0.0'
+                                          : rating.toStringAsFixed(1),
+                                      style: TextStyle(
+                                          color: lightblue,
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: 'NunitoSans')),
+                                ),
+                              ],
+                            ),
+                          ),
+                        if (rating == null) Gap(4),
                         Row(
                           children: [
-                            Image.asset("assets/images/Language.png"),
+                            Image.asset(
+                              "assets/images/intl_lang.png",
+                              color: greenish,
+                              height: 20,
+                            ),
                             for (var i = 0; i < 3; i++)
                               if (i < lang.length)
                                 Container(
-                                  width: MediaQuery.of(context).size.width*0.16,
-                                  margin: EdgeInsets.only(left: 9),
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.17,
+                                  margin: EdgeInsets.only(left: 6),
                                   padding: EdgeInsets.all(4),
                                   decoration: BoxDecoration(
                                       color: Colors.white,
@@ -169,14 +182,19 @@ class OfflineTranslattorCard extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(13),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Color.fromARGB(255, 195, 181, 181)!,
+                                          color: Color.fromARGB(
+                                              255, 195, 181, 181),
                                           blurRadius: 8,
                                           offset: Offset(0, 3),
                                         ),
                                       ]),
                                   child: Text(
-                                     lang[ i],
-                                    style: TextStyle(fontSize: 12,color: greenish),
+                                    lang[i],
+                                    maxLines: 1,
+                                    textAlign: TextAlign.center,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        fontSize: 12, color: greenish),
                                   ),
                                 ),
                             // Container(
