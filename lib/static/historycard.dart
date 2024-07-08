@@ -3,11 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/utils.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:translation/screens/translator/translator_profile_controller.dart';
 import 'package:translation/values/colors.dart';
-import 'package:translation/static/bagee.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:gap/gap.dart';
 
@@ -58,257 +55,199 @@ class HistoryCard extends StatelessWidget {
           child: Column(
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Column(
+                  Flexible(
+                    flex: 2,
+                    child: Column(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(45),
+                          child: image == ''
+                              ? Image(
+                                  image: AssetImage('assets/images/5907.jpg'),
+                                  height: 80,
+                                  width: 80,
+                                )
+                              : CachedNetworkImage(
+                                  imageUrl: image,
+                                  height: 80,
+                                  width: 80,
+                                  fit: BoxFit.cover,
+                                ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Flexible(
+                    flex: 6,
+                    child: Container(
+                      width: Get.width * 0.8,
+                      padding: box.read('locale') != 'ar'
+                          ? EdgeInsets.only(left: 8)
+                          : EdgeInsets.only(right: 8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(45),
-                            child: image == ''
-                                ? Image(
-                                    image: AssetImage('assets/images/5907.jpg'),
-                                    height: 80,
-                                    width: 80,
-                                  )
-                                : CachedNetworkImage(
-                                    imageUrl: image,
-                                    height: 80,
-                                    width: 80,
-                                  ),
-                          ),
-                        ],
-                      ),
-                      Container(
-                        padding: box.read('locale') != 'ar'
-                            ? EdgeInsets.only(left: 6)
-                            : EdgeInsets.only(right: 6),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Directionality(
-                              textDirection: box.read('locale') != 'ar'
-                                  ? TextDirection.ltr
-                                  : TextDirection.rtl,
-                              child: Text(
-                                "Order No.".tr + id.toString(),
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                    fontFamily: 'Mazzard'),
+                          Directionality(
+                            textDirection: box.read('locale') != 'ar'
+                                ? TextDirection.ltr
+                                : TextDirection.rtl,
+                            child: Text(
+                              "Order No.".tr + id.toString(),
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
-                            SizedBox(
-                              height: 4,
-                            ),
-                            SizedBox(
-                              width: Get.width * 0.7,
-                              // decoration: BoxDecoration(border: Border.all()),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    name,
-                                    style: TextStyle(
+                          ),
+                          Gap(4),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Flexible(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      name,
+                                      style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w600,
                                         color: greenish,
-                                        fontFamily: 'Mazzard'),
-                                  ),
-                                  InkWell(
-                                    onTap: onmsgtap,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 6,
-                                          bottom: 6,
-                                          left: 12,
-                                          right: 12),
-                                      child: SvgPicture.asset(
-                                        'assets/images/msg.svg',
-                                        height: 17,
-                                        width: 17,
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 4,
-                            ),
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.4,
-                              child: Text(
-                                type,
-                                maxLines: 2,
-                                style: TextStyle(
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w600,
-                                    color: lightblue,
-                                    fontFamily: 'Mazzard'),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 4,
-                            ),
-                            servicetype == 'document'
-                                ? Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.4,
-                                    child: Text(
-                                      'Amount of pages:'.tr + ': ' + page,
+                                    Gap(4),
+                                    Text(
+                                      type,
                                       maxLines: 2,
                                       style: TextStyle(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w600,
-                                          fontFamily: 'Mazzard'),
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                        color: greenish.withOpacity(0.7),
+                                      ),
                                     ),
-                                  )
-                                : Container(),
-                            SizedBox(
-                              height: 4,
+                                  ],
+                                ),
+                              ),
+                              InkWell(
+                                onTap: onmsgtap,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 6, bottom: 6, left: 12, right: 12),
+                                  child: SvgPicture.asset(
+                                    'assets/images/msg.svg',
+                                    height: 20,
+                                    width: 20,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 4),
+                          if (servicetype == 'document')
+                            Text(
+                              'Amount of pages:'.tr + ': ' + page,
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: greenish.withOpacity(0.77),
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
-                            Row(
-                              children: [
+                          if (servicetype == 'document') SizedBox(height: 4),
+                          Row(
+                            children: [
+                              if (servicetype != 'document') ...[
                                 Icon(
                                   Icons.access_time_filled_outlined,
                                   color: greenish,
-                                  size: 14,
+                                  size: 20,
                                 ),
-                                SizedBox(
-                                  width: 4,
-                                ),
-                                servicetype == 'document'
-                                    ? Container()
-                                    : Text(
-                                        time + " | ",
-                                        style: TextStyle(
-                                            fontSize: 13,
-                                            color: lightblue,
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                                Icon(
-                                  Icons.calendar_month_sharp,
-                                  color: greenish,
-                                  size: 13,
-                                ),
-                                Gap(2),
+                                SizedBox(width: 4),
                                 Text(
-                                  date,
-                                  maxLines: 2,
+                                  time + " | ",
                                   style: TextStyle(
-                                      fontSize: 13,
-                                      color: lightblue,
+                                      fontSize: 12,
+                                      color: greenish.withOpacity(0.7),
                                       fontWeight: FontWeight.w500),
                                 ),
                               ],
-                            ),
-                            Gap(3),
-                            Row(
-                              children: [
-                                Image.asset('assets/images/Banknotes.png'),
-                                Text(
-                                  price.toString() + ' ' + 'AED',
-                                  style: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w500,
-                                      color: lightblue,
-                                      fontFamily: 'Mazzard'),
+                              Icon(
+                                Icons.calendar_month_sharp,
+                                color: greenish,
+                                size: 20,
+                              ),
+                              Gap(4),
+                              Text(
+                                date,
+                                maxLines: 2,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: greenish.withOpacity(0.7),
+                                  fontWeight: FontWeight.w500,
                                 ),
-                              ],
-                            ),
-                            Gap(6),
-                            Row(
-                              children: [
-                                SvgPicture.asset(
-                                  'assets/images/loading.svg',
-                                  height: 18,
-                                  width: 29,
+                              ),
+                            ],
+                          ),
+                          Gap(3),
+                          Row(
+                            children: [
+                              Image.asset(
+                                'assets/images/bankNotes.jpg',
+                                width: 18,
+                              ),
+                              Gap(4),
+                              Text(
+                                price.toString() + ' ' + 'AED',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: greenish.withOpacity(0.7),
                                 ),
-                                Gap(5),
-                                Text(
-                                  status == "3"
-                                      ? 'Completed'.tr
-                                      : status == "2"
-                                          ? "Rejected".tr
-                                          : "In progress".tr,
-                                  style: TextStyle(
-                                      color: status == "3"
-                                          ? Colors.green
-                                          : status == "2"
-                                              ? Colors.red
-                                              : greenish,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                Gap(10),
-                                SvgPicture.asset(
-                                  status == "3"
-                                      ? 'assets/images/completed.svg'
-                                      : status == "2"
-                                          ? "assets/images/remove.svg"
-                                          : "assets/images/timer.svg",
-                                  height: 13,
-                                  width: 13,
-                                  color: status == "3"
-                                      ? Colors.green
-                                      : status == "2"
-                                          ? Colors.red
-                                          : greenish,
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
+                              ),
+                            ],
+                          ),
+                          Gap(8),
+                          Row(
+                            children: [
+                              SvgPicture.asset(
+                                status == "3"
+                                    ? 'assets/images/completed.svg'
+                                    : status == "2"
+                                        ? "assets/images/remove.svg"
+                                        : "assets/images/timer.svg",
+                                height: 13,
+                                width: 13,
+                                color: status == "3"
+                                    ? Colors.green
+                                    : status == "2"
+                                        ? Colors.red
+                                        : greenish,
+                              ),
+                              Gap(10),
+                              Text(
+                                status == "3"
+                                    ? 'Completed'.tr
+                                    : status == "2"
+                                        ? "Rejected".tr
+                                        : "In progress".tr,
+                                style: TextStyle(
+                                    color: status == "3"
+                                        ? Colors.green
+                                        : status == "2"
+                                            ? Colors.red
+                                            : greenish,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              
+                            ],
+                          )
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                  // Column(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  //   children: [
-                  // Text(
-                  //   'AED' + ' ' + price.toString(),
-                  //   style: TextStyle(
-                  //       fontSize: 17,
-                  //       fontWeight: FontWeight.w600,
-                  //       fontFamily: 'Mazzard'),
-                  // ),
-                  // SizedBox(
-                  //   height: 4,
-                  // ),
-                  // Badgee(
-                  //   title: status == "3"
-                  //       ? 'Completed'.tr
-                  //       : status == "2"
-                  //           ? "Rejected".tr
-                  //           : "In progress".tr,
-                  //   color: status == "3"
-                  //       ? Colors.green
-                  //       : status == "2"
-                  //           ? Colors.red
-                  //           : greenish,
-                  // ),
-                  // SizedBox(height: 6),
-                  // Column(
-                  //   children: [
-                  //     InkWell(
-                  //       onTap: onmsgtap,
-                  //       child: Padding(
-                  //         padding: const EdgeInsets.only(
-                  //             top: 6, bottom: 6, left: 12, right: 12),
-                  //         child: SvgPicture.asset(
-                  //           'assets/images/msg.svg',
-                  //           height: 17,
-                  //           width: 17,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
-                  //   ],
-                  // )
                 ],
               ),
               Padding(

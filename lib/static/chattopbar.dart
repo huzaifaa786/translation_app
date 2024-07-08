@@ -13,7 +13,7 @@ class ChatTopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: Get.height * 0.15,
+        height: Get.height * 0.12,
         decoration: BoxDecoration(
           color: greenish,
           borderRadius: BorderRadius.only(
@@ -21,21 +21,22 @@ class ChatTopBar extends StatelessWidget {
               bottomRight: Radius.circular(25)),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(left: 20),
+          padding: const EdgeInsets.only(left: 20,right: 20,top: 8),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
+              GestureDetector(
                       onTap: () {
                         Navigator.pop(context);
                       },
                       child: SvgPicture.asset("assets/icons/back.svg")),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  
                   Container(
-                    width: 70,
-                    height: 70,
+                    width: 60,
+                    height: 60,
                     margin: EdgeInsets.only(left: 12),
                     // padding: EdgeInsets.all(4),
                     decoration: BoxDecoration(
@@ -47,13 +48,14 @@ class ChatTopBar extends StatelessWidget {
                       child: img == 'https://translation.ezmoveportal.com/'
                           ? Image(
                               image: AssetImage('assets/images/5907.jpg'),
-                              height: 64,
-                              width: 64,
+                              height: 60,
+                              width: 60,
+                              fit: BoxFit.cover,
                             )
                           : CachedNetworkImage(
                               imageUrl: img,
-                              height: 64,
-                              width: 64,
+                              height: 60,
+                              width: 60,
                             ),
                     ),
                   ),

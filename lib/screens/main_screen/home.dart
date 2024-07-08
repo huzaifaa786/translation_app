@@ -215,11 +215,10 @@ class _HomeState extends State<Home> {
                           ],
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        padding: EdgeInsets.only(
-                          left: 20,
-                          right: 20,
-                        ),
-                        height: MediaQuery.of(context).size.height * 0.6,
+                        padding: EdgeInsets.only(left: 20, right: 20),
+                        height: box.read('locale') != 'ar'
+                            ? Get.height * 0.56
+                            : Get.height * 0.58,
                         child: SingleChildScrollView(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -301,7 +300,8 @@ class _HomeState extends State<Home> {
                                 //     : MainAxisAlignment.end,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 16),
+                                    padding: const EdgeInsets.only(
+                                        top: 16, left: 12, right: 12),
                                     child: Directionality(
                                       textDirection: box.read('locale') != 'ar'
                                           ? TextDirection.ltr
@@ -311,7 +311,7 @@ class _HomeState extends State<Home> {
                                         style: TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.w600,
-                                            color: kblack),
+                                            color: greenish),
                                       ),
                                     ),
                                   ),
@@ -372,7 +372,8 @@ class _HomeState extends State<Home> {
                                 //     : MainAxisAlignment.end,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 12),
+                                    padding: const EdgeInsets.only(
+                                        top: 12, left: 12, right: 12),
                                     child: Directionality(
                                       textDirection: box.read('locale') != 'ar'
                                           ? TextDirection.ltr
@@ -382,7 +383,7 @@ class _HomeState extends State<Home> {
                                         style: TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.w600,
-                                            color: kblack),
+                                            color: greenish),
                                       ),
                                     ),
                                   ),
@@ -437,7 +438,7 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(top: 70, bottom: 20),
+                                padding: EdgeInsets.only(top: 50, bottom: 20),
                                 child: LargeButton(
                                   title: 'Translate'.tr,
                                   sreenRatio: 0.9,

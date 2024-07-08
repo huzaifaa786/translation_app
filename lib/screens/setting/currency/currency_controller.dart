@@ -16,7 +16,7 @@ class CurrencyController extends GetxController {
     isLoading.value = true;
 
     try {
-      final response = await ApiService().storeCurrency(current, box);
+      final response = await ApiService().storeCurrency(current);
 
       print(response.data);
       isLoading.value = false;

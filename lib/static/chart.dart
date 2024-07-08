@@ -18,51 +18,45 @@ class ChartCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: InkWell(
-        onTap: onPressed,
-        child: Column(
-          children: [
-            Row(
+    return InkWell(
+      onTap: onPressed,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: Row(
               children: <Widget>[
-                // ClipRRect(
-
-                // borderRadius: BorderRadius.circular(40.0),
-                // child: Image.network('http://10.0.2.2:8000/api/image',
-                // height: 100,
-                //   width:100,
-                //    fit: BoxFit.cover,
-                //       )),
-                Container(
-                  width: 70,
-                  height: 70,
-                  margin: EdgeInsets.only(left: 15, right: 15),
-                  // padding: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    // border: Border.all(width: 2, color: Color(0xFF34607B)),
-                    borderRadius: BorderRadius.circular(70),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(22),
-                    child: imgicon == ''
-                        ? Image(
-                            image: AssetImage('assets/images/5907.jpg'),
-                            height: 64,
-                            width: 64,
-                            fit: BoxFit.fill,
-                          )
-                        : CachedNetworkImage(
-                            imageUrl:
-                                'https://translation.klickwash.net/' + imgicon,
-                            height: 64,
-                            width: 64,
-                          ),
+                Flexible(
+                  flex: 1,
+                  child: Container(
+                    width: 70,
+                    height: 70,
+                    margin: EdgeInsets.only(left: 15, right: 15),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(70),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(22),
+                      child: imgicon == ''
+                          ? Image(
+                              image: AssetImage('assets/images/5907.jpg'),
+                              height: 64,
+                              width: 64,
+                              fit: BoxFit.fill,
+                            )
+                          : CachedNetworkImage(
+                              imageUrl:
+                                  'https://translation.klickwash.net/' + imgicon,
+                              height: 64,
+                              width: 64,
+                            ),
+                    ),
                   ),
                 ),
-                Expanded(
+                Flexible(
+                  flex: 2,
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(0.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
@@ -100,14 +94,14 @@ class ChartCards extends StatelessWidget {
                 )
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              child: Divider(
-                thickness: 2,
-              ),
-            )
-          ],
-        ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: Divider(
+              thickness: 2,
+            ),
+          )
+        ],
       ),
     );
   }

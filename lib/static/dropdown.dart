@@ -69,7 +69,7 @@ class DropdownField extends StatelessWidget {
             onChange(value);
           },
           buttonStyleData: ButtonStyleData(
-            height: 55,
+            height: 45,
             width: MediaQuery.of(context).size.width,
             padding: const EdgeInsets.only(left: 12, right: 12),
             decoration: BoxDecoration(

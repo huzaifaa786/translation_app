@@ -19,7 +19,7 @@ const primaryTextColor = Color(4294967295);
 const secondaryTextColor = Color(4278190080);
 const buttonGrey = Color(4292072403);
 const textGrey = Color(4292072403);
-const greenish = Color.fromARGB(255, 16, 54, 78);
+const greenish = Color(0xFF1E2C4A);
 const gray = Color(0xFF34607B1C);
 const graylite = Color(0xFF0000004A);
 const cardGrey = Color(4293651196);
@@ -35,7 +35,7 @@ const unSelectedProgress = Color(4294898357);
 const white = Colors.white;
 const completed = Color(4278236456);
 const lightblue = Color(4285892265);
-
+const sentMsgColor = Color(0xFF486591);
 const LinearGradient greenishgradient = LinearGradient(
   colors: [
     Color(4280298564),
