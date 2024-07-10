@@ -45,7 +45,7 @@ class _OfflinePeople_screenState extends State<OfflinePeople_screen> {
             children: [
               TitleTopbar(
                 text: "Interpreters / Translators",
-                height: 0.1 / 0.9,
+                height: 0.13,
               ),
               // SearchTopBar(
               //   onchange: controller.searchOfflineOrders,
@@ -140,8 +140,8 @@ class _OfflinePeople_screenState extends State<OfflinePeople_screen> {
                             padding: const EdgeInsets.only(right: 4),
                             child: SvgPicture.asset(
                               'assets/images/filterIcon.svg',
-                              height: 30,
-                              width: 30,
+                              height: 20,
+                              width: 20,
                             ),
                           ),
                           // Text(
@@ -161,22 +161,20 @@ class _OfflinePeople_screenState extends State<OfflinePeople_screen> {
                           itemCount: controller.sschedule.length,
                           itemBuilder: (context, index) {
                             return OfflineTranslattorCard(
-                                  currencyname: selectedCurrency != null
-                                      ? currencycontroller
-                                          .selectedCurrency
-                                      : "AED ",
-                                  name: controller.sschedule[index].name,
-                                  image: controller.sschedule[index].profilePic,
-                                  lang: controller.sschedule[index].language,
-                                  vendor: controller.sschedule[index],
-                                  price: controller
-                                      .sschedule[index].service!.audiovideo,
-                                  rating: controller.sschedule[index].rating ==
-                                          null
-                                      ? null
-                                      : double.parse(
-                                          controller.sschedule[index].rating!),
-                                );
+                              currencyname: selectedCurrency != null
+                                  ? currencycontroller.selectedCurrency
+                                  : "AED ",
+                              name: controller.sschedule[index].name,
+                              image: controller.sschedule[index].profilePic,
+                              lang: controller.sschedule[index].language,
+                              vendor: controller.sschedule[index],
+                              price: controller
+                                  .sschedule[index].service!.audiovideo,
+                              rating: controller.sschedule[index].rating == null
+                                  ? null
+                                  : double.parse(
+                                      controller.sschedule[index].rating!),
+                            );
                           }),
                     )
                   : Container(),

@@ -41,7 +41,6 @@ class OfflineTranslattorCard extends StatelessWidget {
               color: ggrey,
               borderRadius: BorderRadius.circular(5),
               boxShadow: [
-               
                 BoxShadow(
                   color: Colors.grey[500]!,
                   blurRadius: 2,
@@ -113,7 +112,7 @@ class OfflineTranslattorCard extends StatelessWidget {
                                           fontFamily: 'Poppins'),
                                     ),
                                     Text(
-                                      price + ' ' +currencyname,
+                                      price + ' ' + currencyname,
                                       style: TextStyle(
                                           color: lightblue,
                                           fontSize: 13,
@@ -153,67 +152,67 @@ class OfflineTranslattorCard extends StatelessWidget {
                                 ),
                               )
                             : Text(''),
-                        Row(
-                          children: [
-                            Image.asset("assets/images/Language.png"),
-                            for (var i = 0; i < 3; i++)
-                              if (i < lang.length)
-                                Container(
-                                  width: MediaQuery.of(context).size.width*0.16,
-                                  margin: EdgeInsets.only(left: 9),
-                                  padding: EdgeInsets.all(4),
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          width: 1.2, color: lightblue),
-                                      borderRadius: BorderRadius.circular(13),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Color.fromARGB(255, 195, 181, 181)!,
-                                          blurRadius: 8,
-                                          offset: Offset(0, 3),
-                                        ),
-                                      ]),
-                                  child: Flexible(
-                                    child: Text(
-                                       maxLines: 1,
-                                       lang[ i].toString(),
-                                      style: TextStyle(fontSize: 12,color: greenish),
-                                    ),
-                                  ),
+                        Row(children: [
+                          Image.asset("assets/images/Language.png"),
+                          for (var i = 0; i < 3; i++)
+                            if (i < lang.length)
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.16,
+                                margin: EdgeInsets.only(left: 9),
+                                padding: EdgeInsets.all(4),
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border.all(
+                                        width: 1.2, color: lightblue),
+                                    borderRadius: BorderRadius.circular(13),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color:
+                                            Color.fromARGB(255, 195, 181, 181)!,
+                                        blurRadius: 8,
+                                        offset: Offset(0, 3),
+                                      ),
+                                    ]),
+                                child: Text(
+                                  lang[i],
+                                  maxLines: 1,
+                                  textAlign: TextAlign.center,
+                                  overflow: TextOverflow.ellipsis,
+                                  style:
+                                      TextStyle(fontSize: 12, color: greenish),
                                 ),
-                            // Container(
-                            //   margin: EdgeInsets.only(left: 4),
-                            //   padding: EdgeInsets.all(4),
-                            //   decoration: BoxDecoration(
-                            //     color: Colors.white,
-                            //     border: Border.all(
-                            //         color: Color.fromRGBO(0, 0, 0, 0.24),
-                            //         width: 1),
-                            //     borderRadius: BorderRadius.circular(6),
-                            //   ),
-                            //   child: Text(
-                            //     'Turkish',
-                            //     style: TextStyle(fontSize: 12),
-                            //   ),
-                            // ),
-                            // Container(
-                            //   margin: EdgeInsets.only(left: 4),
-                            //   padding: EdgeInsets.all(4),
-                            //   decoration: BoxDecoration(
-                            //     color: Colors.white,
-                            //     border: Border.all(
-                            //         color: Color.fromRGBO(0, 0, 0, 0.24),
-                            //         width: 1),
-                            //     borderRadius: BorderRadius.circular(6),
-                            //   ),
-                            //   child: Text(
-                            //     'English',
-                            //     style: TextStyle(fontSize: 12),
-                            //   ),
-                            // )
-                          ],
-                        ),
+                              ),
+                          // Container(
+                          //   margin: EdgeInsets.only(left: 4),
+                          //   padding: EdgeInsets.all(4),
+                          //   decoration: BoxDecoration(
+                          //     color: Colors.white,
+                          //     border: Border.all(
+                          //         color: Color.fromRGBO(0, 0, 0, 0.24),
+                          //         width: 1),
+                          //     borderRadius: BorderRadius.circular(6),
+                          //   ),
+                          //   child: Text(
+                          //     'Turkish',
+                          //     style: TextStyle(fontSize: 12),
+                          //   ),
+                          // ),
+                          // Container(
+                          //   margin: EdgeInsets.only(left: 4),
+                          //   padding: EdgeInsets.all(4),
+                          //   decoration: BoxDecoration(
+                          //     color: Colors.white,
+                          //     border: Border.all(
+                          //         color: Color.fromRGBO(0, 0, 0, 0.24),
+                          //         width: 1),
+                          //     borderRadius: BorderRadius.circular(6),
+                          //   ),
+                          //   child: Text(
+                          //     'English',
+                          //     style: TextStyle(fontSize: 12),
+                          //   ),
+                          // )
+                        ]),
                       ],
                     ),
                   ),

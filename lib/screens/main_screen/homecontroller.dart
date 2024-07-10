@@ -11,6 +11,7 @@ import 'package:translation/screens/translator_screens/notranslator.dart';
 import 'package:translation/screens/translator_screens/translator_screen.dart';
 import 'package:translation/values/string.dart';
 import 'package:get_storage/get_storage.dart';
+import 'dart:developer';
 
 class HomeController extends GetxController {
   static HomeController instance = Get.find();
@@ -284,8 +285,9 @@ class HomeController extends GetxController {
 
     GetStorage box = GetStorage();
     int user_id = box.read('user_id');
+    int api_token= box.read('api_token');
 
-    var data = {'user_id': user_id};
+    var data = {'user_id': user_id, 'api_token': api_token};
     var response = await Api.execute(url: url, data: data);
     print(response);
     LoadingHelper.dismiss();

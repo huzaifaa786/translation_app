@@ -167,7 +167,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                 image: widget.detail!.profilePic,
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(top: 8),
+                                padding: const EdgeInsets.only(top: 14),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -234,7 +234,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                             decoration: BoxDecoration(
                                               color: Colors.white,
                                               border: Border.all(
-                                                  color: lightblue, width: 1),
+                                                  color: lightblue, width: 1,),
                                               borderRadius:
                                                   BorderRadius.circular(22),
                                             ),

@@ -30,7 +30,7 @@ class BalanceCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(left: 15, right: 15, top: 15),
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height*0.22,
+      // height: MediaQuery.of(context).size.height*0.22,
       decoration: BoxDecoration(
         image: DecorationImage(
             image: AssetImage("assets/images/topUp.png"), fit: BoxFit.cover),
