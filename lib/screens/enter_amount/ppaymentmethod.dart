@@ -58,8 +58,8 @@ class _PPaymentMethodState extends State<PPaymentMethod> {
                     children: [
                       Image(
                         image: AssetImage(widget.image),
-                        height: 25,
-                        width: 25,
+                        height: 30,
+                        width: 30,
                         color: widget.isSelected ? white : greenish,
                       ),
                       SizedBox(

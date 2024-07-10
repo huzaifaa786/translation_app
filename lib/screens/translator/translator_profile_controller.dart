@@ -26,7 +26,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 //Enums used to ask user for desired service
 enum ServiceType { Schedule, Document }
 
-enum ScheduleType { AudioVideo, InPerson, DocumentType }
+enum ScheduleType { AudioVideo, InPerson }
 
 enum DocumentType { Urgent, NotUrgent }
 
@@ -46,7 +46,7 @@ class TranslatorProfileController extends GetxController {
   TextEditingController descriptionController = TextEditingController();
   //default types for radio Buttons (change from here)
   ServiceType serviceType = ServiceType.Schedule;
-  ScheduleType scheduleType = ScheduleType.AudioVideo;
+  ScheduleType? scheduleType = ScheduleType.AudioVideo;
   DocumentType documentType = DocumentType.Urgent;
   // InstantType instantType = InstantType.audio;
 
@@ -78,6 +78,8 @@ class TranslatorProfileController extends GetxController {
     startTime = '';
     endTime = '';
     totalAmount = 0;
+    print('kkkkkkkkkkkkkkk');
+    print(scheduleType);
     update();
   }
 
@@ -87,14 +89,12 @@ class TranslatorProfileController extends GetxController {
     totalAmount = 0;
     update();
   }
-
-  // reset instant value
+ 
   resetInstant() {
     instantTime = ''.obs.toString();
     totalAmount = 0.obs.toInt();
     pages = 0;
-    // instantType = InstantType.audio;
-    scheduleType = ScheduleType.AudioVideo;
+    scheduleType = null;
     documentType = DocumentType.Urgent;
     selectedLocation = null;
     startTime = '';
@@ -263,7 +263,7 @@ class TranslatorProfileController extends GetxController {
         "file":
             await dio.MultipartFile.fromFile(file!.path, filename: fileName),
         'api_token': box.read('api_token')!,
-        'servicetype': ScheduleType,
+        'servicetype': servicetype,
         'vendor_id': vendor.id.toString(),
         'price': CheckoutAmount.toString(),
         'duration': duration,
@@ -272,14 +272,15 @@ class TranslatorProfileController extends GetxController {
         'endtime': endTime,
         'meetingtype': 'audio',
         // 'meetingtype': instantType == InstantType.audio ? 'audio' : 'video',
-        'scheduletype': ScheduleType,
-
+        'scheduletype': scheduleType == ScheduleType.AudioVideo
+            ? 'audio/video'
+            : 'inperson',
         'documenttype': documentType,
         'pages': pages,
         'description': descriptionController.text.toString()
       });
-      print(data);
-      // response = await Api.execute(url: url, data: data, image: true);
+
+      response = await Api.execute(url: url, data: data, image: true);
     } else {
       data = {
         'api_token': box.read('api_token')!,
@@ -293,13 +294,13 @@ class TranslatorProfileController extends GetxController {
         'starttime': startTime,
         'endtime': endTime,
         'meetingtype': 'audio',
+        // 'meetingtype': instantType == InstantType.audio ? 'audio' : 'video',
         'scheduletype': scheduleType == ScheduleType.AudioVideo
             ? 'audio/video'
             : 'inperson',
       };
-      print('ffffffffffffffffffffffffffffffff');
-      print(data);
-      // response = await Api.execute(url: url, data: data);
+
+      response = await Api.execute(url: url, data: data);
     }
 
     LoadingHelper.dismiss();
@@ -338,11 +339,12 @@ class TranslatorProfileController extends GetxController {
       'latitude': selectedLocation!.latitude,
       'longitude': selectedLocation!.longitude,
     };
+    log(data);
+
     var response = await Api.execute(url: url, data: data);
     LoadingHelper.dismiss();
     if (!response['error']) {
       Get.offAll(() => CardAdded_Screen());
-      update();
     } else {
       Get.snackbar("Error!", response['error_data'],
           snackPosition: SnackPosition.BOTTOM,
@@ -365,7 +367,6 @@ class TranslatorProfileController extends GetxController {
     LocationData _locationData;
 
     _locationData = await location.getLocation();
-    print('gggggggggggggggggggggggggggg');
     print(
         'latitude: ${_locationData.latitude}, longitude: ${_locationData.longitude}');
   }
@@ -379,14 +380,6 @@ class TranslatorProfileController extends GetxController {
       return;
     }
     CheckoutAmount = totalAmount;
-    // var duration = checkDuration();
-    // if (duration != 30) {
-    //   Get.snackbar("Error!", "Duration must be 30 minutes",
-    //       snackPosition: SnackPosition.BOTTOM,
-    //       backgroundColor: Colors.red,
-    //       colorText: Colors.white);
-    //   return;
-    // }
 
     vendors = vendor;
     LoadingHelper.show();

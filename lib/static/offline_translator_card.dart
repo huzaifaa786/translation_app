@@ -174,9 +174,12 @@ class OfflineTranslattorCard extends StatelessWidget {
                                           offset: Offset(0, 3),
                                         ),
                                       ]),
-                                  child: Text(
-                                     lang[ i],
-                                    style: TextStyle(fontSize: 12,color: greenish),
+                                  child: Flexible(
+                                    child: Text(
+                                       maxLines: 1,
+                                       lang[ i].toString(),
+                                      style: TextStyle(fontSize: 12,color: greenish),
+                                    ),
                                   ),
                                 ),
                             // Container(

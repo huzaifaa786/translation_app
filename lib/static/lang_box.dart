@@ -11,7 +11,10 @@ class LanguageBox extends StatelessWidget {
       padding: EdgeInsets.only(right: 12, bottom: 8),
       child: Container(
         width: MediaQuery.of(context).size.width * 0.20,
-        padding: EdgeInsets.only(bottom: 7, top: 7),
+        padding: EdgeInsets.only(
+          bottom: 7,
+          top: 7,
+        ),
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -21,14 +24,20 @@ class LanguageBox extends StatelessWidget {
             ),
           ],
           color: Colors.white,
-          border: Border.all(color: greenish, width: 1),
+          border: Border.all(color: lightblue, width: 1),
           borderRadius: BorderRadius.circular(15),
         ),
-        child: Center(
-          child: Text(
-            lang,
-            style: TextStyle(fontSize: 12),
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Flexible(
+              child: Text(
+                maxLines: 1,
+                lang.toString(),
+                style: TextStyle(fontSize: 12),
+              ),
+            ),
+          ],
         ),
       ),
     );

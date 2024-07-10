@@ -24,6 +24,24 @@ class ProfileController extends GetxController {
   XFile? profileImage = XFile('');
   User? user;
 
+  bool obscureTextPassword = true;
+  bool obscureTextPassword1 = true;
+  bool obscureTextPassword2 = true;
+    void toggle() {
+    obscureTextPassword = !obscureTextPassword;
+    update();
+  }
+
+  void toggle1() {
+    obscureTextPassword1 = !obscureTextPassword1;
+    update();
+  }
+
+  void toggle2() {
+    obscureTextPassword2 = !obscureTextPassword2;
+    update();
+  }
+
   Future<void> selectProfileImage() async {
     final ImagePicker _picker = ImagePicker();
     var image = await _picker.pickImage(source: ImageSource.gallery);

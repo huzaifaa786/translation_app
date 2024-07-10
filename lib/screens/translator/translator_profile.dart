@@ -231,10 +231,6 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                           )
                                         : Container(
                                             padding: const EdgeInsets.all(10),
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.4,
                                             decoration: BoxDecoration(
                                               color: Colors.white,
                                               border: Border.all(
@@ -243,6 +239,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                   BorderRadius.circular(22),
                                             ),
                                             child: Row(
+                                              mainAxisSize: MainAxisSize.min,
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
@@ -257,19 +254,13 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                       ),
                                                     );
                                                   },
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 12,
-                                                            right: 12),
-                                                    child: Text(
-                                                      'View certificate',
-                                                      style: TextStyle(
-                                                        fontSize: 13,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: Colors.black,
-                                                      ),
+                                                  child: Text(
+                                                    ' View certificate',
+                                                    style: TextStyle(
+                                                      fontSize: 13,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: Colors.black,
                                                     ),
                                                   ),
                                                 ),
@@ -304,457 +295,376 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                         padding: const EdgeInsets.only(left: 16, right: 16),
                         child: Column(
                           children: [
-                            // widget.detail!.service!.isInperson! ||
-                            //         widget.detail!.service!.isAudioVideo!
-                            //     ? Row(
-                            //         children: [
-                            //           TralingRadioBtn(
-                            //             text: 'Schedule'.tr,
-                            //             isSelected: controller.serviceType ==
-                            //                 ServiceType.Schedule,
-                            //             ontap: () {
-                            //               setState(() {
-                            //                 controller.serviceType = ServiceType.Schedule;
-                            //                 if (widget.detail!.service!.isInperson! &&
-                            //                     widget.detail!.service!.isAudioVideo!) {
-                            //                   controller.resetInstant();
-                            //                 }
-                            //               });
-                            //             },
-                            //           ),
-                            //         ],
-                            //       )
-                            //     : SizedBox(),
-                            controller.serviceType == ServiceType.Schedule
-                                ? Column(
-                                    children: [
-                                      widget.detail!.service!.isAudioVideo ==
-                                              true
-                                          ? RadioBtn(
-                                              text: ' Audio/video meeting'.tr,
-                                              image:
-                                                  'assets/images/output-onlinepngtools (11).png',
-                                              groupvalue:
-                                                  controller.scheduleType,
-                                              value: ScheduleType.AudioVideo,
-                                              onChanged: () {
-                                                controller.toggleplan(
-                                                    ScheduleType.AudioVideo);
-                                              },
-                                            )
-                                          : Container(),
-                                      SizedBox(
+                            Column(
+                              children: [
+                                widget.detail!.service!.isAudioVideo == true
+                                    ? RadioBtn(
+                                        text: ' Audio/video meeting'.tr,
+                                        image:
+                                            'assets/images/output-onlinepngtools (11).png',
+                                        groupvalue: controller.scheduleType,
+                                        value: ScheduleType.AudioVideo,
+                                        onChanged: () {
+                                          controller.serviceType =
+                                              ServiceType.Schedule;
+                                          controller.toggleplan(
+                                              ScheduleType.AudioVideo);
+                                        },
+                                      )
+                                    : Container(),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                widget.detail!.service!.isInperson! == true
+                                    ? RadioBtn(
+                                        text: ' In person meeting'.tr,
+                                        image:
+                                            'assets/images/output-onlinepngtools (10).png',
+                                        groupvalue: controller.scheduleType,
+                                        value: ScheduleType.InPerson,
+                                        onChanged: () {
+                                          controller.serviceType =
+                                              ServiceType.Schedule;
+                                          controller.toggleplan(
+                                              ScheduleType.InPerson);
+                                        },
+                                      )
+                                    : Container(),
+                                controller.scheduleType == ScheduleType.InPerson
+                                    ? SizedBox(
+                                        height: 12,
+                                      )
+                                    : Container(),
+                                controller.scheduleType == ScheduleType.InPerson
+                                    ? IconsButton(
+                                        title: 'Choose Location'.tr,
+                                        icon: Icons.my_location_rounded,
+                                        onPressed: () {
+                                          // controller.getlocation();
+                                          Get.to(
+                                              () => DeliveryMap(widget.detail));
+                                        })
+                                    : Container(),
+                                controller.scheduleType ==
+                                            ScheduleType.AudioVideo ||
+                                        controller.scheduleType ==
+                                            ScheduleType.InPerson
+                                    ? SizedBox(
                                         height: 10,
-                                      ),
-                                      widget.detail!.service!.isInperson! ==
-                                              true
-                                          ? RadioBtn(
-                                              text: ' In person meeting'.tr,
-                                              image:
-                                                  'assets/images/output-onlinepngtools (10).png',
-                                              groupvalue:
-                                                  controller.scheduleType,
-                                              value: ScheduleType.InPerson,
-                                              onChanged: () {
-                                                controller.toggleplan(
-                                                    ScheduleType.InPerson);
-                                              },
-                                            )
-                                          : Container(),
-                                      controller.scheduleType ==
-                                              ScheduleType.InPerson
-                                          ? SizedBox(
-                                              height: 12,
-                                            )
-                                          : Container(),
-                                      controller.scheduleType ==
-                                              ScheduleType.InPerson
-                                          ? IconsButton(
-                                              title: 'Choose Location'.tr,
-                                              icon: Icons.my_location_rounded,
-                                              onPressed: () {
-                                                // controller.getlocation();
-                                                Get.to(() =>
-                                                    DeliveryMap(widget.detail));
-                                              })
-                                          : Container(),
-                                      controller.scheduleType ==
-                                                  ScheduleType.AudioVideo ||
-                                              controller.scheduleType ==
-                                                  ScheduleType.InPerson
-                                          ? SizedBox(
-                                              height: 10,
-                                            )
-                                          : Container(),
-                                      controller.scheduleType ==
-                                                  ScheduleType.AudioVideo ||
-                                              controller.scheduleType ==
-                                                  ScheduleType.InPerson
-                                          ? IconsButton(
-                                              title: 'Choose Date'.tr,
-                                              icon: Icons.calendar_month,
-                                              onPressed: () {
-                                                showModalBottomSheet(
-                                                  isScrollControlled: true,
-                                                  context: context,
-                                                  builder:
-                                                      (BuildContext context) {
-                                                    return Directionality(
-                                                      textDirection:
-                                                          ui.TextDirection.ltr,
-                                                      child: StatefulBuilder(
-                                                        builder: (BuildContext
-                                                                context,
-                                                            StateSetter
-                                                                setState) {
-                                                          // Define a callback function to update the selected date
-                                                          void onDateSelected(
-                                                              DateTime
-                                                                  selectedDay,
-                                                              DateTime
-                                                                  focusedDay) {
-                                                            controller
-                                                                .setSelectedDay(
-                                                                    selectedDay,
-                                                                    focusedDay);
-                                                            setState(() {});
-                                                          }
+                                      )
+                                    : Container(),
+                                controller.scheduleType ==
+                                            ScheduleType.AudioVideo ||
+                                        controller.scheduleType ==
+                                            ScheduleType.InPerson
+                                    ? IconsButton(
+                                        title: 'Choose Date'.tr,
+                                        icon: Icons.calendar_month,
+                                        onPressed: () {
+                                          showModalBottomSheet(
+                                            isScrollControlled: true,
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return Directionality(
+                                                textDirection:
+                                                    ui.TextDirection.ltr,
+                                                child: StatefulBuilder(
+                                                  builder: (BuildContext
+                                                          context,
+                                                      StateSetter setState) {
+                                                    // Define a callback function to update the selected date
+                                                    void onDateSelected(
+                                                        DateTime selectedDay,
+                                                        DateTime focusedDay) {
+                                                      controller.setSelectedDay(
+                                                          selectedDay,
+                                                          focusedDay);
+                                                      setState(() {});
+                                                    }
 
-                                                          return Wrap(
-                                                            children: [
-                                                              TableCalendar(
-                                                                calendarFormat:
-                                                                    CalendarFormat
-                                                                        .month,
-                                                                availableCalendarFormats: const {
-                                                                  CalendarFormat
-                                                                          .month:
-                                                                      'Month',
-                                                                  // CalendarFormat.week: 'Week',
-                                                                },
-                                                                firstDay: now,
-                                                                lastDay:
-                                                                    nextSixMonths!,
-                                                                focusedDay:
-                                                                    controller
-                                                                        .focusedDay
-                                                                        .value,
-                                                                calendarStyle:
-                                                                    CalendarStyle(
-                                                                  todayDecoration: BoxDecoration(
-                                                                      color: greenish
-                                                                          .withOpacity(
-                                                                              0.5),
-                                                                      shape: BoxShape
-                                                                          .circle),
-                                                                  selectedDecoration:
-                                                                      BoxDecoration(
-                                                                    color:
-                                                                        greenish, // Customize the background color of the selected day
-                                                                    shape: BoxShape
-                                                                        .circle, // Customize the shape of the selected day
-                                                                  ),
-                                                                  selectedTextStyle:
-                                                                      TextStyle(
-                                                                    color:
-                                                                        white, // Customize the text color of the selected day
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold, // Customize the font weight of the selected day
-                                                                  ),
-                                                                ),
-                                                                selectedDayPredicate:
-                                                                    (day) {
-                                                                  return isSameDay(
-                                                                      controller
-                                                                          .selectedDay
-                                                                          .value,
-                                                                      day);
-                                                                },
-                                                                onDaySelected:
-                                                                    onDateSelected,
-                                                              ),
-                                                              Center(
-                                                                child:
-                                                                    Container(
-                                                                  padding: EdgeInsets
-                                                                      .only(
-                                                                          bottom:
-                                                                              30,
-                                                                          top:
-                                                                              16),
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width *
-                                                                      0.8,
-                                                                  child:
-                                                                      ElevatedButton(
-                                                                    onPressed:
-                                                                        () {
-                                                                      // Call the callback to update the button text
-                                                                      controller
-                                                                          .updateButtonText(
-                                                                              controller.selectedDay);
-                                                                      Navigator.of(
-                                                                              context)
-                                                                          .pop(); // Close the bottom sheet
-                                                                    },
-                                                                    child: Text(
-                                                                        'Done'
-                                                                            .tr),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          );
-                                                        },
-                                                      ),
-                                                    );
-                                                  },
-                                                );
-                                              },
-                                            )
-                                          : SizedBox(),
-                                      controller.scheduleType ==
-                                                  ScheduleType.AudioVideo ||
-                                              controller.scheduleType ==
-                                                  ScheduleType.InPerson
-                                          ? SizedBox(
-                                              height: 12,
-                                            )
-                                          : Container(),
-                                      controller.scheduleType ==
-                                                  ScheduleType.AudioVideo ||
-                                              controller.scheduleType ==
-                                                  ScheduleType.InPerson
-                                          ? Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.9,
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.15,
-                                              padding: EdgeInsets.only(
-                                                  bottom: 7, top: 7),
-                                              decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.grey[500]!,
-                                                    blurRadius: 5,
-                                                    offset: Offset(0.00001, 1),
-                                                  ),
-                                                ],
-                                                color: Colors.white,
-                                                border: Border.all(
-                                                    color: lightblue,
-                                                    width: 1.2),
-                                                borderRadius:
-                                                    BorderRadius.circular(15),
-                                              ),
-                                              child: Column(
-                                                children: [
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Icon(Icons
-                                                          .watch_later_rounded),
-                                                      Text(
-                                                        'Set Time',
-                                                        style: TextStyle(
-                                                            fontSize: 13,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w600),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                          '( United Arab Emirates Timezone )',
-                                                          style: TextStyle(
-                                                              fontSize: 10,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600))
-                                                    ],
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 12),
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceAround,
+                                                    return Wrap(
                                                       children: [
-                                                        Scheduleinput(
-                                                          text: 'Start Time'.tr,
-                                                          controller:
-                                                              startTimeController,
-                                                          onpressed: () {
-                                                            DatePicker.showTimePicker(
-                                                                context,
-                                                                showTitleActions:
-                                                                    true,
-                                                                showSecondsColumn:
-                                                                    false,
-                                                                locale: box.read(
-                                                                            'locale') !=
-                                                                        'ar'
-                                                                    ? LocaleType
-                                                                        .en
-                                                                    : LocaleType
-                                                                        .ar,
-                                                                onChanged:
-                                                                    (val) {
-                                                              var end = val.add(
-                                                                  Duration(
-                                                                      minutes:
-                                                                          1));
-                                                              var time =
-                                                                  DateFormat
-                                                                          .Hm()
-                                                                      .format(
-                                                                          val);
-                                                              var endTime =
-                                                                  DateFormat
-                                                                          .Hm()
-                                                                      .format(
-                                                                          end);
-                                                              startTimeController
-                                                                  .text = time;
-                                                              endTimeController
-                                                                      .text =
-                                                                  endTime;
-                                                              controller
-                                                                      .startTime =
-                                                                  time;
-                                                              controller
-                                                                      .endTime =
-                                                                  endTime;
-                                                              translatorProfileController
-                                                                  .calTotalTime(
-                                                                      widget
-                                                                          .detail!);
-                                                              setState(() {});
-                                                            }, onConfirm:
-                                                                    (val) {
-                                                              var end = val.add(
-                                                                  Duration(
-                                                                      minutes:
-                                                                          1));
-                                                              var time =
-                                                                  DateFormat
-                                                                          .Hm()
-                                                                      .format(
-                                                                          val);
-                                                              var endTime =
-                                                                  DateFormat
-                                                                          .Hm()
-                                                                      .format(
-                                                                          end);
-                                                              startTimeController
-                                                                  .text = time;
-                                                              endTimeController
-                                                                      .text =
-                                                                  endTime;
-                                                              controller
-                                                                      .startTime =
-                                                                  time;
-                                                              controller
-                                                                      .endTime =
-                                                                  endTime;
-                                                              translatorProfileController
-                                                                  .calTotalTime(
-                                                                      widget
-                                                                          .detail!);
-                                                              setState(() {});
-                                                            },
-                                                                currentTime:
-                                                                    DateTime
-                                                                        .now());
+                                                        TableCalendar(
+                                                          calendarFormat:
+                                                              CalendarFormat
+                                                                  .month,
+                                                          availableCalendarFormats: const {
+                                                            CalendarFormat
+                                                                .month: 'Month',
+                                                            // CalendarFormat.week: 'Week',
                                                           },
-                                                          hint: '9:00',
-                                                          fontSize: 18.0,
+                                                          firstDay: now,
+                                                          lastDay:
+                                                              nextSixMonths!,
+                                                          focusedDay: controller
+                                                              .focusedDay.value,
+                                                          calendarStyle:
+                                                              CalendarStyle(
+                                                            todayDecoration: BoxDecoration(
+                                                                color: greenish
+                                                                    .withOpacity(
+                                                                        0.5),
+                                                                shape: BoxShape
+                                                                    .circle),
+                                                            selectedDecoration:
+                                                                BoxDecoration(
+                                                              color:
+                                                                  greenish, // Customize the background color of the selected day
+                                                              shape: BoxShape
+                                                                  .circle, // Customize the shape of the selected day
+                                                            ),
+                                                            selectedTextStyle:
+                                                                TextStyle(
+                                                              color:
+                                                                  white, // Customize the text color of the selected day
+                                                              fontWeight: FontWeight
+                                                                  .bold, // Customize the font weight of the selected day
+                                                            ),
+                                                          ),
+                                                          selectedDayPredicate:
+                                                              (day) {
+                                                            return isSameDay(
+                                                                controller
+                                                                    .selectedDay
+                                                                    .value,
+                                                                day);
+                                                          },
+                                                          onDaySelected:
+                                                              onDateSelected,
                                                         ),
-                                                        Text("To".tr),
-                                                        Scheduleinput(
-                                                          text: 'End Time'.tr,
-                                                          controller:
-                                                              endTimeController,
-                                                          onpressed: () {
-                                                            DatePicker.showTimePicker(
-                                                                context,
-                                                                showTitleActions:
-                                                                    true,
-                                                                showSecondsColumn:
-                                                                    false,
-                                                                onConfirm:
-                                                                    (val) {
-                                                              var end =
-                                                                  DateFormat
-                                                                          .Hm()
-                                                                      .format(
-                                                                          val);
-                                                              endTimeController
-                                                                  .text = end;
-                                                              controller
-                                                                      .endTime =
-                                                                  end;
-                                                              translatorProfileController
-                                                                  .calTotalTime(
-                                                                      widget
-                                                                          .detail!);
-                                                              setState(() {});
-                                                            }, onChanged:
-                                                                    (val) {
-                                                              var end =
-                                                                  DateFormat
-                                                                          .Hm()
-                                                                      .format(
-                                                                          val);
-                                                              endTimeController
-                                                                  .text = end;
-                                                              controller
-                                                                      .endTime =
-                                                                  end;
-                                                              translatorProfileController
-                                                                  .calTotalTime(
-                                                                      widget
-                                                                          .detail!);
-                                                              setState(() {});
-                                                            },
-                                                                currentTime:
-                                                                    DateTime
-                                                                        .now());
-                                                          },
-                                                          hint: '9:30',
-                                                          fontSize: 18.0,
-                                                          enabled: controller
-                                                                      .startTime ==
-                                                                  ''
-                                                              ? false
-                                                              : true,
+                                                        Center(
+                                                          child: Container(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    bottom: 30,
+                                                                    top: 16),
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.8,
+                                                            child:
+                                                                ElevatedButton(
+                                                              onPressed: () {
+                                                                // Call the callback to update the button text
+                                                                controller.updateButtonText(
+                                                                    controller
+                                                                        .selectedDay);
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop(); // Close the bottom sheet
+                                                              },
+                                                              child: Text(
+                                                                  'Done'.tr),
+                                                            ),
+                                                          ),
                                                         ),
                                                       ],
-                                                    ),
+                                                    );
+                                                  },
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        },
+                                      )
+                                    : SizedBox(),
+                                controller.scheduleType ==
+                                            ScheduleType.AudioVideo ||
+                                        controller.scheduleType ==
+                                            ScheduleType.InPerson
+                                    ? SizedBox(
+                                        height: 12,
+                                      )
+                                    : Container(),
+                                controller.scheduleType ==
+                                            ScheduleType.AudioVideo ||
+                                        controller.scheduleType ==
+                                            ScheduleType.InPerson
+                                    ? Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.9,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.15,
+                                        padding:
+                                            EdgeInsets.only(bottom: 7, top: 7),
+                                        decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.grey[500]!,
+                                              blurRadius: 5,
+                                              offset: Offset(0.00001, 1),
+                                            ),
+                                          ],
+                                          color: Colors.white,
+                                          border: Border.all(
+                                              color: lightblue, width: 1.2),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Icon(Icons.watch_later_rounded),
+                                                Text(
+                                                  'Set Time',
+                                                  style: TextStyle(
+                                                      fontSize: 13,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                    '( United Arab Emirates Timezone )',
+                                                    style: TextStyle(
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w600))
+                                              ],
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 12),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
+                                                children: [
+                                                  Scheduleinput(
+                                                    text: 'Start Time'.tr,
+                                                    controller:
+                                                        startTimeController,
+                                                    onpressed: () {
+                                                      DatePicker.showTimePicker(
+                                                          context,
+                                                          showTitleActions:
+                                                              true,
+                                                          showSecondsColumn:
+                                                              false,
+                                                          locale: box.read(
+                                                                      'locale') !=
+                                                                  'ar'
+                                                              ? LocaleType.en
+                                                              : LocaleType.ar,
+                                                          onChanged: (val) {
+                                                        var end = val.add(
+                                                            Duration(
+                                                                minutes: 1));
+                                                        var time =
+                                                            DateFormat.Hm()
+                                                                .format(val);
+                                                        var endTime =
+                                                            DateFormat.Hm()
+                                                                .format(end);
+                                                        startTimeController
+                                                            .text = time;
+                                                        endTimeController.text =
+                                                            endTime;
+                                                        controller.startTime =
+                                                            time;
+                                                        controller.endTime =
+                                                            endTime;
+                                                        translatorProfileController
+                                                            .calTotalTime(
+                                                                widget.detail!);
+                                                        setState(() {});
+                                                      }, onConfirm: (val) {
+                                                        var end = val.add(
+                                                            Duration(
+                                                                minutes: 1));
+                                                        var time =
+                                                            DateFormat.Hm()
+                                                                .format(val);
+                                                        var endTime =
+                                                            DateFormat.Hm()
+                                                                .format(end);
+                                                        startTimeController
+                                                            .text = time;
+                                                        endTimeController.text =
+                                                            endTime;
+                                                        controller.startTime =
+                                                            time;
+                                                        controller.endTime =
+                                                            endTime;
+                                                        translatorProfileController
+                                                            .calTotalTime(
+                                                                widget.detail!);
+                                                        setState(() {});
+                                                      },
+                                                          currentTime:
+                                                              DateTime.now());
+                                                    },
+                                                    hint: '9:00',
+                                                    fontSize: 18.0,
+                                                  ),
+                                                  Text("To".tr),
+                                                  Scheduleinput(
+                                                    text: 'End Time'.tr,
+                                                    controller:
+                                                        endTimeController,
+                                                    onpressed: () {
+                                                      DatePicker.showTimePicker(
+                                                          context,
+                                                          showTitleActions:
+                                                              true,
+                                                          showSecondsColumn:
+                                                              false,
+                                                          onConfirm: (val) {
+                                                        var end =
+                                                            DateFormat.Hm()
+                                                                .format(val);
+                                                        endTimeController.text =
+                                                            end;
+                                                        controller.endTime =
+                                                            end;
+                                                        translatorProfileController
+                                                            .calTotalTime(
+                                                                widget.detail!);
+                                                        setState(() {});
+                                                      }, onChanged: (val) {
+                                                        var end =
+                                                            DateFormat.Hm()
+                                                                .format(val);
+                                                        endTimeController.text =
+                                                            end;
+                                                        controller.endTime =
+                                                            end;
+                                                        translatorProfileController
+                                                            .calTotalTime(
+                                                                widget.detail!);
+                                                        setState(() {});
+                                                      },
+                                                          currentTime:
+                                                              DateTime.now());
+                                                    },
+                                                    hint: '9:30',
+                                                    fontSize: 18.0,
+                                                    enabled:
+                                                        controller.startTime ==
+                                                                ''
+                                                            ? false
+                                                            : true,
                                                   ),
                                                 ],
                                               ),
-                                            )
-                                          : SizedBox()
-                                    ],
-                                  )
-                                : Container(),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    : SizedBox()
+                              ],
+                            ),
+                            // : Container(),
 
                             SizedBox(
                               height: 10,
@@ -763,16 +673,20 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                 ? RadioBtn(
                                     text: ' Document Type'.tr,
                                     image: 'assets/images/Documents.png',
-                                    groupvalue: controller.scheduleType,
-                                    value: ScheduleType.DocumentType,
+                                    groupvalue: controller.serviceType,
+                                    value: ServiceType.Document,
                                     onChanged: () {
-                                      controller.toggleplan(
-                                          ScheduleType.DocumentType);
+                                      print(ScheduleType);
+                                      setState(() {
+                                        controller.serviceType =
+                                            ServiceType.Document;
+                                        controller.resetInstant();
+                                      });
                                     },
                                   )
                                 : Container(),
 
-                            controller.scheduleType == ScheduleType.DocumentType
+                            controller.serviceType == ServiceType.Document
                                 ? Column(
                                     children: [
                                       Padding(
@@ -824,9 +738,11 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                         MediaQuery.of(context)
                                                                 .size
                                                                 .width *
-                                                            0.39,
+                                                            0.49,
                                                     padding: EdgeInsets.only(
-                                                        top: 6, bottom: 6),
+                                                        top: 6,
+                                                        bottom: 6,
+                                                        left: 9),
                                                     decoration: BoxDecoration(
                                                         border: Border.all(
                                                             color: greenish),
@@ -973,8 +889,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                     : "AED ",
                                 onPressed: () {
                                   checkoutController.clear();
-                                  if (controller.scheduleType ==
-                                      ScheduleType.DocumentType) {
+                                  if (controller.serviceType ==
+                                      ServiceType.Document) {
                                     if (controller.totalAmount <= 0) {
                                       Get.snackbar(
                                           "Please fill all required details".tr,

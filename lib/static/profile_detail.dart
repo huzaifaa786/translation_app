@@ -22,6 +22,8 @@ class ProfileDetail extends StatelessWidget {
                   fit: BoxFit.cover,
                 )
               : CachedNetworkImage(
+                  width: 64,
+                  height: 64,
                   imageUrl: image,
                   fit: BoxFit.cover,
                 ),
