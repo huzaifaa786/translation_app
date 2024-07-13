@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:translation/screens/auth/otp_verify/loginOtp.dart';
 import 'package:translation/screens/company_login/company_login_screen.dart';
 import 'package:translation/screens/forgot.dart/forgotAccount.dart';
 import 'package:translation/screens/auth/authcontroller.dart';
@@ -31,6 +32,19 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
+  bool isToggled = false;
+  bool isEmailSelected = true;
+
+  void _toggleButton() {
+    setState(() {
+      isEmailSelected = !isEmailSelected;
+      if (!isEmailSelected) {
+        index = 1;
+      } else {
+        index = 0;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,57 +84,76 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Column(
                             children: [
                               Padding(
-                                padding: EdgeInsets.only(top: 16),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(40),
+                                padding: const EdgeInsets.symmetric(vertical: 15),
+                                child: GestureDetector(
+                                  onTap: _toggleButton,
+                                  child: Container(
+                                    width: 200,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(25),
+                                      color: Colors.white,
                                     ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.2),
-                                        spreadRadius: 5,
-                                        blurRadius: 7,
-                                        offset: Offset(0, 3),
-                                      ),
-                                    ],
+                                    child: Stack(
+                                      children: [
+                                        AnimatedPositioned(
+                                          duration: Duration(milliseconds: 200),
+                                          left: isEmailSelected ? 0 : 100,
+                                          child: Container(
+                                            width: 100,
+                                            height: 50,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(25),
+                                              color: greenish,
+                                            ),
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              isEmailSelected ? 'Email' : 'OTP',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          width: 100,
+                                          child: Align(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              'Email',
+                                              style: TextStyle(
+                                                color: isEmailSelected
+                                                    ? Colors.transparent
+                                                    : Colors.black,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          right: 0,
+                                          top: 16,
+                                          child: Container(
+                                            width: 100,
+                                            child: Align(
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                'OTP',
+                                                style: TextStyle(
+                                                  color: isEmailSelected
+                                                      ? Colors.black
+                                                      : Colors.transparent,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  
-                                  // child: ToggleSwitch(
-                                  //   initialLabelIndex: index,
-                                  //   labels: [
-                                  //     'Email',
-                                  //     'OTP',
-                                  //   ],
-                                  //   totalSwitches: 2,
-                                  //   onToggle: (index) {
-                                  //     getindex(index!);
-                                  //   },
-                                  //   borderWidth: 3,
-                                  //   radiusStyle: true,
-                                  //   fontSize: 15,
-                                  //   minWidth: 110,
-                                  //   minHeight: 45,
-                                  //   cornerRadius: 40,
-                                  //   changeOnTap: true,
-                                  //   inactiveFgColor:
-                                  //       Color.fromARGB(255, 9, 9, 9),
-                                  //   activeFgColor:
-                                  //       Color.fromARGB(255, 255, 255, 255),
-                                  //   inactiveBgColor:
-                                  //       Color.fromARGB(255, 255, 255, 255),
-                                  //   activeBgColor: [greenish],
-                                  //   activeBorders: [
-                                  //     Border.all(
-                                  //       color: greenish,
-                                  //       width: 3.0,
-                                  //     ),
-                                  //     Border.all(
-                                  //       color: greenish,
-                                  //       width: 3.0,
-                                  //     ),
-                                  //   ],
-                                  // ),
                                 ),
                               ),
                               index == 0
@@ -149,8 +182,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 ),
                                               ),
                                               Padding(
-                                                padding:
-                                                    EdgeInsets.only(bottom: 4),
+                                                padding: EdgeInsets.only(
+                                                    bottom: 4, top: 9),
                                                 child: InputField1(
                                                   icon:
                                                       'assets/images/email.svg',

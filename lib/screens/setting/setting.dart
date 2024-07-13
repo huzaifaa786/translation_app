@@ -66,16 +66,16 @@ class _Setting_screenState extends State<Setting_screen> {
                           profileController.clearField();
                           Get.to(() => Profile_screen());
                         },
-                        imgicon: "assets/icons/warning.svg",
+                        imgicon: "assets/icons/profile.svg",
                       ),
                     ),
                     SettingCard(
-                      title: 'Language'.tr,
+                      title: 'language'.tr,
                       onPressed: () {
                         profileController.clearField();
                         Get.to(() => TranslateScreen());
                       },
-                      imgicon: "assets/icons/warning.svg",
+                      imgicon: "assets/icons/msgss.svg",
                     ),
 
                     SettingCard(
@@ -112,7 +112,7 @@ class _Setting_screenState extends State<Setting_screen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0),
                       child: SizedBox(
-                        width: 120,
+                        width: 140,
                         child: ElevatedButton(
                           onPressed: () {
                             logout(context);
@@ -124,13 +124,15 @@ class _Setting_screenState extends State<Setting_screen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                "Log Out".tr,
-                                style: TextStyle(
-                                    color: white,
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: 'Poppins',
-                                    fontSize: 13),
+                              Flexible(
+                                child: Text(
+                                  "Log Out".tr,
+                                  style: TextStyle(
+                                      color: white,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: 'Poppins',
+                                      fontSize: 13),
+                                ),
                               ),
                               SizedBox(
                                 width: 10,

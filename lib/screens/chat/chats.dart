@@ -50,7 +50,7 @@ class _Chats_screenState extends State<Chats_screen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Messages',
+                          'Messages'.tr,
                           style: TextStyle(
                             fontFamily: 'Mazzard',
                             fontSize: 17,

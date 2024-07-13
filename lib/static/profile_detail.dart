@@ -37,24 +37,24 @@ class ProfileDetail extends StatelessWidget {
               name,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
-            rating == null
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: SvgPicture.asset('assets/images/star.svg',
-                              height: 11, width: 11)),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4, left: 2),
-                        child: Text(
-                            rating == null ? '0.0' : rating.toStringAsFixed(1),
-                            style: TextStyle(
-                                fontSize: 11, fontWeight: FontWeight.bold)),
-                      ),
-                    ],
-                  )
-                : SizedBox(),
+            // rating == null
+            //     ? Row(
+            //         mainAxisAlignment: MainAxisAlignment.center,
+            //         children: [
+            //           FittedBox(
+            //               fit: BoxFit.scaleDown,
+            //               child: SvgPicture.asset('assets/images/star.svg',
+            //                   height: 11, width: 11)),
+            //           Padding(
+            //             padding: const EdgeInsets.only(top: 4, left: 2),
+            //             child: Text(
+            //                 rating == null ? '0.0' : rating.toStringAsFixed(1),
+            //                 style: TextStyle(
+            //                     fontSize: 11, fontWeight: FontWeight.bold)),
+            //           ),
+            //         ],
+            //       )
+            // : SizedBox(),
           ],
         ),
       ],

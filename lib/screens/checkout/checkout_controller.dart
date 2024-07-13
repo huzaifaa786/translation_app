@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -8,6 +9,7 @@ import 'package:translation/api/api.dart';
 import 'package:translation/helper/loading.dart';
 import 'package:translation/models/account.dart';
 import 'package:translation/models/coupon.dart';
+import 'package:translation/models/service.dart';
 import 'package:translation/screens/translator/translator_profile_controller.dart';
 import 'package:translation/values/controllers.dart';
 import 'package:translation/values/string.dart';
@@ -23,10 +25,18 @@ class CheckOutController extends GetxController {
     update();
   }
 
-  // List<Coupon> coupons = [];
   paymentIntent() async {
+    GetStorage box = GetStorage();
+    var currency = box.read('currency');
     var url = BASE_URL + 'payment/intent';
-    var data = {'price': translatorProfileController.CheckoutAmount};
+    var price = await changePrice(
+        translatorProfileController.CheckoutAmount.toString());
+    var data = {
+      'price': price,
+      'currency': currency,
+    };
+    print('ggggggggggggggggggg');
+    print(data);
     var response = await Api.execute(url: url, data: data);
     return response['intent'];
   }
@@ -62,7 +72,9 @@ class CheckOutController extends GetxController {
   }
 
   paayment() async {
+    print('hhhhhhhhhhhhhhhhhhhhhh');
     LoadingHelper.show();
+    GetStorage box = GetStorage();
     var data = await paymentIntent();
     data = jsonDecode(data.toString());
     try {
@@ -70,11 +82,11 @@ class CheckOutController extends GetxController {
         paymentSheetParameters: SetupPaymentSheetParameters(
           paymentIntentClientSecret: data['paymentIntent'],
           merchantDisplayName: 'Translation',
-          googlePay: PaymentSheetGooglePay(
-            merchantCountryCode: 'UAE',
-            currencyCode: 'AED',
-            testEnv: true,
-          ),
+          // googlePay: PaymentSheetGooglePay(
+          //   merchantCountryCode: 'UAE',
+          //   currencyCode: 'AED',
+          //   testEnv: true,
+          // ),
           style: ThemeMode.dark,
           // customFlow: true
           // billingDetails: billingDetails,

@@ -89,6 +89,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                               image:
                                   controller.orders[index].vendor!.profilePic,
                               price: controller.orders[index].price,
+                              currency: controller.orders[index].currency,
                               servicetype: controller.orders[index].servicetype,
                               page: controller.orders[index].document != null
                                   ? controller.orders[index].document!.pages

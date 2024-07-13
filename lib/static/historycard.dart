@@ -24,6 +24,7 @@ class HistoryCard extends StatelessWidget {
     this.time,
     this.servicetype,
     this.page,
+    this.currency,
   });
   final type;
   final name;
@@ -31,6 +32,7 @@ class HistoryCard extends StatelessWidget {
   final onmsgtap;
   final id;
   final day;
+  final currency;
   final ontap;
   final price;
   final status;
@@ -198,13 +200,25 @@ class HistoryCard extends StatelessWidget {
                                 width: 18,
                               ),
                               Gap(4),
-                              Text(
-                                price.toString() + ' ' + 'AED',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: greenish.withOpacity(0.7),
-                                ),
+                              Row(
+                                children: [
+                                  Text(
+                                    price.toString() + ' ',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      color: greenish.withOpacity(0.7),
+                                    ),
+                                  ),
+                                  Text(
+                                    currency.toString(),
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      color: greenish.withOpacity(0.7),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -241,7 +255,6 @@ class HistoryCard extends StatelessWidget {
                                     fontSize: 15,
                                     fontWeight: FontWeight.w600),
                               ),
-                              
                             ],
                           )
                         ],

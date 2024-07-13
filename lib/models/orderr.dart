@@ -7,6 +7,8 @@ class Orderr {
   String? starttime;
   String? endtime;
   String? date;
+  String? currency;
+
   String? servicetype;
   String? scheduletype;
   String? status;
@@ -21,6 +23,8 @@ class Orderr {
     scheduletype = orderr['scheduletype'];
     duration = orderr['duration'];
     starttime = orderr['starttime'];
+    currency = orderr['currency'];
+
     endtime = orderr['endtime'];
     date = orderr['date'];
     status = orderr['status'];

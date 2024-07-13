@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
+import 'package:translation/models/service.dart';
 
 import '../values/colors.dart';
 
@@ -54,13 +55,25 @@ class CheckOutButton extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            Text(
-              price + currencyname,
-              style: const TextStyle(
-                color: Color.fromARGB(255, 255, 255, 255),
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-              ),
+            FutureBuilder<String>(
+              future: changePrice(price),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text('Error');
+                } else {
+                  return Text(
+                    '${snapshot.data} $currencyname',
+                    style: TextStyle(
+                      color: white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: 'Poppins',
+                    ),
+                  );
+                }
+              },
             ),
           ],
         ),

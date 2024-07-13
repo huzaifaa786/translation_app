@@ -42,7 +42,7 @@ class SettingController extends GetxController {
   }
 
   // void getcurrency() {
-  //   // updateSelectedCurrency(selectedCurrency);
+  //   updateSelectedCurrency(selectedCurrency);
   //   selectedCurrency = box.read("selectedCurrency");
   //   update();
   // }
@@ -67,21 +67,6 @@ class SettingController extends GetxController {
 
     balance = account.balance!;
     update();
-  }
-
-  Future<void> updateSelectedCurrency(String current) async {
-    selectedCurrency = current;
-    // isLoading.value = true;
-
-    try {
-      final response = await ApiService().storeCurrency(current);
-
-      print(response.data);
-      // isLoading.value = false;
-      update(selectedCurrency as List<Object>?);
-    } on Exception catch (error) {
-      // isLoading.value = false;
-    }
   }
 
   void addbug() async {

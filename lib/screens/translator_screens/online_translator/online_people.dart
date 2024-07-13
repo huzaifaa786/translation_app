@@ -44,7 +44,7 @@ class _OnlinePeople_screenState extends State<OnlinePeople_screen> {
             builder: (controller) => Column(
               children: [
                 TitleTopbar(
-                  text: "Interpreters / Translators",
+                  text: "Interpreters / Translators".tr,
                   height: 0.1 / 0.9,
                 ),
                 // SearchTopBar(

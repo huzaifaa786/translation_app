@@ -4,6 +4,7 @@ import 'package:translation/api/api.dart';
 import 'package:translation/helper/loading.dart';
 import 'package:translation/models/filter.dart';
 import 'package:translation/models/order.dart';
+import 'package:translation/models/service.dart';
 import 'package:translation/models/user.dart';
 import 'package:translation/models/vendor.dart';
 import 'package:translation/screens/auth/login_screen.dart';
@@ -49,11 +50,14 @@ class HomeController extends GetxController {
     var data;
     GetStorage box = GetStorage();
     print(box.read('api_token'));
-    data = {'api_token': box.read('api_token')!};
+    data = {
+      'api_token': box.read('api_token')!,
+    };
     var response = await Api.execute(url: url, data: data);
     LoadingHelper.dismiss();
     if (!response['error']) {
       user = User(response['user']);
+      box.write('currency', user!.currency);
       update();
     } else {
       if (response['error_data'] == "Unauthorized access") {
@@ -96,13 +100,14 @@ class HomeController extends GetxController {
         vendor.add(Vendor(van));
       }
       vendors = vendor;
-      // print(vendor.first.service!.schedual!.first.day);
       searchVendor = vendor;
       onlineVendor = vendor.where((i) => i.online == 1).toList();
       schedule = vendor;
       sonlineVendor = onlineVendor;
       sschedule = schedule;
       update();
+
+      log(sschedule.toString());
 
       if (vendor.isNotEmpty) {
         Get.to(() => Translator_());
@@ -117,6 +122,11 @@ class HomeController extends GetxController {
           backgroundColor: Colors.red,
           colorText: Colors.white);
     }
+  }
+
+  Future<String>? changePrice(price) async {
+    var i = await changePrice(price);
+    return i.toString();
   }
 
 //////////////////////////////////// Search Both Vendors ////////////////////////////////////////////////////////////
@@ -285,7 +295,7 @@ class HomeController extends GetxController {
 
     GetStorage box = GetStorage();
     int user_id = box.read('user_id');
-    int api_token= box.read('api_token');
+    String api_token = box.read('api_token');
 
     var data = {'user_id': user_id, 'api_token': api_token};
     var response = await Api.execute(url: url, data: data);

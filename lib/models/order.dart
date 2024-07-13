@@ -14,6 +14,8 @@ class Order {
   String? starttime;
   String? endtime;
   String? date;
+  String? currency;
+
   String? vendor_id;
   User? user;
   Vendor? vendor;
@@ -30,6 +32,8 @@ class Order {
     status = order['status'];
     vendor_id = order['vendor_id'];
     starttime = order['starttime'];
+    currency = order['currency'];
+
     endtime = order['endtime'];
     date = order['date'];
     user_id = order['user_id'];
@@ -39,6 +43,6 @@ class Order {
     order['servicetype'] == 'document'
         ? document = OrderDocument(order['document'])
         : '';
-        print(document);
+    print(document);
   }
 }

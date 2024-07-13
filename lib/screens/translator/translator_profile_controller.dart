@@ -11,6 +11,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:translation/api/api.dart';
 import 'package:translation/helper/loading.dart';
+import 'package:translation/models/service.dart';
 import 'package:translation/models/unurgent.dart';
 import 'package:translation/models/urgent.dart';
 import 'package:translation/models/vendor.dart';
@@ -89,7 +90,7 @@ class TranslatorProfileController extends GetxController {
     totalAmount = 0;
     update();
   }
- 
+
   resetInstant() {
     instantTime = ''.obs.toString();
     totalAmount = 0.obs.toInt();
@@ -135,12 +136,12 @@ class TranslatorProfileController extends GetxController {
       }
     } else {
       totalAmount = 0;
-      Get.snackbar(
-          'Pages exceed the maximum amount of pages set by translator'.tr, '',
-          duration: Duration(seconds: 2),
-          backgroundColor: Colors.red,
-          colorText: white,
-          snackPosition: SnackPosition.BOTTOM);
+      // Get.snackbar(
+      //     'Pages exceed the maximum amount of pages set by translator'.tr, '',
+      //     duration: Duration(seconds: 2),
+      //     backgroundColor: Colors.red,
+      //     colorText: white,
+      //     snackPosition: SnackPosition.BOTTOM);
       pageAlert(context);
     }
     update();
@@ -252,9 +253,11 @@ class TranslatorProfileController extends GetxController {
     var url = BASE_URL + 'user/order';
     var data;
     GetStorage box = GetStorage();
+
     var servicetype =
         serviceType == ServiceType.Schedule ? 'schedule' : 'document';
-
+    var price = await changePrice(
+        translatorProfileController.CheckoutAmount.toString());
     var response;
     if (serviceType == ServiceType.Document) {
       String fileName = file!.path.split('/').last;
@@ -265,8 +268,9 @@ class TranslatorProfileController extends GetxController {
         'api_token': box.read('api_token')!,
         'servicetype': servicetype,
         'vendor_id': vendor.id.toString(),
-        'price': CheckoutAmount.toString(),
+        'price': price,
         'duration': duration,
+        'currency': box.read('currency'),
         'date': DateTime.now().toString(),
         'starttime': startTime,
         'endtime': endTime,
@@ -285,8 +289,10 @@ class TranslatorProfileController extends GetxController {
       data = {
         'api_token': box.read('api_token')!,
         'servicetype': servicetype,
+        'currency': box.read('currency'),
+
         'vendor_id': vendor.id.toString(),
-        'price': CheckoutAmount.toString(),
+        'price': price,
         'duration': duration,
         'date': serviceType == ServiceType.Schedule
             ? translatorProfileController.selectedDay.value.toString()
@@ -325,11 +331,14 @@ class TranslatorProfileController extends GetxController {
     GetStorage box = GetStorage();
     var servicetype =
         serviceType == ServiceType.Schedule ? 'schedule' : 'document';
+    var price = await changePrice(
+        translatorProfileController.CheckoutAmount.toString());
     data = {
       'api_token': box.read('api_token')!,
       'servicetype': servicetype,
+      'currency': box.read('currency'),
       'vendor_id': vendor.id.toString(),
-      'price': CheckoutAmount.toString(),
+      'price': price,
       'duration': duration,
       'date': translatorProfileController.selectedDay.value.toString(),
       'starttime': startTime,
@@ -405,10 +414,10 @@ class TranslatorProfileController extends GetxController {
       LoadingHelper.dismiss();
     } else {
       LoadingHelper.dismiss();
-      Get.snackbar("Timings are booked, please try other time".tr, "",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white);
+      // Get.snackbar("Timings are booked, please try other time".tr, "",
+      //     snackPosition: SnackPosition.BOTTOM,
+      //     backgroundColor: Colors.red,
+      //     colorText: Colors.white);
       errorAlert(context);
     }
     LoadingHelper.dismiss();
@@ -570,7 +579,7 @@ void errorAlert(BuildContext context) {
               ),
               SizedBox(height: 20),
               Text(
-                "Timings are booked please find other\n timings",
+                "Timings are booked please find other\n timings".tr,
                 style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
                 textAlign: TextAlign.center,
               ),
@@ -604,7 +613,7 @@ void pageAlert(BuildContext context) {
               ),
               SizedBox(height: 20),
               Text(
-                "The amount of pages exceeds the\n translator’s limits",
+                "The amount of pages exceeds the\n translator’s limits".tr,
                 style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
                 textAlign: TextAlign.center,
               ),

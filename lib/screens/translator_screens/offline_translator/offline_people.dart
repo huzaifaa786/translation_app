@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:translation/models/filter.dart';
+import 'package:translation/models/service.dart';
 import 'package:translation/screens/main_screen/homecontroller.dart';
 import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/screens/translator_screens/offline_translator/offline_modal.dart';
@@ -10,9 +11,10 @@ import 'package:translation/static/offline_translator_card.dart';
 import 'package:translation/static/search_topbar.dart';
 import 'package:translation/static/titletopbar.dart';
 import 'package:translation/values/controllers.dart';
+import 'package:forex_conversion/forex_conversion.dart';
 
 class OfflinePeople_screen extends StatefulWidget {
-  const OfflinePeople_screen({super.key});
+  OfflinePeople_screen({super.key});
 
   @override
   State<OfflinePeople_screen> createState() => _OfflinePeople_screenState();
@@ -22,9 +24,12 @@ class _OfflinePeople_screenState extends State<OfflinePeople_screen> {
   SettingController currencycontroller = Get.find();
   GetStorage box = GetStorage();
   String? selectedCurrency;
+  String? currency;
+
   @override
   void initState() {
-    selectedCurrency = box.read('selectedCurrency');
+    selectedCurrency = box.read('currency');
+    setState(() {});
     super.initState();
   }
 
@@ -36,6 +41,12 @@ class _OfflinePeople_screenState extends State<OfflinePeople_screen> {
   //   super.initState();
   // }
 
+  // currencyrata() async {
+  //   var allPrices =
+  //   print('gggggggggggggggggggggggg');
+  //   print(allPrices);
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +55,7 @@ class _OfflinePeople_screenState extends State<OfflinePeople_screen> {
           builder: (controller) => Column(
             children: [
               TitleTopbar(
-                text: "Interpreters / Translators",
+                text: "Interpreters / Translators".tr,
                 height: 0.13,
               ),
               // SearchTopBar(
@@ -161,9 +172,7 @@ class _OfflinePeople_screenState extends State<OfflinePeople_screen> {
                           itemCount: controller.sschedule.length,
                           itemBuilder: (context, index) {
                             return OfflineTranslattorCard(
-                              currencyname: selectedCurrency != null
-                                  ? currencycontroller.selectedCurrency
-                                  : "AED ",
+                              currencyname: selectedCurrency,
                               name: controller.sschedule[index].name,
                               image: controller.sschedule[index].profilePic,
                               lang: controller.sschedule[index].language,

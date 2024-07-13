@@ -4,6 +4,7 @@ class User {
   String? apiToken;
   String? number;
   String? email;
+  String? currency;
   String? profilePic;
   String? type;
   int? isCompany;
@@ -12,6 +13,7 @@ class User {
     id = user['id'];
     username = user['username'];
     number = user['phone'];
+    currency =user['currency'];
     apiToken = user['api_token'] ?? '';
     email = user['email'];
     profilePic = user['profilepic'] ?? '';

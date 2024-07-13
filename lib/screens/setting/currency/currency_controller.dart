@@ -3,15 +3,15 @@ import 'package:get_storage/get_storage.dart';
 import 'package:translation/api/currencyapi.dart';
 
 class CurrencyController extends GetxController {
-  
   RxString selectedCurrency = ' '.obs;
   RxBool isLoading = false.obs;
   final apiService = ApiService();
   final box = GetStorage();
 
-  Future<void> updateSelectedCurrency(String current) async {
     
-     
+ 
+
+  Future<void> updateSelectedCurrency(String current) async {
     selectedCurrency.value = current;
     isLoading.value = true;
 
@@ -25,4 +25,6 @@ class CurrencyController extends GetxController {
       isLoading.value = false;
     }
   }
+
+
 }

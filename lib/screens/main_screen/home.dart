@@ -320,7 +320,7 @@ class _HomeState extends State<Home> {
                                 child: DropdownField(
                                   selectedvalue:
                                       homeController.fromSelectedLanguage,
-                                  text: 'select a language'.tr,
+                                  text: 'Select Language'.tr,
                                   items: Languages(),
                                   onChange: (value) {
                                     setState(() {
@@ -392,7 +392,7 @@ class _HomeState extends State<Home> {
                                 child: DropdownField(
                                   selectedvalue:
                                       homeController.toSelectedLanguage,
-                                  text: 'select a language'.tr,
+                                  text: 'Select Language'.tr,
                                   items: Languages(),
                                   onChange: (value) {
                                     setState(() {

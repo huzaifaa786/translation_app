@@ -79,7 +79,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
     getfav();
     urgentMaxcount();
     unurgentMaxCount();
-    selectedCurrency = box.read('selectedCurrency');
+    selectedCurrency = box.read('currency');
     super.initState();
   }
 
@@ -225,7 +225,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Text(
-                                                    "No certificate uploaded!"),
+                                                    "No certificate uploaded!".tr),
                                               ],
                                             ),
                                           )
@@ -255,7 +255,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                     );
                                                   },
                                                   child: Text(
-                                                    ' View certificate',
+                                                   ' ' +'view certificate'.tr,
                                                     style: TextStyle(
                                                       fontSize: 13,
                                                       fontWeight:
@@ -282,7 +282,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Book a service',
+                          'Book a service'.tr,
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.w600),
                         )
@@ -299,7 +299,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                               children: [
                                 widget.detail!.service!.isAudioVideo == true
                                     ? RadioBtn(
-                                        text: ' Audio/video meeting'.tr,
+                                        text:' ' + 'Audio/video meeting'.tr,
                                         image:
                                             'assets/images/output-onlinepngtools (11).png',
                                         groupvalue: controller.scheduleType,
@@ -317,7 +317,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                 ),
                                 widget.detail!.service!.isInperson! == true
                                     ? RadioBtn(
-                                        text: ' In person meeting'.tr,
+                                        text: ' ' +'In person meeting'.tr,
                                         image:
                                             'assets/images/output-onlinepngtools (10).png',
                                         groupvalue: controller.scheduleType,
@@ -512,7 +512,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                               children: [
                                                 Icon(Icons.watch_later_rounded),
                                                 Text(
-                                                  'Set Time',
+                                                  'Set Time'.tr,
                                                   style: TextStyle(
                                                       fontSize: 13,
                                                       fontWeight:
@@ -520,18 +520,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                 ),
                                               ],
                                             ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                    '( United Arab Emirates Timezone )',
-                                                    style: TextStyle(
-                                                        fontSize: 10,
-                                                        fontWeight:
-                                                            FontWeight.w600))
-                                              ],
-                                            ),
+                                          
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                   top: 12),
@@ -671,7 +660,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                             ),
                             widget.detail!.service!.isdocument! == true
                                 ? RadioBtn(
-                                    text: ' Document Type'.tr,
+                                    text: 'Document Type'.tr,
                                     image: 'assets/images/Documents.png',
                                     groupvalue: controller.serviceType,
                                     value: ServiceType.Document,
@@ -691,7 +680,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                     children: [
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(left: 59),
+                                            const EdgeInsets.only(left: 59,right: 20),
                                         child: Column(
                                           children: [
                                             RadioBtn2(
@@ -789,11 +778,11 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                             )
                                           : Container(),
                                       Padding(
-                                        padding: const EdgeInsets.only(top: 10),
+                                        padding: const EdgeInsets.only(top: 10,right: 15),
                                         child: Row(
                                           children: [
                                             Text(
-                                              "       How many pages are in this file ?  "
+                                              "       How many pages are in this file ?  ".tr
                                                   .tr,
                                               style: TextStyle(
                                                   fontSize: 14,
@@ -885,7 +874,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                 price: controller.totalAmount.toString(),
                                 sreenRatio: 0.9,
                                 currencyname: selectedCurrency != null
-                                    ? currencycontroller.selectedCurrency
+                                    ? selectedCurrency
                                     : "AED ",
                                 onPressed: () {
                                   checkoutController.clear();

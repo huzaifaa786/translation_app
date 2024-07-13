@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:translation/api/currencyapi.dart';
+import 'package:translation/screens/main_screen/home.dart';
+import 'package:translation/screens/profile/profile.dart';
 import 'package:translation/screens/setting/currency/currency_controller.dart';
 import 'package:translation/screens/setting/settingcontroller.dart';
 import 'package:translation/static/countryList.dart';
 import 'package:translation/values/colors.dart';
+import 'package:forex_conversion/forex_conversion.dart';
 
 class Currency extends StatefulWidget {
   const Currency({Key? key});
@@ -16,10 +20,10 @@ class Currency extends StatefulWidget {
 class _CurrencyState extends State<Currency> {
   final SettingController controller = Get.find();
   GetStorage box = GetStorage();
+  final fx = Forex();
 
-  void saveSelectedcurrency(String currency) {
+  saveSelectedcurrency(String currency) {
     box.write("selectedCurrency", currency);
-    controller.updateSelectedCurrency(currency);
   }
 
   String? selectedCurrency;
@@ -31,10 +35,43 @@ class _CurrencyState extends State<Currency> {
     {'title': 'EUR', 'image': "assets/images/European Union Circular Flag.png"},
     {'title': 'AED', 'image': 'assets/images/United Arab Emirates.png'}
   ];
+
   @override
   void initState() {
     super.initState();
-    selectedCurrency = box.read('selectedCurrency');
+    loadSelectedCurrency();
+    currencyrata();
+  }
+
+  void loadSelectedCurrency() {
+    setState(() {
+      selectedCurrency = box.read("selectedCurrency");
+    });
+  }
+
+  currencyrata() async {
+    var allPrices = await fx.getCurrencyConverted(
+        sourceCurrency: "AED", destinationCurrency: "PKR", sourceAmount: 2);
+    print('gggggggggggggggggggggggg');
+    print(allPrices);
+  }
+
+  RxBool isLoading = false.obs;
+  final apiService = ApiService();
+  Future<void> updateSelectedCurrency() async {
+    var Currency = selectedCurrency;
+
+    try {
+      final response = await ApiService().storeCurrency(Currency.toString());
+      if (response.data['user'] != null) {
+        print(response.data);
+        Get.offAll(() => Home_screen());
+      }
+
+      // update(selectedCurrency as List<Object>?);
+    } on Exception catch (error) {
+      isLoading.value = false;
+    }
   }
 
   @override
@@ -66,25 +103,21 @@ class _CurrencyState extends State<Currency> {
                   final String countryCurrency = currency[index]['title'];
 
                   return CountryList(
+                    value: countryCurrency,
                     picture: image ?? 'assets/images/Great Britain.png',
                     countrycurrency: countryCurrency,
                     groupvalue: selectedCurrency,
-                    value: countryCurrency,
-                    onchaged: (String? newValue) {
+                    onchaged: (dynamic newValue) {
                       setState(() {
-                        selectedCurrency = countryCurrency;
-                        saveSelectedcurrency(selectedCurrency!);
-
-                        print(selectedCurrency);
+                        selectedCurrency = newValue;
+                        saveSelectedcurrency(newValue!);
                       });
-                      // if (controller.isLoading.value)
-                      //   Center(child: CircularProgressIndicator());
+                      updateSelectedCurrency();
                     },
                   );
                 },
               ),
             ),
-            // ElevatedButton(onPressed: () {}, child: Text(""))
           ],
         ),
       ),

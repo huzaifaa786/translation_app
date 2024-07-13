@@ -104,7 +104,7 @@ class OnlineTranslatorCard extends StatelessWidget {
                                       width: 12,
                                     ),
                           Text(
-                            "Rate per 30 mins:  ",
+                            "per 30 mins".tr,
                              style: TextStyle(
                                           fontSize: 13,
                                           fontWeight: FontWeight.w400,

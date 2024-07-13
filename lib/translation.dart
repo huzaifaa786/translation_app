@@ -6,9 +6,12 @@ class LocaleString extends Translations {
         'en_US': {
           "ADD": "ADD",
           "Enter your amount": "Enter your amount",
+          "Enter Amount": "Enter Amount",
           "Hello": "Hello",
           "From:": "From",
           "From": "From",
+          'Order No.':'Order No.',
+          'language': 'language',
           "To:": "To",
           "Translate": "Translate",
           "Home": "Home",
@@ -142,11 +145,12 @@ class LocaleString extends Translations {
           "Your order has been accepted": "Your order has been accepted",
           "Your order has been rejected and order amount was refunded":
               "Your order has been rejected and order amount was refunded",
-          "Rate per 30 mins": "Rate per 30 mins",
+          "per 30 mins": "per 30 mins",
           "Tap here to view messages": "Tap here to view messages",
           "Gulf Standard Time United Arab Emirates Time":
               "Gulf Standard Time United Arab Emirates Time",
           "To": "To",
+          'interpreters/translators': 'interpreters/translators',
           "Sorry! Interpreter not within your range":
               "Sorry! Interpreter not within your range",
           "Please fill all required details":
@@ -170,8 +174,55 @@ class LocaleString extends Translations {
           "Free item": "Free item",
           'You have successfully applied the promo code':
               'You have successfully applied the promo code',
+          'Timings are booked please find other\n timings':
+              'Timings are booked please find other\n timings',
+          'The amount of pages exceeds the\n translator’s limits':
+              'The amount of pages exceeds the\n translator’s limits',
+          'The Documents will be delivered in     ':
+              'The Documents will be delivered in     ',
+          '       How many pages are in this file ?  ':
+              '       How many pages are in this file ?  ',
+          'Currency': 'Currency',
+          'change password': 'change password',
+          'choose a currency': 'choose a currency',
+          'Book a service': 'Book a service',
+          'set a time': 'set a time',
+          'no certificate uploaded': 'no certificate uploaded',
+          'audio/video meeting': 'audio/video meeting',
+          'in person meeting': 'in person meeting',
+          'view certificate': 'view certificate',
+          'document type': 'document type',
+          'Translator': 'Translator',
+          'Type Of Service':'Type Of Service',
+          'time': 'time',
+          'Interpreters / Translators':'Interpreters / Translators',
+          'apply': 'apply',
         },
         'ar_AE': {
+          'Order No.':'رقم الطلب',
+          'Interpreters / Translators':'المترجمين',
+          'language': 'اللغة',
+          'apply': 'تقديم',
+          'time': 'الوقت',
+          'Type Of Service': 'نوع الخدمة ',
+          'Translator': 'المترجم',
+          'document type': 'نوع المستند',
+          'view certificate': 'عرض الشهادة',
+          'in person meeting': 'إجتماع وجه لوجه',
+          'audio/video meeting': 'إجتماع عبر الفيديو/ صوتي',
+          'no certificate uploaded': 'لم يتم إرفاق الشهادة ',
+          'set a time': 'إختر الوقت',
+          'Book a service': 'إحجز خدمة ',
+          'interpreters/translators': 'المترجمين',
+          'choose a currency': 'إختر العملة',
+          'change password': 'تغيير كلمة السر ',
+          'Currency': 'العملة',
+          '       How many pages are in this file ?  ': 'كم صفحة متواجدة في الملف',
+          'The Documents will be delivered in     ': 'المستند سيتم تسليمه في ',
+          'The amount of pages exceeds the\n translator’s limits':
+              'عدد الصفحات تتجاوز الحد الخاص بالمترجم',
+          'Timings are booked please find other\n timings':
+              'الوقت محجوز ، رجاء العثور على أوقات أخرى',
           'You have successfully applied the promo code':
               'تم وضع كود الخصم بنجاح',
           "Free item": "الأداة المجانية",
@@ -197,9 +248,10 @@ class LocaleString extends Translations {
           "Gulf Standard Time United Arab Emirates Time":
               "بناءً على توقيت دولة الإمارات العربية المتحدة",
           "Tap here to view messages": "اضغط هنا لعرض الرسائل",
-          "Rate per 30 mins": "السعر لكل ٣٠ دقيقة",
+          "per 30 mins": " لكل ٣٠ دقيقة",
           "ADD": "أضف",
           "Enter your amount": "أدخل المبلغ الخاص بك",
+          "Enter Amount": "أدخل المبلغ",
           "Report bug/issues": "الإبلاغ عن خلل/مشكلة",
           'Instant audio/video meeting': "اجتماع صوتي/مرئي فوري",
           "Document translation": "ترجمة وثيقة",

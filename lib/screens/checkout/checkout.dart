@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
+import 'package:translation/models/service.dart';
 import 'package:translation/screens/checkout/checkout_controller.dart';
 import 'package:translation/screens/enter_amount/ppaymentmethod.dart';
 import 'package:translation/screens/main_screen/homecontroller.dart';
@@ -45,8 +46,9 @@ class _Checkout_screenState extends State<Checkout_screen> {
   void initState() {
     getbalance();
     print(widget.totalAmount);
+    selectedCurrency = box.read('currency');
+
     super.initState();
-    selectedCurrency = box.read('selectedCurrency');
   }
 
   substractbalance() {
@@ -123,7 +125,7 @@ class _Checkout_screenState extends State<Checkout_screen> {
                                   SvgPicture.asset(
                                       'assets/images/Online Support.svg'),
                                   Text(
-                                    'Translator:  ',
+                                    'Translator'.tr,
                                     style: TextStyle(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w700,
@@ -176,7 +178,7 @@ class _Checkout_screenState extends State<Checkout_screen> {
                                 children: [
                                   Image.asset('assets/icons/Service (2).png'),
                                   Text(
-                                    ' Type Of Service:',
+                                    'Type Of Service'.tr,
                                     style: TextStyle(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w700,
@@ -217,7 +219,7 @@ class _Checkout_screenState extends State<Checkout_screen> {
                                       Row(
                                         children: [
                                           Icon(Icons.calendar_month),
-                                          Text('Date',
+                                          Text('Date'.tr,
                                               style: TextStyle(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w700)),
@@ -246,7 +248,7 @@ class _Checkout_screenState extends State<Checkout_screen> {
                                             Row(
                                               children: [
                                                 Icon(Icons.timer_outlined),
-                                                Text('Time',
+                                                Text('Time'.tr,
                                                     style: TextStyle(
                                                         fontSize: 14,
                                                         fontWeight:
@@ -377,13 +379,38 @@ class _Checkout_screenState extends State<Checkout_screen> {
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600,
                                       color: greenish)),
-                              Text(
-                                translatorProfileController.CheckoutAmount
-                                        .toString() +
-                                    "${selectedCurrency != null ? currencycontroller.selectedCurrency : " AED "}",
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w600),
+
+                              FutureBuilder<String>(
+                                future: changePrice(
+                                  translatorProfileController.CheckoutAmount
+                                      .toString(),
+                                ),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return CircularProgressIndicator();
+                                  } else if (snapshot.hasError) {
+                                    return Text('Error');
+                                  } else {
+                                    return Text(
+                                      '${snapshot.data}   ${selectedCurrency != null ? selectedCurrency : " AED "}',
+                                      style: TextStyle(
+                                        color: greenish,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        fontFamily: 'Poppins',
+                                      ),
+                                    );
+                                  }
+                                },
                               ),
+                              // Text(
+                              //   translatorProfileController.CheckoutAmount
+                              //           .toString() +
+                              //       "${selectedCurrency != null ? currencycontroller.selectedCurrency : " AED "}",
+                              //   style: TextStyle(
+                              //       fontSize: 16, fontWeight: FontWeight.w600),
+                              // ),
                             ],
                           ),
                         ),
@@ -398,12 +425,29 @@ class _Checkout_screenState extends State<Checkout_screen> {
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600,
                                       color: greenish)),
-                              Text(
-                                translatorProfileController.CheckoutAmount
-                                        .toString() +
-                                    "${selectedCurrency != null ? currencycontroller.selectedCurrency : " AED "}",
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w600),
+                              FutureBuilder<String>(
+                                future: changePrice(
+                                  translatorProfileController.CheckoutAmount
+                                      .toString(),
+                                ),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return CircularProgressIndicator();
+                                  } else if (snapshot.hasError) {
+                                    return Text('Error');
+                                  } else {
+                                    return Text(
+                                      '${snapshot.data}   ${selectedCurrency != null ? selectedCurrency : " AED "}',
+                                      style: TextStyle(
+                                        color: greenish,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        fontFamily: 'Poppins',
+                                      ),
+                                    );
+                                  }
+                                },
                               ),
 
                               // Text(
@@ -479,28 +523,29 @@ class _Checkout_screenState extends State<Checkout_screen> {
                                 if (_site == payMethod.walletpay) {
                                   walletpayment();
                                 } else {
-                                  translatorProfileController.scheduleType ==
-                                          ScheduleType.InPerson
-                                      ? translatorProfileController
-                                          .InpersonplaceOrder(
-                                              translatorProfileController
-                                                  .vendors)
-                                      : translatorProfileController.placeOrder(
-                                          translatorProfileController.vendors);
+                                  // translatorProfileController.scheduleType ==
+                                  //         ScheduleType.InPerson
+                                  //     ? translatorProfileController
+                                  //         .InpersonplaceOrder(
+                                  //             translatorProfileController
+                                  //                 .vendors)
+                                  //     : translatorProfileController.placeOrder(
+                                  //         translatorProfileController.vendors);
+                                  checkoutController.confirmPayment();
                                 }
                               }
                             } else {
                               if (_site == payMethod.walletpay) {
                                 walletpayment();
                               } else {
-                                translatorProfileController.scheduleType ==
-                                        ScheduleType.InPerson
-                                    ? translatorProfileController
-                                        .InpersonplaceOrder(
-                                            translatorProfileController.vendors)
-                                    : translatorProfileController.placeOrder(
-                                        translatorProfileController.vendors);
-                                // checkoutController.confirmPayment();
+                                // translatorProfileController.scheduleType ==
+                                //         ScheduleType.InPerson
+                                //     ? translatorProfileController
+                                //         .InpersonplaceOrder(
+                                //             translatorProfileController.vendors)
+                                //     : translatorProfileController.placeOrder(
+                                //         translatorProfileController.vendors);
+                                checkoutController.confirmPayment();
                               }
                             }
                             // authController.signIn();

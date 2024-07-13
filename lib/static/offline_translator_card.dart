@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:translation/models/service.dart';
 import 'package:translation/screens/profile/profile.dart';
 import 'package:translation/screens/translator/translator_profile.dart';
 import 'package:translation/values/colors.dart';
@@ -104,21 +105,34 @@ class OfflineTranslattorCard extends StatelessWidget {
                                       width: 12,
                                     ),
                                     Text(
-                                      " per 30 mins".tr + ': ',
+                                      "per 30 mins".tr + ': ',
                                       style: TextStyle(
                                           fontSize: 13,
                                           color: lightblue,
                                           fontWeight: FontWeight.w400,
                                           fontFamily: 'Poppins'),
                                     ),
-                                    Text(
-                                      price + ' ' + currencyname,
-                                      style: TextStyle(
-                                          color: lightblue,
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: 'Poppins'),
-                                    )
+                                    FutureBuilder<String>(
+                                      future: changePrice(price),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return CircularProgressIndicator();
+                                        } else if (snapshot.hasError) {
+                                          return Text('Error');
+                                        } else {
+                                          return Text(
+                                            '${snapshot.data} $currencyname',
+                                            style: TextStyle(
+                                              color: Colors.lightBlue,
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: 'Poppins',
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    ),
                                   ],
                                 ),
                               )

@@ -25,7 +25,7 @@ class _Translator_State extends State<Translator_> {
   String? selectedCurrency;
   @override
   void initState() {
-    selectedCurrency = box.read('selectedCurrency');
+    selectedCurrency = box.read('currency');
     super.initState();
   }
 
@@ -39,7 +39,7 @@ class _Translator_State extends State<Translator_> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TitleTopbar(
-              text: "Interpreters / Translators",
+              text: "Interpreters / Translators".tr,
               height: 0.13,
             ),
             // Container(
@@ -205,20 +205,17 @@ class _Translator_State extends State<Translator_> {
                     itemCount: homeController.sschedule.length > 6
                         ? 6
                         : homeController.sschedule.length,
-                        shrinkWrap: true,
-                        physics: BouncingScrollPhysics(),
+                    shrinkWrap: true,
+                    physics: BouncingScrollPhysics(),
                     itemBuilder: (context, index) => OfflineTranslattorCard(
-                          currencyname: selectedCurrency != null
-                              ? currencycontroller.selectedCurrency
-                              : "AED ",
+                          currencyname:  selectedCurrency,
                           name: homeController.sschedule[index].name,
                           image: homeController.sschedule[index].profilePic,
                           lang: homeController.sschedule[index].language,
                           vendor: homeController.sschedule[index],
                           price: homeController
                               .sschedule[index].service!.audiovideo,
-                          rating: homeController.sschedule[index].rating ==
-                                  null
+                          rating: homeController.sschedule[index].rating == null
                               ? null
                               : double.parse(
                                   homeController.sschedule[index].rating!),

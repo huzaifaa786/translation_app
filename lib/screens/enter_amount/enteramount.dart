@@ -64,7 +64,7 @@ class _Topup_screenState extends State<Topup_screen> {
                           height: 30,
                         ),
                         Text(
-                          'Enter Amount',
+                          'Enter Amount'.tr,
                           style: TextStyle(
                               color: greenish,
                               fontSize: 20,

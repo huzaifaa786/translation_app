@@ -56,7 +56,7 @@ void main() async {
   await GetStorage.init();
 
   Stripe.publishableKey =
-      'pk_test_51MlTmPAN8zi2vyFswyWqxxJKbe8NnGRtoOo55Z2P65V8EykUYWk034zKSkXkh2THsQZ6OYZzdoQOUxXmSmPiPz9G00dQnMo69A';
+      'pk_test_51NM6X5DLEEzulrUBli8t2AqzUxlQ32XHEmZP1M2V1UnF4zSh1jJvGLkCPsOUyenBdP2DsrJt5swIiAYwc8V2MFnW00YshheMTw';
   Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
   Stripe.urlScheme = 'flutterstripe';
   await Stripe.instance.applySettings();
