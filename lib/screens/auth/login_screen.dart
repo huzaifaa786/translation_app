@@ -83,79 +83,79 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           child: Column(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 15),
-                                child: GestureDetector(
-                                  onTap: _toggleButton,
-                                  child: Container(
-                                    width: 200,
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(25),
-                                      color: Colors.white,
-                                    ),
-                                    child: Stack(
-                                      children: [
-                                        AnimatedPositioned(
-                                          duration: Duration(milliseconds: 200),
-                                          left: isEmailSelected ? 0 : 100,
-                                          child: Container(
-                                            width: 100,
-                                            height: 50,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(25),
-                                              color: greenish,
-                                            ),
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                              isEmailSelected ? 'Email' : 'OTP',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 100,
-                                          child: Align(
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                              'Email',
-                                              style: TextStyle(
-                                                color: isEmailSelected
-                                                    ? Colors.transparent
-                                                    : Colors.black,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          right: 0,
-                                          top: 16,
-                                          child: Container(
-                                            width: 100,
-                                            child: Align(
-                                              alignment: Alignment.center,
-                                              child: Text(
-                                                'OTP',
-                                                style: TextStyle(
-                                                  color: isEmailSelected
-                                                      ? Colors.black
-                                                      : Colors.transparent,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
+                              // Padding(
+                              //   padding: const EdgeInsets.symmetric(vertical: 15),
+                              //   child: GestureDetector(
+                              //     onTap: _toggleButton,
+                              //     child: Container(
+                              //       width: 200,
+                              //       height: 50,
+                              //       decoration: BoxDecoration(
+                              //         borderRadius: BorderRadius.circular(25),
+                              //         color: Colors.white,
+                              //       ),
+                              //       child: Stack(
+                              //         children: [
+                              //           AnimatedPositioned(
+                              //             duration: Duration(milliseconds: 200),
+                              //             left: isEmailSelected ? 0 : 100,
+                              //             child: Container(
+                              //               width: 100,
+                              //               height: 50,
+                              //               decoration: BoxDecoration(
+                              //                 borderRadius:
+                              //                     BorderRadius.circular(25),
+                              //                 color: greenish,
+                              //               ),
+                              //               alignment: Alignment.center,
+                              //               child: Text(
+                              //                 isEmailSelected ? 'Email' : 'OTP',
+                              //                 style: TextStyle(
+                              //                   color: Colors.white,
+                              //                   fontWeight: FontWeight.bold,
+                              //                 ),
+                              //               ),
+                              //             ),
+                              //           ),
+                              //           Container(
+                              //             width: 100,
+                              //             child: Align(
+                              //               alignment: Alignment.center,
+                              //               child: Text(
+                              //                 'Email',
+                              //                 style: TextStyle(
+                              //                   color: isEmailSelected
+                              //                       ? Colors.transparent
+                              //                       : Colors.black,
+                              //                   fontWeight: FontWeight.bold,
+                              //                 ),
+                              //               ),
+                              //             ),
+                              //           ),
+                              //           Positioned(
+                              //             right: 0,
+                              //             top: 16,
+                              //             child: Container(
+                              //               width: 100,
+                              //               child: Align(
+                              //                 alignment: Alignment.center,
+                              //                 child: Text(
+                              //                   'OTP',
+                              //                   style: TextStyle(
+                              //                     color: isEmailSelected
+                              //                         ? Colors.black
+                              //                         : Colors.transparent,
+                              //                     fontWeight: FontWeight.bold,
+                              //                   ),
+                              //                 ),
+                              //               ),
+                              //             ),
+                              //           ),
+                              //         ],
+                              //       ),
+                              //     ),
+                              //   ),
+                              // ),
                               index == 0
                                   ? Container(
                                       padding:
