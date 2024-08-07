@@ -40,7 +40,6 @@ class _Translator_State extends State<Translator_> {
           children: [
             TitleTopbar(
               text: "Interpreters / Translators".tr,
-              height: 0.13,
             ),
             // Container(
             //   decoration :BoxDecoration(color: greenish),
@@ -208,7 +207,7 @@ class _Translator_State extends State<Translator_> {
                     shrinkWrap: true,
                     physics: BouncingScrollPhysics(),
                     itemBuilder: (context, index) => OfflineTranslattorCard(
-                          currencyname:  selectedCurrency,
+                          currencyname: selectedCurrency,
                           name: homeController.sschedule[index].name,
                           image: homeController.sschedule[index].profilePic,
                           lang: homeController.sschedule[index].language,

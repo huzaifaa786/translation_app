@@ -126,6 +126,7 @@ class _FreeItemsState extends State<FreeItems> {
               ),
             ),
             Container(
+              height: Get.height * 0.2,
               padding: const EdgeInsets.all(20),
               margin: const EdgeInsets.all(20),
               decoration: BoxDecoration(
@@ -210,8 +211,9 @@ class _FreeItemsState extends State<FreeItems> {
               ),
             ),
             Container(
+              height: Get.height * 0.2,
               padding: const EdgeInsets.all(25),
-              margin: const EdgeInsets.all(20),
+              margin: const EdgeInsets.all(18),
               decoration: BoxDecoration(
                   color: Colors.grey.shade200,
                   borderRadius: BorderRadius.circular(10),
@@ -232,7 +234,7 @@ class _FreeItemsState extends State<FreeItems> {
                   onPressed: translate,
                   style: ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(greenish),
-                      fixedSize: const MaterialStatePropertyAll(Size(369, 53))),
+                      fixedSize: const MaterialStatePropertyAll(Size(300, 53))),
                   child: isloading
                       ? const SizedBox.square(
                           dimension: 20,

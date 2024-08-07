@@ -15,6 +15,7 @@ class Vendor {
   String? status;
   String? rating;
   String? currency;
+  String? bio;
 
   int? online;
   String? aboutArabic;
@@ -39,7 +40,9 @@ class Vendor {
     aboutArabic = vendor['about(arabic)'] ?? '';
     aboutEnglish = vendor['about(Eng)'] ?? '';
     online = vendor['online'];
+    bio = vendor['bio'] ?? "";
     language = jsonDecode(vendor['language']);
+
     service =
         vendor['service'] != null ? VendorService(vendor['service']) : null;
   }

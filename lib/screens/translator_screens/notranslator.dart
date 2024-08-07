@@ -22,7 +22,6 @@ class _NoTransFound_screenState extends State<NoTransFound_screen> {
             children: [
               TitleTopbar(
                 text: "Interpreters / Translators".tr,
-                height: 0.1 / 0.9,
               ),
               // Row(
               //   children: [

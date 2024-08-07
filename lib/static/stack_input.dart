@@ -47,10 +47,9 @@ class StackInputField extends StatelessWidget {
     // bool isDark = Provider.of<DarkThemeProvider>(context).darkTheme;
 
     return SizedBox(
-      width: Get.width * 0.9,
-      
+      width: Get.width,
       child: Padding(
-        padding: const EdgeInsets.only(top: 19, left: 20, right: 20),
+        padding: const EdgeInsets.only(top: 19, left: 10, right: 10),
         child: TextFormField(
           readOnly: readOnly,
           obscureText: obscure,

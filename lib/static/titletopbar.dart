@@ -11,7 +11,7 @@ class TitleTopbar extends StatelessWidget {
     super.key,
     this.text,
     this.ontap,
-    this.height = 0.1,
+    this.height = 0.1 / 0.7,
   });
   final text;
   final ontap;
@@ -64,7 +64,7 @@ class TitleTopbar extends StatelessWidget {
                   // )
                 ],
               ),
-              Gap(6),
+              Gap(5),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

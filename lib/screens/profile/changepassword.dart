@@ -59,16 +59,21 @@ class _ChangePassword_screenState extends State<ChangePassword_screen> {
               SizedBox(
                 height: 40,
               ),
-              LargeButton(
-                  color: greenish,
-                  title: 'Change',
-                  onPressed: () {
-                    profileController.changepassword((success) {
-                      if (success) {
-                        update(context);
-                      }
-                    });
-                  })
+              SizedBox(
+                height: Get.height * 0.06,
+                width: Get.width * 0.4,
+                child: LargeButton(
+                    radius: 30.0,
+                    color: greenish,
+                    title: 'Update',
+                    onPressed: () {
+                      profileController.changepassword((success) {
+                        if (success) {
+                          update(context);
+                        }
+                      });
+                    }),
+              )
             ]),
           ),
         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:gap/gap.dart';
 import 'package:translation/values/colors.dart';
 
 class DropdownField extends StatelessWidget {
@@ -46,21 +47,33 @@ class DropdownField extends StatelessWidget {
       padding: const EdgeInsets.only(top: 10.0),
       child: DropdownButtonHideUnderline(
         child: DropdownButton2(
-          hint: Text(
-            text,
-            style: TextStyle(
-              fontSize: 13,
-              color: hintText,
+          hint: Center(
+            child: Text(
+              text,
+              style: TextStyle(
+                fontSize: 13,
+                color: hintText,
+              ),
             ),
           ),
           items: items!
               .map((item) => DropdownMenuItem<String>(
                     value: item,
-                    child: Text(
-                      item.toString(),
-                      style: const TextStyle(
-                        fontSize: 14,
-                      ),
+                    child: Wrap(
+                      children: [
+                        Center(
+                          child: Text(
+                            item.toString(),
+                            style: const TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                        Divider(
+                          thickness: 1,
+                          color: greenish,
+                        ),
+                      ],
                     ),
                   ))
               .toList(),

@@ -50,7 +50,7 @@ class _Profile_screenState extends State<Profile_screen> {
                         Column(
                           children: [
                             TitleTopbar(
-                              height: 0.15,
+                              // height: 0.15,
                               text: 'Profile'.tr,
                               ontap: () {
                                 Navigator.pop(context);
@@ -89,7 +89,7 @@ class _Profile_screenState extends State<Profile_screen> {
                                         Stack(
                                           children: [
                                             Container(
-                                              height: 100,
+                                              height: Get.height * 0.1,
                                               width: 100,
                                               padding: EdgeInsets.all(8),
                                               decoration: BoxDecoration(
@@ -107,7 +107,7 @@ class _Profile_screenState extends State<Profile_screen> {
                                                     borderRadius:
                                                         BorderRadius.all(
                                                             Radius.circular(
-                                                                55)),
+                                                                355)),
                                                     child: profileController
                                                                 .profileImage!
                                                                 .path !=

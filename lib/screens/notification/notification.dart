@@ -52,7 +52,7 @@ class _Notification_screenState extends State<Notification_screen> {
                 ? Flexible(
                     child: Container(
                       height: MediaQuery.of(context).size.height * 0.88,
-                      padding: EdgeInsets.only(left: 12, right: 12),
+                      padding: EdgeInsets.only(left: 10, right: 10),
                       child: ListView.builder(
                           itemCount: controller.notifications.length,
                           itemBuilder: (context, index) => NotificationTile(
@@ -85,6 +85,8 @@ class _Notification_screenState extends State<Notification_screen> {
                                 //     : () {},
                                 name: controller
                                     .notifications[index].vendor!.username,
+                                serviceType: controller
+                                    .notifications[index].service_type,
                                 image: controller
                                     .notifications[index].vendor!.profilePic,
                                 title: controller.notifications[index].title,

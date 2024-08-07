@@ -159,12 +159,17 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                   width: 25))),
                                 ],
                               ),
-                              ProfileDetail(
-                                name: widget.detail!.name,
-                                // rating: widget.detail!.rating == null
-                                //     ? null
-                                //     : double.parse(widget.detail!.rating!),
-                                image: widget.detail!.profilePic,
+                              Column(
+                                children: [
+                                  ProfileDetail(
+                                    name: widget.detail!.name,
+                                    // rating: widget.detail!.rating == null
+                                    //     ? null
+                                    //     : double.parse(widget.detail!.rating!),
+                                    image: widget.detail!.profilePic,
+                                    bio: widget.detail!.bio,
+                                  ),
+                                ],
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(top: 14),
@@ -224,8 +229,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                Text(
-                                                    "No certificate uploaded!".tr),
+                                                Text("No certificate uploaded!"
+                                                    .tr),
                                               ],
                                             ),
                                           )
@@ -234,7 +239,9 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                             decoration: BoxDecoration(
                                               color: Colors.white,
                                               border: Border.all(
-                                                  color: lightblue, width: 1,),
+                                                color: lightblue,
+                                                width: 1,
+                                              ),
                                               borderRadius:
                                                   BorderRadius.circular(22),
                                             ),
@@ -243,8 +250,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                SvgPicture.asset(
-                                                    "assets/images/user.svg"),
+                                                Image.asset(
+                                                    "assets/images/Certificate.png"),
                                                 InkWell(
                                                   onTap: () {
                                                     Get.to(
@@ -255,7 +262,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                     );
                                                   },
                                                   child: Text(
-                                                   ' ' +'view certificate'.tr,
+                                                    ' ' + 'view certificate'.tr,
                                                     style: TextStyle(
                                                       fontSize: 13,
                                                       fontWeight:
@@ -292,16 +299,15 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                       height: 13,
                     ),
                     Padding(
-                        padding: const EdgeInsets.only(left: 16, right: 16),
+                        padding: const EdgeInsets.only(left: 16, right: 17),
                         child: Column(
                           children: [
                             Column(
                               children: [
                                 widget.detail!.service!.isAudioVideo == true
                                     ? RadioBtn(
-                                        text:' ' + 'Audio/video meeting'.tr,
-                                        image:
-                                            'assets/images/output-onlinepngtools (11).png',
+                                        text: ' ' + 'Audio/video meeting'.tr,
+                                        image: 'assets/icons/audio,video.png',
                                         groupvalue: controller.scheduleType,
                                         value: ScheduleType.AudioVideo,
                                         onChanged: () {
@@ -317,9 +323,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                 ),
                                 widget.detail!.service!.isInperson! == true
                                     ? RadioBtn(
-                                        text: ' ' +'In person meeting'.tr,
-                                        image:
-                                            'assets/images/output-onlinepngtools (10).png',
+                                        text: ' ' + 'In person meeting'.tr,
+                                        image: 'assets/icons/Meeting Room.png',
                                         groupvalue: controller.scheduleType,
                                         value: ScheduleType.InPerson,
                                         onChanged: () {
@@ -520,7 +525,6 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                 ),
                                               ],
                                             ),
-                                          
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                   top: 12),
@@ -661,7 +665,7 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                             widget.detail!.service!.isdocument! == true
                                 ? RadioBtn(
                                     text: 'Document Type'.tr,
-                                    image: 'assets/images/Documents.png',
+                                    image: 'assets/icons/Documents.png',
                                     groupvalue: controller.serviceType,
                                     value: ServiceType.Document,
                                     onChanged: () {
@@ -679,8 +683,8 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                 ? Column(
                                     children: [
                                       Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 59,right: 20),
+                                        padding: const EdgeInsets.only(
+                                            left: 59, right: 20),
                                         child: Column(
                                           children: [
                                             RadioBtn2(
@@ -778,11 +782,13 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                             )
                                           : Container(),
                                       Padding(
-                                        padding: const EdgeInsets.only(top: 10,right: 15),
+                                        padding: const EdgeInsets.only(
+                                            top: 10, right: 15),
                                         child: Row(
                                           children: [
                                             Text(
-                                              "       How many pages are in this file ?  ".tr
+                                              "       How many pages are in this file ?  "
+                                                  .tr
                                                   .tr,
                                               style: TextStyle(
                                                   fontSize: 14,
@@ -796,37 +802,23 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                               minWidth: MediaQuery.of(context)
                                                       .size
                                                       .width *
-                                                  0.2,
+                                                  0.1,
                                               decoration: InputDecoration(
-                                                suffixIcon: InkWell(
-                                                  onTap: () {
-                                                    translatorProfileController
-                                                            .pages =
-                                                        int.parse(
-                                                            pagecontoller.text);
-                                                    translatorProfileController
-                                                        .dayscalculate(
-                                                            widget.detail!);
-                                                    translatorProfileController
-                                                        .documentprice(
-                                                            widget.detail!,
-                                                            context);
-                                                    FocusManager
-                                                        .instance.primaryFocus!
-                                                        .unfocus();
-                                                    // profileController.EditText();
-                                                  },
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            bottom: 8.0),
-                                                    child: Icon(
-                                                      Icons.check,
-                                                      color: greenish,
-                                                      size: 18,
-                                                    ),
-                                                  ),
-                                                ),
+                                                // suffixIcon: InkWell(
+                                                //   onTap: () {
+                                                //     // profileController.EditText();
+                                                //   },
+                                                //   // child: Padding(
+                                                //   //   padding:
+                                                //   //       const EdgeInsets.only(
+                                                //   //           bottom: 8.0),
+                                                //   //   // child: Icon(
+                                                //   //   //   Icons.check,
+                                                //   //   //   color: greenish,
+                                                //   //   //   size: 18,
+                                                //   //   // ),
+                                                //   // ),
+                                                // ),
                                               ),
                                             ),
                                           ],
@@ -878,9 +870,18 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                     : "AED ",
                                 onPressed: () {
                                   checkoutController.clear();
+
                                   if (controller.serviceType ==
                                       ServiceType.Document) {
                                     if (controller.totalAmount <= 0) {
+                                      translatorProfileController.pages =
+                                          int.parse(pagecontoller.text);
+                                      translatorProfileController
+                                          .dayscalculate(widget.detail!);
+                                      translatorProfileController.documentprice(
+                                          widget.detail!, context);
+                                      FocusManager.instance.primaryFocus!
+                                          .unfocus();
                                       Get.snackbar(
                                           "Please fill all required details".tr,
                                           '',

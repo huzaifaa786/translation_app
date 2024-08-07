@@ -14,6 +14,7 @@ class LargeButton extends StatelessWidget {
       this.icon,
       this.buttonWidth = 0.8,
       this.sreenRatio = 0.9,
+      this.radius = 10.0,
       this.color = secondaryColor})
       : super(key: key);
 
@@ -25,6 +26,7 @@ class LargeButton extends StatelessWidget {
   final textcolor;
   final icon;
   final buttonWidth;
+  final radius;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -35,8 +37,8 @@ class LargeButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: color,
           shadowColor: primaryColor,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(radius)),
           ),
         ),
         child: Row(

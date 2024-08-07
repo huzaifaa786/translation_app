@@ -8,12 +8,16 @@ class Notificationn {
   String? title;
   Order? orderr;
   Vendor? vendor;
+  String? service_type;
   Notificationn(notification) {
     id = notification['id'];
     title = notification['title'];
-    orderr = notification['order'] != null ? Order(notification['order']) : null;;
+    service_type = notification['service_type'];
+    orderr =
+        notification['order'] != null ? Order(notification['order']) : null;
+    ;
     print('dfdfdffffffffdfdfdfdf');
     print(notification['vendor']);
-    vendor = Vendor(notification['vendor']) ;
+    vendor = Vendor(notification['vendor']);
   }
 }

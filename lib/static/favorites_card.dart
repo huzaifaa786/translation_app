@@ -42,11 +42,11 @@ class FavoritesCard extends StatelessWidget {
                 offset: Offset(0.00001, 1),
               ),
             ],
-            color:ggrey,
+            color: ggrey,
             borderRadius: BorderRadius.circular(12),
           ),
           padding: const EdgeInsets.all(12.0),
-          height: MediaQuery.of(context).size.height * 0.13,
+          height: MediaQuery.of(context).size.height * 0.15,
           child: Column(
             children: [
               Row(
@@ -60,7 +60,7 @@ class FavoritesCard extends StatelessWidget {
                   Column(
                     children: [
                       ClipRRect(
-                          borderRadius: BorderRadius.circular(22),
+                          borderRadius: BorderRadius.circular(30),
                           child: image == ''
                               ? Image.asset(
                                   "assets/images/5907.jpg",
@@ -96,15 +96,16 @@ class FavoritesCard extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            for (var i = 0; i < 3; i++)
+                            for (var i = 0; i < 2; i++)
                               if (i < lang.length)
                                 Container(
                                   margin: EdgeInsets.only(right: 9),
-                                  padding: EdgeInsets.only(left: 13,right: 13,top: 5,bottom:5 ),
+                                  padding: EdgeInsets.only(
+                                      left: 13, right: 13, top: 5, bottom: 5),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
-                                    border:
-                                        Border.all(color: lightblue, width: 1.2),
+                                    border: Border.all(
+                                        color: lightblue, width: 1.2),
                                     borderRadius: BorderRadius.circular(12),
                                     boxShadow: [
                                       BoxShadow(

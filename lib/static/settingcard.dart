@@ -55,11 +55,11 @@ class SettingCard extends StatelessWidget {
                           shape: BoxShape.circle,
                         ),
                         child: Center(
-                          child: SvgPicture.asset(
+                          child: Image.asset(
                             imgicon,
                             color: greenish,
-                            height: 28,
-                            width: 28,
+                            height: 38,
+                            width: 38,
                           ),
                         ),
                       ),

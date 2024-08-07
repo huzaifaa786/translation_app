@@ -2,12 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
 class ProfileDetail extends StatelessWidget {
-  const ProfileDetail({super.key, this.rating, this.name, this.image});
+  const ProfileDetail({
+    super.key,
+    this.rating,
+    this.name,
+    this.image,
+    this.bio,
+  });
   final name;
   final rating;
   final image;
+  final bio;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +45,14 @@ class ProfileDetail extends StatelessWidget {
               name,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
+            ConstrainedBox(
+               constraints: BoxConstraints(maxWidth: Get.width * 0.44),
+              child: Text(
+                bio.toString(),
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w300),
+              ),
+            ),
+
             // rating == null
             //     ? Row(
             //         mainAxisAlignment: MainAxisAlignment.center,

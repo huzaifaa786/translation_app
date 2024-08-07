@@ -25,7 +25,7 @@ class _RadioBtnState extends State<RadioBtn> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         widget.onChanged();
       },
       child: Container(
@@ -56,7 +56,10 @@ class _RadioBtnState extends State<RadioBtn> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(),
-                  child: Text(widget.text),
+                  child: Text(
+                    widget.text,
+                    style: TextStyle(fontSize: 13),
+                  ),
                 ),
               ],
             ),

@@ -77,7 +77,7 @@ class _Home_screenState extends State<Home_screen> {
   List<PersistentBottomNavBarItem> _navBarItem() {
     return [
       PersistentBottomNavBarItem(
-        icon: FaIcon(FontAwesomeIcons.houseChimneyWindow),
+        icon: Image.asset("assets/images/Home Page.png"),
         title: ('Home'.tr),
         textStyle: TextStyle(
             fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
@@ -90,9 +90,9 @@ class _Home_screenState extends State<Home_screen> {
             ? badges.Badge(
                 showBadge: chatController.unseen == '0' ? false : true,
                 badgeContent: Text(chatController.unseen!),
-                child: FaIcon(FontAwesomeIcons.commentDots),
+                child: Image.asset("assets/images/Chat Bubble.png"),
               )
-            : FaIcon(FontAwesomeIcons.commentDots),
+            : Image.asset("assets/images/Chat Bubble.png"),
         iconSize: 20,
         title: ('Chat'.tr),
         textStyle: TextStyle(
@@ -113,7 +113,7 @@ class _Home_screenState extends State<Home_screen> {
       //   inactiveColorPrimary: kblack,
       // ),
       PersistentBottomNavBarItem(
-          icon: FaIcon(FontAwesomeIcons.clipboardList),
+          icon: Image.asset("assets/images/List View.png"),
           iconSize: 20,
           title: ('Orders'.tr),
           textStyle: TextStyle(
@@ -128,7 +128,7 @@ class _Home_screenState extends State<Home_screen> {
             });
           }),
       PersistentBottomNavBarItem(
-        icon: FaIcon(FontAwesomeIcons.gear),
+        icon: Image.asset("assets/images/Gear.png"),
         iconSize: 20,
         title: ('Settings'.tr),
         textStyle: TextStyle(
@@ -215,7 +215,7 @@ class _HomeState extends State<Home> {
                           ],
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        padding: EdgeInsets.only(left: 20, right: 20),
+                        padding: EdgeInsets.only(left: 13, right: 13),
                         height: box.read('locale') != 'ar'
                             ? Get.height * 0.56
                             : Get.height * 0.58,
@@ -225,7 +225,7 @@ class _HomeState extends State<Home> {
                             children: [
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(top: 20, bottom: 30),
+                                    const EdgeInsets.only(top: 10, bottom: 30),
                                 child: Align(
                                   alignment: Alignment.bottomCenter,
                                   child: GestureDetector(

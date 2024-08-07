@@ -9,7 +9,7 @@ class TitleTopbarr extends StatelessWidget {
     super.key,
     this.text,
     this.ontap,
-    this.height = 0.1,
+    this.height = 0.1 / 0.7,
   });
   final text;
   final ontap;

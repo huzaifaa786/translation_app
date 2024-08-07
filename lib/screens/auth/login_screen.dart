@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:translation/screens/auth/otp_verify/loginOtp.dart';
@@ -54,11 +55,12 @@ class _LoginScreenState extends State<LoginScreen> {
         child: GetBuilder<AuthController>(
             builder: (controller) => Stack(
                   children: [
-                    Image.asset(
-                      "assets/images/loginback.jpg",
-                      fit: BoxFit.fill,
-                      height: MediaQuery.of(context).size.height * 0.25,
-                      width: double.infinity,
+                    Container(
+                      height: Get.height * 0.5,
+                      width: Get.width,
+                      decoration: BoxDecoration(
+                        gradient: greenishgradient,
+                      ),
                     ),
                     Column(
                       children: [
@@ -76,10 +78,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
                             color: Color.fromARGB(255, 250, 250, 250),
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(30),
-                              topLeft: Radius.circular(30),
-                            ),
                           ),
                           child: Column(
                             children: [
@@ -173,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 padding: EdgeInsets.only(
                                                     top: 14, bottom: 20),
                                                 child: Text(
-                                                  'WELCOME BACK',
+                                                  'WELCOME',
                                                   style: TextStyle(
                                                       fontSize: 24,
                                                       fontWeight:
@@ -214,7 +212,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                                       child: Text(
                                                         "Forgot Password?",
                                                         style: TextStyle(
-                                                            fontSize: 18,
+                                                            decoration:
+                                                                TextDecoration
+                                                                    .underline,
+                                                            fontSize: 12,
                                                             color:
                                                                 Colors.black54,
                                                             fontWeight:
@@ -225,25 +226,31 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   ],
                                                 ),
                                               ),
-                                              LargeButton(
-                                                title: 'Login',
-                                                sreenRatio: 0.9,
-                                                onPressed: () {
-                                                  setState(() {});
-                                                  authController.SignIn(
-                                                      (success) {
-                                                    if (success) {
-                                                      authController
-                                                              .validateSignUpForm =
-                                                          false.obs;
-                                                      Get.offAll(
-                                                          () => Home_screen());
-                                                    }
-                                                  });
-                                                },
-                                                color: greenish,
-                                                textcolor: Colors.white,
-                                                buttonWidth: 0.95,
+                                              Gap(50),
+                                              SizedBox(
+                                                height: Get.height * 0.06,
+                                                width: Get.width * 0.4,
+                                                child: LargeButton(
+                                                  radius: 30.0,
+                                                  title: 'Login',
+                                                  sreenRatio: 0.9,
+                                                  onPressed: () {
+                                                    setState(() {});
+                                                    authController.SignIn(
+                                                        (success) {
+                                                      if (success) {
+                                                        authController
+                                                                .validateSignUpForm =
+                                                            false.obs;
+                                                        Get.offAll(() =>
+                                                            Home_screen());
+                                                      }
+                                                    });
+                                                  },
+                                                  color: greenish,
+                                                  textcolor: Colors.white,
+                                                  buttonWidth: 0.95,
+                                                ),
                                               ),
                                               Padding(
                                                 padding: EdgeInsets.only(
@@ -274,6 +281,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                                         child: Text(
                                                           'Register Now',
                                                           style: TextStyle(
+                                                              decoration:
+                                                                  TextDecoration
+                                                                      .underline,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w600,

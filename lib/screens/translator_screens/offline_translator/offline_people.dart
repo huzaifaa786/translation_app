@@ -149,10 +149,10 @@ class _OfflinePeople_screenState extends State<OfflinePeople_screen> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(right: 4),
-                            child: SvgPicture.asset(
-                              'assets/images/filterIcon.svg',
-                              height: 20,
-                              width: 20,
+                            child: Image.asset(
+                              'assets/images/Filter.png',
+                              height: 28,
+                              width: 28,
                             ),
                           ),
                           // Text(

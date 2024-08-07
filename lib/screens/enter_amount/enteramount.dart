@@ -38,7 +38,6 @@ class _Topup_screenState extends State<Topup_screen> {
               Column(
                 children: [
                   TitleTopbar(
-                    height: 0.14,
                     text: 'Top Up'.tr,
                     ontap: () {
                       Get.back();
@@ -47,7 +46,7 @@ class _Topup_screenState extends State<Topup_screen> {
                 ],
               ),
               Positioned(
-                top: 100,
+                top: 90,
                 right: 14,
                 left: 14,
                 child: Container(
@@ -148,7 +147,6 @@ class _Topup_screenState extends State<Topup_screen> {
                         SizedBox(
                           height: 30,
                         ),
-                      
                         Padding(
                           padding: const EdgeInsets.only(left: 30, right: 30),
                           child: Row(
@@ -167,11 +165,11 @@ class _Topup_screenState extends State<Topup_screen> {
                         SizedBox(
                           height: 20,
                         ),
-                          const Divider(
+                        const Divider(
                           thickness: 2,
                           height: 1,
                         ),
-                          SizedBox(
+                        SizedBox(
                           height: 30,
                         ),
                         Directionality(
@@ -180,62 +178,62 @@ class _Topup_screenState extends State<Topup_screen> {
                             padding: const EdgeInsets.only(left: 15, right: 15),
                             child: Column(children: [
                               // PPaymentMethod(
-                  
+
                               //   title: 'Googlepay',
-                  
+
                               //   image: "assets/icons/googlepay.png",
-                  
+
                               //   groupvalue: _site,
-                  
+
                               //   value: payMethod.googlePay,
-                  
+
                               //   onchaged: () {
-                  
+
                               //     toggleplan(payMethod.googlePay);
-                  
+
                               //   },
-                  
+
                               // ),
-                  
+
                               // PPaymentMethod(
-                  
+
                               //   title: 'Applepay',
-                  
+
                               //   image: "assets/icons/applepay.png",
-                  
+
                               //   groupvalue: _site,
-                  
+
                               //   value: payMethod.applePay,
-                  
+
                               //   onchaged: () {
-                  
+
                               //     toggleplan(payMethod.applePay);
-                  
+
                               //   },
-                  
+
                               // ),
-                  
+
                               // PPaymentMethod(
-                  
+
                               //   title: 'Form Wallet',
-                  
+
                               //   image: "assets/icons/walletpay.png",
-                  
+
                               //   groupvalue: _site,
-                  
+
                               //   value: payMethod.walletpay,
-                  
+
                               //   onchaged: () {
-                  
+
                               //     toggleplan(payMethod.walletpay);
-                  
+
                               //   },
-                  
+
                               // ),
-                  
+
                               PPaymentMethod(
                                 title: 'Credit/visa card'.tr,
-                                image: "assets/icons/visapay.png",
+                                image: "assets/images/Credit Card.png",
                                 groupvalue: _site,
                                 value: payMethod.materCard,
                                 isSelected: _site == payMethod.materCard,
@@ -253,7 +251,7 @@ class _Topup_screenState extends State<Topup_screen> {
                           //   title: 'Top Up'.tr,
                           //   sreenRatio: 0.9,
                           //   onPressed: () {
-                  
+
                           //   },
                           //   color: greenish,
                           //   textcolor: Colors.white,

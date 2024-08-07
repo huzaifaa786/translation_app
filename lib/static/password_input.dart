@@ -45,12 +45,7 @@ class InputFieldPassword1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 70,
-      // decoration: BoxDecoration(
-      //   border: Border.all(color: Colors.grey),
-      //   borderRadius: BorderRadius.all(
-      //     Radius.circular(6),
-      //   ),
-      // ),
+      color: Colors.transparent,
       child: Card(
         color: Color.fromRGBO(255, 255, 255, 1),
         shape: OutlineInputBorder(
@@ -59,38 +54,41 @@ class InputFieldPassword1 extends StatelessWidget {
               color: lightblue,
             )),
         child: TextFormField(
-          style: const TextStyle(fontSize: 14),
+          style: const TextStyle(fontSize: 13),
           controller: controller,
           decoration: InputDecoration(
-              prefixIcon: Padding(
-                padding: const EdgeInsets.all(12),
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: SvgPicture.asset(
-                    imageIcon,
-                    height: 17,
-                    width: 17,
-                    color: greenish,
-                  ),
+            prefixIcon: Padding(
+              padding: const EdgeInsets.all(8),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: SvgPicture.asset(
+                  imageIcon,
+                  height: 17,
+                  width: 17,
+                  color: greenish,
                 ),
               ),
-              suffixIcon: GestureDetector(
-                onTap: () {
-                  toggle();
-                },
-                child: Icon(
-                  obscure
-                      ? Icons.visibility_off_outlined
-                      : Icons.visibility_outlined,
-                  color: Colors.black,
-                ),
+            ),
+            suffixIcon: GestureDetector(
+              onTap: () {
+                toggle();
+              },
+              child: Icon(
+                obscure
+                    ? Icons.visibility_off_outlined
+                    : Icons.visibility_outlined,
+                color: Colors.black,
               ),
-              filled: true,
-              fillColor: Colors.white,
-              hintText: hint,
-              hintStyle: TextStyle(color: textGrey),
-              contentPadding: const EdgeInsets.only(left: 3.0),
-              border: OutlineInputBorder(borderSide: BorderSide.none)),
+            ),
+            filled: true,
+            fillColor: Colors.white,
+            hintText: hint,
+            hintStyle: TextStyle(color: textGrey),
+            contentPadding: EdgeInsets.only(left: 23),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(30),
+                borderSide: BorderSide.none),
+          ),
           keyboardType: type,
           cursorColor: Colors.black,
           obscureText: obscure,

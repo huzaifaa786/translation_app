@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:translation/models/service.dart';
@@ -43,7 +44,7 @@ class OfflineTranslattorCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(5),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey[500]!,
+                  color: Colors.grey[400]!,
                   blurRadius: 2,
                   offset: Offset(0.00001, 3),
                 ),
@@ -62,7 +63,7 @@ class OfflineTranslattorCard extends StatelessWidget {
                           // borderRadius: BorderRadius.circular(24),
                           ),
                       child: ClipRRect(
-                          borderRadius: BorderRadius.circular(22),
+                          borderRadius: BorderRadius.circular(30),
                           child: image == ''
                               ? Image.asset(
                                   "assets/images/5907.jpg",
@@ -104,8 +105,9 @@ class OfflineTranslattorCard extends StatelessWidget {
                                       height: 12,
                                       width: 12,
                                     ),
+                                    Gap(3),
                                     Text(
-                                      "per 30 mins".tr + ': ',
+                                      "Per 30 mins".tr + ': ',
                                       style: TextStyle(
                                           fontSize: 13,
                                           color: lightblue,
@@ -145,8 +147,8 @@ class OfflineTranslattorCard extends StatelessWidget {
                                   children: [
                                     FittedBox(
                                         fit: BoxFit.scaleDown,
-                                        child: SvgPicture.asset(
-                                            'assets/images/star.svg',
+                                        child: Image.asset(
+                                            'assets/images/Star.png',
                                             height: 11,
                                             width: 11)),
                                     Padding(

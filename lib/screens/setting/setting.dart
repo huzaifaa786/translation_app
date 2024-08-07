@@ -66,7 +66,7 @@ class _Setting_screenState extends State<Setting_screen> {
                           profileController.clearField();
                           Get.to(() => Profile_screen());
                         },
-                        imgicon: "assets/icons/profile.svg",
+                        imgicon: "assets/images/Male User.png",
                       ),
                     ),
                     SettingCard(
@@ -75,7 +75,7 @@ class _Setting_screenState extends State<Setting_screen> {
                         profileController.clearField();
                         Get.to(() => TranslateScreen());
                       },
-                      imgicon: "assets/icons/msgss.svg",
+                      imgicon: "assets/images/Globe.png",
                     ),
 
                     SettingCard(
@@ -84,7 +84,7 @@ class _Setting_screenState extends State<Setting_screen> {
                         showDialog(
                             context: context, builder: (context) => Currency());
                       },
-                      imgicon: "assets/icons/currency.svg",
+                      imgicon: "assets/images/Euro.png",
                     ),
                     SettingCard(
                       title: 'Report bug/issues'.tr,
@@ -92,7 +92,7 @@ class _Setting_screenState extends State<Setting_screen> {
                         settingController.ClearbugVariables();
                         onBugTAp(context);
                       },
-                      imgicon: "assets/icons/warning.svg",
+                      imgicon: "assets/images/High Importance.png",
                     ),
 
                     // SettingCard(

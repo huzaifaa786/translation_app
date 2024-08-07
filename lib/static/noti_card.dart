@@ -15,6 +15,7 @@ class NotificationTile extends StatelessWidget {
     this.ontap,
     this.badgetitle,
     this.badgecolor,
+    this.serviceType,
     this.name,
   });
   final name;
@@ -25,6 +26,7 @@ class NotificationTile extends StatelessWidget {
   final ontap;
   final badgetitle;
   final badgecolor;
+  final serviceType;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,7 @@ class NotificationTile extends StatelessWidget {
         elevation: 2,
         color: Colors.white,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(8, 14, 8, 14),
+          padding: const EdgeInsets.fromLTRB(8, 10, 8, 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -64,7 +66,7 @@ class NotificationTile extends StatelessWidget {
                         padding: box.read('locale') == 'ar'
                             ? EdgeInsets.only(right: 12)
                             : EdgeInsets.only(left: 12),
-                        width: MediaQuery.of(context).size.width * 0.45,
+                        width: MediaQuery.of(context).size.width * 0.6,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -72,9 +74,16 @@ class NotificationTile extends StatelessWidget {
                             Text(
                               name,
                               style: TextStyle(
-                                  fontSize: 14,
+                                  fontSize: 15,
                                   color: Colors.black,
                                   fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              serviceType.toString(),
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w300),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 4.0),
@@ -84,19 +93,40 @@ class NotificationTile extends StatelessWidget {
                                     : title == 'Your order has been accepted'
                                         ? 'Your order has been accepted'.tr
                                         : title ==
-                                                'Your order has been rejected and order amount was refunded'
-                                            ? 'Your order has been rejected and order amount was refunded'.tr
+                                                'Your order has been rejected and  order amount was refunded'
+                                            ? 'Your order has been rejected and order amount was refunded'
+                                                .tr
                                             : title ==
                                                     'Your order has been completed'
-                                                ? 'Your order has been completed'.tr
+                                                ? 'Your order has been completed'
+                                                    .tr
                                                 : title,
                                 style: TextStyle(
-                                    fontSize: 13,
+                                    fontSize: 10,
                                     fontWeight: FontWeight.w400,
-                                    color: hintText),
+                                    color: greenish),
                                 maxLines: 3,
                               ),
                             ),
+                            status != ''
+                                ? Badgee(
+                                    title: status == "3"
+                                        ? 'Completed'.tr
+                                        : status == "2"
+                                            ? "Rejected".tr
+                                            : "In progress".tr,
+                                    color: status == "3"
+                                        ? Colors.green
+                                        : status == "2"
+                                            ? Colors.red
+                                            : greenish,
+                                    picture: status == "3"
+                                        ? "assets/images/Done.png"
+                                        : status == "2"
+                                            ? "assets/images/Close.png"
+                                            : "assets/images/Historical.png",
+                                  )
+                                : Container(),
                           ],
                         ),
                       ),
@@ -104,20 +134,6 @@ class NotificationTile extends StatelessWidget {
                   ),
                 ],
               ),
-              status != ''
-                  ? Badgee(
-                      title: status == "3"
-                          ? 'Completed'.tr
-                          : status == "2"
-                              ? "Rejected".tr
-                              : "In progress".tr,
-                      color: status == "3"
-                          ? Colors.green
-                          : status == "2"
-                              ? Colors.red
-                              : greenish,
-                    )
-                  : Container(),
             ],
           ),
         ),

@@ -38,7 +38,7 @@ class Validators {
     // final digitRegExp =
     //     RegExp(r'^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{1,}$');
     if (password!.length < 6) {
-      return "*Password must be 6 characters long";
+      return "password must contain atleast 6 characters";
     } else {
       return null;
     }
