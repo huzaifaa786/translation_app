@@ -54,7 +54,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Padding(
+      body:   Padding(
         padding: const EdgeInsets.symmetric(horizontal: 1.0),
         child: PageView.builder(
             itemCount: screens.length,
@@ -131,13 +131,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                     ),
                                   ),
                                 ),
-                                Text(
-                                  screens[index].desc,
-                                  textAlign: TextAlign.justify,
-                                  style: const TextStyle(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.bold,
-                                    color: kwhite,
+                                Center(
+                                  child: Text(
+                                    screens[index].desc,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold,
+                                      color: kwhite,
+                                    ),
                                   ),
                                 ),
                               ],

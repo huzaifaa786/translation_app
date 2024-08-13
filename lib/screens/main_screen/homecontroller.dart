@@ -196,7 +196,7 @@ class HomeController extends GetxController {
     if (rating == "Highest to lowest rating") {
       sschedule = schedule;
       sschedule.sort(
-          (a, b) => double.parse(b.rating!).compareTo(double.parse(a.rating!)));
+          (a, b) => double.parse(b.rating ?? '0.0').compareTo(double.parse(a.rating ?? '0.0')));
       if (price == "Highest price to lowest price") {
         sschedule.sort((a, b) => double.parse(b.service!.audiovideo!)
             .compareTo(double.parse(a.service!.audiovideo!)));
@@ -207,7 +207,7 @@ class HomeController extends GetxController {
     } else if (rating == "lowest to highest rating") {
       sschedule = schedule;
       sschedule.sort(
-          (a, b) => double.parse(a.rating!).compareTo(double.parse(b.rating!)));
+          (a, b) => double.parse(a.rating ?? '0.0').compareTo(double.parse(b.rating ?? '0.0')));
       if (price == "Highest price to lowest price") {
         sschedule.sort((a, b) => double.parse(b.service!.audiovideo!)
             .compareTo(double.parse(a.service!.audiovideo!)));
@@ -233,7 +233,7 @@ class HomeController extends GetxController {
     if (rating == "Highest to lowest rating") {
       sonlineVendor = onlineVendor;
       sonlineVendor.sort(
-          (a, b) => double.parse(b.rating!).compareTo(double.parse(a.rating!)));
+          (a, b) => double.parse(b.rating ?? '0.0').compareTo(double.parse(a.rating ?? '0.0')));
       if (price == "Highest price to lowest price") {
         sonlineVendor.sort((a, b) =>
             double.parse(b.service!.onlineaudiovideoPrice!)
@@ -246,7 +246,7 @@ class HomeController extends GetxController {
     } else if (rating == "lowest to highest rating") {
       sonlineVendor = onlineVendor;
       sonlineVendor.sort(
-          (a, b) => double.parse(a.rating!).compareTo(double.parse(b.rating!)));
+          (a, b) => double.parse(a.rating ?? '0.0').compareTo(double.parse(b.rating ?? '0.0')));
       if (price == "Highest price to lowest price") {
         sonlineVendor.sort((a, b) =>
             double.parse(b.service!.onlineaudiovideoPrice!)
