@@ -77,7 +77,11 @@ class _Home_screenState extends State<Home_screen> {
   List<PersistentBottomNavBarItem> _navBarItem() {
     return [
       PersistentBottomNavBarItem(
-        icon: Image.asset("assets/images/Home Page.png"),
+        icon: SvgPicture.asset(
+          "assets/icons/home2.svg",
+          height: Get.height * 0.09,
+          fit: BoxFit.scaleDown,
+        ),
         title: ('Home'.tr),
         textStyle: TextStyle(
             fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
@@ -90,9 +94,9 @@ class _Home_screenState extends State<Home_screen> {
             ? badges.Badge(
                 showBadge: chatController.unseen == '0' ? false : true,
                 badgeContent: Text(chatController.unseen!),
-                child: Image.asset("assets/images/Chat Bubble.png"),
+                child: SvgPicture.asset("assets/icons/chatbb.svg"),
               )
-            : Image.asset("assets/images/Chat Bubble.png"),
+            : SvgPicture.asset("assets/icons/chatbb.svg"),
         iconSize: 20,
         title: ('Chat'.tr),
         textStyle: TextStyle(
@@ -113,8 +117,11 @@ class _Home_screenState extends State<Home_screen> {
       //   inactiveColorPrimary: kblack,
       // ),
       PersistentBottomNavBarItem(
-          icon: Image.asset("assets/images/List View.png"),
-          iconSize: 20,
+          icon: SvgPicture.asset(
+            "assets/icons/orders23.svg",
+            fit: BoxFit.scaleDown,
+          ),
+          iconSize: 0.5,
           title: ('Orders'.tr),
           textStyle: TextStyle(
               fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
@@ -128,7 +135,7 @@ class _Home_screenState extends State<Home_screen> {
             });
           }),
       PersistentBottomNavBarItem(
-        icon: Image.asset("assets/images/Gear.png"),
+        icon: SvgPicture.asset("assets/icons/setting.svg"),
         iconSize: 20,
         title: ('Settings'.tr),
         textStyle: TextStyle(
