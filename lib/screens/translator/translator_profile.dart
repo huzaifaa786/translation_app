@@ -487,12 +487,14 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                         controller.scheduleType ==
                                             ScheduleType.InPerson
                                     ? Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.9,
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.15,
+                                        // width: MediaQuery.of(context)
+                                        //         .size
+                                        //         .width *
+                                        //     0.9,
+                                        // height: MediaQuery.of(context)
+                                        //         .size
+                                        //         .height *
+                                        //     0.15,
                                         padding:
                                             EdgeInsets.only(bottom: 7, top: 7),
                                         decoration: BoxDecoration(
@@ -612,6 +614,11 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                               true,
                                                           showSecondsColumn:
                                                               false,
+                                                          locale: box.read(
+                                                                      'locale') !=
+                                                                  'ar'
+                                                              ? LocaleType.en
+                                                              : LocaleType.ar,
                                                           onConfirm: (val) {
                                                         var end =
                                                             DateFormat.Hm()
@@ -803,23 +810,78 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                                       .size
                                                       .width *
                                                   0.1,
+                                              onChanged: (value) {
+                                                if (controller.serviceType ==
+                                                    ServiceType.Document) {
+                                                  if (controller.totalAmount <=
+                                                      0) {
+                                                    translatorProfileController
+                                                            .pages =
+                                                        int.parse(
+                                                            pagecontoller.text);
+                                                    translatorProfileController
+                                                        .dayscalculate(
+                                                            widget.detail!);
+                                                    translatorProfileController
+                                                        .documentprice(
+                                                            widget.detail!,
+                                                            context);
+                                                    FocusManager
+                                                        .instance.primaryFocus!
+                                                        .unfocus();
+                                                    Get.snackbar(
+                                                        "Please fill all required details"
+                                                            .tr,
+                                                        '',
+                                                        // "Make sure the page selected by you is within the range of the translator. You may check by ensuring that your selected pages are deliverable in at least one day.",
+                                                        snackPosition:
+                                                            SnackPosition
+                                                                .BOTTOM,
+                                                        backgroundColor:
+                                                            Colors.red,
+                                                        colorText:
+                                                            Colors.white);
+                                                    return;
+                                                  }
+                                                  translatorProfileController
+                                                          .CheckoutAmount =
+                                                      controller.totalAmount;
+                                                  setState(() {});
+                                                  if (translatorProfileController
+                                                          .file ==
+                                                      null) {
+                                                    Get.snackbar(
+                                                        "Please Attach File."
+                                                            .tr,
+                                                        "",
+                                                        snackPosition:
+                                                            SnackPosition
+                                                                .BOTTOM,
+                                                        backgroundColor:
+                                                            Colors.red,
+                                                        colorText:
+                                                            Colors.white);
+                                                    return;
+                                                  }
+                                                }
+                                              },
                                               decoration: InputDecoration(
-                                                // suffixIcon: InkWell(
-                                                //   onTap: () {
-                                                //     // profileController.EditText();
-                                                //   },
-                                                //   // child: Padding(
-                                                //   //   padding:
-                                                //   //       const EdgeInsets.only(
-                                                //   //           bottom: 8.0),
-                                                //   //   // child: Icon(
-                                                //   //   //   Icons.check,
-                                                //   //   //   color: greenish,
-                                                //   //   //   size: 18,
-                                                //   //   // ),
-                                                //   // ),
-                                                // ),
-                                              ),
+                                                  // suffixIcon: InkWell(
+                                                  //   onTap: () {
+                                                  //     // profileController.EditText();
+                                                  //   },
+                                                  //   // child: Padding(
+                                                  //   //   padding:
+                                                  //   //       const EdgeInsets.only(
+                                                  //   //           bottom: 8.0),
+                                                  //   //   // child: Icon(
+                                                  //   //   //   Icons.check,
+                                                  //   //   //   color: greenish,
+                                                  //   //   //   size: 18,
+                                                  //   //   // ),
+                                                  //   // ),
+                                                  // ),
+                                                  ),
                                             ),
                                           ],
                                         ),
@@ -867,10 +929,9 @@ class _TraslatorProfileState extends State<TraslatorProfile> {
                                 sreenRatio: 0.9,
                                 currencyname: selectedCurrency != null
                                     ? selectedCurrency
-                                    : "AED ",
+                                    : "AED",
                                 onPressed: () {
                                   checkoutController.clear();
-
                                   if (controller.serviceType ==
                                       ServiceType.Document) {
                                     if (controller.totalAmount <= 0) {

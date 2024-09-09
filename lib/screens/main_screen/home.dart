@@ -94,9 +94,19 @@ class _Home_screenState extends State<Home_screen> {
             ? badges.Badge(
                 showBadge: chatController.unseen == '0' ? false : true,
                 badgeContent: Text(chatController.unseen!),
-                child: SvgPicture.asset("assets/icons/chatbb.svg"),
+                child: SvgPicture.asset(
+                  "assets/icons/chaticon.svg",
+                  fit: BoxFit.contain,
+                  height: 35,
+                  width: 41,
+                ),
               )
-            : SvgPicture.asset("assets/icons/chatbb.svg"),
+            : SvgPicture.asset(
+                "assets/icons/chaticon.svg",
+                fit: BoxFit.contain,
+                height: 35,
+                width: 41,
+              ),
         iconSize: 20,
         title: ('Chat'.tr),
         textStyle: TextStyle(

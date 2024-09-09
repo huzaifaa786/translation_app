@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'dart:io' as io;
@@ -185,12 +186,34 @@ class _Chatdetails_screenState extends State<Chatdetails_screen> {
                           },
                           controller: chatController.massagecontroller,
                           decoration: InputDecoration(
-                            suffixIcon: InkWell(
-                                onTap: () {
-                                  controller.picksinglefile();
-                                },
-                                child: Icon(Icons.attach_file,
-                                    color: Colors.black)),
+                            suffixIcon: Row(
+                              children: [
+                                InkWell(
+                                    onTap: () {
+                                      controller.picksinglefile();
+                                    },
+                                    child: Icon(Icons.attach_file,
+                                        color: Colors.black)),
+                                SizedBox(
+                                  width: 3,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    if (chatController.massagecontroller.text
+                                        .trim()
+                                        .isNotEmpty) {
+                                      chatController.sendMassage();
+                                    }
+                                  },
+                                  child: SvgPicture.asset(
+                                    "assets/icons/send_icon.svg",
+                                    width: 26,
+                                    height: 28,
+                                    color: greenish,
+                                  ),
+                                ),
+                              ],
+                            ),
                             hintText: 'You message'.tr,
                             border: InputBorder.none,
                             contentPadding:

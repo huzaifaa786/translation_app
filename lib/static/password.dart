@@ -2,9 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get_storage/get_storage.dart';
 
 class ChangePassword extends StatelessWidget {
-  const ChangePassword(
+  GetStorage box = GetStorage();
+
+  ChangePassword(
       {super.key,
       this.title,
       this.ontap,
@@ -25,36 +28,38 @@ class ChangePassword extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 25, bottom: 15, left: 20, right: 20),
-      child: GestureDetector(
-        onTap: onPressed,
-        child: Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.grey,
-              ),
-              borderRadius: BorderRadius.all(
-                Radius.circular(20),
-              ),
-            ),
-            child: Row(
-              children: [
-                Image.asset("assets/images/Private Lock.png"),
-                SizedBox(
-                  width: 52,
+      child: Directionality(
+        textDirection:
+            box.read('locale') == 'ar' ? TextDirection.rtl : TextDirection.ltr,
+        child: GestureDetector(
+          onTap: onPressed,
+          child: Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.grey,
                 ),
-                Text(
-                  title,
-                  style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 13,
-                      color: Colors.black,
-                      fontFamily: 'Poppins'
-                      ),
-                      
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20),
                 ),
-              ],
-            )),
+              ),
+              child: Row(
+                children: [
+                  Image.asset("assets/images/Private Lock.png"),
+                  SizedBox(
+                    width: 52,
+                  ),
+                  Text(
+                    title,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 13,
+                        color: Colors.black,
+                        fontFamily: 'Poppins'),
+                  ),
+                ],
+              )),
+        ),
       ),
     );
   }

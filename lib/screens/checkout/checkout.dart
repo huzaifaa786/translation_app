@@ -84,15 +84,13 @@ class _Checkout_screenState extends State<Checkout_screen> {
                     Stack(
                       children: [
                         TitleTopbar(
-                          height: 0.12,
                           text: 'Checkout'.tr,
                           ontap: () {
                             Get.back();
                           },
                         ),
                         Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.width * 0.59,
+                          padding: EdgeInsets.all(8),
                           margin: EdgeInsets.only(top: 83, left: 16, right: 16),
                           decoration: BoxDecoration(
                               color: ggrey,

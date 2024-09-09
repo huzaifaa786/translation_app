@@ -27,7 +27,7 @@ class _ChangePassword_screenState extends State<ChangePassword_screen> {
           builder: (controller) => SingleChildScrollView(
             child: Column(children: [
               TitleTopbar(
-                text: 'Change Password',
+                text: 'Change Password'.tr,
                 ontap: () {
                   Navigator.pop(context);
                 },
@@ -36,22 +36,22 @@ class _ChangePassword_screenState extends State<ChangePassword_screen> {
                 height: 30,
               ),
               PasswordInputField(
-                hint: 'Enter Current Password',
-                lable: 'Current Password',
+                hint: 'Enter Current Password'.tr,
+                lable: 'Current Password'.tr,
                 controller: profileController.currentpasswordController,
                 toggle: controller.toggle,
                 obscure: controller.obscureTextPassword,
               ),
               PasswordInputField(
-                hint: 'Enter New Password',
-                lable: 'New Password',
+                hint: 'Enter New Password'.tr,
+                lable: 'New Password'.tr,
                 controller: profileController.newpasswordController,
                 toggle: controller.toggle1,
                 obscure: controller.obscureTextPassword1,
               ),
               PasswordInputField(
-                hint: 'Enter Confirm Password',
-                lable: 'Confirm Password',
+                hint: 'Enter Confirm Password'.tr,
+                lable: 'Confirm Password'.tr,
                 controller: profileController.confirmpasswordController,
                 toggle: controller.toggle2,
                 obscure: controller.obscureTextPassword2,
@@ -65,7 +65,7 @@ class _ChangePassword_screenState extends State<ChangePassword_screen> {
                 child: LargeButton(
                     radius: 30.0,
                     color: greenish,
-                    title: 'Update',
+                    title: 'Update'.tr,
                     onPressed: () {
                       profileController.changepassword((success) {
                         if (success) {
@@ -91,7 +91,7 @@ class _ChangePassword_screenState extends State<ChangePassword_screen> {
       content: Column(
         children: [
           Text(
-            "Successfully\n Updated",
+            "Successfully\n Updated".tr,
             style: TextStyle(
                 fontSize: 25, fontWeight: FontWeight.w700, color: greenish),
             textAlign: TextAlign.center,
@@ -111,7 +111,7 @@ class _ChangePassword_screenState extends State<ChangePassword_screen> {
           height: 34,
           width: MediaQuery.of(context).size.width * 0.4,
           child: Text(
-            "Ok",
+            "Ok".tr,
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
           onPressed: () {

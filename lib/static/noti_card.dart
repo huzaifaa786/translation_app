@@ -78,13 +78,27 @@ class NotificationTile extends StatelessWidget {
                                   color: Colors.black,
                                   fontWeight: FontWeight.w500),
                             ),
-                            Text(
-                              serviceType.toString(),
-                              style: TextStyle(
-                                  fontSize: 13,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w300),
-                            ),
+                            if (serviceType != null)
+                              Text(
+                                serviceType == 'audio/video'
+                                    ? 'audio/video'.tr
+                                    : serviceType == 'document'
+                                        ? 'document'.tr
+                                        : serviceType == 'inperson'
+                                            ? 'inperson'.tr
+                                            : serviceType ==
+                                                    'New message from metro'
+                                                ? 'New message from metro'.tr
+                                                : serviceType ==
+                                                        "Your order has been rejected and order amount was refunded"
+                                                    ? "Your order has been rejected and order amount was refunded"
+                                                        .tr
+                                                    : serviceType.toString(),
+                                style: TextStyle(
+                                    fontSize: 13,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w300),
+                              ),
                             Padding(
                               padding: const EdgeInsets.only(top: 4.0),
                               child: Text(
@@ -93,14 +107,18 @@ class NotificationTile extends StatelessWidget {
                                     : title == 'Your order has been accepted'
                                         ? 'Your order has been accepted'.tr
                                         : title ==
-                                                'Your order has been rejected and  order amount was refunded'
-                                            ? 'Your order has been rejected and order amount was refunded'
+                                                "Your order has been rejected and order amount was refunded"
+                                            ? "Your order has been rejected and order amount was refunded"
                                                 .tr
                                             : title ==
                                                     'Your order has been completed'
                                                 ? 'Your order has been completed'
                                                     .tr
-                                                : title,
+                                                : title ==
+                                                        'New message from metro'
+                                                    ? 'New message from metro'
+                                                        .tr
+                                                    : title,
                                 style: TextStyle(
                                     fontSize: 10,
                                     fontWeight: FontWeight.w400,

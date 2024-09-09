@@ -60,12 +60,16 @@ Future<String> changePrice(String price) async {
   double priceConverted = 0;
   await fx
       .getCurrencyConverted(
-    sourceCurrency: "AED",
+    sourceCurrency: "USD",
     destinationCurrency: currency,
     sourceAmount: double.parse(price),
+  
   )
       .then((value) {
     priceConverted = value;
+    
+  
   });
   return priceConverted.toString();
+  
 }

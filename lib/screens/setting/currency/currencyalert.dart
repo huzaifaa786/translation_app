@@ -85,7 +85,7 @@ class _CurrencyState extends State<Currency> {
             Padding(
               padding: const EdgeInsets.only(top: 40, right: 10, left: 10),
               child: Text(
-                "Choose Your Currency",
+                "Choose Your Currency".tr,
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                   color: greenish,

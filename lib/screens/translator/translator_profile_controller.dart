@@ -130,9 +130,11 @@ class TranslatorProfileController extends GetxController {
     if (days != '0') {
       if (documentType == DocumentType.Urgent) {
         totalAmount = pages * int.parse(vendor.service!.urgentprice.toString());
+        update();
       } else {
         totalAmount =
             pages * int.parse(vendor.service!.unurgentprice.toString());
+        update();
       }
     } else {
       totalAmount = 0;
@@ -146,6 +148,8 @@ class TranslatorProfileController extends GetxController {
     }
     update();
   }
+
+
 
   File? file = File('');
   Future<void> picksinglefile() async {
@@ -348,7 +352,7 @@ class TranslatorProfileController extends GetxController {
       'latitude': selectedLocation!.latitude,
       'longitude': selectedLocation!.longitude,
     };
-    log(data);
+    // log(data);
 
     var response = await Api.execute(url: url, data: data);
     LoadingHelper.dismiss();

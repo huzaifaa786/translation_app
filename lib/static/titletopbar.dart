@@ -30,7 +30,7 @@ class TitleTopbar extends StatelessWidget {
         textDirection: TextDirection.ltr,
         child: Padding(
           padding:
-              const EdgeInsets.only(top: 15, right: 16, left: 16, bottom: 10),
+              const EdgeInsets.only(top: 10, right: 16, left: 16, bottom: 10),
           child: Column(
             children: [
               Row(

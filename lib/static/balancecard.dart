@@ -51,8 +51,7 @@ class BalanceCard extends StatelessWidget {
                           color: Colors.white,
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
-                          fontFamily: 'Poppins'
-                          ),
+                          fontFamily: 'Poppins'),
                     ),
                   ),
                 ],
@@ -62,7 +61,7 @@ class BalanceCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 10, top: 5),
                     child: Text(
-                      'AED',
+                      'AED'.tr,
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -110,6 +109,7 @@ class BalanceCard extends StatelessWidget {
                               padding: const EdgeInsets.all(4.0),
                               child: Text(
                                 'Top Up'.tr,
+                                textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w700,

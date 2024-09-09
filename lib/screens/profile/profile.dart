@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:translation/screens/profile/changepassword.dart';
@@ -86,124 +87,128 @@ class _Profile_screenState extends State<Profile_screen> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        Stack(
-                                          children: [
-                                            Container(
-                                              height: Get.height * 0.1,
-                                              width: 100,
-                                              padding: EdgeInsets.all(8),
-                                              decoration: BoxDecoration(
-                                                  // border: Border.all(
-                                                  //   color: Colors.black,
-                                                  // ),
+                                        // Stack(
+                                        //   children: [
+                                        //     Container(
+                                        //       height: Get.height * 0.1,
+                                        //       width: 100,
+                                        //       padding: EdgeInsets.all(8),
+                                        //       decoration: BoxDecoration(
+                                        //           // border: Border.all(
+                                        //           //   color: Colors.black,
+                                        //           // ),
 
-                                                  // borderRadius: BorderRadius.all(
-                                                  //     Radius.circular(70))
-                                                  ),
-                                              child: Stack(
-                                                fit: StackFit.expand,
-                                                children: [
-                                                  ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                355)),
-                                                    child: profileController
-                                                                .profileImage!
-                                                                .path !=
-                                                            ''
-                                                        ? FittedBox(
-                                                            fit: BoxFit
-                                                                .scaleDown,
-                                                            child: Image.file(
-                                                              File(profileController
-                                                                  .profileImage!
-                                                                  .path),
-                                                              height: 120,
-                                                              width: 120,
-                                                              fit: BoxFit.fill,
-                                                            ),
-                                                          )
-                                                        : profileController
-                                                                    .user ==
-                                                                null
-                                                            ? FittedBox(
-                                                                fit: BoxFit
-                                                                    .scaleDown,
-                                                                child:
-                                                                    Image.asset(
-                                                                  "assets/images/5907.png",
-                                                                  height: 120,
-                                                                  width: 120,
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                ),
-                                                              )
-                                                            : profileController
-                                                                        .user!
-                                                                        .profilePic ==
-                                                                    ''
-                                                                ? FittedBox(
-                                                                    fit: BoxFit
-                                                                        .scaleDown,
-                                                                    child: Image
-                                                                        .asset(
-                                                                      "assets/images/5907.png",
-                                                                      height:
-                                                                          120,
-                                                                      width:
-                                                                          120,
-                                                                      fit: BoxFit
-                                                                          .cover,
-                                                                    ),
-                                                                  )
-                                                                : FittedBox(
-                                                                    fit: BoxFit
-                                                                        .scaleDown,
-                                                                    child:
-                                                                        CachedNetworkImage(
-                                                                      imageUrl: profileController
-                                                                          .user!
-                                                                          .profilePic!,
-                                                                      height:
-                                                                          120,
-                                                                      width:
-                                                                          120,
-                                                                      fit: BoxFit
-                                                                          .cover,
-                                                                    ),
-                                                                  ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Positioned(
-                                                bottom: 0,
-                                                right: -25,
-                                                child: RawMaterialButton(
-                                                  onPressed: () {
-                                                    profileController
-                                                        .selectProfileImage();
-                                                  },
-                                                  elevation: 1.0,
-                                                  fillColor: greenish,
-                                                  child: Icon(
-                                                    Icons.camera_alt_outlined,
-                                                    color: white,
-                                                    size: 19,
-                                                  ),
-                                                  padding: EdgeInsets.all(5.0),
-                                                  shape: CircleBorder(),
-                                                )),
-                                          ],
-                                        ),
+                                        //           // borderRadius: BorderRadius.all(
+                                        //           //     Radius.circular(70))
+                                        //           ),
+                                        //       child: Stack(
+                                        //         fit: StackFit.expand,
+                                        //         children: [
+                                        //           ClipRRect(
+                                        //             borderRadius:
+                                        //                 BorderRadius.all(
+                                        //                     Radius.circular(
+                                        //                         355)),
+                                        //             child: profileController
+                                        //                         .profileImage!
+                                        //                         .path !=
+                                        //                     ''
+                                        //                 ? FittedBox(
+                                        //                     fit: BoxFit
+                                        //                         .scaleDown,
+                                        //                     child: Image.file(
+                                        //                       File(profileController
+                                        //                           .profileImage!
+                                        //                           .path),
+                                        //                       height: 120,
+                                        //                       width: 120,
+                                        //                       fit: BoxFit.fill,
+                                        //                     ),
+                                        //                   )
+                                        //                 : profileController
+                                        //                             .user ==
+                                        //                         null
+                                        //                     ? FittedBox(
+                                        //                         fit: BoxFit
+                                        //                             .scaleDown,
+                                        //                         child:
+                                        //                             Image.asset(
+                                        //                           "assets/images/5907.png",
+                                        //                           height: 120,
+                                        //                           width: 120,
+                                        //                           fit: BoxFit
+                                        //                               .cover,
+                                        //                         ),
+                                        //                       )
+                                        //                     : profileController
+                                        //                                 .user!
+                                        //                                 .profilePic ==
+                                        //                             ''
+                                        //                         ? FittedBox(
+                                        //                             fit: BoxFit
+                                        //                                 .scaleDown,
+                                        //                             child: Image
+                                        //                                 .asset(
+                                        //                               "assets/images/5907.png",
+                                        //                               height:
+                                        //                                   120,
+                                        //                               width:
+                                        //                                   120,
+                                        //                               fit: BoxFit
+                                        //                                   .cover,
+                                        //                             ),
+                                        //                           )
+                                        //                         : FittedBox(
+                                        //                             fit: BoxFit
+                                        //                                 .scaleDown,
+                                        //                             child:
+                                        //                                 CachedNetworkImage(
+                                        //                               imageUrl: profileController
+                                        //                                   .user!
+                                        //                                   .profilePic!,
+                                        //                               height:
+                                        //                                   120,
+                                        //                               width:
+                                        //                                   120,
+                                        //                               fit: BoxFit
+                                        //                                   .cover,
+                                        //                             ),
+                                        //                           ),
+                                        //           ),
+                                        //         ],
+                                        //       ),
+                                        //     ),
+                                        //     Positioned(
+                                        //         bottom: 0,
+                                        //         right: -25,
+                                        //         child: RawMaterialButton(
+                                        //           onPressed: () {
+                                        //             profileController
+                                        //                 .selectProfileImage();
+                                        //           },
+                                        //           elevation: 1.0,
+                                        //           fillColor: greenish,
+                                        //           child: Icon(
+                                        //             Icons.camera_alt_outlined,
+                                        //             color: white,
+                                        //             size: 19,
+                                        //           ),
+                                        //           padding: EdgeInsets.all(5.0),
+                                        //           shape: CircleBorder(),
+                                        //         )),
+                                        //   ],
+                                        // ),
 
                                         // profileController.profileImage!.path == ''
                                         //     ? Container()
                                         //     : Text(profileController.profileImage!.path),
-                                        SizedBox(
-                                          height: 25,
+                                        Image.asset(
+                                          "assets/images/5907.png",
+                                          height: 80,
+                                          width: 81,
+                                          fit: BoxFit.cover,
                                         ),
+                                        Gap(8),
                                         Text(
                                           profileController.user == null
                                               ? ''
@@ -219,7 +224,7 @@ class _Profile_screenState extends State<Profile_screen> {
                                         ),
                                       ]),
                                   StackInputField(
-                                    hint: 'Enter your name',
+                                    hint: 'Enter your name'.tr,
                                     lable: 'Username'.tr,
                                     controller:
                                         profileController.nameController,
@@ -229,7 +234,7 @@ class _Profile_screenState extends State<Profile_screen> {
                                   ),
                                   StackInputField(
                                     readOnly: true,
-                                    hint: 'Enter your Email',
+                                    hint: 'Enter your Email'.tr,
                                     lable: 'Email Address'.tr,
                                     controller:
                                         profileController.emailController,
@@ -238,7 +243,7 @@ class _Profile_screenState extends State<Profile_screen> {
                                       ? Container()
                                       : StackInputField(
                                           readOnly: true,
-                                          hint: 'Enter your phone number',
+                                          hint: 'Enter your phone number'.tr,
                                           lable: 'Phone Number'.tr,
                                           controller:
                                               profileController.phoneController,
