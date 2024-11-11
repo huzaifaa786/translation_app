@@ -207,11 +207,14 @@ class LocaleString extends Translations {
           "document": "document",
           "New message from metro": "New message from metro",
           "inperson": "inperson",
-          "": "",
+          "inPerson": "inPerson",
+         
         },
         'ar_AE': {
           "New message from metro": "رسالة جديدة من metro",
           "inperson": "وجهاً لوجه",
+                    "inPerson": "وجهاً لوجه",
+
           "audio/video": "صوت/فيديو",
           "document": "مستند",
           'Order No.': 'رقم الطلب',

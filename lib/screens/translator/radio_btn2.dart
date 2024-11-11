@@ -24,26 +24,32 @@ class _RadioBtn2State extends State<RadioBtn2> {
   @override
   Widget build(BuildContext context) {
     GetStorage box = GetStorage();
-    return Container(
-      constraints: BoxConstraints(
-          maxWidth: MediaQuery.of(context).size.width), // Constrain the width
-      child: ListTile(
-        title: Transform.translate(
-          offset: box.read("locale") != "ar" ? Offset(-25, 0) : Offset(25, 0),
-          child: Text(
-            widget.text ?? '',
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+    return GestureDetector(
+     onTap: () {
+        if (widget.onChanged != null) {
+          widget.onChanged!();  
+        }},
+      child: Container(
+        constraints: BoxConstraints(
+            maxWidth: MediaQuery.of(context).size.width), // Constrain the width
+        child: ListTile(
+          title: Transform.translate(
+            offset: box.read("locale") != "ar" ? Offset(-25, 0) : Offset(25, 0),
+            child: Text(
+              widget.text ?? '',
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+            ),
           ),
-        ),
-        leading: Transform.translate(
-          offset: box.read("locale") != "ar" ? Offset(-25, 0) : Offset(25, 0),
-          child: Radio(
-            value: widget.value.toString(),
-            groupValue: widget.groupvalue.toString(),
-            fillColor: MaterialStateColor.resolveWith((states) => greenish),
-            onChanged: (value) {
-              widget.onChanged();
-            },
+          leading: Transform.translate(
+            offset: box.read("locale") != "ar" ? Offset(-25, 0) : Offset(25, 0),
+            child: Radio(
+              value: widget.value.toString(),
+              groupValue: widget.groupvalue.toString(),
+              fillColor: MaterialStateColor.resolveWith((states) => greenish),
+              onChanged: (value) {
+                widget.onChanged();
+              },
+            ),
           ),
         ),
       ),

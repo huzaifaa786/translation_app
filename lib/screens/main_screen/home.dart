@@ -77,11 +77,8 @@ class _Home_screenState extends State<Home_screen> {
   List<PersistentBottomNavBarItem> _navBarItem() {
     return [
       PersistentBottomNavBarItem(
-        icon: SvgPicture.asset(
-          "assets/icons/home2.svg",
-          height: Get.height * 0.09,
-          fit: BoxFit.scaleDown,
-        ),
+        icon: SvgPicture.asset("assets/icons/home2.svg",
+            height: Get.height * 0.09, fit: BoxFit.scaleDown, color: greenish),
         title: ('Home'.tr),
         textStyle: TextStyle(
             fontFamily: 'Poppins', fontSize: 10, fontWeight: FontWeight.w400),
@@ -94,19 +91,14 @@ class _Home_screenState extends State<Home_screen> {
             ? badges.Badge(
                 showBadge: chatController.unseen == '0' ? false : true,
                 badgeContent: Text(chatController.unseen!),
-                child: SvgPicture.asset(
-                  "assets/icons/chaticon.svg",
-                  fit: BoxFit.contain,
-                  height: 35,
-                  width: 41,
-                ),
+                child: SvgPicture.asset("assets/icons/chaticon.svg",
+                    fit: BoxFit.contain,
+                    height: 35,
+                    width: 41,
+                    color: greenish),
               )
-            : SvgPicture.asset(
-                "assets/icons/chaticon.svg",
-                fit: BoxFit.contain,
-                height: 35,
-                width: 41,
-              ),
+            : SvgPicture.asset("assets/icons/chaticon.svg",
+                fit: BoxFit.contain, height: 35, width: 41, color: greenish),
         iconSize: 20,
         title: ('Chat'.tr),
         textStyle: TextStyle(
@@ -127,10 +119,8 @@ class _Home_screenState extends State<Home_screen> {
       //   inactiveColorPrimary: kblack,
       // ),
       PersistentBottomNavBarItem(
-          icon: SvgPicture.asset(
-            "assets/icons/orders23.svg",
-            fit: BoxFit.scaleDown,
-          ),
+          icon: SvgPicture.asset("assets/icons/orders23.svg",
+              fit: BoxFit.scaleDown, color: greenish),
           iconSize: 0.5,
           title: ('Orders'.tr),
           textStyle: TextStyle(
@@ -145,7 +135,10 @@ class _Home_screenState extends State<Home_screen> {
             });
           }),
       PersistentBottomNavBarItem(
-        icon: SvgPicture.asset("assets/icons/setting.svg"),
+        icon: SvgPicture.asset(
+          "assets/icons/setting.svg",
+          color: greenish,
+        ),
         iconSize: 20,
         title: ('Settings'.tr),
         textStyle: TextStyle(

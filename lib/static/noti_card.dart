@@ -86,6 +86,8 @@ class NotificationTile extends StatelessWidget {
                                         ? 'document'.tr
                                         : serviceType == 'inperson'
                                             ? 'inperson'.tr
+                                            : serviceType == 'inPerson'
+                                            ? 'inPerson'.tr
                                             : serviceType ==
                                                     'New message from metro'
                                                 ? 'New message from metro'.tr
